@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenAmmo Solutions - Empowering Progress. Sustaining Futures.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc; /* Light gray background for contrast */
+        }
+        .bento-grid-item {
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            isolation: isolate; /* For z-index stacking */
+        }
+        .bento-grid-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            transition: background 0.3s;
+            z-index: -1;
+        }
+        .bento-grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .bento-grid-item:hover::before {
+            background: rgba(0, 0, 0, 0.25);
+        }
+        /* Specific background images for visual placeholders */
+        #finance-bg { background-image: url('https://placehold.co/800x600/10B981/ffffff?text=Finance+Consulting'); }
+        #edu-bg { background-image: url('https://placehold.co/800x600/059669/ffffff?text=Training+%26+Development'); }
+        #event-bg { background-image: url('https://placehold.co/800x600/047857/ffffff?text=Events+%26+Supply+Chain'); }
+        #cabin-bg { background-image: url('https://placehold.co/800x600/065F46/ffffff?text=Green+Cabin+Stays'); }
+    </style>
+</head>
+<body>
+
+    <!-- SOLUTIONS NAV BAR -->
+    <nav class="bg-white shadow-lg sticky top-0 z-20">
+        <div class="container mx-auto px-4 md:px-8 py-3 flex justify-between items-center">
+            
+            <!-- Logo (Link to Group Home) -->
+            <div class="flex items-center space-x-8">
+                <a href="/index.html" class="text-2xl md:text-3xl font-extrabold text-green-800 rounded-lg p-1">
+                    GreenAmmo <span class="text-green-500">Group</span>
+                </a>
+            </div>
+
+            <!-- Navigation Links and Contact Button -->
+            <ul class="flex items-center space-x-6">
+                
+                <!-- Solutions Section Home Link -->
+                <li>
+                    <a href="/solutions/index.html" class="text-base font-semibold text-green-600 border-b-2 border-green-600 transition hidden sm:inline-block">
+                        GreenAmmo Solutions
+                    </a>
+                </li>
+                
+                <!-- About Us Link -->
+                <li>
+                    <a href="/about-us.html" class="text-gray-700 hover:text-green-600 transition hidden lg:inline-block">
+                        About Us
+                    </a>
+                </li>
+
+                <!-- Services Dropdown -->
+                <li class="relative group hidden sm:block">
+                    <button class="text-gray-700 hover:text-green-600 transition inline-flex items-center gap-1">
+                        Services
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute hidden group-hover:block bg-white rounded-xl shadow-xl p-3 top-5 -left-4 w-48 transition-all z-10 border border-green-100">
+                        <ul class="text-sm space-y-1">
+                            <li><a href="/solutions/finance.html" class="block py-1 px-2 text-gray-700 hover:bg-green-50 rounded transition">Finance Services</a></li>
+                            <li><a href="/solutions/education.html" class="block py-1 px-2 text-gray-700 hover:bg-green-50 rounded transition">Education & Dev.</a></li>
+                            <li><a href="/solutions/event-supply.html" class="block py-1 px-2 text-gray-700 hover:bg-green-50 rounded transition">Event & Supply</a></li>
+                            <li><a href="/solutions/accommodation.html" class="block py-1 px-2 text-gray-700 hover:bg-green-50 rounded transition">Accommodation</a></li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <!-- Contact Us Button -->
+                <li>
+                    <a href="/solutions/contact.html" 
+                       class="bg-green-600 text-white font-semibold py-2 px-4 rounded-full hover:bg-green-700 transition shadow-lg shadow-green-500/50">
+                        Contact Us
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <!-- 1. HERO SECTION -->
+        <section class="bg-green-700 text-white py-20 md:py-32">
+            <div class="container mx-auto px-4 md:px-8 text-center max-w-4xl">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-6">
+                    Empowering Progress. <span class="text-green-300">Sustaining Futures.</span>
+                </h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto">
+                    GreenAmmo Solutions is uniting purpose with performance to deliver impact-driven, multi-sectoral solutions for individuals, businesses, and institutions.
+                </p>
+            </div>
+        </section>
+
+        <!-- 2. MISSION & INTRO -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4 md:px-8 max-w-5xl">
+                <div class="grid md:grid-cols-3 gap-10 items-start">
+                    
+                    <div class="md:col-span-2 space-y-4">
+                        <h2 class="text-3xl font-bold text-green-800 mb-4">Holistic Service. Professional Excellence.</h2>
+                        <p class="text-gray-700">
+                            From financial consulting to education, events, e-commerce, and budget stays – we’re building a smarter and more connected tomorrow. From curated events to last-mile product delivery, we bring excellence and efficiency together.
+                        </p>
+                    </div>
+
+                    <div class="bg-green-50 p-6 rounded-xl border-l-4 border-green-600 shadow-sm">
+                        <h3 class="text-xl font-semibold text-green-800 mb-2">Our Core Belief</h3>
+                        <p class="text-sm text-gray-700">
+                            We believe in inclusive growth, professionalism, and holistic service. We’re not just a service provider — we're your long-term **development partner** across sectors and stages.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SERVICES GRID (2x2 Bento Grid) -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4 md:px-8 max-w-6xl">
+                <h2 class="text-4xl font-extrabold text-green-800 text-center mb-12">Explore Our Solutions</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Finance Services -->
+                    <a href="/solutions/finance.html" id="finance-bg" class="bento-grid-item bg-green-600 rounded-2xl p-8 h-80 flex flex-col justify-end text-white">
+                        <h3 class="text-3xl font-bold mb-2">1. Finance Services</h3>
+                        <p class="text-lg font-medium">Taxation, Accounting, and Strategic Consulting.</p>
+                        <ul class="text-sm mt-3 space-y-1 opacity-80">
+                            <li>Taxation & Compliance</li>
+                            <li>Project Facilitation</li>
+                            <li>Strategic Business Consulting</li>
+                        </ul>
+                    </a>
+
+                    <!-- Education and Development Services -->
+                    <a href="/solutions/education.html" id="edu-bg" class="bento-grid-item bg-green-700 rounded-2xl p-8 h-80 flex flex-col justify-end text-white">
+                        <h3 class="text-3xl font-bold mb-2">2. Education & Development</h3>
+                        <p class="text-lg font-medium">Training, Skill Building, and Digital Content Creation.</p>
+                        <ul class="text-sm mt-3 space-y-1 opacity-80">
+                            <li>Educational & Training Services</li>
+                            <li>Skill Development</li>
+                            <li>Website & Content Development</li>
+                        </ul>
+                    </a>
+
+                    <!-- Event and Supply Services -->
+                    <a href="/solutions/event-supply.html" id="event-bg" class="bento-grid-item bg-green-800 rounded-2xl p-8 h-80 flex flex-col justify-end text-white">
+                        <h3 class="text-3xl font-bold mb-2">3. Event & Supply Services</h3>
+                        <p class="text-lg font-medium">From curated events to last-mile product delivery.</p>
+                        <ul class="text-sm mt-3 space-y-1 opacity-80">
+                            <li>Professional Event Management</li>
+                            <li>Efficient Supply Services</li>
+                        </ul>
+                    </a>
+
+                    <!-- Accommodation Services -->
+                    <a href="/solutions/accommodation.html" id="cabin-bg" class="bento-grid-item bg-green-900 rounded-2xl p-8 h-80 flex flex-col justify-end text-white">
+                        <h3 class="text-3xl font-bold mb-2">4. Accommodation Services</h3>
+                        <p class="text-lg font-medium">Budget and eco-friendly stays, powered by Green Cabin.</p>
+                        <ul class="text-sm mt-3 space-y-1 opacity-80">
+                            <li>Sustainable Hospitality</li>
+                            <li>Long-term Budget Stays</li>
+                        </ul>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 4. WHY US? (Trust & Credibility Building) -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4 md:px-8 max-w-5xl">
+                <h2 class="text-3xl font-bold text-green-800 text-center mb-10">Why Choose GreenAmmo Solutions?</h2>
+                <div class="grid sm:grid-cols-3 gap-8 text-center">
+                    
+                    <div class="p-6 bg-green-50 rounded-xl shadow-md space-y-3">
+                        <svg class="w-10 h-10 mx-auto text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2c-2.355 0-4.605.698-6.502 2.016M12 22c-2.355 0-4.605-.698-6.502-2.016M18 10a6 6 0 00-6-6M6 10a6 6 0 00-6 6"></path></svg>
+                        <h3 class="font-semibold text-xl text-green-800">Impact-Driven</h3>
+                        <p class="text-sm text-gray-600">Every solution is designed not just for performance, but for positive environmental and social impact.</p>
+                    </div>
+                    
+                    <div class="p-6 bg-green-50 rounded-xl shadow-md space-y-3">
+                        <svg class="w-10 h-10 mx-auto text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3 .895 3 2s-1.343 2-3 2-3-.895-3-2 .896-2 3-2zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <h3 class="font-semibold text-xl text-green-800">Holistic Partnership</h3>
+                        <p class="text-sm text-gray-600">We serve as a long-term development partner, offering support across multiple sectors and project stages.</p>
+                    </div>
+                    
+                    <div class="p-6 bg-green-50 rounded-xl shadow-md space-y-3">
+                        <svg class="w-10 h-10 mx-auto text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        <h3 class="font-semibold text-xl text-green-800">Professional Rigor</h3>
+                        <p class="text-sm text-gray-600">Expect professional delivery and efficiency, whether it's tax compliance or event execution.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. FINAL CTA SECTION -->
+        <section class="py-20 bg-green-500 text-white text-center">
+            <div class="container mx-auto px-4 md:px-8 max-w-3xl">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Build a Smarter Tomorrow?</h2>
+                <p class="text-lg mb-8">
+                    Let's discuss how our integrated, sustainable solutions can drive progress for your business or project.
+                </p>
+                <a href="/solutions/contact.html" 
+                   class="inline-block bg-white text-green-700 font-extrabold py-3 px-10 rounded-full text-lg hover:bg-gray-100 transition shadow-xl transform hover:scale-105">
+                    Start a Conversation Today
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER (Using the previously designed comprehensive structure) -->
+    <footer class="bg-green-800 text-white pt-12">
+        <div class="container mx-auto px-4 md:px-8">
+
+            <!-- 1. TOP ROW: Logo, Description & Nav Columns -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-green-700">
+                
+                <!-- Logo and Description -->
+                <div class="md:col-span-2 space-y-4">
+                    <h3 class="text-3xl font-bold text-green-300">GreenAmmo Group</h3>
+                    <p class="text-sm text-green-200 max-w-sm">
+                        Empowering sustainable living and waste management through community action, research, and project initiation.
+                    </p>
+                </div>
+
+                <!-- Navigation Columns -->
+                <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
+
+                    <!-- Column 1: GreenAmmo -->
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-green-50 mb-3">GreenAmmo</h4>
+                        <ul class="text-sm space-y-2 text-green-200">
+                            <li><a href="/about-us.html" class="hover:text-green-300 transition">About Us</a></li>
+                            <li><a href="/gallery.html" class="hover:text-green-300 transition">Media (Gallery)</a></li>
+                            <li><a href="/certifications.html" class="hover:text-green-300 transition">Certificates</a></li>
+                            <li><a href="/alliances.html" class="hover:text-green-300 transition">Alliances</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 2: Solutions -->
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-green-50 mb-3">Solutions</h4>
+                        <ul class="text-sm space-y-2 text-green-200">
+                            <li><a href="/solutions/finance.html" class="hover:text-green-300 transition">Finance</a></li>
+                            <li><a href="/solutions/education.html" class="hover:text-green-300 transition">Education & Development</a></li>
+                            <li><a href="/solutions/event-supply.html" class="hover:text-green-300 transition">Event & Supply</a></li>
+                            <li><a href="/solutions/accommodation.html" class="hover:text-green-300 transition">Accommodations</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 3: Trust -->
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-green-50 mb-3">Trust</h4>
+                        <ul class="text-sm space-y-2 text-green-200">
+                            <li><a href="/trust/projects.html" class="hover:text-green-300 transition">Projects & Milestones</a></li>
+                            <li><a href="/trust/campaigns.html" class="hover:text-green-300 transition">Campaigns</a></li>
+                            <li><a href="/trust/reports.html" class="hover:text-green-300 transition">Reports & Research</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 4: Action/Explore -->
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-green-50 mb-3">Take Action</h4>
+                        <div class="space-y-2">
+                            <a href="../joinus.html" class="block bg-green-600 text-white text-center text-sm font-medium py-2 rounded-lg hover:bg-green-700 transition">
+                                Join Us
+                            </a>
+                            <a href="/explore.html" class="block border border-green-600 text-green-50 text-center text-sm font-medium py-2 rounded-lg hover:border-green-300 hover:text-green-300 transition">
+                                Explore
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- 2. BOTTOM ROW: Copyright and Socials -->
+            <div class="flex flex-col sm:flex-row justify-between items-center py-6 text-sm text-green-200">
+                <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
+                
+                <!-- Social Icons -->
+                <div class="flex gap-4 mt-4 sm:mt-0">
+                    <a href="#" class="hover:text-green-400 transition" aria-label="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3 8h-2v2h2v2h-2v4h-2v-4H9V12h2V10c0-1.104.896-2 2-2h2v2z"/></svg>
+                    </a>
+                    <a href="#" class="hover:text-green-400 transition" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.179 2.541c.883 0 1.632.748 1.632 1.632v.005c0 .883-.749 1.631-1.632 1.631h-.005c-.883 0-1.632-.748-1.632-1.631v-.005c0-.883.749-1.632 1.632-1.632h.005zM12 8c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4zm-2.821 8.879c.148.093.308.175.474.246.36.155.76.246 1.171.246h2.348c.41 0 .81-.091 1.17-.246.166-.071.326-.153.473-.246.22-.138.423-.306.605-.5.182-.194.34-.413.474-.658.134-.245.242-.516.326-.811.168-.598.256-1.233.256-1.879v-2.352c0-.646-.088-1.281-.256-1.879a4.897 4.897 0 0 0-.326-.811 4.795 4.795 0 0 0-.474-.658 4.67 4.67 0 0 0-.605-.5 4.908 4.908 0 0 0-.474-.246c-.36-.155-.76-.246-1.17-.246h-2.348c-.41 0-.81.091-1.17.246a4.908 4.908 0 0 0-.474.246 4.67 4.67 0 0 0-.605.5 4.795 4.795 0 0 0-.474.658 4.897 4.897 0 0 0-.326.811c-.168.598-.256 1.233-.256 1.879v2.352c0 .646.088 1.281.256 1.879a4.897 4.897 0 0 0 .326.811 4.795 4.795 0 0 0 .474.658 4.67 4.67 0 0 0 .605.5z"/></svg>
+                    </a>
+                    <a href="#" class="hover:text-green-400 transition" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-2 16H8V11h2v7zm-1-8H9V8h1v2zM16 18h-2v-3c0-1.657-1.343-3-3-3s-3 1.343-3 3v3h-2V11h2v1.5c.618-.844 1.877-1.5 3-1.5 2.206 0 4 1.794 4 4v3z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

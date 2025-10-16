@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Services - GreenAmmo Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for Tabs and Accordions -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+        .tab-button.active {
+            border-color: #065F46; /* Dark Green */
+            color: #065F46;
+            background-color: #ECFDF5; /* Lightest Green */
+        }
+        .tab-button {
+            transition: all 0.2s ease-in-out;
+            white-space: nowrap;
+        }
+        /* Custom styling for the list items inside the accordion */
+        .accordion-list {
+            list-style: none; /* Remove default list style */
+            padding-left: 0;
+            margin-top: 0.5rem;
+        }
+        .accordion-list li {
+            padding-left: 1.5rem; /* Space for custom bullet */
+            position: relative;
+            margin-bottom: 0.25rem;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+        .accordion-list li::before {
+            content: '•'; /* Custom bullet point */
+            color: #34D399; /* Green-400 */
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SOLUTIONS NAV BAR (Copied from solutions_landing.html) -->
+    <nav class="bg-white shadow-lg sticky top-0 z-20">
+        <div class="container mx-auto px-4 md:px-8 py-3 flex justify-between items-center">
+            
+            <!-- Logo (Link to Group Home) -->
+            <div class="flex items-center space-x-8">
+                <a href="/index.html" class="text-2xl md:text-3xl font-extrabold text-green-800 rounded-lg p-1">
+                    GreenAmmo <span class="text-green-500">Group</span>
+                </a>
+            </div>
+
+            <!-- Navigation Links and Contact Button -->
+            <ul class="flex items-center space-x-6">
+                
+                <!-- Solutions Section Home Link -->
+                <li>
+                    <a href="/solutions/index.html" class="text-base font-semibold text-green-600 border-b-2 border-green-600 transition hidden sm:inline-block">
+                        GreenAmmo Solutions
+                    </a>
+                </li>
+                
+                <!-- About Us Link -->
+                <li>
+                    <a href="/aboutus.html" class="text-gray-700 hover:text-green-600 transition hidden lg:inline-block">
+                        About Us
+                    </a>
+                </li>
+
+                <!-- Services Dropdown -->
+                <li class="relative group hidden sm:block">
+                    <button class="text-gray-700 hover:text-green-600 transition inline-flex items-center gap-1">
+                        Services
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute hidden group-hover:block bg-white rounded-xl shadow-xl p-3 top-5 -left-4 w-48 transition-all z-10 border border-green-100">
+                        <ul class="text-sm space-y-1">
+                            <li><a href="/solutions/finance.html" class="block py-1 px-2 text-green-700 font-bold hover:bg-green-50 rounded transition">Finance Services</a></li>
+                            <li><a href="/solutions/education.html" class="block py-1 px-2 text-gray-700 hover:bg-green-50 rounded transition">Education & Dev.</a></li>
+                            <li><a href="/solutions/eventsupply.html" class="block py-1 px-2 text-gray-700 hover:bg-green-50 rounded transition">Event & Supply</a></li>
+                            <li><a href="/solutions/accommodation.html" class="block py-1 px-2 text-gray-700 hover:bg-green-50 rounded transition">Accommodation</a></li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <!-- Contact Us Button -->
+                <li>
+                    <a href="/solutions/contact.html" 
+                       class="bg-green-600 text-white font-semibold py-2 px-4 rounded-full hover:bg-green-700 transition shadow-lg shadow-green-500/50">
+                        Contact Us
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <!-- HERO SECTION -->
+        <section class="bg-gray-100 py-16 md:py-24">
+            <div class="container mx-auto px-4 md:px-8 max-w-5xl text-center">
+                <p class="text-green-600 font-semibold text-sm uppercase mb-2">GreenAmmo Solutions</p>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+                    Impact-Driven Finance Services
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Streamline your finances. Power your projects.
+                </p>
+            </div>
+        </section>
+        
+        <!-- SERVICE TABS & ACCORDION DETAILS -->
+        <section class="py-16 bg-white" x-data="{ activeTab: 'taxation' }">
+            <div class="container mx-auto px-4 md:px-8 max-w-6xl">
+
+                <!-- Tab Navigation (Buttons) -->
+                <div class="flex flex-wrap justify-center gap-3 mb-12 border-b border-gray-200 pb-4">
+                    <button @click="activeTab = 'taxation'" :class="{ 'active': activeTab === 'taxation' }"
+                        class="tab-button px-5 py-2 text-base font-semibold rounded-full border border-gray-300 text-gray-700 hover:border-green-700 hover:text-green-700">
+                        Taxation Services
+                    </button>
+                    <button @click="activeTab = 'accounting'" :class="{ 'active': activeTab === 'accounting' }"
+                        class="tab-button px-5 py-2 text-base font-semibold rounded-full border border-gray-300 text-gray-700 hover:border-green-700 hover:text-green-700">
+                        Accounting & Compliance
+                    </button>
+                    <button @click="activeTab = 'project'" :class="{ 'active': activeTab === 'project' }"
+                        class="tab-button px-5 py-2 text-base font-semibold rounded-full border border-gray-300 text-gray-700 hover:border-green-700 hover:text-green-700">
+                        Project Facilitation
+                    </button>
+                    <!-- UPDATED TAB LABEL -->
+                    <button @click="activeTab = 'consultancy'" :class="{ 'active': activeTab === 'consultancy' }"
+                        class="tab-button px-5 py-2 text-base font-semibold rounded-full border border-gray-300 text-gray-700 hover:border-green-700 hover:text-green-700">
+                        Financial Consultancy Services
+                    </button>
+                </div>
+                
+                <!-- Dynamic Tab Content (Now containing Accordions) -->
+                <div class="p-4 md:p-8 bg-gray-50 rounded-2xl shadow-lg border border-gray-200">
+                    
+                    <!-- 1. Taxation Services Tab -->
+                    <div x-show="activeTab === 'taxation'" x-transition.opacity.duration.500 class="space-y-6" x-data="{ open: null }">
+                        <h2 class="text-3xl font-bold text-green-800">TAXATION SERVICES</h2>
+                        <p class="text-lg text-gray-700">Comprehensive tax planning, compliance, and strategic representation to ensure your operations are optimized, risk-free, and fully compliant with all regulatory mandates.</p>
+                        
+                        <!-- Accordion Items for Taxation -->
+                        <div class="divide-y divide-gray-200 border-t border-b border-gray-200">
+                            
+                            <!-- Sub-Service 1: Income Tax Services -->
+                            <div class="py-1">
+                                <button @click="open = (open === 1 ? null : 1)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Income Tax Services</span>
+                                    <svg :class="{ 'rotate-180': open === 1, 'rotate-0': open !== 1 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 1" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ol class="accordion-list">
+                                        <li>Individual Income Tax Return (ITR) Filing</li>
+                                        <li>Business/ Professional Income Tax Return (ITR) Filing</li>
+                                        <li>Trusts, NGOs, AOPs, BOIs, AJPs, HUFs, Societies Income Tax Return (ITR) Filing</li>
+                                        <li>Partnership Firm & LLP Income Tax Return (ITR) Filing</li>
+                                        <li>Corporate or Company Income Tax Return (ITR) Filing</li>
+                                        <li>Advance Tax Calculation and Payment Support</li>
+                                        <li>Computation of Tax Liability and Income Computation (AMT / MAT)</li>
+                                        <li>Income Tax Refund Claims and Follow-Up</li>
+                                        <li>Capital Gains Tax Calculation and Reporting</li>
+                                        <li>Rental Income Tax Advisory</li>
+                                        <li>House Property Income Planning</li>
+                                        <li>Agricultural Income Tax Treatment</li>
+                                        <li>Exempt Income Planning</li>
+                                        <li>Income Tax Exemption Certificate</li>
+                                        <li>Tax Planning for Startups, SMEs, and Corporates</li>
+                                        <li>NRI Tax Return Filing (with Indian and foreign income)</li>
+                                        <li>International Taxation</li>
+                                        <li>Other Income Tax related services</li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                            <!-- Sub-Service 2: GST Services -->
+                            <div class="py-1">
+                                <button @click="open = (open === 2 ? null : 2)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>GST (Goods and Services Tax) Services</span>
+                                    <svg :class="{ 'rotate-180': open === 2, 'rotate-0': open !== 2 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 2" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>GST Registration and Amendment</li>
+                                        <li>GST Monthly, Quarterly, Annual Return Filing</li>
+                                        <li>GST Reconciliation (Books vs GSTR-2A/2B)</li>
+                                        <li>GST Input Tax Credit (ITC) Advisory</li>
+                                        <li>Electronic Credit Ledger and Electronic Cash Ledger Reconciliation</li>
+                                        <li>E-invoicing and E-way Bill Assistance</li>
+                                        <li>GST Composition Scheme Advisory & Compliance</li>
+                                        <li>GST Refund Application (Exporters, Inverted Duty, etc.)</li>
+                                        <li>GST Compliance Health Check</li>
+                                        <li>LUT (Letter of Undertaking) Filing for Exports</li>
+                                        <li>GST Impact Assessment for New Businesses</li>
+                                        <li>GST Surrender and Final Return filing</li>
+                                        <li>Sector-specific GST Advisory</li>
+                                        <li>GST Audit Preparation Support</li>
+                                        <li>Filing Forms DRC-03, PMT-09, etc</li>
+                                        <li>Other GST related matters</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Sub-Service 3: TDS / TCS Services -->
+                            <div class="py-1">
+                                <button @click="open = (open === 3 ? null : 3)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>TDS / TCS Services</span>
+                                    <svg :class="{ 'rotate-180': open === 3, 'rotate-0': open !== 3 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 3" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>TAN Application and Correction</li>
+                                        <li>TDS Deduction Calculation (Salary, Rent, Contractors, etc.)</li>
+                                        <li>TCS Computation for Sellers</li>
+                                        <li>Quarterly TDS/TCS Return Filing</li>
+                                        <li>Generation of Form 16, 16A</li>
+                                        <li>TDS Correction and Revision Filing</li>
+                                        <li>TDS Demand Resolution and Justification Report Handling</li>
+                                        <li>Interest and Late Fee Computation for TDS Delays</li>
+                                        <li>Lower/Nil TDS Certificate Application (Form 13)</li>
+                                        <li>PAN validation and 15CA/15CB assistance for foreign remittances</li>
+                                        <li>GST-TDS registration</li>
+                                        <li>GST-TDS return filing</li>
+                                        <li>GST-TDS acceptance and Cash Ledger Claims</li>
+                                        <li>Other TDS related matters</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                             <!-- Sub-Service 4: Representation Services -->
+                            <div class="py-1">
+                                <button @click="open = (open === 4 ? null : 4)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Representation Services</span>
+                                    <svg :class="{ 'rotate-180': open === 4, 'rotate-0': open !== 4 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 4" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Representation before Income Tax Department for hearings, etc</li>
+                                        <li>Assistance in Income Tax Scrutiny, Demand, Order, Appeal Cases</li>
+                                        <li>GST Department Representation</li>
+                                        <li>Filing Replies and Compliances against Tax Notices</li>
+                                        <li>Assessment and Reassessment Assistance</li>
+                                        <li>Support for Survey, Search, and Seizure Cases</li>
+                                        <li>Rectification Applications</li>
+                                        <li>Support for Faceless Assessments & E-proceedings</li>
+                                        <li>Support for e-Campaigns & Feedbacks</li>
+                                        <li>Other Representation Matters</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Sub-Service 5: Other Tax related works -->
+                            <div class="py-1">
+                                <button @click="open = (open === 5 ? null : 5)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Other Tax related works</span>
+                                    <svg :class="{ 'rotate-180': open === 5, 'rotate-0': open !== 5 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 5" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>PAN Application and Correction</li>
+                                        <li>DSC (Digital Signature Certificate) Application for E-filing</li>
+                                        <li>Professional Tax Registration & Returns</li>
+                                        <li>Tax Compliance Calendar Maintenance</li>
+                                        <li>Preparation of Books for Tax Compliance</li>
+                                        <li>Annual Information Statement (AIS) and Form 26AS Review</li>
+                                        <li>ROC Compliance with Tax Implications (MCA filings)</li>
+                                        <li>MSME/Udyam Registration with Tax Benefits Advisory</li>
+                                        <li>Stamp Duty and Registration Value Analysis</li>
+                                        <li>Excise & Service Tax Legacy Support</li>
+                                        <li>Export Import License, AED Works, etc</li>
+                                        <li>VAT/CST Returns and Transitional Support (for legacy issues)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="/solutions/contact.html?service=Taxation" class="mt-8 inline-block bg-green-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-700 transition">Inquire About Taxation</a>
+                    </div>
+                    
+                    <!-- 2. Accounting & Compliance Services Tab -->
+                    <div x-show="activeTab === 'accounting'" x-transition.opacity.duration.500 class="space-y-6" x-data="{ open: null }">
+                        <h2 class="text-3xl font-bold text-green-800">II. ACCOUNTING SERVICES 📊</h2>
+                        <p class="text-lg text-gray-700">Maintain immaculate financial records and guarantee regulatory compliance. Our services ensure transparent and accurate reporting, freeing you up to focus on your core mission.</p>
+                        
+                        <!-- Accordion Items for Accounting -->
+                        <div class="divide-y divide-gray-200 border-t border-b border-gray-200">
+                            
+                            <!-- Sub-Service 1: Bookkeeping Services -->
+                            <div class="py-1">
+                                <button @click="open = (open === 1 ? null : 1)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Bookkeeping Services</span>
+                                    <svg :class="{ 'rotate-180': open === 1, 'rotate-0': open !== 1 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 1" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Sales and Purchase, Invoicing, DEO and accounting works</li>
+                                        <li>Daily transaction recording</li>
+                                        <li>Accounts receivable and payable management</li>
+                                        <li>Bank and credit card reconciliation</li>
+                                        <li>General ledger maintenance</li>
+                                        <li>Cash book maintenance</li>
+                                        <li>Expense tracking and classification</li>
+                                        <li>Petty cash accounting</li>
+                                        <li>Inventory or Stock record maintenance</li>
+                                        <li>Preparation of Chart of Accounts</li>
+                                        <li>Fixed asset register management</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Sub-Service 2: Financial Reporting & Statements -->
+                            <div class="py-1">
+                                <button @click="open = (open === 2 ? null : 2)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Financial Reporting & Statements</span>
+                                    <svg :class="{ 'rotate-180': open === 2, 'rotate-0': open !== 2 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 2" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Balance sheet</li>
+                                        <li>Profit & Loss (P&L) statement</li>
+                                        <li>Cash flow statement</li>
+                                        <li>Statement of changes in equity</li>
+                                        <li>Trial balance preparation</li>
+                                        <li>Monthly/quarterly/annual financial reports</li>
+                                        <li>Ratio analysis and financial health indicators</li>
+                                        <li>Custom management reports (dashboards)</li>
+                                        <li>Budget vs actual comparison reports</li>
+                                        <li>MIS (Management Information Systems) reports</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Sub-Service 3: Payroll Accounting -->
+                            <div class="py-1">
+                                <button @click="open = (open === 3 ? null : 3)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Payroll Accounting</span>
+                                    <svg :class="{ 'rotate-180': open === 3, 'rotate-0': open !== 3 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 3" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Payroll processing</li>
+                                        <li>Payslip generation and distribution</li>
+                                        <li>Employee tax (TDS) calculation and filing</li>
+                                        <li>Provident Fund (PF) and Employee State Insurance (ESI) compliance</li>
+                                        <li>Bonus, gratuity, and leave encashment calculation</li>
+                                        <li>Salary structure design</li>
+                                        <li>Full & final settlement accounting</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                             <!-- Sub-Service 4: Compliance & Regulatory Accounting -->
+                            <div class="py-1">
+                                <button @click="open = (open === 4 ? null : 4)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Compliance & Regulatory Accounting</span>
+                                    <svg :class="{ 'rotate-180': open === 4, 'rotate-0': open !== 4 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 4" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Company or LLP or OPC incorporation and ROC filings</li>
+                                        <li>Preparation of board meeting minutes and resolutions</li>
+                                        <li>Maintenance of statutory registers</li>
+                                        <li>Filing of annual returns (MCA compliance)</li>
+                                        <li>Compliance under Companies Act / LLP Act and filing of relevant forms</li>
+                                        <li>Audit compliance</li>
+                                        <li>Internal control checks and documentation</li>
+                                        <li>Startup & SME-Specific Accounting (Integrated Advisory)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Sub-Service 5: Business Advisory & Forecasting -->
+                            <div class="py-1">
+                                <button @click="open = (open === 5 ? null : 5)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Business Advisory & Forecasting</span>
+                                    <svg :class="{ 'rotate-180': open === 5, 'rotate-0': open !== 5 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 5" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Budget preparation</li>
+                                        <li>Costing and break-even analysis</li>
+                                        <li>Profitability analysis (product/service level)</li>
+                                        <li>Forecasting and financial modelling</li>
+                                        <li>Feasibility studies and financial planning</li>
+                                        <li>Valuation of business/assets</li>
+                                        <li>Scenario planning and stress testing</li>
+                                        <li>Financial due diligence for investment or partnerships</li>
+                                        <li>Preparation of Business and HR Policies</li>
+                                        <li>Financial policy and governance design</li>
+                                        <li>Budgeting, forecasting, and internal control oversight</li>
+                                        <li>Monthly performance reviews and business insights</li>
+                                        <li>Recruitment support for finance personnel</li>
+                                        <li>Financial training for teams and entrepreneurs</li>
+                                        <li>Mentoring for finance managers in small organisations</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Sub-Service 6: NGO, Societies, Government and Trust Accounting -->
+                            <div class="py-1">
+                                <button @click="open = (open === 6 ? null : 6)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>NGO, Societies, Government and Trust Accounting</span>
+                                    <svg :class="{ 'rotate-180': open === 6, 'rotate-0': open !== 6 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 6" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Fund-based accounting</li>
+                                        <li>Donation and grant management</li>
+                                        <li>Utilization certificate preparation</li>
+                                        <li>12A and 80G compliance accounting</li>
+                                        <li>Project-wise financial reporting</li>
+                                        <li>Audit compliance</li>
+                                        <li>Government Accounting</li>
+                                        <li>Support for government tenders and finance compliance</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Sub-Service 7: Software-Based Accounting Services -->
+                            <div class="py-1">
+                                <button @click="open = (open === 7 ? null : 7)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Software-Based Accounting Services</span>
+                                    <svg :class="{ 'rotate-180': open === 7, 'rotate-0': open !== 7 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 7" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Tally (ERP9/ Prime) or other accounting software accounting, setup and customization</li>
+                                        <li>Migration between accounting software platforms</li>
+                                        <li>Migration from manual to accounting software</li>
+                                        <li>Accounting automation tools integration</li>
+                                        <li>Cloud-based bookkeeping solutions</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Sub-Service 8: Audit Support Services -->
+                            <div class="py-1">
+                                <button @click="open = (open === 8 ? null : 8)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Audit Support Services</span>
+                                    <svg :class="{ 'rotate-180': open === 8, 'rotate-0': open !== 8 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 8" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Preparation of audit schedules</li>
+                                        <li>Audit trail documentation</li>
+                                        <li>Coordination with statutory/internal auditors</li>
+                                        <li>Correction of accounting errors based on audit observations</li>
+                                        <li>Drafting of management representation letters</li>
+                                        <li>Fixed asset verification and reporting</li>
+                                        <li>Stock audit support</li>
+                                        <li>Internal audit data preparation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="/solutions/contact.html?service=Accounting" class="mt-8 inline-block bg-green-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-700 transition">Get Compliance Support</a>
+                    </div>
+
+                    <!-- 3. Project Facilitation Services Tab -->
+                    <div x-show="activeTab === 'project'" x-transition.opacity.duration.500 class="space-y-6" x-data="{ open: null }">
+                        <h2 class="text-3xl font-bold text-green-800">III. PROJECT FACILITATION SERVICES 🤝</h2>
+                        <p class="text-lg text-gray-700">From initial concept to funding acquisition and execution, we facilitate projects, specializing in initiatives with environmental, educational, or social impact.</p>
+                        
+                        <!-- Accordion Items for Project Facilitation -->
+                        <div class="divide-y divide-gray-200 border-t border-b border-gray-200">
+                            
+                            <!-- Sub-Service 1: DPR (Detailed Project Report) Preparation -->
+                            <div class="py-1">
+                                <button @click="open = (open === 1 ? null : 1)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>DPR (Detailed Project Report) Preparation</span>
+                                    <svg :class="{ 'rotate-180': open === 1, 'rotate-0': open !== 1 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 1" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Preparation of detailed project reports for government and private projects</li>
+                                        <li>Sector-specific DPRs (infrastructure, agriculture, education, health, waste management, etc.)</li>
+                                        <li>Technical feasibility and viability studies</li>
+                                        <li>Cost–benefit analysis and break-even calculation</li>
+                                        <li>Projected cash flows and income statements</li>
+                                        <li>SWOT and risk assessment</li>
+                                        <li>Alignment with SDGs or national missions (e.g., Make in India, Swachh Bharat)</li>
+                                        <li>DPRs for social enterprises and NGOs</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Sub-Service 2: Loan and Credit Facilitation -->
+                            <div class="py-1">
+                                <button @click="open = (open === 2 ? null : 2)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Loan and Credit Facilitation</span>
+                                    <svg :class="{ 'rotate-180': open === 2, 'rotate-0': open !== 2 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 2" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Preparation of bankable project proposals</li>
+                                        <li>Financial modelling for credit assessment</li>
+                                        <li>Cash flow projection and debt servicing analysis</li>
+                                        <li>CMA data preparation (Credit Monitoring Arrangement)</li>
+                                        <li>Liaisoning with banks and financial institutions</li>
+                                        <li>Term loan, working capital and OD application support</li>
+                                        <li>Preparation of financial viability reports</li>
+                                        <li>NBFC/Microfinance institution support documentation</li>
+                                        <li>Follow-up on loan sanction status and clarifications</li>
+                                        <li>Project Pitching</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Sub-Service 3: Government Funding & Subsidy Advisory -->
+                            <div class="py-1">
+                                <button @click="open = (open === 3 ? null : 3)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Government Funding & Subsidy Advisory</span>
+                                    <svg :class="{ 'rotate-180': open === 3, 'rotate-0': open !== 3 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 3" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Identification of relevant schemes (Startup India, PMEGP, Mudra, MSME, NSDC, NABARD, etc.)</li>
+                                        <li>End-to-end support for application under government grant/subsidy schemes</li>
+                                        <li>Preparation of proposal decks for scheme eligibility</li>
+                                        <li>Drafting and submission of government application forms</li>
+                                        <li>DPRs aligned with government scheme guidelines</li>
+                                        <li>Submission of UC (Utilization Certificates) and progress reports</li>
+                                        <li>Monitoring and compliance with scheme guidelines</li>
+                                        <li>Assistance with state/central government incentives for manufacturing, agri, or green initiatives</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                             <!-- Sub-Service 4: Business Development & Strategic Planning -->
+                            <div class="py-1">
+                                <button @click="open = (open === 4 ? null : 4)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Business Development & Strategic Planning</span>
+                                    <svg :class="{ 'rotate-180': open === 4, 'rotate-0': open !== 4 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 4" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Market entry strategy and go-to-market (GTM) plans</li>
+                                        <li>Business model development and validation</li>
+                                        <li>Strategic growth planning (short, medium, long-term)</li>
+                                        <li>Business restructuring for scale-up or funding</li>
+                                        <li>Revenue stream optimization</li>
+                                        <li>Franchise and channel partner model design</li>
+                                        <li>Customer profiling and competitor benchmarking</li>
+                                        <li>Business diversification planning</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Sub-Service 5: Project Proposal and Pitch Deck Creation -->
+                            <div class="py-1">
+                                <button @click="open = (open === 5 ? null : 5)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Project Proposal and Pitch Deck Creation</span>
+                                    <svg :class="{ 'rotate-180': open === 5, 'rotate-0': open !== 5 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 5" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Investor-ready pitch decks</li>
+                                        <li>One-pagers and executive summaries</li>
+                                        <li>Business concept note drafting</li>
+                                        <li>Business plan writing (including problem, solution, market, revenue, team, projections)</li>
+                                        <li>Presentations for angel investors, VCs, government panels, or donors</li>
+                                        <li>Branding and storytelling alignment</li>
+                                        <li>Visual mock-ups and service flowcharts</li>
+                                        <li>Financial highlights and use-of-funds breakdown</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Sub-Service 6: Legal and Statutory Readiness -->
+                            <div class="py-1">
+                                <button @click="open = (open === 6 ? null : 6)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Legal and Statutory Readiness</span>
+                                    <svg :class="{ 'rotate-180': open === 6, 'rotate-0': open !== 6 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 6" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Registration and compliance (LLP, Companies, Pvt. Ltds., OPC, NGO, Society, etc.)</li>
+                                        <li>Drafting of MOA, AOA, trust deeds, etc.</li>
+                                        <li>Business PAN, TAN, MSME, GST, GEM registrations</li>
+                                        <li>DPIIT Startup India registration</li>
+                                        <li>Drafting of partnership, vendor, lease, rental and other agreements</li>
+                                        <li>Audit readiness for grants or credit evaluations</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Sub-Service 7: Capacity Building and Consultation -->
+                            <div class="py-1">
+                                <button @click="open = (open === 7 ? null : 7)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Capacity Building and Consultation</span>
+                                    <svg :class="{ 'rotate-180': open === 7, 'rotate-0': open !== 7 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 7" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Advisory on business scaling and operational planning</li>
+                                        <li>Stakeholder mapping and engagement strategies</li>
+                                        <li>Representation support in forums and expos</li>
+                                        <li>Pitch practice sessions and narrative fine-tuning</li>
+                                        <li>Strategy workshops for teams and entrepreneurs</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="/solutions/contact.html?service=ProjectFacilitation" class="mt-8 inline-block bg-green-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-700 transition">Facilitate My Project</a>
+                    </div>
+
+                    <!-- 4. Financial Consultancy Services Tab -->
+                    <!-- NOTE: Tab ID changed to 'consultancy' -->
+                    <div x-show="activeTab === 'consultancy'" x-transition.opacity.duration.500 class="space-y-6" x-data="{ open: null }">
+                        <h2 class="text-3xl font-bold text-green-800">IV. FINANCIAL CONSULTANCY SERVICES 🧭</h2>
+                        <p class="text-lg text-gray-700">Future-proof your business with strategy consulting focused on operational efficiency, financial modeling, and aligning your core business with modern sustainability practices.</p>
+                        
+                        <!-- Accordion Items for Consulting -->
+                        <div class="divide-y divide-gray-200 border-t border-b border-gray-200">
+                            
+                            <!-- Sub-Service 1: Financial Planning & Strategy -->
+                            <div class="py-1">
+                                <button @click="open = (open === 1 ? null : 1)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Financial Planning & Strategy</span>
+                                    <svg :class="{ 'rotate-180': open === 1, 'rotate-0': open !== 1 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 1" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Personal financial planning (short, medium, long-term goals)</li>
+                                        <li>Business financial strategy formulation</li>
+                                        <li>Cash flow planning and optimization</li>
+                                        <li>Debt management and restructuring</li>
+                                        <li>Capital budgeting and allocation planning</li>
+                                        <li>Scenario planning and contingency budgeting</li>
+                                        <li>Cost control and reduction strategy</li>
+                                        <li>Break-even analysis and profit planning</li>
+                                        <li>Rolling forecast development</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Sub-Service 2: Investment Advisory -->
+                            <div class="py-1">
+                                <button @click="open = (open === 2 ? null : 2)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Investment Advisory</span>
+                                    <svg :class="{ 'rotate-180': open === 2, 'rotate-0': open !== 2 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 2" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Investment planning for individuals (mutual funds, bonds, insurance, SIPs)</li>
+                                        <li>Business investment advisory (CAPEX planning, ROI analysis)</li>
+                                        <li>Portfolio diversification planning</li>
+                                        <li>Startup investment readiness and documentation</li>
+                                        <li>Return on Investment (ROI) and Internal Rate of Return (IRR) analysis</li>
+                                        <li>Investment options for surplus funds</li>
+                                        <li>Risk-adjusted investment planning</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Sub-Service 3: Business Finance Consulting -->
+                            <div class="py-1">
+                                <button @click="open = (open === 3 ? null : 3)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                    <span>Business Finance Consulting</span>
+                                    <svg :class="{ 'rotate-180': open === 3, 'rotate-0': open !== 3 }" class="w-5 h-5 transition-transform text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                <div x-show="open === 3" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                    <ul class="accordion-list">
+                                        <li>Feasibility study and financial viability reports</li>
+                                        <li>Financial projections and forecasting (3 to 10 years)</li>
+                                        <li>Project report preparation for loans and funding</li>
+                                        <li>Working capital planning and cycle optimization</li>
+                                        <li>Business plan creation with financials</li>
+                                        <li>Pricing strategy and unit economics modelling</li>
+                                        <li>Budgeting and variance analysis</li>
+                                        <li>Business restructuring for profitability improvement</li>
+                                        <li>Franchise and expansion financial strategy</li>
+                                        <li>Finance function SOP development</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="/solutions/contact.html?service=Consulting" class="mt-8 inline-block bg-green-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-700 transition">Request a Consultation</a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        
+        <!-- CALL TO ACTION -->
+        <section class="py-12 bg-green-700 text-white text-center">
+            <div class="container mx-auto px-4 md:px-8 max-w-4xl">
+                <h2 class="text-3xl font-bold mb-4">Need Comprehensive Financial Clarity?</h2>
+                <p class="text-lg mb-6">
+                    Contact our expert team today to schedule a free initial assessment of your financial and strategic needs.
+                </p>
+                <a href="/solutions/contact.html" 
+                   class="inline-block bg-green-300 text-green-800 font-extrabold py-3 px-8 rounded-full text-lg hover:bg-white transition shadow-lg">
+                    Contact GreenAmmo Solutions
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER (Copied from solutions_landing.html) -->
+    <footer class="bg-green-800 text-white pt-12">
+        <div class="container mx-auto px-4 md:px-8">
+
+            <!-- 1. TOP ROW: Logo, Description & Nav Columns -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-green-700">
+                
+                <!-- Logo and Description -->
+                <div class="md:col-span-2 space-y-4">
+                    <h3 class="text-3xl font-bold text-green-300">GreenAmmo Group</h3>
+                    <p class="text-sm text-green-200 max-w-sm">
+                        Empowering sustainable living and waste management through community action, research, and project initiation.
+                    </p>
+                </div>
+
+                <!-- Navigation Columns -->
+                <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
+
+                    <!-- Column 1: GreenAmmo -->
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-green-50 mb-3">GreenAmmo</h4>
+                        <ul class="text-sm space-y-2 text-green-200">
+                            <li><a href="/about-us.html" class="hover:text-green-300 transition">About Us</a></li>
+                            <li><a href="/gallery.html" class="hover:text-green-300 transition">Media (Gallery)</a></li>
+                            <li><a href="/certifications.html" class="hover:text-green-300 transition">Certificates</a></li>
+                            <li><a href="/alliances.html" class="hover:text-green-300 transition">Alliances</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 2: Solutions -->
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-green-50 mb-3">Solutions</h4>
+                        <ul class="text-sm space-y-2 text-green-200">
+                            <li><a href="/solutions/finance.html" class="hover:text-green-300 transition">Finance</a></li>
+                            <li><a href="/solutions/education.html" class="hover:text-green-300 transition">Education & Development</a></li>
+                            <li><a href="/solutions/event-supply.html" class="hover:text-green-300 transition">Event & Supply</a></li>
+                            <li><a href="/solutions/accommodation.html" class="hover:text-green-300 transition">Accommodations</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 3: Trust -->
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-green-50 mb-3">Trust</h4>
+                        <ul class="text-sm space-y-2 text-green-200">
+                            <li><a href="/trust/projects.html" class="hover:text-green-300 transition">Projects & Milestones</a></li>
+                            <li><a href="/trust/campaigns.html" class="hover:text-green-300 transition">Campaigns</a></li>
+                            <li><a href="/trust/reports.html" class="hover:text-green-300 transition">Reports & Research</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 4: Action/Explore -->
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-green-50 mb-3">Take Action</h4>
+                        <div class="space-y-2">
+                            <a href="/join-us.html" class="block bg-green-600 text-white text-center text-sm font-medium py-2 rounded-lg hover:bg-green-700 transition">
+                                Join Us
+                            </a>
+                            <a href="/explore.html" class="block border border-green-600 text-green-50 text-center text-sm font-medium py-2 rounded-lg hover:border-green-300 hover:text-green-300 transition">
+                                Explore
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- 2. BOTTOM ROW: Copyright and Socials -->
+            <div class="flex flex-col sm:flex-row justify-between items-center py-6 text-sm text-green-200">
+                <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
+                
+                <!-- Social Icons -->
+                <div class="flex gap-4 mt-4 sm:mt-0">
+                    <a href="#" class="hover:text-green-400 transition" aria-label="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3 8h-2v2h2v2h-2v4h-2v-4H9V12h2V10c0-1.104.896-2 2-2h2v2z"/></svg>
+                    </a>
+                    <a href="#" class="hover:text-green-400 transition" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.179 2.541c.883 0 1.632.748 1.632 1.632v.005c0 .883-.749 1.631-1.632 1.631h-.005c-.883 0-1.632-.748-1.632-1.631v-.005c0-.883.749-1.632 1.632-1.632h.005zM12 8c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4zm-2.821 8.879c.148.093.308.175.474.246.36.155.76.246 1.171.246h2.348c.41 0 .81-.091 1.17-.246.166-.071.326-.153.473-.246.22-.138.423-.306.605-.5.182-.194.34-.413.474-.658.134-.245.242-.516.326-.811.168-.598.256-1.233.256-1.879v-2.352c0-.646-.088-1.281-.256-1.879a4.897 4.897 0 0 0-.326-.811 4.795 4.795 0 0 0-.474-.658 4.67 4.67 0 0 0-.605-.5 4.908 4.908 0 0 0-.474-.246c-.36-.155-.76-.246-1.17-.246h-2.348c-.41 0-.81.091-1.17.246a4.908 4.908 0 0 0-.474.246 4.67 4.67 0 0 0-.605.5 4.795 4.795 0 0 0-.474.658 4.897 4.897 0 0 0-.326.811c-.168.598-.256 1.233-.256 1.879v2.352c0 .646.088 1.281.256 1.879a4.897 4.897 0 0 0 .326.811 4.795 4.795 0 0 0 .474.658 4.67 4.67 0 0 0 .605.5z"/></svg>
+                    </a>
+                    <a href="#" class="hover:text-green-400 transition" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-2 16H8V11h2v7zm-1-8H9V8h1v2zM16 18h-2v-3c0-1.657-1.343-3-3-3s-3 1.343-3 3v3h-2V11h2v1.5c.618-.844 1.877-1.5 3-1.5 2.206 0 4 1.794 4 4v3z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
