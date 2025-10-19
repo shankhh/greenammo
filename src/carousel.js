@@ -67,11 +67,11 @@ async function render_carousel() {
     document.querySelector(".glide").classList.remove("hidden");
     document.querySelector(".carousel_skeleton").classList.add("hidden");
     document.querySelector(".glide__slides").innerHTML = slidesHTML;
-    const perView = 4; // visible slides per view
+    const perView = 3; // visible slides per view
 
     const glide = new Glide(".glide", {
       type: "slider", // important: 'slider' stops looping
-      perView: perView,
+      perView: 4,
       focusAt: "center",
       gap: 30,
       startAt: 0,
