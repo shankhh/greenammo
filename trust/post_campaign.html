@@ -3,151 +3,443 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GreenAmmo Trust - Building Credibility Through Action.</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>GreenAmmo Trust</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+      href="node_modules/@glidejs/glide/dist/css/glide.core.min.css"
+    />
+
+    <!-- Optional Theme stylesheet -->
+    <link
+      rel="stylesheet"
+      href="node_modules/@glidejs/glide/dist/css/glide.theme.min.css"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // Custom Brand Palette (Defined by User Request)
+              "brand-dark": "#1D371F", // Primary Dark Green (Headings, Main Text)
+              "brand-primary": "#7C966A", // Secondary Olive Green (Borders, Secondary Text)
+              "brand-accent": "#6E8546", // Tertiary Vibrant Moss (CTA Background, Highlights)
+              "brand-light": "#D2E3AB", // Lightest Green (Light backgrounds, Watermarks)
+              "brand-base": "#F7FAF7", // Suggested Off-White Base
+            },
+          },
+        },
+      };
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      defer
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+
+    <link rel="icon" type="image/x-icon" href="trust.png" />
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Montserrat:wght@600&display=swap");
+    </style>
+    
+    <style>
+      /* @layer components {
+          .cta-button {
+            @apply inline-block py-3 px-10 rounded-full text-lg transition shadow-xl transform hover:scale-105;
+          }
+        } */
+      .cta-button {
+        display: inline-block;
+        padding: 0.75rem 2.5rem; /* py-3 px-10 */
+        border-radius: 9999px; /* rounded-full */
+        font-size: 1.125rem; /* text-lg */
+        transition: all 0.3s;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        transform: scale(1);
+      }
+      .cta-button:hover {
+        transform: scale(1.05);
+      }
+
       body {
-        font-family: "Inter", sans-serif;
-        background-color: #f7fafc; /* Light gray background for contrast */
+        font-family: "Inter", sans-serif; /* Keep Inter for body text */
+        /* Using the Off-White Base color */
+        background-color: #f7fafc;
+        /* ... rest of the body styles (watermark, etc.) ... */
       }
-      .bento-grid-item {
-        transition: transform 0.3s, box-shadow 0.3s;
-        background-size: cover;
-        background-position: center;
+
+      /* NEW: Apply Bricolage Grotesque to all headings */
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Bricolage Grotesque", sans-serif;
+      }
+      /* CORRECTED: Defining cta-button within @layer components */
+
+      /* Custom CSS for continuous scrolling logo/brand banner */
+      .scrolling-banner {
+        animation: scroll 40s linear infinite;
+        display: flex;
+        width: fit-content;
+      }
+      @keyframes scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      .scrolling-banner:hover {
+        animation-play-state: paused;
+      }
+
+      /* Style for the Campaign Image Placeholder (Updated with brand-accent color #6E8546) */
+      .campaign-card {
+        background: linear-gradient(
+            rgba(110, 133, 70, 0.4),
+            rgba(110, 133, 70, 0.8)
+          ),
+          url("https://placehold.co/400x700/6E8546/ffffff?text=Campaign+Image")
+            center/cover;
+        height: 400px;
         position: relative;
-        isolation: isolate; /* For z-index stacking */
       }
-      .bento-grid-item::before {
-        content: "";
+      /* ... rest of the styles ... */
+    </style>
+    
+    <style>
+      /* Add this to your existing <style> block */
+
+      /* ---------------------------------------------------- */
+      /* NEW: CSS for the 3D Flip Card Effect in Principles Section */
+      /* ---------------------------------------------------- */
+      .flip-card {
+        perspective: 1000px; /* Establishes the 3D context */
+        height: 480px; /* Fixed height for consistent flipping */
+      }
+
+      .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.8s;
+        transform-style: preserve-3d; /* Key to the 3D effect */
+        transform: rotateY(0deg); /* Start state */
+      }
+
+      /* State when clicked/active */
+      .flip-card-inner.flipped {
+        transform: rotateY(180deg);
+      }
+
+      .flip-card-front,
+      .flip-card-back {
         position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.4);
-        transition: background 0.3s;
-        z-index: -1;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden; /* Hide the back side during flip */
+        backface-visibility: hidden;
+        border-radius: 1rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
       }
-      .bento-grid-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+      .flip-card-front {
+        background-color: #ffffff;
+        color: #333333;
+        z-index: 2;
       }
-      .bento-grid-item:hover::before {
-        background: rgba(0, 0, 0, 0.25);
+
+      .flip-card-back {
+        background-color: #1d371f; /* brand-dark color for the back */
+        color: white;
+        transform: rotateY(180deg); /* Position the back face */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
       }
-      /* Specific background images for visual placeholders (Trust-specific) */
-      #projects-bg {
-        background-image: url("https://placehold.co/800x600/1C8D4B/ffffff?text=Major+Projects");
-      }
-      #reports-bg {
-        background-image: url("https://placehold.co/800x600/0E7444/ffffff?text=Reports+%26+Research");
-      }
-      #campaigns-bg {
-        background-image: url("https://placehold.co/800x600/065F46/ffffff?text=Community+Campaigns");
-      }
-      #alliances-bg {
-        background-image: url("https://placehold.co/800x600/047857/ffffff?text=Strategic+Alliances");
+      
+      /* Remove or update the old principle-card hover style */
+      .principle-card {
+        /* Removed old styles for hover/transform */
+        position: relative;
+        z-index: 10;
+        transition: none; /* Remove transition as it interferes with flip */
       }
     </style>
+      <style>
+        body {
+          font-family: "Inter", sans-serif;
+          background-color: #f7fafc; /* Light gray background for contrast */
+        }
+        .bento-grid-item {
+          transition: transform 0.3s, box-shadow 0.3s;
+          background-size: cover;
+          background-position: center;
+          position: relative;
+          isolation: isolate; /* For z-index stacking */
+        }
+        .bento-grid-item::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.4);
+          transition: background 0.3s;
+          z-index: -1;
+        }
+        .bento-grid-item:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .bento-grid-item:hover::before {
+          background: rgba(0, 0, 0, 0.25);
+        }
+        /* Specific background images for visual placeholders (Trust-specific) */
+        #projects-bg {
+          background-image: url("https://placehold.co/800x600/1C8D4B/ffffff?text=Major+Projects");
+        }
+        #reports-bg {
+          background-image: url("https://placehold.co/800x600/0E7444/ffffff?text=Reports+%26+Research");
+        }
+        #campaigns-bg {
+          background-image: url("https://placehold.co/800x600/065F46/ffffff?text=Community+Campaigns");
+        }
+        #alliances-bg {
+          background-image: url("https://placehold.co/800x600/047857/ffffff?text=Strategic+Alliances");
+        }
+      </style>
   </head>
   <body>
-    <nav class="bg-white shadow-lg sticky top-0 z-20">
+    <nav x-data="{ open: false }" class="bg-white shadow-lg sticky top-0 z-20">
       <div
-        class="container mx-auto px-4 md:px-8 py-3 flex justify-between items-center"
+      class="container mx-auto px-4 md:px-8 py-3 flex justify-between items-center"
       >
-        <div class="flex items-center space-x-8">
-          <a
-            href="/index.html"
-            class="text-2xl md:text-3xl font-extrabold text-green-800 rounded-lg p-1"
-          >
-            GreenAmmo <span class="text-green-500">Group</span>
+        <div class="flex items-center">
+          <a href="./index.html" class="block">
+            <img
+            src="trust.png"
+              alt="GreenAmmo Trust Logo"
+              class="h-12 w-auto object-contain"
+              title="GreenAmmo Trust"
+              />
           </a>
         </div>
 
-        <ul class="flex items-center space-x-6">
-          <li>
-            <a
-              href="/trust/index.html"
-              class="text-base font-semibold text-green-600 border-b-2 border-green-600 transition hidden sm:inline-block"
-            >
-              GreenAmmo Trust
-            </a>
-          </li>
+        <div class="hidden lg:flex items-center space-x-8">
+          <a
+            href="/index.html"
+            class="text-gray-700 hover:text-brand-accent transition font-semibold"
+            >Home</a
+          >
+          <a
+            href="/gallery.html"
+            class="text-gray-700 hover:text-brand-accent transition font-semibold"
+            >Media</a
+          >
+          <a
+            href="/campaigns.html"
+            class="text-gray-700 hover:text-brand-accent transition font-semibold"
+            >Campaigns</a
+          >
 
-          <li>
-            <a
-              href="/aboutus.html"
-              class="text-gray-700 hover:text-green-600 transition hidden lg:inline-block"
-            >
-              About Us
-            </a>
-          </li>
-
-          <li class="relative group hidden sm:block">
+          <div x-data="{ dropdownOpen: false }" class="relative">
             <button
-              class="text-gray-700 hover:text-green-600 transition inline-flex items-center gap-1"
+              @click="dropdownOpen = !dropdownOpen"
+              @click.away="dropdownOpen = false"
+              class="text-gray-700 hover:text-brand-accent transition inline-flex items-center gap-1 font-semibold"
             >
-              Explore
+              Milestones
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-4 h-4"
+                :class="{'rotate-180': dropdownOpen}"
+                class="w-4 h-4 transform transition-transform duration-300"
                 fill="none"
-                viewBox="0 0 24 24"
                 stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
                   d="M19 9l-7 7-7-7"
-                />
+                ></path>
               </svg>
             </button>
             <div
-              class="absolute hidden group-hover:block bg-white rounded-xl shadow-xl p-3 top-5 -left-4 w-48 transition-all z-10 border border-green-100"
+              x-show="dropdownOpen"
+              x-cloak
+              x-transition:enter="transition ease-out duration-200"
+              x-transition:enter-start="opacity-0 scale-95"
+              x-transition:enter-end="opacity-100 scale-100"
+              x-transition:leave="transition ease-in duration-150"
+              x-transition:leave-start="opacity-100 scale-100"
+              x-transition:leave-end="opacity-0 scale-95"
+              class="absolute bg-white rounded-xl shadow-xl p-3 top-10 right-0 w-48 transition-all z-30 border border-brand-light origin-top-right"
             >
               <ul class="text-sm space-y-1">
                 <li>
                   <a
-                    href="/trust/projects.html"
-                    class="block py-1 px-2 text-gray-700 hover:bg-green-50 rounded transition"
-                    >Projects & Milestones</a
+                    href="/milestones/projects.html"
+                    @click="dropdownOpen = false"
+                    class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition"
                   >
+                    Projects
+                  </a>
                 </li>
                 <li>
                   <a
-                    href="/trust/reports.html"
-                    class="block py-1 px-2 text-gray-700 hover:bg-green-50 rounded transition"
-                    >Reports & Research</a
+                    href="/milestones/reports.html"
+                    @click="dropdownOpen = false"
+                    class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition"
                   >
-                </li>
-                <li>
-                  <a
-                    href="/trust/campaigns.html"
-                    class="block py-1 px-2 text-gray-700 hover:bg-green-50 rounded transition"
-                    >Community Campaigns</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/alliances.html"
-                    class="block py-1 px-2 text-gray-700 hover:bg-green-50 rounded transition"
-                    >Strategic Alliances</a
-                  >
+                    Reports
+                  </a>
                 </li>
               </ul>
             </div>
-          </li>
+          </div>
 
-          <li>
-            <a
-              href="/solutions/contact.html"
-              class="bg-green-600 text-white font-semibold py-2 px-4 rounded-full hover:bg-green-700 transition shadow-lg shadow-green-500/50"
+          <a
+            href="/joinus.html"
+            class="cta-button bg-brand-accent text-white hover:bg-brand-dark/90 shadow-brand-accent/50"
+          >
+            Let's Talk
+          </a>
+        </div>
+
+        <button
+          @click="open = !open"
+          class="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100"
+        >
+          <svg
+            x-show="!open"
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            ></path>
+          </svg>
+          <svg
+            x-show="open"
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <div
+        x-show="open"
+        x-cloak
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0 -translate-y-4"
+        x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 -translate-y-4"
+        class="lg:hidden px-4 pb-4 bg-white border-t border-gray-100 absolute w-full shadow-2xl z-10"
+      >
+        <ul class="flex flex-col space-y-2 font-medium">
+          <a
+            href="/index.html"
+            @click="open = false"
+            class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded"
+            >Home</a
+          >
+          <a
+            href="/gallery.html"
+            @click="open = false"
+            class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded"
+            >Media</a
+          >
+          <a
+            href="/campaigns.html"
+            @click="open = false"
+            class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded"
+            >Campaigns</a
+          >
+
+          <div x-data="{ mobileDropdownOpen: false }">
+            <button
+              @click="mobileDropdownOpen = !mobileDropdownOpen"
+              class="w-full text-left py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded flex justify-between items-center"
             >
-              Get In Touch
-            </a>
-          </li>
+              Milestones
+              <svg
+                :class="{'rotate-180': mobileDropdownOpen}"
+                class="w-4 h-4 transform transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </button>
+            <div
+              x-show="mobileDropdownOpen"
+              x-cloak
+              x-transition:enter="transition ease-out duration-100"
+              x-transition:enter-start="transform opacity-0 scale-y-90"
+              x-transition:enter-end="transform opacity-100 scale-y-100"
+              x-transition:leave="transition ease-in duration-75"
+              x-transition:leave-start="transform opacity-100 scale-y-100"
+              x-transition:leave-end="transform opacity-0 scale-y-90"
+              class="ml-4 border-l border-brand-light pl-4 space-y-1"
+            >
+              <a
+                href="/milestones/projects.html"
+                @click="open = false"
+                class="block py-1 text-sm text-gray-600 hover:text-brand-accent"
+                >Projects</a
+              >
+              <a
+                href="/milestones/reports.html"
+                @click="open = false"
+                class="block py-1 text-sm text-gray-600 hover:text-brand-accent"
+                >Reports</a
+              >
+            </div>
+          </div>
+
+          <a
+            href="/joinus.html"
+            @click="open = false"
+            class="mt-4 block text-center cta-button bg-brand-accent text-white hover:bg-brand-dark/90 shadow-brand-accent/50"
+          >
+            Join the Change
+          </a>
         </ul>
       </div>
     </nav>
@@ -236,107 +528,10 @@
         </div>
       </section>
 
-      <section class="py-16 bg-white">
-        <div class="container mx-auto px-4 md:px-8 max-w-5xl">
-          <h2 class="text-3xl font-bold text-green-800 text-center mb-10">
-            Our Commitment to Accountability
-          </h2>
-          <div class="grid sm:grid-cols-3 gap-8 text-center">
-            <div class="p-6 bg-green-50 rounded-xl shadow-md space-y-3">
-              <svg
-                class="w-10 h-10 mx-auto text-green-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 8c1.657 0 3 .895 3 2s-1.343 2-3 2-3-.895-3-2 .896-2 3-2zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                ></path>
-              </svg>
-              <h3 class="font-semibold text-xl text-green-800">
-                Clear Metrics
-              </h3>
-              <p class="text-sm text-gray-600">
-                We establish clear, quantifiable goals for every project and
-                campaign to measure true impact.
-              </p>
-            </div>
 
-            <div class="p-6 bg-green-50 rounded-xl shadow-md space-y-3">
-              <svg
-                class="w-10 h-10 mx-auto text-green-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2c-2.355 0-4.605.698-6.502 2.016M12 22c-2.355 0-4.605-.698-6.502-2.016M18 10a6 6 0 00-6-6M6 10a6 6 0 00-6 6"
-                ></path>
-              </svg>
-              <h3 class="font-semibold text-xl text-green-800">
-                Verified Data
-              </h3>
-              <p class="text-sm text-gray-600">
-                All published data and reports are internally verified and often
-                subject to third-party scrutiny for accuracy.
-              </p>
-            </div>
-
-            <div class="p-6 bg-green-50 rounded-xl shadow-md space-y-3">
-              <svg
-                class="w-10 h-10 mx-auto text-green-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                ></path>
-              </svg>
-              <h3 class="font-semibold text-xl text-green-800">
-                Public Record
-              </h3>
-              <p class="text-sm text-gray-600">
-                We make our key documents easily accessible so the community can
-                audit our progress and finances.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="py-20 bg-green-500 text-white text-center">
-        <div class="container mx-auto px-4 md:px-8 max-w-3xl">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">
-            Explore Our Latest Impact Report
-          </h2>
-          <p class="text-lg mb-8">
-            Download the latest comprehensive report to see the full scope of
-            our activities, financial summaries, and future plans.
-          </p>
-          <a
-            href="/trust/reports.html"
-            class="inline-block bg-white text-green-700 font-extrabold py-3 px-10 rounded-full text-lg hover:bg-gray-100 transition shadow-xl transform hover:scale-105"
-          >
-            View Reports Now
-          </a>
-        </div>
-      </section>
     </main>
 
-    <footer class="bg-green-800 text-white pt-12">
+    <!-- <footer class="bg-green-800 text-white pt-12">
       <div class="container mx-auto px-4 md:px-8">
         <div
           class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-green-700"
@@ -513,6 +708,177 @@
                 />
               </svg>
             </a>
+          </div>
+        </div>
+      </div>
+    </footer> -->
+        <footer class="bg-brand-dark text-white pt-12">
+      <div class="container mx-auto px-4 md:px-8">
+        <div
+          class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-brand-primary"
+        >
+          <div class="md:col-span-2 space-y-4">
+            <h3 class="text-3xl font-bold text-brand-light">GreenAmmo Group</h3>
+            <p class="text-sm text-brand-light/70 max-w-sm">
+              Empowering sustainable living and waste management through
+              community action, research, and project initiation.
+            </p>
+          </div>
+
+          <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
+            <div class="space-y-3">
+              <h4 class="font-semibold text-white mb-3">GreenAmmo</h4>
+              <ul class="text-sm space-y-2 text-brand-light/80">
+                <li>
+                  <a href="/aboutus" class="hover:text-brand-light transition"
+                    >About Us</a
+                  >
+                </li>
+                <li>
+                  <a href="/gallery" class="hover:text-brand-light transition"
+                    >Media (Gallery)</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/certifications"
+                    class="hover:text-brand-light transition"
+                    >Certificates</a
+                  >
+                </li>
+                <li>
+                  <a href="/alliances" class="hover:text-brand-light transition"
+                    >Alliances</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="space-y-3">
+              <h4 class="font-semibold text-white mb-3">Solutions</h4>
+              <ul class="text-sm space-y-2 text-brand-light/80">
+                <li>
+                  <a
+                    href="/solutions/finance"
+                    class="hover:text-brand-light transition"
+                    >Finance</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/solutions/education"
+                    class="hover:text-brand-light transition"
+                    >Education & Development</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/solutions/event-supply"
+                    class="hover:text-brand-light transition"
+                    >Event & Supply</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/solutions/accommodation"
+                    class="hover:text-brand-light transition"
+                    >Accommodations</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="space-y-3">
+              <h4 class="font-semibold text-white mb-3">Trust</h4>
+              <ul class="text-sm space-y-2 text-brand-light/80">
+                <li>
+                  <a
+                    href="/trust/projects.html"
+                    class="hover:text-brand-light transition"
+                    >Projects & Milestones</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/trust/campaigns.html"
+                    class="hover:text-brand-light transition"
+                    >Campaigns</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/trust/reports.html"
+                    class="hover:text-brand-light transition"
+                    >Annual Reports</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/trust/donate.html"
+                    class="hover:text-brand-light transition"
+                    >Donate Now</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- <div class="space-y-3">
+              <h4 class="font-semibold text-white mb-3">Support</h4>
+              <ul class="text-sm space-y-2 text-brand-light/80">
+                <li>
+                  <a
+                    href="/solutions/contact.html"
+                    class="hover:text-brand-light transition"
+                    >Contact Us</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/joinus.html"
+                    class="hover:text-brand-light transition"
+                    >Join Us</a
+                  >
+                </li>
+                <li>
+                  <a href="/faq" class="hover:text-brand-light transition"
+                    >FAQ</a
+                  >
+                </li>
+                <li>
+                  <a href="/privacy" class="hover:text-brand-light transition"
+                    >Privacy Policy</a
+                  >
+                </li>
+              </ul>
+            </div> -->
+            <div class="space-y-3">
+              <h4 class="font-semibold text-green-50 mb-3">Take Action</h4>
+              <div class="space-y-2">
+                <a
+                  href="../joinus.html"
+                  class="block bg-brand-accent text-white text-center text-sm font-medium py-2 rounded-lg hover:bg-brand-light/40 transition"
+                >
+                  Join Us
+                </a>
+                <a
+                  href="/explore.html"
+                  class="block border border-green-600 text-green-50 text-center text-sm font-medium py-2 rounded-lg hover:border-green-300 hover:text-green-300 transition"
+                >
+                  Explore
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="container mx-auto px-4 md:px-8 py-4 flex flex-col sm:flex-row justify-between items-center text-sm text-brand-light/80"
+        >
+          <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
+          <div class="flex space-x-4 mt-2 sm:mt-0">
+            <a href="#" class="hover:text-white transition">Facebook</a>
+            <a href="#" class="hover:text-white transition">Instagram</a>
+            <a href="#" class="hover:text-white transition">LinkedIn</a>
           </div>
         </div>
       </div>

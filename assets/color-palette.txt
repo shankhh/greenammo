@@ -3,3 +3,5 @@ HEX: #1d371f	RGB: 29, 55, 31
 HEX: #7c966a	RGB: 124, 150, 106
 HEX: #6c745a	RGB: 108, 116, 90
 HEX: #6e8546	RGB: 110, 133, 70
+
+Bricolage Grotesque [Google]
