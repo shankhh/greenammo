@@ -5,3 +5,49 @@ HEX: #6c745a	RGB: 108, 116, 90
 HEX: #6e8546	RGB: 110, 133, 70
 
 Bricolage Grotesque [Google]
+
+{
+// Custom BLUE Brand Palette (Extracted from Logo)
+"brand-dark": "#2A6496",    // Darker Blue (Headings, Main Text)
+"brand-primary": "#56A0D3", // Main Medium Sky Blue (Borders, Secondary Text)
+"brand-accent": "#3B82F6",  // Vibrant Accent Blue (CTA Background, Highlights)
+"brand-light": "#BFDBFE",   // Light Sky Blue (Light backgrounds, Watermarks)
+"brand-base": "#F7FAFC",     // Off-White Base (Consistent Background)
+}
+
+## GreenAmmo Color Palettes (HEX Codes)
+
+---
+
+### Solutions (Blue Theme)
+
+"brand-dark":    "#2A6496" // Darker Blue
+"brand-primary": "#56A0D3" // Main Medium Sky Blue
+"brand-accent":  "#3B82F6" // Vibrant Accent Blue
+"brand-light":   "#BFDBFE" // Light Sky Blue
+"brand-base":    "#F7FAFC" // Off-White Base
+
+---
+
+### Trust / Original (Green Theme - Based on initial user HEX values)
+
+"brand-dark":    "#1d371f" // Very Dark Green
+"brand-primary": "#7c966a" // Medium Muted Olive Green
+"brand-accent":  "#6e8546" // Medium Vibrant Olive Green
+"brand-light":   "#d2e3ab" // Light Desaturated Green
+"brand-base":    "#F7FAFC" // Assumed Off-White Base (Same as Blue)
+
+*Other provided green shades:*
+"#6c745a" // Darker Muted Olive-Gray Green
+
+---
+
+### GreenAmmo Group (Blended Pop Pastel Theme)
+
+"group-primary-green": "#4CAF50" // Deep Mint (Primary)
+"group-pastel-green":  "#A8D7B0" // Soft Sage (Vibrant Pastel Green)
+"group-pastel-blue":   "#9FD8E4" // Sky Mist (Soft Pastel Blue)
+"group-accent-neutral":"#F0EAD6" // Sandy Beige (Warm Neutral Accent)
+"group-base-white":    "#FDFDFD" // Cloud White (Clean Base)
+
+---

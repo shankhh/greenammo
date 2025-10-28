@@ -3,785 +3,372 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="./assets/greenammo.jpeg" /> <!-- Consider updating favicon path -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./src/style.css">
-    <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js">
-        // Initialize Lenis
-        const lenis = new Lenis({
-            autoRaf: true,
-        });
 
-        // Listen for the scroll event and log the event data
-        lenis.on('scroll', (e) => {
-            console.log(e);
-        });
+    <!-- 1. Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 2. Load Alpine.js for interactivity (Tabs) -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Lenis Smooth Scroll (Optional) -->
+    <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
+
+    <title>Gallery - GreenAmmo Group</title>
+
+    <!-- 3. Configure Tailwind with Pop Pastel Group Palette & Fonts -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // GreenAmmo Group (Blended Pop Pastel Theme)
+              "group-primary-green": "#4CAF50", // Deep Mint (Primary Branding)
+              "group-pastel-green":  "#A8D7B0", // Soft Sage (Accents, Backgrounds)
+              "group-pastel-blue":   "#9FD8E4", // Sky Mist (Secondary Accent)
+              "group-accent-neutral":"#F0EAD6", // Sandy Beige (Warm Highlights)
+              "group-base-white":    "#FDFDFD", // Clean Base (Background)
+              "group-text-dark":     "#1F2937", // Dark Gray for Text (Good Contrast)
+              "group-text-medium":   "#6B7280", // Medium Gray for Subtext
+            },
+            fontFamily: {
+              // Setup font families
+              'sans': ['Inter', 'sans-serif'],
+              'heading': ['Bricolage Grotesque', 'sans-serif'],
+            },
+             animation: { // Animation for modal & skeleton
+                'fade-in': 'fade-in 0.3s ease-out',
+                'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+                'fade-in': {
+                    'from': { opacity: 0, transform: 'translateY(10px)' },
+                    'to': { opacity: 1, transform: 'translateY(0)' },
+                },
+                /* Ensure pulse is defined if using animate-pulse */
+                pulse: {
+                  '0%, 100%': { opacity: 1 },
+                  '50%': { opacity: .5 },
+                }
+            }
+          },
+        },
+      };
     </script>
-    <title>GreenAmmo</title>
+
+    <!-- 4. Import Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- 5. Apply new font rules, CTA button styles, Tab styles, Skeleton -->
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #FDFDFD; /* group-base-white */
+        color: #1F2937; /* group-text-dark */
+      }
+      h1, h2, h3, h4, .font-heading {
+        font-family: "Bricolage Grotesque", sans-serif;
+      }
+      .cta-button { /* Consistent Button Style */
+        display: inline-block; padding: 0.75rem 2.5rem; border-radius: 9999px;
+        font-size: 1rem; font-weight: 600; transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transform: scale(1); text-align: center;
+      }
+      .cta-button:hover {
+        transform: scale(1.03) translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+       /* Tab Button Styles */
+       .tab-button {
+            transition: all 0.2s ease-in-out; white-space: nowrap;
+            padding: 0.5rem 1.25rem; /* px-5 py-2 */
+            font-size: 1rem; /* text-base */ font-weight: 600; /* font-semibold */
+            border-radius: 9999px; /* rounded-full */ border-width: 1px;
+            border-color: #D1D5DB; /* border-gray-300 */ color: #374151; /* text-gray-700 */
+        }
+        .tab-button.active {
+            border-color: #4CAF50; /* group-primary-green */
+            color: #ffffff; /* white text */
+            background-color: #4CAF50; /* group-primary-green */
+        }
+        .tab-button:not(.active):hover {
+            border-color: #A8D7B0; /* group-pastel-green */
+            color: #4CAF50; /* group-primary-green */
+            background-color: #A8D7B033; /* group-pastel-green with low opacity */
+        }
+         /* Added style for modal transitions */
+        .modal-hidden { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-out, visibility 0s linear 0.3s; }
+        .modal-visible { opacity: 1; visibility: visible; transition: opacity 0.3s ease-out; }
+         /* Carousel content centering */
+        #carousel-content img, #carousel-content video { margin: auto; }
+    </style>
 </head>
 
-<body class="bg-gray-50 text-gray-900 font-sans">
+<body class="bg-group-base-white text-group-text-dark font-sans" x-data="{ showModal: false }">
     <!-- 🌿 NAV COMPONENT for GreenAmmo Group -->
-    <nav class="w-full bg-white shadow-sm sticky top-0 z-50">
+     <nav class="w-full bg-white shadow-sm sticky top-0 z-50" x-data="{ mobileMenuOpen: false }">
         <div class="container mx-auto flex justify-between items-center px-6 py-4">
             <!-- Logo -->
-            <a href="/" class="font-bold text-2xl text-green-700 tracking-tight">
-                GreenAmmo
+            <a href="/" class="font-heading font-extrabold text-2xl text-group-primary-green tracking-tight flex items-center gap-2">
+                 <img src="./assets/greenammo.jpeg" alt="GreenAmmo Logo" class="h-10 w-auto rounded-full object-cover">
+                 <span class="text-group-pastel-green">Green</span><span class="text-group-pastel-blue">Ammo</span>
             </a>
 
-            <!-- Primary Nav Links -->
-            <ul class="hidden md:flex space-x-6 text-gray-700 font-medium items-center">
-                <li><a href="/aboutus" class="hover:text-green-600 transition">About Us</a></li>
-
-                <!-- Solutions Dropdown -->
+            <!-- Primary Nav Links (Desktop) -->
+            <ul class="hidden md:flex space-x-6 text-group-text-medium font-medium items-center">
+                <li><a href="/aboutus.html" class="hover:text-group-primary-green transition">About Us</a></li>
+                 <!-- Media Dropdown - Highlight current page -->
                 <li class="relative group">
-                    <button class="hover:text-green-600 transition inline-flex items-center gap-1">
-                        Solutions
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div
-                        class="absolute hidden group-hover:grid grid-cols-3 gap-4 bg-white rounded-2xl shadow-lg p-6 top-5 -left-12 w-[800px] transition-all">
-                        <div>
-                            <h4 class="font-semibold text-green-700 mb-2">Finance</h4>
-                            <ul class="text-sm space-y-1">
-                                <li><a href="#" class="hover:text-green-600">Taxation</a></li>
-                                <li><a href="#" class="hover:text-green-600">Accounting & Compliance</a></li>
-                                <li><a href="#" class="hover:text-green-600">Project Facilitation</a></li>
-                                <li><a href="#" class="hover:text-green-600">Business Consulting</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-green-700 mb-2">Education & Development</h4>
-                            <ul class="text-sm space-y-1">
-                                <li><a href="#" class="hover:text-green-600">Education & Training</a></li>
-                                <li><a href="#" class="hover:text-green-600">Skill Development</a></li>
-                                <li><a href="#" class="hover:text-green-600">Website & Content</a></li>
-                            </ul>
-                        </div>
-                        <div class="flex flex-col">
-                            <div>
-                                <h4 class="font-semibold text-green-700 mb-2">Event and Supply</h4>
-                                <ul class="text-sm space-y-1">
-                                    <li><a href="#" class="hover:text-green-600">Event & Management</a></li>
-                                    <li><a href="#" class="hover:text-green-600">Supply Services</a></li>
-
-                            </div>
-                            <br>
-                            <div>
-                                <h4 class="font-semibold text-green-700 mb-2" title="Powered by GreenCabin">
-                                    Accommodation</h4>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Trust Dropdown -->
-                <li class="relative group">
-                    <button class="hover:text-green-600 transition inline-flex items-center gap-1">
-                        Trust
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div
-                        class="absolute hidden group-hover:grid grid-cols-2 gap-4 bg-white rounded-2xl shadow-lg p-6 top-5 -left-12 w-[600px] transition-all">
-                        <div>
-                            <h4 class="font-semibold text-green-700 mb-2">Programs</h4>
-                            <ul class="text-sm space-y-1">
-                                <li><a href="#" class="hover:text-green-600">Projects & Milestones</a></li>
-                                <li><a href="#" class="hover:text-green-600">Campaigns</a></li>
-                                <li><a href="#" class="hover:text-green-600">Reports & Research</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-green-700 mb-2">Get Involved</h4>
-                            <ul class="text-sm space-y-1">
-                                <li><a href="#" class="hover:text-green-600">Join the Change</a></li>
-                                <li><a href="#" class="hover:text-green-600">Donate / Sponsor</a></li>
-                                <li><a href="#" class="hover:text-green-600">Volunteer</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="relative group">
-                    <button class="hover:text-green-600 transition inline-flex items-center gap-1">
+                    <button class="text-group-primary-green font-semibold transition inline-flex items-center gap-1">
                         Media
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                     </button>
-                    <div
-                        class="absolute hidden group-hover:grid grid-cols-2 gap-4 bg-white rounded-2xl shadow-lg p-6 top-5 -left-12 w-[500px] transition-all">
-                        <div>
-                            <h4 class="font-semibold text-green-700 mb-2">Our Story</h4>
-                            <ul class="text-sm space-y-1">
-                                <li><a href="/gallery.html" class="hover:text-green-600">Gallery</a></li>
-                                <li><a href="/testimonials.html" class="hover:text-green-600">Testimonials</a></li>
-                                <li><a href="/digitalcontent.html" class="hover:text-green-600">Digital Content</a></li>
-                            </ul>
-                        </div>
-
+                    <div class="absolute hidden group-hover:block bg-white rounded-xl shadow-lg p-4 top-5 -left-4 w-56 transition-all z-10 border border-gray-100">
+                        <ul class="text-sm space-y-1">
+                            <li><a href="/gallery.html" class="block py-1 px-3 text-group-primary-green font-bold bg-group-pastel-green/30 rounded transition">Gallery</a></li>
+                            <li><a href="/testimonials.html" class="block py-1 px-3 text-group-text-medium hover:bg-group-pastel-green/30 rounded transition">Testimonials</a></li>
+                            <li><a href="/digitalcontent.html" class="block py-1 px-3 text-group-text-medium hover:bg-group-pastel-green/30 rounded transition">Digital Content</a></li>
+                        </ul>
+                    </div>
                 </li>
-                <li><a href="#" class="hover:text-green-600 transition">Blog</a></li>
-                <li><a href="./joinus" class="hover:text-green-600 transition">Join Us</a></li>
+                <li><a href="/blog.html" class="hover:text-group-primary-green transition">Blog</a></li>
+                <li><a href="/joinus.html" class="hover:text-group-primary-green transition">Join Us</a></li>
             </ul>
 
-            <!-- Explore Button -->
-            <button class="bg-green-600 text-white px-4 py-2 rounded-xl shadow hover:bg-green-700 transition md:ml-4"
-                onclick="openModal()">
+            <!-- Explore Button (Desktop) -->
+            <button class="hidden md:block cta-button bg-group-primary-green text-white hover:bg-opacity-90" @click="showModal = true">
                 Explore
             </button>
 
             <!-- Mobile Menu Toggle -->
-            <button class="md:hidden flex items-center text-green-700" id="menu-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
+            <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden flex items-center text-group-primary-green focus:outline-none">
+                <svg x-show="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <svg x-show="mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
 
         <!-- Mobile Dropdown -->
-        <div class="md:hidden hidden flex-col space-y-2 bg-white shadow-inner px-6 py-4" id="mobile-menu">
-            <a href="#" class="block hover:text-green-600">Home</a>
-            <a href="#" class="block hover:text-green-600">Solutions</a>
-            <a href="#" class="block hover:text-green-600">Trust</a>
-            <a href="#" class="block hover:text-green-600">Media</a>
-            <a href="#" class="block hover:text-green-600">Blog</a>
-            <a href="#" class="block hover:text-green-600">Join Us</a>
+        <div x-show="mobileMenuOpen" x-transition class="md:hidden flex-col space-y-2 bg-white shadow-inner px-6 py-4 border-t border-gray-100">
+            <a href="/aboutus.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">About Us</a>
+            <a href="/gallery.html" class="block py-2 text-group-primary-green font-bold bg-group-pastel-green/30 rounded">Media</a> <!-- Highlight current -->
+            <a href="/blog.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">Blog</a>
+            <a href="/joinus.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">Join Us</a>
+             <button class="mt-2 w-full cta-button bg-group-primary-green text-white hover:bg-opacity-90" @click="showModal = true; mobileMenuOpen = false;">
+                Explore
+             </button>
         </div>
     </nav>
 
-    <!-- 🔧 Simple JS for Mobile Toggle -->
-    <script>
-        document.getElementById('menu-toggle').addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-    </script>
-    <main class="min-h-screen bg-green-50">
+    <main class="min-h-screen">
 
-        <section class="bg-green-700 text-white py-16">
-            <div class="container mx-auto px-4 md:px-8 text-center">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">Our Work in Action</h1>
-                <p class="text-lg md:text-xl max-w-2xl mx-auto">
-                    A visual journey through our community projects, workshops, and sustainable efforts across the
-                    country.
+        <!-- HERO SECTION -->
+        <section class="bg-group-pastel-green/30 py-16 md:py-24">
+            <div class="container mx-auto px-4 md:px-8 max-w-5xl text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-group-text-dark mb-4 font-heading">
+                    Our Work in Action
+                </h1>
+                <p class="text-lg md:text-xl text-group-text-medium max-w-3xl mx-auto">
+                    A visual journey through our community projects, workshops, and sustainable efforts across the country.
                 </p>
             </div>
         </section>
 
-        <!-- <section class="py-16">
-            <div class="container mx-auto px-4 md:px-8">
-                <h2 class="text-3xl font-bold text-green-900 mb-8 text-center">Photo Gallery</h2>
+        <!-- GALLERY TABS & CONTENT -->
+        <section class="py-16 bg-white" x-data="{ activeTab: 'photos' }">
+            <div class="container mx-auto px-4 md:px-8 max-w-6xl">
 
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
+                <!-- Tab Navigation - UPDATED @click -->
+                <div class="flex flex-wrap justify-center gap-3 mb-12 border-b border-gray-200 pb-4">
+                    <button @click="activeTab = 'photos'; switchTab('image')" :class="{ 'active': activeTab === 'photos' }"
+                        class="tab-button">
+                        📷 Photos
+                    </button>
+                    <button @click="activeTab = 'videos'; switchTab('video')" :class="{ 'active': activeTab === 'videos' }"
+                        class="tab-button">
+                        🎬 Videos
+                    </button>
+                </div>
 
-                    <div class="aspect-square overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition duration-330 relative group"
-                        onclick="openCarousel(1)">
-                        <img src="https://source.unsplash.com/random/400x400/?recycling" alt="Recycling drive activity"
-                            class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                        <div
-                            class="absolute inset-0 bg-green-900 bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                            <span class="text-white font-semibold text-sm p-2 bg-green-600/70 rounded">View Project</span>
+                <!-- Tab Content Area -->
+                <div>
+                    <!-- Photos Tab Content -->
+                    <div x-show="activeTab === 'photos'" x-transition.opacity.duration.300>
+                        <h2 class="text-3xl font-bold text-group-text-dark font-heading mb-8 text-center sr-only">Photo Gallery</h2>
+                        <!-- Skeleton Loader for Photos -->
+                        <div id="photos-skeleton" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
+                            <!-- Repeat skeleton items (e.g., 6-9 times) -->
+                            <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
+                            <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
+                            <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
+                            <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
+                            <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
+                            <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
+                        </div>
+                        <!-- Actual Photo Grid (Populated by JS) -->
+                        <div id="photos-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
+                            <!-- Images will be appended here -->
                         </div>
                     </div>
 
-                    <div class="aspect-square overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition duration-330"
-                        onclick="openCarousel(2)"</div>
-                    <div class="aspect-square overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition duration-330"
-                        onclick="openCarousel(3)"> <img src="https://source.unsplash.com/random/400x400/?composting"
-                            alt="Composting workshop"
-                            class="w-full h-full object-cover hover:scale-105 transition duration-300"></div>
-                    <div class="aspect-square overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition duration-330"
-                        onclick="openCarousel(4)"> <img
-                            src="https://source.unsplash.com/random/400x400/?volunteers,nature"
-                            alt="Volunteers in nature"
-                            class="w-full h-full object-cover hover:scale-105 transition duration-300"></div>
-                    <div class="aspect-square overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition duration-330"
-                        onclick="openCarousel(5)"> <img src="https://source.unsplash.com/random/400x400/?beach-cleanup"
-                            alt="Beach cleanup drive"
-                            class="w-full h-full object-cover hover:scale-105 transition duration-300"></div>
-                    <div class="aspect-square overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition duration-330"
-                        onclick="openCarousel(6)"> <img src="https://source.unsplash.com/random/400x400/?workshop"
-                            alt="Sustainability workshop"
-                            class="w-full h-full object-cover hover:scale-105 transition duration-300"></div>
-                    <div class="aspect-square overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition duration-330"
-                        onclick="openCarousel(7)"> <img src="https://source.unsplash.com/random/400x400/?india,school"
-                            alt="Awareness at school in India"
-                            class="w-full h-full object-cover hover:scale-105 transition duration-300"></div>
-                    <div class="aspect-square overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition duration-330"
-                        onclick="openCarousel(8)"> <img src="https://source.unsplash.com/random/400x400/?ecobricks"
-                            alt="Ecobricks building"
-                            class="w-full h-full object-cover hover:scale-105 transition duration-300"></div>
-                    <div class="aspect-square overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition duration-330"
-                        onclick="openCarousel(9)"> <img src="https://source.unsplash.com/random/400x400/?planting"
-                            alt="Community planting activity"
-                            class="w-full h-full object-cover hover:scale-105 transition duration-300"></div>
-                </div>
-            </div>
-        </section>
-
-        <div id="carousel-modal"
-            class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center p-4">
-            <div class="relative w-full max-w-4xl h-full max-h-[80vh]">
-                <button onclick="closeCarousel()"
-                    class="absolute top-0 right-0 m-4 text-white text-4xl z-50">&times;</button>
-
-                <div class="w-full h-full bg-gray-800 rounded-lg flex items-center justify-center text-white">
-                    <p>Carousel Placeholder: Image and caption will appear here.</p>
-                </div>
-
-            </div>
-        </div>
-        <script>
-                    async function fetchGallery(params) {
-            try {
-                const res = await fetch('https://greenammo.in/wp-json/wp/v2/media')
-                const data =  await res.json()
-
-                console.log(data)
-            } catch (error) {
-                console.log(error)
-            }
-        } 
-        fetchGallery() ;
-        </script> -->
-
-
-        <section class="py-16">
-            <div class="container mx-auto px-4 md:px-8">
-                <h2 class="text-3xl font-bold text-green-900 mb-8 text-center">Photo Gallery</h2>
-
-                <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
-                </div>
-
-                <div id="infinite-scroll-sentinel" class="text-center py-8">
-                    <div id="loading-spinner" class="hidden">
-                        <svg class="animate-spin mx-auto h-8 w-8 text-green-700" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
-                            </circle>
-                            <path class="opacity-75" fill="currentColor"
-                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-                            </path>
-                        </svg>
-                        <p class="text-gray-500 mt-2">Loading more images...</p>
+                    <!-- Videos Tab Content -->
+                     <div x-show="activeTab === 'videos'" x-transition.opacity.duration.300>
+                         <h2 class="text-3xl font-bold text-group-text-dark font-heading mb-8 text-center sr-only">Video Gallery</h2>
+                         <!-- Skeleton Loader for Videos -->
+                        <div id="videos-skeleton" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
+                            <!-- Repeat skeleton items -->
+                            <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
+                            <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
+                            <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
+                        </div>
+                        <!-- Actual Video Grid (Populated by JS) -->
+                        <div id="videos-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
+                            <!-- Videos will be appended here -->
+                        </div>
                     </div>
-                    <p id="end-message" class="hidden text-gray-500">You've reached the end of the gallery.</p>
+
+                    <!-- Infinite Scroll Sentinel & Messages -->
+                    <div id="infinite-scroll-sentinel" class="text-center py-8">
+                        <!-- Generic Loading Message (Initially hidden) -->
+                         <p id="loading-message" class="hidden text-gray-500">Loading more...</p>
+                         <p id="end-message" class="hidden text-group-text-medium">You've reached the end.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <div id="carousel-modal"
-            class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden items-center justify-center p-4 transition-opacity duration-300">
-            <div class="relative w-full max-w-4xl h-full max-h-[80vh]">
-                <button onclick="closeCarousel()"
-                    class="absolute top-0 right-0 m-4 text-white text-4xl z-[60] hover:text-green-400 transition">&times;</button>
+        <!-- CAROUSEL MODAL (Remains mostly the same, styles updated) -->
+        <div id="carousel-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4 modal-hidden">
+            <div class="relative w-full max-w-4xl max-h-[85vh] bg-group-text-dark rounded-lg shadow-xl flex flex-col" @click.stop>
+                <button onclick="closeCarousel()" class="absolute -top-4 -right-4 m-2 text-white bg-black/50 rounded-full p-1 z-[60] hover:text-group-pastel-blue transition text-3xl">&times;</button>
 
-                <button onclick="changeImage(-1)"
-                    class="absolute left-0 top-1/2 transform -translate-y-1/2 p-3 text-white text-4xl z-50 opacity-75 hover:opacity-100 transition">
+                <!-- Carousel Content Area (Image/Video) -->
+                <div id="carousel-content" class="flex-grow w-full h-full flex items-center justify-center overflow-hidden relative p-4">
+                    <!-- Media element (img or video) inserted by JS -->
+                </div>
+
+                <!-- Caption Area -->
+                 <div id="carousel-caption" class="p-3 bg-black/30 text-white text-center text-sm font-medium truncate"></div>
+
+                 <!-- Navigation Arrows -->
+                <button onclick="changeMedia(-1)" id="carousel-prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-12 p-3 text-white text-4xl z-50 opacity-75 hover:opacity-100 transition focus:outline-none">
                     &#10094;
                 </button>
-
-                <button onclick="changeImage(1)"
-                    class="absolute right-0 top-1/2 transform -translate-y-1/2 p-3 text-white text-4xl z-50 opacity-75 hover:opacity-100 transition">
+                <button onclick="changeMedia(1)" id="carousel-next" class="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-12 p-3 text-white text-4xl z-50 opacity-75 hover:opacity-100 transition focus:outline-none">
                     &#10095;
                 </button>
-
-                <div id="carousel-content" class="w-full h-full bg-gray-800 rounded-lg flex flex-col overflow-hidden">
-                    <img id="carousel-image" src="" alt="" class="flex-grow w-full object-contain p-4">
-                    <div id="carousel-caption" class="p-4 bg-gray-900 text-white text-center text-lg font-medium"></div>
-                </div>
-
             </div>
         </div>
-
-        <script>
-            let currentPage = 1;
-            const perPage = 9;
-            let isLoading = false;
-            let hasMore = true;
-            let allImagesData = []; // Stores all loaded data for the carousel
-            let currentIndex = 0; // Current image index in the carousel
-
-            const grid = document.getElementById('gallery-grid');
-            const sentinel = document.getElementById('infinite-scroll-sentinel');
-            const spinner = document.getElementById('loading-spinner');
-            const endMessage = document.getElementById('end-message');
-            const modal = document.getElementById('carousel-modal');
-            const carouselImage = document.getElementById('carousel-image');
-            const carouselCaption = document.getElementById('carousel-caption');
-
-            // --- 1. DATA FETCHING ---
-            async function fetchGallery() {
-                if (isLoading || !hasMore) return;
-
-                isLoading = true;
-                spinner.classList.remove('hidden');
-
-                try {
-                    // Using WP API pagination: page=${currentPage}&per_page=${perPage}
-                    const res = await fetch(`https://greenammo.in/wp-json/wp/v2/media?per_page=${perPage}&page=${currentPage}`);
-
-                    // Check the 'X-WP-TotalPages' header to manage infinite scroll state
-                    const totalPages = res.headers.get('X-WP-TotalPages');
-                    const data = await res.json();
-
-                    if (data.length === 0 || (totalPages && currentPage >= parseInt(totalPages))) {
-                        hasMore = false;
-                        endMessage.classList.remove('hidden');
-                        sentinel.classList.add('hidden'); // Hide sentinel if we're done
-                    } else {
-                        renderImages(data);
-                        currentPage++;
-                    }
-                } catch (error) {
-                    console.error("Error fetching gallery data:", error);
-                    // Optionally, show an error message
-                } finally {
-                    isLoading = false;
-                    spinner.classList.add('hidden');
-                }
-            }
-
-            // --- 2. IMAGE RENDERING & LAZY LOADING ---
-            // function renderImages(data) {
-            //     // Collect new images for the carousel array
-            //     allImagesData = allImagesData.concat(data);
-
-            //     data.forEach((item, index) => {
-            //         // Only proceed if a proper image link exists
-            //         const imageUrl = item.media_details?.sizes?.medium_large?.source_url || item.source_url;
-            //         if (!imageUrl) return;
-
-            //         const globalIndex = allImagesData.length - data.length + index; // Calculate correct index in allImagesData
-            //         const caption = item.caption.rendered.replace(/<[^>]*>?/gm, '') || 'View Project';
-
-            //         const imageContainer = document.createElement('div');
-            //         imageContainer.className = 'aspect-square overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition duration-330 relative group';
-            //         // Use the global index to map back to the allImagesData array
-            //         imageContainer.setAttribute('onclick', `openCarousel(${globalIndex})`); 
-
-            //         const img = document.createElement('img');
-            //         img.setAttribute('data-src', imageUrl); // Use data-src for lazy loading
-            //         img.alt = caption;
-            //         img.className = 'w-full h-full object-cover group-hover:scale-105 transition duration-300';
-            //         img.loading = 'lazy'; // Browser-native lazy loading
-
-            //         // IntersectionObserver for custom lazy loading (optional, but good practice for full control)
-            //         observer.observe(img);
-
-            //         // Overlay with caption
-            //         const overlay = document.createElement('div');
-            //         overlay.className = 'absolute inset-0 bg-green-900 bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300';
-            //         overlay.innerHTML = `<span class="text-white font-semibold text-sm p-2 bg-green-600/70 rounded">${caption}</span>`;
-
-            //         imageContainer.appendChild(img);
-            //         imageContainer.appendChild(overlay);
-            //         grid.appendChild(imageContainer);
-            //     });
-            // }
-            function renderImages(data) {
-                // Collect new images/videos for the carousel array
-                allImagesData = allImagesData.concat(data);
-
-                data.forEach((item, index) => {
-                    const mimeType = item.mime_type || item.media_type || '';
-                    const isImage = mimeType.startsWith('image');
-                    const isVideo = mimeType.startsWith('video');
-
-                    // Only process valid image or video
-                    if (!isImage && !isVideo) return;
-
-                    // Prefer medium_large size if available
-                    const mediaUrl = item.media_details?.sizes?.medium_large?.source_url || item.source_url;
-                    if (!mediaUrl) return;
-
-                    const globalIndex = allImagesData.length - data.length + index; // Correct index for carousel
-                    const caption = item.caption?.rendered?.replace(/<[^>]*>?/gm, '') || 'View Project';
-
-                    // Main container for each media item
-                    const container = document.createElement('div');
-                    container.className =
-                        'aspect-square overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition duration-330 relative group';
-                    container.setAttribute('onclick', `openCarousel(${globalIndex})`);
-
-                    // Create media element
-                    let mediaElement;
-                    if (isImage) {
-                        mediaElement = document.createElement('img');
-                        mediaElement.setAttribute('data-src', mediaUrl);
-                        mediaElement.alt = caption;
-                        mediaElement.className =
-                            'w-full h-full object-cover group-hover:scale-105 transition duration-300';
-                        mediaElement.loading = 'lazy';
-                        observer.observe(mediaElement); // Lazy load via IntersectionObserver
-                    } else if (isVideo) {
-                        mediaElement = document.createElement('video');
-                        mediaElement.src = mediaUrl;
-                        mediaElement.className = 'w-full h-full object-cover';
-                        mediaElement.muted = true;
-                        mediaElement.loop = true;
-                        mediaElement.playsInline = true;
-                        mediaElement.preload = 'metadata';
-
-                        // Start playing on hover (optional)
-                        container.addEventListener('mouseenter', () => mediaElement.play());
-                        container.addEventListener('mouseleave', () => mediaElement.pause());
-                    }
-
-                    // Overlay with caption
-                    // const overlay = document.createElement('div');
-                    // overlay.className =
-                    //     'absolute inset-0 bg-green-900 bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300';
-                    // overlay.innerHTML = `<span class="text-white font-semibold text-sm p-2 bg-green-600/70 rounded">${caption}</span>`;
-
-                    container.appendChild(mediaElement);
-                    // container.appendChild(overlay);
-                    grid.appendChild(container);
-                });
-            }
-
-
-
-            // --- LAZY LOADING IMPLEMENTATION (Intersection Observer) ---
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.getAttribute('data-src');
-                        img.removeAttribute('data-src');
-                        observer.unobserve(img); // Stop observing once loaded
-                    }
-                });
-            }, {
-                rootMargin: '0px 0px 200px 0px', // Load images when 200px from viewport
-            });
-
-            // --- 3. INFINITE SCROLL ---
-            const infiniteScrollObserver = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting && !isLoading && hasMore) {
-                    fetchGallery();
-                }
-            }, {
-                threshold: 0.1
-            });
-
-            infiniteScrollObserver.observe(sentinel);
-
-
-            // --- 4. CAROUSEL LOGIC ---
-            // function updateCarousel() {
-            //     if (allImagesData.length === 0) return;
-
-            //     const item = allImagesData[currentIndex];
-
-            //     // Find the most appropriate image size (fallback logic)
-            //     const imageUrl = item.media_details?.sizes?.large?.source_url || item.media_details?.sizes?.full?.source_url || item.source_url;
-            //     const caption = item.caption.rendered.replace(/<[^>]*>?/gm, '') || `Image ${currentIndex + 1} of ${allImagesData.length}`;
-
-            //     carouselImage.src = imageUrl;
-            //     carouselImage.alt = caption;
-            //     carouselCaption.textContent = caption;
-
-            //     // Ensure buttons visibility is updated
-            //     document.querySelector('.relative button:nth-of-type(1)').style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
-            //     document.querySelector('.relative button:nth-of-type(2)').style.visibility = currentIndex === allImagesData.length - 1 ? 'hidden' : 'visible';
-            // }
-            // function updateCarousel() {
-            //     if (allImagesData.length === 0) return;
-
-            //     const item = allImagesData[currentIndex];
-            //     const mimeType = item.mime_type || item.media_type || '';
-            //     const isImage = mimeType.startsWith('image');
-            //     const isVideo = mimeType.startsWith('video');
-            //     // Find the most appropriate image size (fallback logic)
-            //     const imageUrl =
-            //         item.media_details?.sizes?.large?.source_url ||
-            //         item.media_details?.sizes?.full?.source_url ||
-            //         item.source_url;
-
-            //     const caption =
-            //         item.caption?.rendered?.replace(/<[^>]*>?/gm, '') ||
-            //         `Image ${currentIndex + 1} of ${allImagesData.length}`;
-
-            //     // Apply image source and style
-            //     carouselImage.src = imageUrl;
-            //     carouselImage.alt = caption;
-
-            //     // ✅ Ensure proper scaling and alignment
-            //     carouselImage.style.objectFit = 'contain';
-            //     carouselImage.style.width = '100%';
-            //     carouselImage.style.height = '100%';
-            //     carouselImage.style.display = 'block';
-
-            //     // Update caption
-            //     carouselCaption.textContent = caption;
-
-            //     // Update navigation button visibility
-            //     document.querySelector('.relative button:nth-of-type(1)').style.visibility =
-            //         currentIndex === 0 ? 'hidden' : 'visible';
-            //     document.querySelector('.relative button:nth-of-type(2)').style.visibility =
-            //         currentIndex === allImagesData.length - 1 ? 'hidden' : 'visible';
-            // }
-            function updateCarousel() {
-                if (allImagesData.length === 0) return;
-
-                const item = allImagesData[currentIndex];
-                const mimeType = item.mime_type || item.media_type || '';
-                const isImage = mimeType.startsWith('image');
-                const isVideo = mimeType.startsWith('video');
-
-                // ✅ Only proceed for image or video
-                if (!isImage && !isVideo) return;
-
-                // Pick the best media source
-                const mediaUrl =
-                    item.media_details?.sizes?.large?.source_url ||
-                    item.media_details?.sizes?.full?.source_url ||
-                    item.source_url;
-
-                if (!mediaUrl) return;
-
-                const caption =
-                    item.caption?.rendered?.replace(/<[^>]*>?/gm, '') ||
-                    `Item ${currentIndex + 1} of ${allImagesData.length}`;
-
-                const carouselContent = document.getElementById('carousel-content');
-                const carouselCaption = document.getElementById('carousel-caption');
-                const existingMedia = document.getElementById('carousel-image');
-
-                // ✅ Remove old media element if exists
-                if (existingMedia) existingMedia.remove();
-
-                // ✅ Create new <img> or <video> element
-                let newMediaElement;
-
-                if (isImage) {
-                    newMediaElement = document.createElement('img');
-                    newMediaElement.id = 'carousel-image';
-                    newMediaElement.src = mediaUrl;
-                    newMediaElement.alt = caption;
-                    newMediaElement.className =
-                        'flex-grow w-full object-cover p-4 transition duration-500 ease-in-out';
-                    newMediaElement.loading = 'lazy';
-                } else if (isVideo) {
-                    newMediaElement = document.createElement('video');
-                    newMediaElement.id = 'carousel-image';
-                    newMediaElement.src = mediaUrl;
-                    newMediaElement.className =
-                        'flex-grow w-full object-cover p-4 transition duration-500 ease-in-out';
-                    newMediaElement.controls = true;
-                    newMediaElement.autoplay = true;
-                    newMediaElement.muted = true;
-                    newMediaElement.loop = true;
-                    newMediaElement.playsInline = true;
-                }
-                Object.assign(newMediaElement.style, {
-                    width: '100%',
-                    height: '100%',
-                    display: 'block',
-                    padding: '16px',
-                    objectFit: 'contain',
-                    transition: 'opacity 0.3s ease-in-out',
-                });
-                // ✅ Inject before the caption (so caption stays below media)
-                carouselContent.insertBefore(newMediaElement, carouselCaption);
-
-                // ✅ Update caption
-                carouselCaption.textContent = caption;
-
-                // ✅ Update nav buttons visibility
-                document.querySelector('.relative button:nth-of-type(1)').style.visibility =
-                    currentIndex === 0 ? 'hidden' : 'visible';
-                document.querySelector('.relative button:nth-of-type(2)').style.visibility =
-                    currentIndex === allImagesData.length - 1 ? 'hidden' : 'visible';
-            }
-
-
-            window.openCarousel = (index) => {
-                currentIndex = index;
-                updateCarousel();
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling background
-            }
-
-            window.closeCarousel = () => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-                document.body.style.overflow = '';
-            }
-
-            window.changeImage = (step) => {
-                const newIndex = currentIndex + step;
-                if (newIndex >= 0 && newIndex < allImagesData.length) {
-                    currentIndex = newIndex;
-                    updateCarousel();
-                }
-            }
-
-            // Start fetching when the script loads
-            fetchGallery();
-        </script>
-
-
-        <footer class="bg-green-800 text-white pt-12">
-            <div class="container mx-auto px-4 md:px-8">
-
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-green-700">
-
-                    <div class="md:col-span-2 space-y-4">
-                        <h3 class="text-3xl font-bold text-green-300">GreenAmmo</h3>
-                        <p class="text-sm text-green-200 max-w-sm">
-                            Empowering sustainable living and waste management through community action, research, and
-                            project initiation.
-                        </p>
-                    </div>
-
-                    <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
-
-                        <div class="space-y-3">
-                            <h4 class="font-semibold text-green-50 mb-3">GreenAmmo</h4>
-                            <ul class="text-sm space-y-2 text-green-200">
-                                <li><a href="/about-us.html" class="hover:text-green-300 transition">About Us</a></li>
-                                <li><a href="/gallery.html" class="hover:text-green-300 transition">Media (Gallery)</a>
-                                </li>
-                                <li><a href="/certifications.html"
-                                        class="hover:text-green-300 transition">Certificates</a></li>
-                                <li><a href="/alliances.html" class="hover:text-green-300 transition">Alliances</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="space-y-3">
-                            <h4 class="font-semibold text-green-50 mb-3">Solutions</h4>
-                            <ul class="text-sm space-y-2 text-green-200">
-                                <li><a href="/solutions/finance.html"
-                                        class="hover:text-green-300 transition">Finance</a></li>
-                                <li><a href="/solutions/education.html"
-                                        class="hover:text-green-300 transition">Education & Development</a></li>
-                                <li><a href="/solutions/event-supply.html" class="hover:text-green-300 transition">Event
-                                        & Supply</a></li>
-                                <li><a href="/solutions/accommodations.html"
-                                        class="hover:text-green-300 transition">Accommodations</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="space-y-3">
-                            <h4 class="font-semibold text-green-50 mb-3">Trust</h4>
-                            <ul class="text-sm space-y-2 text-green-200">
-                                <li><a href="/trust/projects.html" class="hover:text-green-300 transition">Projects &
-                                        Milestones</a></li>
-                                <li><a href="/trust/campaigns.html"
-                                        class="hover:text-green-300 transition">Campaigns</a></li>
-                                <li><a href="/trust/reports.html" class="hover:text-green-300 transition">Reports &
-                                        Research</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="space-y-3">
-                            <h4 class="font-semibold text-green-50 mb-3">Take Action</h4>
-                            <div class="space-y-2">
-                                <a href="/join-us.html"
-                                    class="block bg-green-600 text-white text-center text-sm font-medium py-2 rounded-lg hover:bg-green-700 transition">
-                                    Join Us
-                                </a>
-                                <a href="/explore.html"
-                                    class="block border border-green-600 text-green-50 text-center text-sm font-medium py-2 rounded-lg hover:border-green-300 hover:text-green-300 transition">
-                                    Explore
-                                </a>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="flex flex-col sm:flex-row justify-between items-center py-6 text-sm text-green-200">
-                    <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
-
-                    <div class="flex gap-4 mt-4 sm:mt-0">
-                        <a href="#" class="hover:text-green-400 transition" aria-label="Facebook">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="currentColor">
-                                <path
-                                    d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3 8h-2v2h2v2h-2v4h-2v-4H9V12h2V10c0-1.104.896-2 2-2h2v2z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="hover:text-green-400 transition" aria-label="Instagram">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="currentColor">
-                                <path
-                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.179 2.541c.883 0 1.632.748 1.632 1.632v.005c0 .883-.749 1.631-1.632 1.631h-.005c-.883 0-1.632-.748-1.632-1.631v-.005c0-.883.749-1.632 1.632-1.632h.005zM12 8c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4zm-2.821 8.879c.148.093.308.175.474.246.36.155.76.246 1.171.246h2.348c.41 0 .81-.091 1.17-.246.166-.071.326-.153.473-.246.22-.138.423-.306.605-.5.182-.194.34-.413.474-.658.134-.245.242-.516.326-.811.168-.598.256-1.233.256-1.879v-2.352c0-.646-.088-1.281-.256-1.879a4.897 4.897 0 0 0-.326-.811 4.795 4.795 0 0 0-.474-.658 4.67 4.67 0 0 0-.605-.5 4.908 4.908 0 0 0-.474-.246c-.36-.155-.76-.246-1.17-.246h-2.348c-.41 0-.81.091-1.17.246a4.908 4.908 0 0 0-.474.246 4.67 4.67 0 0 0-.605.5 4.795 4.795 0 0 0-.474.658 4.897 4.897 0 0 0-.326.811c-.168.598-.256 1.233-.256 1.879v2.352c0 .646.088 1.281.256 1.879a4.897 4.897 0 0 0 .326.811 4.795 4.795 0 0 0 .474.658 4.67 4.67 0 0 0 .605.5z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="hover:text-green-400 transition" aria-label="LinkedIn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="currentColor">
-                                <path
-                                    d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-2 16H8V11h2v7zm-1-8H9V8h1v2zM16 18h-2v-3c0-1.657-1.343-3-3-3s-3 1.343-3 3v3h-2V11h2v1.5c.618-.844 1.877-1.5 3-1.5 2.206 0 4 1.794 4 4v3z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </footer>
 
     </main>
 
-    <!-- 🌍 EXPLORE MODAL -->
-    <div id="exploreModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden justify-center items-center z-50">
-        <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full mx-4 md:mx-0 overflow-hidden animate-fade-in">
-            <div class="flex justify-between items-center px-6 py-4 border-b">
-                <h3 class="text-xl font-semibold text-green-700">Explore GreenAmmo</h3>
-                <button class="text-gray-500 hover:text-green-700" onclick="closeModal()">
-                    ✕
+    <!-- FOOTER (Group Theme) -->
+    <footer class="bg-group-text-dark text-white pt-12">
+        <!-- Footer content remains the same as index.html -->
+         <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-gray-700">
+                <!-- Logo and Description -->
+                <div class="md:col-span-2 space-y-4">
+                    <h3 class="text-3xl font-bold text-group-pastel-green font-heading">GreenAmmo Group</h3>
+                    <p class="text-sm text-gray-300 max-w-sm">
+                        Empowering sustainable living and waste management through community action, research, and project initiation.
+                    </p>
+                </div>
+                <!-- Navigation Columns -->
+                <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
+                    <!-- Column 1: GreenAmmo -->
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3 font-heading">GreenAmmo</h4>
+                        <ul class="text-sm space-y-2 text-gray-300">
+                            <li><a href="/about-us.html" class="hover:text-group-pastel-green transition">About Us</a></li>
+                            <li><a href="/gallery.html" class="hover:text-group-pastel-green transition">Media (Gallery)</a></li>
+                            <li><a href="/certifications.html" class="hover:text-group-pastel-green transition">Certificates</a></li>
+                            <li><a href="/alliances.html" class="hover:text-group-pastel-green transition">Alliances</a></li>
+                        </ul>
+                    </div>
+                    <!-- Column 2: Solutions -->
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3 font-heading">Solutions</h4>
+                        <ul class="text-sm space-y-2 text-gray-300">
+                            <li><a href="/solutions/finance.html" class="hover:text-group-pastel-green transition">Finance</a></li>
+                            <li><a href="/solutions/education.html" class="hover:text-group-pastel-green transition">Education & Development</a></li>
+                            <li><a href="/solutions/event-supply.html" class="hover:text-group-pastel-green transition">Event & Supply</a></li>
+                            <li><a href="/solutions/accommodation.html" class="hover:text-group-pastel-green transition">Accommodations</a></li>
+                        </ul>
+                    </div>
+                    <!-- Column 3: Trust -->
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3 font-heading">Trust</h4>
+                        <ul class="text-sm space-y-2 text-gray-300">
+                            <li><a href="/trust/projects.html" class="hover:text-group-pastel-green transition">Projects & Milestones</a></li>
+                            <li><a href="/trust/campaigns.html" class="hover:text-group-pastel-green transition">Campaigns</a></li>
+                            <li><a href="/trust/reports.html" class="hover:text-group-pastel-green transition">Reports & Research</a></li>
+                        </ul>
+                    </div>
+                    <!-- Column 4: Action/Explore -->
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3 font-heading">Take Action</h4>
+                        <div class="space-y-2">
+                            <a href="/join-us.html" class="block text-center py-2 px-4 rounded-full bg-group-primary-green text-white hover:bg-opacity-80 transition text-sm font-semibold shadow-md">Join Us</a>
+                            <!-- UPDATED Explore Button -->
+                            <button id="explore-btn-footer" class="block w-full text-center py-2 px-4 rounded-full border-2 border-group-pastel-green text-group-pastel-green hover:bg-group-pastel-green hover:text-group-text-dark transition text-sm font-semibold">Explore</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Row: Copyright and Socials -->
+            <div class="flex flex-col sm:flex-row justify-between items-center py-6 text-sm text-gray-400">
+                <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
+                <div class="flex gap-4 mt-4 sm:mt-0">
+                    <a href="#" class="hover:text-group-pastel-blue transition" aria-label="Facebook"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3 8h-2v2h2v2h-2v4h-2v-4H9V12h2V10c0-1.104.896-2 2-2h2v2z"/></svg></a>
+                    <a href="#" class="hover:text-group-pastel-blue transition" aria-label="Instagram"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.179 2.541c.883 0 1.632.748 1.632 1.632v.005c0 .883-.749 1.631-1.632 1.631h-.005c-.883 0-1.632-.748-1.632-1.631v-.005c0-.883.749-1.632 1.632-1.632h.005zM12 8c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4zm-2.821 8.879c.148.093.308.175.474.246.36.155.76.246 1.171.246h2.348c.41 0 .81-.091 1.17-.246.166-.071.326-.153.473-.246.22-.138.423-.306.605-.5.182-.194.34-.413.474-.658.134-.245.242-.516.326-.811.168-.598.256-1.233.256-1.879v-2.352c0-.646-.088-1.281-.256-1.879a4.897 4.897 0 0 0-.326-.811 4.795 4.795 0 0 0-.474-.658 4.67 4.67 0 0 0-.605-.5 4.908 4.908 0 0 0-.474-.246c-.36-.155-.76-.246-1.17-.246h-2.348c-.41 0-.81.091-1.17.246a4.908 4.908 0 0 0-.474.246 4.67 4.67 0 0 0-.605.5 4.795 4.795 0 0 0-.474.658 4.897 4.897 0 0 0-.326.811c-.168.598-.256 1.233-.256 1.879v2.352c0 .646.088 1.281.256 1.879a4.897 4.897 0 0 0 .326.811 4.795 4.795 0 0 0 .474.658 4.67 4.67 0 0 0 .605.5z"/></svg></a>
+                    <a href="#" class="hover:text-group-pastel-blue transition" aria-label="LinkedIn"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-2 16H8V11h2v7zm-1-8H9V8h1v2zM16 18h-2v-3c0-1.657-1.343-3-3-3s-3 1.343-3 3v3h-2V11h2v1.5c.618-.844 1.877-1.5 3-1.5 2.206 0 4 1.794 4 4v3z"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Explore Modal (Remains same as index.html) -->
+    <div id="exploreModal" x-cloak class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden justify-center items-center z-50 p-4 modal-hidden" x-show="showModal" @click.away="showModal = false" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full mx-auto overflow-hidden animate-fade-in" @click.stop>
+             <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+                <h3 class="text-xl font-semibold text-group-text-dark font-heading">Explore GreenAmmo</h3>
+                <button class="text-gray-400 hover:text-group-primary-green focus:outline-none" @click="showModal = false">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
-
-            <!-- Two-Panel Grid -->
             <div class="grid md:grid-cols-2 gap-6 p-8">
                 <!-- Panel 1: GreenAmmo Solutions -->
-                <div class="bg-green-50 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-green-100"
-                    onclick="window.location.href='/solutions'">
+                <div class="bg-group-pastel-blue/20 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-group-pastel-blue/30 border border-group-pastel-blue/40" onclick="window.location.href='./solutions/index.html'">
                     <div>
-                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4">
-                            <p class="text-green-600 text-sm">[Undraw SVG: Business / Growth]</p>
+                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-group-pastel-blue/20">
+                            <svg class="w-16 h-16 text-group-pastel-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                         </div>
-                        <h4 class="text-2xl font-semibold text-green-700 mb-2">GreenAmmo Solutions</h4>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            Professional, scalable services spanning Finance, Education, Events, and Accommodation —
-                            uniting purpose with performance for sustainable growth.
+                        <h4 class="text-2xl font-semibold text-brand-dark mb-2 font-heading">GreenAmmo Solutions</h4>
+                        <p class="text-group-text-medium text-sm leading-relaxed">
+                            Professional, scalable services spanning Finance, Education, Events, and Accommodation — uniting purpose with performance for sustainable growth.
                         </p>
                     </div>
                     <div class="mt-6">
-                        <button class="bg-green-600 text-white px-4 py-2 rounded-xl hover:bg-green-700 transition">
+                        <button class="cta-button-secondary border-group-pastel-blue text-group-pastel-blue hover:bg-group-pastel-blue/20 w-full sm:w-auto">
                             Visit Solutions
                         </button>
                     </div>
                 </div>
-
                 <!-- Panel 2: GreenAmmo Trust -->
-                <div class="bg-emerald-50 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-emerald-100"
-                    onclick="window.location.href='/trust'">
-                    <div>
-                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4">
-                            <p class="text-green-600 text-sm">[Undraw SVG: Community / Nature]</p>
+                <div class="bg-group-pastel-green/30 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-group-pastel-green/40 border border-group-pastel-green/50" onclick="window.location.href='./trust/index.html'">
+                     <div>
+                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-group-pastel-green/20">
+                           <svg class="w-16 h-16 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         </div>
-                        <h4 class="text-2xl font-semibold text-green-700 mb-2">GreenAmmo Trust</h4>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            Non-profit initiatives for environmental awareness, youth empowerment, and community
-                            development — turning sustainability into action.
+                        <h4 class="text-2xl font-semibold text-group-primary-green mb-2 font-heading">GreenAmmo Trust</h4>
+                        <p class="text-group-text-medium text-sm leading-relaxed">
+                            Non-profit initiatives for environmental awareness, youth empowerment, and community development — turning sustainability into action.
                         </p>
                     </div>
                     <div class="mt-6">
-                        <button class="bg-emerald-600 text-white px-4 py-2 rounded-xl hover:bg-emerald-700 transition">
+                         <button class="cta-button-secondary border-group-primary-green text-group-primary-green hover:bg-group-pastel-green/50 w-full sm:w-auto">
                             Visit Trust
                         </button>
                     </div>
@@ -790,39 +377,331 @@
         </div>
     </div>
 
-    <!-- 🧠 JS: Open / Close Logic -->
+    <!-- 🧠 JavaScript for Gallery Logic -->
     <script>
-        function openModal() {
-            document.getElementById('exploreModal').classList.remove('hidden');
-            document.getElementById('exploreModal').classList.add('flex');
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            // State variables
+            let currentMediaType = 'image'; // Start with photos
+            let currentPage = 1;
+            const perPage = 9;
+            let isLoading = false;
+            let hasMore = true;
+            let allMediaData = []; // Combined data for carousel
+            let currentIndex = 0; // Carousel index
 
-        function closeModal() {
-            document.getElementById('exploreModal').classList.remove('flex');
-            document.getElementById('exploreModal').classList.add('hidden');
-        }
+            // DOM Elements
+            const photosGrid = document.getElementById('photos-grid');
+            const videosGrid = document.getElementById('videos-grid');
+            const photosSkeleton = document.getElementById('photos-skeleton');
+            const videosSkeleton = document.getElementById('videos-skeleton');
+            const sentinel = document.getElementById('infinite-scroll-sentinel');
+            const loadingMessage = document.getElementById('loading-message');
+            const endMessage = document.getElementById('end-message');
+            const modal = document.getElementById('carousel-modal');
+            const carouselContent = document.getElementById('carousel-content');
+            const carouselCaption = document.getElementById('carousel-caption');
+            const carouselPrev = document.getElementById('carousel-prev');
+            const carouselNext = document.getElementById('carousel-next');
 
+            // --- API Fetching ---
+            async function fetchGallery(mediaType, page) {
+                if (isLoading || !hasMore) return;
+
+                isLoading = true;
+                showSkeleton(mediaType, true); // Show skeleton for the correct tab
+                loadingMessage.classList.remove('hidden'); // Show loading text
+                endMessage.classList.add('hidden');
+
+                try {
+                    // Fetch images or videos based on mediaType
+                    const res = await fetch(`https://greenammo.in/wp-json/wp/v2/media?media_type=${mediaType}&per_page=${perPage}&page=${page}`);
+                    const totalPages = res.headers.get('X-WP-TotalPages');
+                    const data = await res.json();
+
+                    if (!res.ok) {
+                         throw new Error(`HTTP error! status: ${res.status}`);
+                    }
+
+                    if (data.length === 0 || (totalPages && page >= parseInt(totalPages))) {
+                        hasMore = false;
+                        endMessage.classList.remove('hidden');
+                        sentinel.style.display = 'none'; // Hide sentinel when no more items
+                    } else {
+                        renderMedia(data, mediaType);
+                        currentPage++;
+                        sentinel.style.display = 'block'; // Ensure sentinel is visible
+                    }
+                } catch (error) {
+                    console.error("Error fetching gallery data:", error);
+                    endMessage.textContent = 'Failed to load content.'; // Show error
+                    endMessage.classList.remove('hidden');
+                    hasMore = false;
+                     sentinel.style.display = 'none';
+                } finally {
+                    isLoading = false;
+                    showSkeleton(mediaType, false); // Hide skeleton
+                    loadingMessage.classList.add('hidden'); // Hide loading text
+                }
+            }
+
+            // --- Rendering Media ---
+            function renderMedia(data, mediaType) {
+                const grid = (mediaType === 'image') ? photosGrid : videosGrid;
+                const startIndex = allMediaData.length; // Starting index for the new batch in the global array
+
+                allMediaData = allMediaData.concat(data); // Add new data for carousel
+
+                data.forEach((item, index) => {
+                    const mimeType = item.mime_type || '';
+                    const isImage = mimeType.startsWith('image');
+                    const isVideo = mimeType.startsWith('video');
+
+                    if (!isImage && !isVideo) return;
+
+                    const mediaUrl = item.media_details?.sizes?.medium_large?.source_url || item.source_url;
+                    if (!mediaUrl) return;
+
+                    const globalIndex = startIndex + index; // Calculate correct global index
+                    const caption = item.caption?.rendered?.replace(/<[^>]*>?/gm, '') || `View ${mediaType}`;
+
+                    const container = document.createElement('div');
+                    container.className = 'aspect-square overflow-hidden cursor-pointer shadow-md hover:shadow-lg transition duration-300 relative group rounded-lg border border-gray-100';
+                    container.setAttribute('onclick', `openCarousel(${globalIndex})`);
+
+                    let mediaElement;
+                    if (isImage) {
+                        mediaElement = document.createElement('img');
+                        mediaElement.setAttribute('data-src', mediaUrl);
+                        mediaElement.alt = caption;
+                        mediaElement.className = 'w-full h-full object-cover group-hover:scale-105 transition duration-300';
+                        mediaElement.loading = 'lazy';
+                        lazyLoadObserver.observe(mediaElement); // Use observer to load image
+                    } else if (isVideo) {
+                        mediaElement = document.createElement('video');
+                        mediaElement.src = mediaUrl;
+                        mediaElement.className = 'w-full h-full object-cover';
+                        mediaElement.muted = true;
+                        mediaElement.loop = true;
+                        mediaElement.playsInline = true;
+                        mediaElement.preload = 'metadata';
+                        // Play/Pause on hover
+                        container.addEventListener('mouseenter', () => mediaElement.play().catch(e => console.error("Video play failed:", e)));
+                        container.addEventListener('mouseleave', () => mediaElement.pause());
+                        // Add a play icon overlay for videos
+                        const playIconOverlay = document.createElement('div');
+                        playIconOverlay.className = 'absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition';
+                        playIconOverlay.innerHTML = `<svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>`;
+                        container.appendChild(playIconOverlay);
+                    }
+
+                    container.appendChild(mediaElement);
+                    grid.appendChild(container);
+                });
+            }
+
+// --- Skeleton Loader Logic ---
+            function showSkeleton(mediaType, show) {
+                 // MOVED element lookup inside the function
+                 const photosSkeleton = document.getElementById('photos-skeleton');
+                 const videosSkeleton = document.getElementById('videos-skeleton');
+                 const photosGrid = document.getElementById('photos-grid');
+                 const videosGrid = document.getElementById('videos-grid');
+
+                 const skeleton = (mediaType === 'image') ? photosSkeleton : videosSkeleton;
+                 const grid = (mediaType === 'image') ? photosGrid : videosGrid;
+                 
+                 if (!skeleton || !grid) return; // Exit if elements aren't found
+
+                 if (show && grid.childElementCount === 0) { 
+                     // Only show skeleton if grid is empty and we are told to show
+                     skeleton.style.display = 'grid';
+                     skeleton.classList.remove('hidden');
+                 } else if (!show) {
+                     // Only hide skeleton if we are explicitly told to hide
+                     skeleton.classList.add('hidden');
+                 }
+                 // If show is true BUT grid is not empty (infinite scroll), do nothing.
+            }
+
+
+            // --- Lazy Loading Observer ---
+            const lazyLoadObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const media = entry.target;
+                        if (media.tagName === 'IMG') {
+                            media.src = media.getAttribute('data-src');
+                            media.removeAttribute('data-src');
+                        }
+                        observer.unobserve(media);
+                    }
+                });
+            }, { rootMargin: '0px 0px 200px 0px' });
+
+            // --- Infinite Scroll Observer ---
+            const infiniteScrollObserver = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting && !isLoading && hasMore) {
+                    fetchGallery(currentMediaType, currentPage);
+                }
+            }, { threshold: 0.5 }); // Trigger when 50% visible
+
+             if(sentinel) infiniteScrollObserver.observe(sentinel);
+
+
+            // --- Tab Switching Logic (FIXED) ---
+             window.switchTab = (newMediaType) => { // newMediaType is 'image' or 'video'
+                if (newMediaType === currentMediaType) return; // Do nothing if already active
+
+                // Reset state for the new tab
+                currentMediaType = newMediaType;
+                currentPage = 1;
+                hasMore = true;
+                isLoading = false; 
+                allMediaData = []; 
+                currentIndex = 0;
+
+                // Clear previous grid content
+                photosGrid.innerHTML = '';
+                videosGrid.innerHTML = '';
+
+                // Hide skeletons
+                photosSkeleton.classList.add('hidden');
+                videosSkeleton.classList.add('hidden');
+                
+                // Reset messages
+                endMessage.classList.add('hidden');
+                loadingMessage.classList.add('hidden');
+                sentinel.style.display = 'block'; 
+
+                // Fetch data for the new tab
+                fetchGallery(currentMediaType, currentPage);
+                
+                // Note: Alpine's activeTab is set by the @click directive on the button itself.
+             };
+
+            // --- Carousel Logic ---
+            function updateCarousel() {
+                if (allMediaData.length === 0 || currentIndex < 0 || currentIndex >= allMediaData.length) return;
+
+                const item = allMediaData[currentIndex];
+                const mimeType = item.mime_type || '';
+                const isImage = mimeType.startsWith('image');
+                const isVideo = mimeType.startsWith('video');
+
+                if (!isImage && !isVideo) return;
+
+                const mediaUrl = item.media_details?.sizes?.large?.source_url || item.media_details?.sizes?.full?.source_url || item.source_url;
+                if (!mediaUrl) return;
+
+                const caption = item.caption?.rendered?.replace(/<[^>]*>?/gm, '') || `Item ${currentIndex + 1}`;
+
+                // Clear previous media
+                carouselContent.innerHTML = ''; // Clear everything inside first
+
+                let mediaElement;
+                if (isImage) {
+                    mediaElement = document.createElement('img');
+                    mediaElement.src = mediaUrl;
+                    mediaElement.alt = caption;
+                    mediaElement.className = 'max-h-full max-w-full object-contain'; // Center and contain
+                } else if (isVideo) {
+                    mediaElement = document.createElement('video');
+                    mediaElement.src = mediaUrl;
+                    mediaElement.className = 'max-h-full max-w-full object-contain';
+                    mediaElement.controls = true;
+                    mediaElement.autoplay = true; // Autoplay when modal opens
+                    mediaElement.playsInline = true;
+                }
+
+                if (mediaElement) {
+                    carouselContent.appendChild(mediaElement); // Add the new element
+                }
+                carouselCaption.textContent = caption;
+
+                // Update arrow visibility
+                carouselPrev.style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
+                carouselNext.style.visibility = currentIndex === allMediaData.length - 1 ? 'hidden' : 'visible';
+            }
+
+            window.openCarousel = (index) => {
+                currentIndex = index;
+                updateCarousel();
+                modal.classList.remove('hidden', 'modal-hidden');
+                modal.classList.add('flex', 'modal-visible');
+                document.body.style.overflow = 'hidden';
+            }
+
+            window.closeCarousel = () => {
+                modal.classList.remove('flex', 'modal-visible');
+                modal.classList.add('modal-hidden');
+                 // Stop video if playing
+                const video = modal.querySelector('video');
+                if (video) {
+                    video.pause();
+                    video.src = ""; // Stop download
+                }
+                setTimeout(() => { modal.classList.add('hidden'); }, 300); // Hide after transition
+                document.body.style.overflow = '';
+            }
+
+            window.changeMedia = (step) => {
+                const newIndex = currentIndex + step;
+                if (newIndex >= 0 && newIndex < allMediaData.length) {
+                    currentIndex = newIndex;
+                    updateCarousel();
+                }
+            }
+
+            // --- Initial Fetch ---
+            fetchGallery(currentMediaType, currentPage); // Fetch photos on initial load
+
+            // --- Lenis Init ---
+            if (typeof Lenis !== 'undefined') {
+                const lenis = new Lenis()
+                function raf(time) {
+                    lenis.raf(time)
+                    requestAnimationFrame(raf)
+                }
+                requestAnimationFrame(raf)
+            } else {
+                console.warn('Lenis script not loaded.');
+            }
+
+             // --- Explore Modal --- (Vanilla JS version)
+             // Re-finding elements just in case
+             const exploreModal = document.getElementById('exploreModal');
+             const exploreBtns = [
+                document.getElementById('explore-btn-desktop'),
+                document.getElementById('explore-btn-mobile'),
+                document.getElementById('explore-btn-footer')
+            ];
+             const modalCloseBtn = exploreModal ? exploreModal.querySelector('button[class*="text-gray-400"]') : null; // More robust selector
+
+             function openModalJS() { 
+                 const modal = document.getElementById('exploreModal'); // Find it again
+                 if(modal) { 
+                     modal.classList.remove('hidden', 'modal-hidden'); 
+                     modal.classList.add('flex', 'modal-visible'); 
+                 } 
+             }
+             function closeModalJS() { 
+                 const modal = document.getElementById('exploreModal'); // Find it again
+                 if(modal) { 
+                     modal.classList.remove('flex', 'modal-visible'); 
+                     modal.classList.add('modal-hidden'); 
+                     setTimeout(() => { modal.classList.add('hidden'); }, 300); 
+                 } 
+             }
+
+             exploreBtns.forEach(btn => { if (btn) btn.addEventListener('click', openModalJS); });
+             if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModalJS);
+             if (exploreModal) exploreModal.addEventListener('click', (event) => { 
+                 if (event.target === exploreModal) closeModalJS(); // Close on backdrop click
+            });
+
+
+        });
     </script>
-
-    <!-- 💫 Optional small fade-in animation -->
-    <style>
-        @keyframes fade-in {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-fade-in {
-            animation: fade-in 0.3s ease-out;
-        }
-    </style>
-
 </body>
-
 </html>
+

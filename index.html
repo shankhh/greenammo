@@ -2,500 +2,535 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./src/style.css">
-  <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js">
-    // Initialize Lenis
-    const lenis = new Lenis({
-      autoRaf: true,
-    });
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./assets/greenammo.jpeg" /> <!-- Consider updating favicon path -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    // Listen for the scroll event and log the event data
-    lenis.on('scroll', (e) => {
-      console.log(e);
-    });
-  </script>
-  <title>GreenAmmo</title>
+    <!-- 1. Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 2. Alpine.js REMOVED -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script> -->
+
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
+
+    <title>GreenAmmo Group </title>
+
+    <!-- 3. Configure Tailwind with Pop Pastel Group Palette & Fonts -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // GreenAmmo Group (Blended Pop Pastel Theme)
+              "group-primary-green": "#4CAF50", // Deep Mint (Primary Branding)
+              "group-pastel-green":  "#A8D7B0", // Soft Sage (Accents, Backgrounds)
+              "group-pastel-blue":   "#9FD8E4", // Sky Mist (Secondary Accent)
+              "group-accent-neutral":"#F0EAD6", // Sandy Beige (Warm Highlights)
+              "group-base-white":    "#FDFDFD", // Clean Base (Background)
+              "group-text-dark":     "#1F2937", // Dark Gray for Text (Good Contrast)
+              "group-text-medium":   "#6B7280", // Medium Gray for Subtext
+            },
+            fontFamily: {
+              // Setup font families
+              'sans': ['Inter', 'sans-serif'],
+              'heading': ['Bricolage Grotesque', 'sans-serif'],
+            },
+             animation: { // Animation for modal
+                'fade-in': 'fade-in 0.3s ease-out',
+            },
+            keyframes: {
+                'fade-in': {
+                    'from': { opacity: 0, transform: 'translateY(10px)' },
+                    'to': { opacity: 1, transform: 'translateY(0)' },
+                }
+            }
+          },
+        },
+      };
+    </script>
+
+    <!-- 4. Import Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- 5. Apply new font rules and CTA button styles -->
+    <style>
+      body {
+        font-family: "Inter", sans-serif; /* Inter for body */
+        background-color: #FDFDFD; /* group-base-white */
+        color: #1F2937; /* group-text-dark */
+      }
+      h1, h2, h3, h4, .font-heading {
+        font-family: "Bricolage Grotesque", sans-serif; /* Bricolage for headings */
+      }
+      .cta-button {
+        display: inline-block;
+        padding: 0.75rem 2.5rem;
+        border-radius: 9999px;
+        font-size: 1rem; /* Slightly reduced size */
+        font-weight: 600;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transform: scale(1);
+        text-align: center;
+      }
+      .cta-button:hover {
+        transform: scale(1.03) translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      .cta-button-secondary { /* Style for secondary/outline buttons */
+        padding: 0.75rem 2.5rem;
+        border-radius: 9999px;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease-in-out;
+        border-width: 2px;
+         transform: scale(1);
+         text-align: center;
+      }
+       .cta-button-secondary:hover {
+        transform: scale(1.03) translateY(-2px);
+      }
+
+       /* Added style for modal transitions */
+      .modal-hidden {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease-out, visibility 0s linear 0.3s;
+      }
+       .modal-visible {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.3s ease-out;
+      }
+    </style>
 </head>
 
-<body class="bg-gray-50 text-gray-900 font-sans">
-  <!-- 🌿 NAV COMPONENT for GreenAmmo Group -->
-  <nav class="w-full bg-white shadow-sm sticky top-0 z-50">
-    <div class="container mx-auto flex justify-between items-center px-6 py-4">
-      <!-- Logo -->
-      <a href="/" class="font-bold text-2xl text-green-700 tracking-tight">
-        GreenAmmo
-      </a>
-
-      <!-- Primary Nav Links -->
-      <ul class="hidden md:flex space-x-6 text-gray-700 font-medium items-center">
-        <li><a href="/aboutus" class="hover:text-green-600 transition">About Us</a></li>
-
-        <!-- Solutions Dropdown -->
-        <li class="relative group">
-          <button class="hover:text-green-600 transition inline-flex items-center gap-1" href="./solutions/index.html">
-            Solutions
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-          <div
-            class="absolute hidden group-hover:grid grid-cols-3 gap-4 bg-white rounded-2xl shadow-lg p-6 top-5 -left-12 w-[800px] transition-all">
-            <div>
-              <h4 class="font-semibold text-green-700 mb-2">Finance</h4>
-              <ul class="text-sm space-y-1">
-                <li><a href="#" class="hover:text-green-600">Taxation</a></li>
-                <li><a href="#" class="hover:text-green-600">Accounting & Compliance</a></li>
-                <li><a href="#" class="hover:text-green-600">Project Facilitation</a></li>
-                <li><a href="#" class="hover:text-green-600">Business Consulting</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="font-semibold text-green-700 mb-2">Education & Development</h4>
-              <ul class="text-sm space-y-1">
-                <li><a href="#" class="hover:text-green-600">Education & Training</a></li>
-                <li><a href="#" class="hover:text-green-600">Skill Development</a></li>
-                <li><a href="#" class="hover:text-green-600">Website & Content</a></li>
-              </ul>
-            </div>
-            <div class="flex flex-col">
-              <div>
-                <h4 class="font-semibold text-green-700 mb-2">Event and Supply</h4>
-                <ul class="text-sm space-y-1">
-                  <li><a href="#" class="hover:text-green-600">Event & Management</a></li>
-                  <li><a href="#" class="hover:text-green-600">Supply Services</a></li>
-
-              </div>
-              <br>
-              <div>
-                <h4 class="font-semibold text-green-700 mb-2" title="Powered by GreenCabin">Accommodation</h4>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <!-- Trust Dropdown -->
-        <li class="relative group">
-          <button class="hover:text-green-600 transition inline-flex items-center gap-1">
-            Trust
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-          <div
-            class="absolute hidden group-hover:grid grid-cols-2 gap-4 bg-white rounded-2xl shadow-lg p-6 top-5 -left-12 w-[600px] transition-all">
-            <div>
-              <h4 class="font-semibold text-green-700 mb-2">Programs</h4>
-              <ul class="text-sm space-y-1">
-                <li><a href="#" class="hover:text-green-600">Projects & Milestones</a></li>
-                <li><a href="#" class="hover:text-green-600">Campaigns</a></li>
-                <li><a href="#" class="hover:text-green-600">Reports & Research</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="font-semibold text-green-700 mb-2">Get Involved</h4>
-              <ul class="text-sm space-y-1">
-                <li><a href="#" class="hover:text-green-600">Join the Change</a></li>
-                <li><a href="#" class="hover:text-green-600">Donate / Sponsor</a></li>
-                <li><a href="#" class="hover:text-green-600">Volunteer</a></li>
-              </ul>
-            </div>
-          </div>
-        </li>
-
-        <li class="relative group">
-          <button class="hover:text-green-600 transition inline-flex items-center gap-1">
-            Media
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-          <div
-            class="absolute hidden group-hover:grid grid-cols-2 gap-4 bg-white rounded-2xl shadow-lg p-6 top-5 -left-12 w-[500px] transition-all">
-            <div>
-              <h4 class="font-semibold text-green-700 mb-2">Our Story</h4>
-              <ul class="text-sm space-y-1">
-                <li><a href="/gallery.html" class="hover:text-green-600">Gallery</a></li>
-                <li><a href="/testimonials.html" class="hover:text-green-600">Testimonials</a></li>
-                <li><a href="/digitalcontent.html" class="hover:text-green-600">Digital Content</a></li>
-              </ul>
-            </div>
-
-        </li>
-        <li><a href="#" class="hover:text-green-600 transition">Blog</a></li>
-        <li><a href="./joinus" class="hover:text-green-600 transition">Join Us</a></li>
-      </ul>
-
-      <!-- Explore Button -->
-      <button class="bg-green-600 text-white px-4 py-2 rounded-xl shadow hover:bg-green-700 transition md:ml-4"
-        onclick="openModal()">
-        Explore
-      </button>
-
-      <!-- Mobile Menu Toggle -->
-      <button class="md:hidden flex items-center text-green-700" id="menu-toggle">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-    </div>
-
-    <!-- Mobile Dropdown -->
-    <div class="md:hidden hidden flex-col space-y-2 bg-white shadow-inner px-6 py-4" id="mobile-menu">
-      <a href="#" class="block hover:text-green-600">Home</a>
-      <a href="#" class="block hover:text-green-600">Solutions</a>
-      <a href="#" class="block hover:text-green-600">Trust</a>
-      <a href="#" class="block hover:text-green-600">Media</a>
-      <a href="#" class="block hover:text-green-600">Blog</a>
-      <a href="#" class="block hover:text-green-600">Join Us</a>
-    </div>
-  </nav>
-
-  <!-- 🔧 Simple JS for Mobile Toggle -->
-  <script>
-    document.getElementById('menu-toggle').addEventListener('click', () => {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
-  </script>
-
-
-
-  <main class="min-h-screen">
-
-    <!-- 💬 HERO SECTION -->
-    <section class="container mx-auto px-4 md:px-8 py-16 grid md:grid-cols-2 gap-8 items-center">
-      <div>
-        <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
-          Empowering People.<br />
-          Enabling Progress.<br />
-          Enriching the Planet.
-        </h1>
-        <p class="text-lg text-gray-600 mb-6">
-          GreenAmmo Group bridges impact and innovation — empowering individuals, communities,
-          and enterprises to build a smarter, inclusive, and sustainable future.
-        </p>
-        <div class="flex gap-4">
-          <button class="bg-green-600 text-white px-5 py-3 rounded-xl shadow hover:bg-green-700 transition">
-            <a href="./trust/index.html">Join a Campaign</a>
-          </button>
-          <button class="border border-green-600 text-green-600 px-5 py-3 rounded-xl hover:bg-green-50 transition">
-            <a href="./solutions/index.html">Partner with Us</a>
-          </button>
-        </div>
-      </div>
-      <div class="flex justify-center">
-        <!-- 🖼️ Placeholder for undraw-style illustration -->
-        <div class="w-72 h-72 bg-green-100 rounded-2xl flex items-center justify-center">
-          <p class="text-green-600">[SVG Hero Illustration]</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 💡 WHY US SECTION -->
-    <section class="container mx-auto px-4 md:px-8 py-12">
-      <h2 class="text-2xl font-semibold mb-8 text-center">Why Choose GreenAmmo?</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <!-- Each block -->
-        <div class="bg-white rounded-2xl shadow p-6 hover:shadow-lg transition">
-          <div class="w-full h-32 bg-green-50 rounded-xl mb-4 flex items-center justify-center">
-            <p class="text-green-600">[SVG Icon]</p>
-          </div>
-          <h3 class="font-semibold text-lg mb-2">Integrated Approach</h3>
-          <p class="text-gray-600 text-sm">
-            Combining social and professional impact to create meaningful, scalable outcomes.
-          </p>
-        </div>
-
-        <div class="bg-white rounded-2xl shadow p-6 hover:shadow-lg transition">
-          <div class="w-full h-32 bg-green-50 rounded-xl mb-4 flex items-center justify-center">
-            <p class="text-green-600">[SVG Icon]</p>
-          </div>
-          <h3 class="font-semibold text-lg mb-2">Transparent Operations</h3>
-          <p class="text-gray-600 text-sm">
-            People-first, transparent processes trusted by public, private, and civic sectors.
-          </p>
-        </div>
-
-        <div class="bg-white rounded-2xl shadow p-6 hover:shadow-lg transition">
-          <div class="w-full h-32 bg-green-50 rounded-xl mb-4 flex items-center justify-center">
-            <p class="text-green-600">[SVG Icon]</p>
-          </div>
-          <h3 class="font-semibold text-lg mb-2">Scalable Solutions</h3>
-          <p class="text-gray-600 text-sm">
-            Tech-enabled systems designed for growth, sustainability, and real-world reliability.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 🔄 SWITCHABLE INFO BLOCKS (Solutions vs Trust) -->
-    <section class="container mx-auto px-4 md:px-8 py-16">
-      <h2 class="text-2xl font-semibold text-center mb-8">Discover Our Divisions</h2>
-      <div class="grid md:grid-cols-2 gap-8">
-        <!-- GreenAmmo Solutions -->
-        <div class="bg-white rounded-2xl p-6 shadow hover:shadow-lg transition flex flex-col justify-between">
-          <div>
-            <h3 class="text-xl font-semibold mb-2 text-green-700">GreenAmmo Solutions</h3>
-            <p class="text-gray-600 mb-4 text-sm">
-              Professional, scalable services across Finance, Education, Events, FMCG, and Accommodation —
-              driving business and social growth together.
-            </p>
-          </div>
-          <div class="w-full h-40 bg-green-50 rounded-xl flex items-center justify-center">
-            <p class="text-green-600">[SVG Solutions]</p>
-          </div>
-        </div>
-
-        <!-- GreenAmmo Trust -->
-        <div class="bg-white rounded-2xl p-6 shadow hover:shadow-lg transition flex flex-col justify-between">
-          <div>
-            <h3 class="text-xl font-semibold mb-2 text-green-700">GreenAmmo Trust</h3>
-            <p class="text-gray-600 mb-4 text-sm">
-              Non-profit initiatives empowering people and protecting the planet — from climate action to
-              women’s empowerment and community development.
-            </p>
-          </div>
-          <div class="w-full h-40 bg-green-50 rounded-xl flex items-center justify-center">
-            <p class="text-green-600">[SVG Trust]</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 🤝 ALLIANCES -->
-    <section class="container mx-auto px-4 md:px-8 py-12">
-      <h2 class="text-2xl font-semibold text-center mb-8">Our Alliances</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 place-items-center">
-        <!-- Replace placeholders with actual logos -->
-        <div class="bg-white p-4 rounded-xl shadow w-32 h-32 flex items-center justify-center">
-          <p class="text-gray-400 text-sm">Logo 1</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl shadow w-32 h-32 flex items-center justify-center">
-          <p class="text-gray-400 text-sm">Logo 2</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl shadow w-32 h-32 flex items-center justify-center">
-          <p class="text-gray-400 text-sm">Logo 3</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl shadow w-32 h-32 flex items-center justify-center">
-          <p class="text-gray-400 text-sm">Logo 4</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 💬 TESTIMONIALS -->
-    <section class="container mx-auto px-4 md:px-8 py-16">
-      <h2 class="text-2xl font-semibold text-center mb-8">What People Say</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-white rounded-2xl shadow p-6">
-          <p class="text-gray-600 text-sm mb-4">
-            “GreenAmmo’s blend of professionalism and purpose is unmatched. Their transparency builds trust at every
-            step.”
-          </p>
-          <h4 class="font-semibold text-green-700">– Community Partner</h4>
-        </div>
-        <div class="bg-white rounded-2xl shadow p-6">
-          <p class="text-gray-600 text-sm mb-4">
-            “They make sustainability real — not just a buzzword. Our business saw growth and impact together.”
-          </p>
-          <h4 class="font-semibold text-green-700">– Corporate Client</h4>
-        </div>
-        <div class="bg-white rounded-2xl shadow p-6">
-          <p class="text-gray-600 text-sm mb-4">
-            “Volunteering with GreenAmmo Trust changed my perspective on what collaboration can achieve.”
-          </p>
-          <h4 class="font-semibold text-green-700">– Volunteer</h4>
-        </div>
-      </div>
-    </section>
-
-    <footer class="bg-green-800 text-white pt-12">
-      <div class="container mx-auto px-4 md:px-8">
-
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-green-700">
-
-          <div class="md:col-span-2 space-y-4">
-            <h3 class="text-3xl font-bold text-green-300">GreenAmmo</h3>
-            <p class="text-sm text-green-200 max-w-sm">
-              Empowering sustainable living and waste management through community action, research, and project
-              initiation.
-            </p>
-          </div>
-
-          <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
-
-            <div class="space-y-3">
-              <h4 class="font-semibold text-green-50 mb-3">GreenAmmo</h4>
-              <ul class="text-sm space-y-2 text-green-200">
-                <li><a href="/about-us.html" class="hover:text-green-300 transition">About Us</a></li>
-                <li><a href="/gallery.html" class="hover:text-green-300 transition">Media (Gallery)</a></li>
-                <li><a href="/certifications.html" class="hover:text-green-300 transition">Certificates</a></li>
-                <li><a href="/alliances.html" class="hover:text-green-300 transition">Alliances</a></li>
-              </ul>
-            </div>
-
-            <div class="space-y-3">
-              <h4 class="font-semibold text-green-50 mb-3">Solutions</h4>
-              <ul class="text-sm space-y-2 text-green-200">
-                <li><a href="/solutions/finance.html" class="hover:text-green-300 transition">Finance</a></li>
-                <li><a href="/solutions/education.html" class="hover:text-green-300 transition">Education &
-                    Development</a></li>
-                <li><a href="/solutions/event-supply.html" class="hover:text-green-300 transition">Event & Supply</a>
-                </li>
-                <li><a href="/solutions/accommodations.html" class="hover:text-green-300 transition">Accommodations</a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="space-y-3">
-              <h4 class="font-semibold text-green-50 mb-3">Trust</h4>
-              <ul class="text-sm space-y-2 text-green-200">
-                <li><a href="/trust/projects.html" class="hover:text-green-300 transition">Projects & Milestones</a>
-                </li>
-                <li><a href="/trust/campaigns.html" class="hover:text-green-300 transition">Campaigns</a></li>
-                <li><a href="/trust/reports.html" class="hover:text-green-300 transition">Reports & Research</a></li>
-              </ul>
-            </div>
-
-            <div class="space-y-3">
-              <h4 class="font-semibold text-green-50 mb-3">Take Action</h4>
-              <div class="space-y-2">
-                <a href="/join-us.html"
-                  class="block bg-green-600 text-white text-center text-sm font-medium py-2 rounded-lg hover:bg-green-700 transition">
-                  Join Us
-                </a>
-                <a href="/explore.html"
-                  class="block border border-green-600 text-green-50 text-center text-sm font-medium py-2 rounded-lg hover:border-green-300 hover:text-green-300 transition">
-                  Explore
-                </a>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="flex flex-col sm:flex-row justify-between items-center py-6 text-sm text-green-200">
-          <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
-
-          <div class="flex gap-4 mt-4 sm:mt-0">
-            <a href="#" class="hover:text-green-400 transition" aria-label="Facebook">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3 8h-2v2h2v2h-2v4h-2v-4H9V12h2V10c0-1.104.896-2 2-2h2v2z" />
-              </svg>
+<body class="bg-group-base-white text-group-text-dark font-sans"> <!-- Removed x-data -->
+    <!-- 🌿 NAV COMPONENT for GreenAmmo Group (Updated) -->
+     <nav class="w-full bg-white shadow-sm sticky top-0 z-50"> <!-- Removed x-data -->
+        <div class="container mx-auto flex justify-between items-center px-6 py-4">
+            <!-- Logo -->
+            <a href="/" class="font-heading font-extrabold text-2xl text-group-primary-green tracking-tight flex items-center gap-2">
+                 <img src="./assets/greenammo.jpeg" alt="GreenAmmo Logo" class="h-10 w-auto rounded-full object-cover">
+                 Group
             </a>
-            <a href="#" class="hover:text-green-400 transition" aria-label="Instagram">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.179 2.541c.883 0 1.632.748 1.632 1.632v.005c0 .883-.749 1.631-1.632 1.631h-.005c-.883 0-1.632-.748-1.632-1.631v-.005c0-.883.749-1.632 1.632-1.632h.005zM12 8c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4zm-2.821 8.879c.148.093.308.175.474.246.36.155.76.246 1.171.246h2.348c.41 0 .81-.091 1.17-.246.166-.071.326-.153.473-.246.22-.138.423-.306.605-.5.182-.194.34-.413.474-.658.134-.245.242-.516.326-.811.168-.598.256-1.233.256-1.879v-2.352c0-.646-.088-1.281-.256-1.879a4.897 4.897 0 0 0-.326-.811 4.795 4.795 0 0 0-.474-.658 4.67 4.67 0 0 0-.605-.5 4.908 4.908 0 0 0-.474-.246c-.36-.155-.76-.246-1.17-.246h-2.348c-.41 0-.81.091-1.17.246a4.908 4.908 0 0 0-.474.246 4.67 4.67 0 0 0-.605.5 4.795 4.795 0 0 0-.474.658 4.897 4.897 0 0 0-.326.811c-.168.598-.256 1.233-.256 1.879v2.352c0 .646.088 1.281.256 1.879a4.897 4.897 0 0 0 .326.811 4.795 4.795 0 0 0 .474.658 4.67 4.67 0 0 0 .605.5z" />
-              </svg>
-            </a>
-            <a href="#" class="hover:text-green-400 transition" aria-label="LinkedIn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-2 16H8V11h2v7zm-1-8H9V8h1v2zM16 18h-2v-3c0-1.657-1.343-3-3-3s-3 1.343-3 3v3h-2V11h2v1.5c.618-.844 1.877-1.5 3-1.5 2.206 0 4 1.794 4 4v3z" />
-              </svg>
-            </a>
-          </div>
+
+            <!-- Primary Nav Links (Desktop) -->
+            <ul class="hidden md:flex space-x-6 text-group-text-medium font-medium items-center">
+                <li><a href="/aboutus.html" class="hover:text-group-primary-green transition">About Us</a></li>
+                 <!-- Media Dropdown -->
+                <li class="relative group">
+                    <button class="hover:text-group-primary-green transition inline-flex items-center gap-1">
+                        Media
+                        <svg xmlns="http://www.w.3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    <div class="absolute hidden group-hover:block bg-white rounded-xl shadow-lg p-4 top-5 -left-4 w-56 transition-all z-10 border border-gray-100">
+                        <ul class="text-sm space-y-1">
+                            <li><a href="/gallery.html" class="block py-1 px-3 text-group-text-medium hover:bg-group-pastel-green/30 rounded transition">Gallery</a></li>
+                            <li><a href="/testimonials.html" class="block py-1 px-3 text-group-text-medium hover:bg-group-pastel-green/30 rounded transition">Testimonials</a></li>
+                            <li><a href="/digitalcontent.html" class="block py-1 px-3 text-group-text-medium hover:bg-group-pastel-green/30 rounded transition">Digital Content</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="/blog.html" class="hover:text-group-primary-green transition">Blog</a></li>
+                <li><a href="/joinus.html" class="hover:text-group-primary-green transition">Join Us</a></li>
+            </ul>
+
+            <!-- Explore Button (Desktop) - ADDED ID -->
+            <button id="explore-btn-desktop" class="hidden md:block cta-button bg-group-primary-green text-white hover:bg-opacity-90">
+                Explore
+            </button>
+
+            <!-- Mobile Menu Toggle - ADDED ID -->
+            <button id="mobile-menu-toggle" class="md:hidden flex items-center text-group-primary-green focus:outline-none">
+                <!-- SVGs remain the same, logic handled by JS -->
+                 <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
         </div>
-      </div>
+
+        <!-- Mobile Dropdown - ADDED ID, initially hidden -->
+        <div id="mobile-menu" class="hidden md:hidden flex-col space-y-2 bg-white shadow-inner px-6 py-4 border-t border-gray-100">
+            <a href="/aboutus.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">About Us</a>
+            <a href="/gallery.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">Media</a>
+            <a href="/blog.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">Blog</a>
+            <a href="/joinus.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">Join Us</a>
+             <!-- Explore Button (Mobile) - ADDED ID -->
+             <button id="explore-btn-mobile" class="mt-2 w-full cta-button bg-group-primary-green text-white hover:bg-opacity-90">
+                Explore
+             </button>
+        </div>
+    </nav>
+
+    <main class="min-h-screen">
+
+        <!-- 💬 HERO SECTION -->
+        <section class="container mx-auto px-4 md:px-8 py-16 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-5 leading-tight font-heading text-group-text-dark">
+                    Empowering People.<br />
+                    Enabling Progress.<br />
+                    <span class="text-group-primary-green">Enriching the Planet.</span>
+                </h1>
+                <p class="text-lg text-group-text-medium mb-8 max-w-lg">
+                    GreenAmmo Group bridges impact and innovation — empowering individuals, communities, and enterprises to build a smarter, inclusive, and sustainable future.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="./trust/index.html" class="cta-button bg-group-primary-green text-white hover:bg-opacity-90 shadow-group-pastel-green/50">
+                        Join a Campaign
+                    </a>
+                    <a href="./solutions/index.html" class="cta-button-secondary border-group-primary-green text-group-primary-green hover:bg-group-pastel-green/50">
+                        Partner with Us
+                    </a>
+                </div>
+            </div>
+            <div class="flex justify-center">
+                <!-- 🖼️ Simple SVG Illustration Placeholder -->
+                <div class="w-full max-w-md h-72 bg-group-pastel-green/30 rounded-2xl flex items-center justify-center p-6 border border-group-pastel-green">
+                    <svg class="w-24 h-24 text-group-primary-green opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v13m0-13V4a2 2 0 114 0v4m-4 0H8m4 13a9 9 0 110-18 9 9 0 010 18zm-4-9a4 4 0 108 0 4 4 0 00-8 0z"></path></svg>
+                     <!-- Replace with a more relevant illustration -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ... (Rest of the main content sections: Why Us, Discover Divisions, Alliances, Testimonials) ... -->
+        <!-- These sections remain the same as the previous version -->
+        
+        <!-- 💡 WHY US SECTION -->
+        <section class="container mx-auto px-4 md:px-8 py-12">
+            <h2 class="text-3xl font-bold text-center mb-10 font-heading text-group-text-dark">Why Choose GreenAmmo?</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                 <!-- Card 1 -->
+                <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition border border-gray-100">
+                    <div class="w-full h-32 bg-group-pastel-green/30 rounded-xl mb-4 flex items-center justify-center border border-group-pastel-green">
+                         <svg class="w-12 h-12 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <h3 class="font-semibold text-xl mb-2 font-heading text-group-text-dark">Integrated Approach</h3>
+                    <p class="text-group-text-medium text-sm">
+                        Combining social and professional impact to create meaningful, scalable outcomes.
+                    </p>
+                </div>
+                <!-- Card 2 -->
+                 <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition border border-gray-100">
+                    <div class="w-full h-32 bg-group-pastel-green/30 rounded-xl mb-4 flex items-center justify-center border border-group-pastel-green">
+                        <svg class="w-12 h-12 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2c-2.355 0-4.605.698-6.502 2.016M12 22c-2.355 0-4.605-.698-6.502-2.016M18 10a6 6 0 00-6-6M6 10a6 6 0 00-6 6"></path></svg>
+                    </div>
+                    <h3 class="font-semibold text-xl mb-2 font-heading text-group-text-dark">Transparent Operations</h3>
+                    <p class="text-group-text-medium text-sm">
+                        People-first, transparent processes trusted by public, private, and civic sectors.
+                    </p>
+                </div>
+                 <!-- Card 3 -->
+                 <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition border border-gray-100">
+                    <div class="w-full h-32 bg-group-pastel-green/30 rounded-xl mb-4 flex items-center justify-center border border-group-pastel-green">
+                       <svg class="w-12 h-12 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="font-semibold text-xl mb-2 font-heading text-group-text-dark">Scalable Solutions</h3>
+                    <p class="text-group-text-medium text-sm">
+                        Tech-enabled systems designed for growth, sustainability, and real-world reliability.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🔄 DISCOVER OUR DIVISIONS -->
+        <section class="container mx-auto px-4 md:px-8 py-16">
+            <h2 class="text-3xl font-bold text-center mb-10 font-heading text-group-text-dark">Discover Our Divisions</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                 <!-- GreenAmmo Solutions -->
+                <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition flex flex-col justify-between border border-gray-100">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-3 font-heading text-group-pastel-blue">GreenAmmo Solutions</h3>
+                         <div class="w-full h-40 bg-group-pastel-blue/20 rounded-xl flex items-center justify-center mb-4 border border-group-pastel-blue/50">
+                             <svg class="w-16 h-16 text-group-pastel-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <p class="text-group-text-medium mb-4 text-sm">
+                            Professional, scalable services across Finance, Education, Events, FMCG, and Accommodation — driving business and social growth together.
+                        </p>
+                    </div>
+                     <a href="./solutions/index.html" class="mt-4 inline-block cta-button-secondary border-group-pastel-blue text-group-pastel-blue hover:bg-group-pastel-blue/20 w-full sm:w-auto">
+                        Visit Solutions
+                     </a>
+                </div>
+
+                <!-- GreenAmmo Trust -->
+                <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition flex flex-col justify-between border border-gray-100">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-3 font-heading text-group-primary-green">GreenAmmo Trust</h3>
+                        <div class="w-full h-40 bg-group-pastel-green/30 rounded-xl flex items-center justify-center mb-4 border border-group-pastel-green/50">
+                            <svg class="w-16 h-16 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        </div>
+                        <p class="text-group-text-medium mb-4 text-sm">
+                            Non-profit initiatives empowering people and protecting the planet — from climate action to women’s empowerment and community development.
+                        </p>
+                    </div>
+                     <a href="./trust/index.html" class="mt-4 inline-block cta-button-secondary border-group-primary-green text-group-primary-green hover:bg-group-pastel-green/50 w-full sm:w-auto">
+                        Visit Trust
+                     </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🤝 ALLIANCES -->
+        <section class="container mx-auto px-4 md:px-8 py-12">
+            <h2 class="text-3xl font-bold text-center mb-10 font-heading text-group-text-dark">Our Alliances</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 place-items-center">
+                 <!-- Replace placeholders with actual logos -->
+                <div class="bg-white p-4 rounded-xl shadow-sm w-32 h-32 flex items-center justify-center grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition duration-300">
+                    <img src="https://placehold.co/100x50/cccccc/333333?text=Logo+1" alt="Partner Logo 1" class="max-h-16 w-auto object-contain">
+                </div>
+                 <div class="bg-white p-4 rounded-xl shadow-sm w-32 h-32 flex items-center justify-center grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition duration-300">
+                    <img src="https://placehold.co/100x50/cccccc/333333?text=Logo+2" alt="Partner Logo 2" class="max-h-16 w-auto object-contain">
+                </div>
+                 <div class="bg-white p-4 rounded-xl shadow-sm w-32 h-32 flex items-center justify-center grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition duration-300">
+                   <img src="https://placehold.co/100x50/cccccc/333333?text=Logo+3" alt="Partner Logo 3" class="max-h-16 w-auto object-contain">
+                </div>
+                 <div class="bg-white p-4 rounded-xl shadow-sm w-32 h-32 flex items-center justify-center grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition duration-300">
+                    <img src="https://placehold.co/100x50/cccccc/333333?text=Logo+4" alt="Partner Logo 4" class="max-h-16 w-auto object-contain">
+                </div>
+                 <div class="bg-white p-4 rounded-xl shadow-sm w-32 h-32 flex items-center justify-center grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition duration-300">
+                   <img src="https://placehold.co/100x50/cccccc/333333?text=Logo+5" alt="Partner Logo 5" class="max-h-16 w-auto object-contain">
+                </div>
+            </div>
+        </section>
+
+        <!-- 💬 TESTIMONIALS -->
+        <section class="bg-group-pastel-green/30 py-16">
+            <div class="container mx-auto px-4 md:px-8">
+                <h2 class="text-3xl font-bold text-center mb-10 font-heading text-group-text-dark">What People Say</h2>
+                 <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-2xl shadow p-6 border border-gray-100">
+                        <p class="text-group-text-medium text-sm mb-4 italic">
+                            “GreenAmmo’s blend of professionalism and purpose is unmatched. Their transparency builds trust at every step.”
+                        </p>
+                        <h4 class="font-semibold text-group-primary-green">– Community Partner</h4>
+                    </div>
+                    <div class="bg-white rounded-2xl shadow p-6 border border-gray-100">
+                         <p class="text-group-text-medium text-sm mb-4 italic">
+                            “They make sustainability real — not just a buzzword. Our business saw growth and impact together.”
+                        </p>
+                        <h4 class="font-semibold text-group-primary-green">– Corporate Client</h4>
+                    </div>
+                    <div class="bg-white rounded-2xl shadow p-6 border border-gray-100">
+                         <p class="text-group-text-medium text-sm mb-4 italic">
+                            “Volunteering with GreenAmmo Trust changed my perspective on what collaboration can achieve.”
+                        </p>
+                        <h4 class="font-semibold text-group-primary-green">– Volunteer</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER (Group Theme) -->
+     <footer class="bg-group-text-dark text-white pt-12">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-gray-700">
+                <!-- Logo and Description -->
+                <div class="md:col-span-2 space-y-4">
+                    <h3 class="text-3xl font-bold text-group-pastel-green font-heading">GreenAmmo Group</h3>
+                    <p class="text-sm text-gray-300 max-w-sm">
+                        Empowering sustainable living and waste management through community action, research, and project initiation.
+                    </p>
+                </div>
+                <!-- Navigation Columns -->
+                <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
+                    <!-- Column 1: GreenAmmo -->
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3 font-heading">GreenAmmo</h4>
+                        <ul class="text-sm space-y-2 text-gray-300">
+                            <li><a href="/about-us.html" class="hover:text-group-pastel-green transition">About Us</a></li>
+                            <li><a href="/gallery.html" class="hover:text-group-pastel-green transition">Media (Gallery)</a></li>
+                            <li><a href="/certifications.html" class="hover:text-group-pastel-green transition">Certificates</a></li>
+                            <li><a href="/alliances.html" class="hover:text-group-pastel-green transition">Alliances</a></li>
+                        </ul>
+                    </div>
+                    <!-- Column 2: Solutions -->
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3 font-heading">Solutions</h4>
+                        <ul class="text-sm space-y-2 text-gray-300">
+                            <li><a href="/solutions/finance.html" class="hover:text-group-pastel-green transition">Finance</a></li>
+                            <li><a href="/solutions/education.html" class="hover:text-group-pastel-green transition">Education & Development</a></li>
+                            <li><a href="/solutions/event-supply.html" class="hover:text-group-pastel-green transition">Event & Supply</a></li>
+                            <li><a href="/solutions/accommodation.html" class="hover:text-group-pastel-green transition">Accommodations</a></li>
+                        </ul>
+                    </div>
+                    <!-- Column 3: Trust -->
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3 font-heading">Trust</h4>
+                        <ul class="text-sm space-y-2 text-gray-300">
+                            <li><a href="/trust/projects.html" class="hover:text-group-pastel-green transition">Projects & Milestones</a></li>
+                            <li><a href="/trust/campaigns.html" class="hover:text-group-pastel-green transition">Campaigns</a></li>
+                            <li><a href="/trust/reports.html" class="hover:text-group-pastel-green transition">Reports & Research</a></li>
+                        </ul>
+                    </div>
+                    <!-- Column 4: Action/Explore -->
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3 font-heading">Take Action</h4>
+                        <div class="space-y-2">
+                            <a href="/join-us.html" class="block text-center py-2 px-4 rounded-full bg-group-primary-green text-white hover:bg-opacity-80 transition text-sm font-semibold shadow-md">Join Us</a>
+                            <!-- UPDATED Explore Button - ADDED ID -->
+                            <button id="explore-btn-footer" class="block w-full text-center py-2 px-4 rounded-full border-2 border-group-pastel-green text-group-pastel-green hover:bg-group-pastel-green hover:text-group-text-dark transition text-sm font-semibold">Explore</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Row: Copyright and Socials -->
+            <div class="flex flex-col sm:flex-row justify-between items-center py-6 text-sm text-gray-400">
+                <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
+                <div class="flex gap-4 mt-4 sm:mt-0">
+                    <a href="#" class="hover:text-group-pastel-blue transition" aria-label="Facebook"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3 8h-2v2h2v2h-2v4h-2v-4H9V12h2V10c0-1.104.896-2 2-2h2v2z"/></svg></a>
+                    <a href="#" class="hover:text-group-pastel-blue transition" aria-label="Instagram"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.179 2.541c.883 0 1.632.748 1.632 1.632v.005c0 .883-.749 1.631-1.632 1.631h-.005c-.883 0-1.632-.748-1.632-1.631v-.005c0-.883.749-1.632 1.632-1.632h.005zM12 8c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4zm-2.821 8.879c.148.093.308.175.474.246.36.155.76.246 1.171.246h2.348c.41 0 .81-.091 1.17-.246.166-.071.326-.153.473-.246.22-.138.423-.306.605-.5.182-.194.34-.413.474-.658.134-.245.242-.516.326-.811.168-.598.256-1.233.256-1.879v-2.352c0-.646-.088-1.281-.256-1.879a4.897 4.897 0 0 0-.326-.811 4.795 4.795 0 0 0-.474-.658 4.67 4.67 0 0 0-.605-.5 4.908 4.908 0 0 0-.474-.246c-.36-.155-.76-.246-1.17-.246h-2.348c-.41 0-.81.091-1.17.246a4.908 4.908 0 0 0-.474.246 4.67 4.67 0 0 0-.605.5 4.795 4.795 0 0 0-.474.658 4.897 4.897 0 0 0-.326.811c-.168.598-.256 1.233-.256 1.879v2.352c0 .646.088 1.281.256 1.879a4.897 4.897 0 0 0 .326.811 4.795 4.795 0 0 0 .474.658 4.67 4.67 0 0 0 .605.5z"/></svg></a>
+                    <a href="#" class="hover:text-group-pastel-blue transition" aria-label="LinkedIn"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-2 16H8V11h2v7zm-1-8H9V8h1v2zM16 18h-2v-3c0-1.657-1.343-3-3-3s-3 1.343-3 3v3h-2V11h2v1.5c.618-.844 1.877-1.5 3-1.5 2.206 0 4 1.794 4 4v3z"/></svg></a>
+                </div>
+            </div>
+        </div>
     </footer>
 
-  </main>
-  <!-- 🌍 EXPLORE Button MODAL -->
-  <div id="exploreModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden justify-center items-center z-50">
-    <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full mx-4 md:mx-0 overflow-hidden animate-fade-in">
-      <div class="flex justify-between items-center px-6 py-4 border-b">
-        <h3 class="text-xl font-semibold text-green-700">Explore GreenAmmo</h3>
-        <button class="text-gray-500 hover:text-green-700" onclick="closeModal()">
-          ✕
-        </button>
-      </div>
-
-      <!-- Two-Panel Grid -->
-      <div class="grid md:grid-cols-2 gap-6 p-8">
-        <!-- Panel 1: GreenAmmo Solutions -->
-        <div
-          class="bg-green-50 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-green-100"
-          onclick="window.location.href='./solutions/index.html'">
-          <div>
-            <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4">
-              <p class="text-green-600 text-sm">[Undraw SVG: Business / Growth]</p>
+    <!-- 🌍 EXPLORE Button MODAL (Styled with Group Palette) - ADDED ID -->
+    <div id="exploreModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden justify-center items-center z-50 p-4 modal-hidden"> <!-- Initially hidden and ready for transition -->
+        <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full mx-auto overflow-hidden animate-fade-in" id="modal-content"> <!-- Added ID to content area -->
+             <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+                <h3 class="text-xl font-semibold text-group-text-dark font-heading">Explore GreenAmmo</h3>
+                <!-- Added ID to close button -->
+                <button id="modal-close-btn" class="text-gray-400 hover:text-group-primary-green focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
             </div>
-            <h4 class="text-2xl font-semibold text-green-700 mb-2">GreenAmmo Solutions</h4>
-            <p class="text-gray-600 text-sm leading-relaxed">
-              Professional, scalable services spanning Finance, Education, Events, and Accommodation —
-              uniting purpose with performance for sustainable growth.
-            </p>
-          </div>
-          <div class="mt-6">
-            <button class="bg-green-600 text-white px-4 py-2 rounded-xl hover:bg-green-700 transition">
-              Visit Solutions
-            </button>
-          </div>
-        </div>
 
-        <!-- Panel 2: GreenAmmo Trust -->
-        <div
-          class="bg-emerald-50 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-emerald-100"
-          onclick="window.location.href='./trust/index.html'">
-          <div>
-            <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4">
-              <p class="text-green-600 text-sm">[Undraw SVG: Community / Nature]</p>
+             <!-- Two-Panel Grid -->
+            <div class="grid md:grid-cols-2 gap-6 p-8">
+                <!-- Panel 1: GreenAmmo Solutions -->
+                <div class="bg-group-pastel-blue/20 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-group-pastel-blue/30 border border-group-pastel-blue/40" onclick="window.location.href='./solutions/index.html'">
+                    <div>
+                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-group-pastel-blue/20">
+                            <svg class="w-16 h-16 text-group-pastel-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h4 class="text-2xl font-semibold text-brand-dark mb-2 font-heading">GreenAmmo Solutions</h4>
+                        <p class="text-group-text-medium text-sm leading-relaxed">
+                            Professional, scalable services spanning Finance, Education, Events, and Accommodation — uniting purpose with performance for sustainable growth.
+                        </p>
+                    </div>
+                    <div class="mt-6">
+                        <button class="cta-button-secondary border-group-pastel-blue text-group-pastel-blue hover:bg-group-pastel-blue/20 w-full sm:w-auto">
+                            Visit Solutions
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Panel 2: GreenAmmo Trust -->
+                <div class="bg-group-pastel-green/30 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-group-pastel-green/40 border border-group-pastel-green/50" onclick="window.location.href='./trust/index.html'">
+                     <div>
+                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-group-pastel-green/20">
+                           <svg class="w-16 h-16 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        </div>
+                        <h4 class="text-2xl font-semibold text-group-primary-green mb-2 font-heading">GreenAmmo Trust</h4>
+                        <p class="text-group-text-medium text-sm leading-relaxed">
+                            Non-profit initiatives for environmental awareness, youth empowerment, and community development — turning sustainability into action.
+                        </p>
+                    </div>
+                    <div class="mt-6">
+                         <button class="cta-button-secondary border-group-primary-green text-group-primary-green hover:bg-group-pastel-green/50 w-full sm:w-auto">
+                            Visit Trust
+                        </button>
+                    </div>
+                </div>
             </div>
-            <h4 class="text-2xl font-semibold text-green-700 mb-2">GreenAmmo Trust</h4>
-            <p class="text-gray-600 text-sm leading-relaxed">
-              Non-profit initiatives for environmental awareness, youth empowerment, and community
-              development — turning sustainability into action.
-            </p>
-          </div>
-          <div class="mt-6">
-            <button class="bg-emerald-600 text-white px-4 py-2 rounded-xl hover:bg-emerald-700 transition">
-              Visit Trust
-            </button>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <!-- 🧠 JS: Open / Close Logic -->
-  <script>
-    function openModal() {
-      document.getElementById('exploreModal').classList.remove('hidden');
-      document.getElementById('exploreModal').classList.add('flex');
-    }
+    <!-- 🧠 VANILLA JS for Mobile Menu, Modal, and Lenis -->
+    <script>
+       document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const menuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIconOpen = document.getElementById('menu-icon-open');
+            const menuIconClose = document.getElementById('menu-icon-close');
 
-    function closeModal() {
-      document.getElementById('exploreModal').classList.remove('flex');
-      document.getElementById('exploreModal').classList.add('hidden');
-    }
-  </script>
+            if (menuToggle && mobileMenu && menuIconOpen && menuIconClose) {
+                menuToggle.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                    menuIconOpen.classList.toggle('hidden');
+                    menuIconClose.classList.toggle('hidden');
+                });
+            } else {
+                 console.error("Mobile menu elements not found");
+            }
 
-  <!-- 💫 Optional small fade-in animation -->
-  <style>
-    @keyframes fade-in {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
+            // Explore Modal Logic
+            const exploreModal = document.getElementById('exploreModal');
+            const modalContent = document.getElementById('modal-content');
+            const exploreBtns = [
+                document.getElementById('explore-btn-desktop'),
+                document.getElementById('explore-btn-mobile'),
+                document.getElementById('explore-btn-footer')
+            ];
+            const modalCloseBtn = document.getElementById('modal-close-btn');
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+            function openModal() {
+                 if(exploreModal) {
+                    exploreModal.classList.remove('hidden', 'modal-hidden');
+                    exploreModal.classList.add('flex', 'modal-visible');
+                 }
+            }
 
-    .animate-fade-in {
-      animation: fade-in 0.3s ease-out;
-    }
-  </style>
+            function closeModal() {
+                 if(exploreModal) {
+                    exploreModal.classList.remove('flex', 'modal-visible');
+                    exploreModal.classList.add('modal-hidden'); // Add transition class first
+                    // Use setTimeout to add 'hidden' after transition completes
+                    setTimeout(() => {
+                        exploreModal.classList.add('hidden');
+                    }, 300); // Match CSS transition duration
+                 }
+            }
+
+            exploreBtns.forEach(btn => {
+                if (btn) {
+                    btn.addEventListener('click', openModal);
+                }
+            });
+
+            if (modalCloseBtn) {
+                modalCloseBtn.addEventListener('click', closeModal);
+            }
+
+            // Close modal if clicking outside the content area
+            if (exploreModal && modalContent) {
+                exploreModal.addEventListener('click', (event) => {
+                    // Check if the click was directly on the backdrop (exploreModal)
+                    if (event.target === exploreModal) {
+                        closeModal();
+                    }
+                });
+            } else {
+                 console.error("Modal elements not found");
+            }
+
+
+            // Initialize Lenis Smooth Scroll
+            if (typeof Lenis !== 'undefined') {
+                const lenis = new Lenis()
+
+                lenis.on('scroll', (e) => {
+                   // console.log(e) // Optional: Log scroll events
+                })
+
+                function raf(time) {
+                    lenis.raf(time)
+                    requestAnimationFrame(raf)
+                }
+                requestAnimationFrame(raf)
+            } else {
+                console.warn('Lenis script not loaded or failed to initialize.');
+            }
+        });
+    </script>
 
 </body>
-
 </html>
+
