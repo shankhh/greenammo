@@ -1,532 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finance Services - GreenAmmo Solutions</title>
+    <title>Event & Supply Services - GreenAmmo Solutions</title>
+
+    <!-- 1. Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Alpine.js for Tabs and Accordions -->
+
+    <!-- 2. Load Alpine.js for interactivity -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- 3. Configure Tailwind with BLUE color palette & fonts -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // Custom BLUE Brand Palette (Extracted from Logo)
+              "brand-dark": "#2A6496",    // Darker Blue (Headings, Main Text)
+              "brand-primary": "#56A0D3", // Main Medium Sky Blue (Borders, Secondary Text, Accordion Titles)
+              "brand-accent": "#3B82F6",  // Vibrant Accent Blue (CTA Background, Highlights, Active Tab)
+              "brand-light": "#BFDBFE",   // Light Sky Blue (Light backgrounds, Watermarks, Inactive Tab BG)
+              "brand-base": "#F7FAFC",     // Off-White Base (Consistent Background)
+            },
+            fontFamily: {
+              // Setup font families
+              'sans': ['Inter', 'sans-serif'],
+              'heading': ['Bricolage Grotesque', 'sans-serif'],
+            }
+          },
+        },
+      };
+    </script>
+
+    <!-- 4. Import Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- 5. Apply new font rules, CTA button styles, Tab styles, Accordion styles -->
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7fafc;
-        }
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #F7FAFC; /* brand-base */
+        color: #1f2937;
+      }
 
-        .tab-button.active {
-            border-color: #065F46;
-            /* Dark Green */
-            color: #065F46;
-            background-color: #ECFDF5;
-            /* Lightest Green */
-        }
+      h1, h2, h3, h4, .font-heading {
+        font-family: "Bricolage Grotesque", sans-serif;
+      }
 
-        .tab-button {
-            transition: all 0.2s ease-in-out;
-            white-space: nowrap;
-        }
+      .cta-button {
+        display: inline-block;
+        padding: 0.75rem 2.5rem;
+        border-radius: 9999px;
+        font-size: 1.125rem;
+        font-weight: 600;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transform: scale(1);
+      }
+      .cta-button:hover {
+        transform: scale(1.03) translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
 
-        /* Custom styling for the list items inside the accordion */
-        .accordion-list {
-            list-style: none;
-            /* Remove default list style */
-            padding-left: 0;
-            margin-top: 0.5rem;
-        }
+      .tab-button {
+        transition: all 0.2s ease-in-out;
+        white-space: nowrap;
+      }
+      .tab-button.active {
+        border-color: #3B82F6; /* brand-accent */
+        color: #ffffff;
+        background-color: #3B82F6; /* brand-accent */
+        font-weight: 700;
+      }
+      .tab-button:not(.active):hover {
+        border-color: #56A0D3; /* brand-primary */
+        color: #2A6496; /* brand-dark */
+        background-color: #BFDBFE; /* brand-light */
+      }
 
-        .accordion-list li {
-            padding-left: 1.5rem;
-            /* Space for custom bullet */
-            position: relative;
-            margin-bottom: 0.25rem;
-            line-height: 1.5;
-            font-size: 0.95rem;
-        }
+       /* Accordion List Styles (using standard disc bullets as per recent request) */
+       .accordion-list {
+            list-style: disc; /* Use standard disc bullets */
+            padding-left: 1.5rem; /* Indentation for bullets */
+            margin-top: 0.75rem;
+       }
+       .accordion-list li {
+            /* Removed ::before styles */
+            margin-bottom: 0.35rem;
+            line-height: 1.6;
+            font-size: 0.9rem;
+            color: #4b5563; /* Gray-600 */
+       }
+       /* Ensure nested lists also get bullets */
+       .accordion-list ul {
+           list-style: circle; /* Use circle for nested lists */
+           margin-left: 1rem; /* Indent nested lists */
+           margin-top: 0.25rem;
+       }
 
-        .accordion-list li::before {
-            content: '•';
-            /* Custom bullet point */
-            color: #34D399;
-            /* Green-400 */
-            font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
     </style>
 </head>
+<body class="bg-brand-base">
 
-<body>
-
-    <!-- SOLUTIONS NAV BAR (Copied from solutions_landing.html) -->
-    <nav class="bg-white shadow-lg sticky top-0 z-20">
-        <div class="container mx-auto px-4 md:px-8 py-3 flex justify-between items-center">
-
-            <!-- Logo (Link to Group Home) -->
-            <div class="flex items-center space-x-8">
-                <a href="/index.html" class="text-2xl md:text-3xl font-extrabold text-green-800 rounded-lg p-1">
-                    GreenAmmo <span class="text-green-500">Group</span>
+    <!-- SOLUTIONS NAV BAR (Blue Theme - Active Link Updated) -->
+    <nav class="bg-white shadow-lg sticky top-0 z-20" x-data="{ open: false }">
+        <div class="container mx-auto px-4 md:px-8 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo (Links to Solutions Home) -->
+                <a href="/solutions/index.html" class="flex items-center gap-2 text-2xl md:text-3xl font-extrabold text-brand-dark rounded-lg p-1 font-heading">
+                    <img src="greenammo.jpeg" alt="GreenAmmo" class="h-10 w-auto rounded-full object-cover">
+                    Solutions
                 </a>
+
+                <!-- Desktop Navigation Links -->
+                <ul class="hidden md:flex items-center space-x-6">
+                    <li><a href="/index.html" class="text-base font-semibold text-gray-700 hover:text-brand-accent transition">HOME</a></li>
+                    <li><a href="/about-us.html" class="text-gray-700 hover:text-brand-accent transition">About Us</a></li>
+                    <li class="relative group">
+                        <button class="text-gray-700 hover:text-brand-accent transition inline-flex items-center gap-1">
+                            Services
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        </button>
+                        <div class="absolute hidden group-hover:block bg-white rounded-xl shadow-xl p-3 top-5 -left-4 w-48 transition-all z-10 border border-brand-light">
+                            <ul class="text-sm space-y-1">
+                                <li><a href="/solutions/finance.html" class="block py-1 px-2 text-gray-700 hover:bg-brand-light rounded transition">Finance Services</a></li>
+                                <li><a href="/solutions/education.html" class="block py-1 px-2 text-gray-700 hover:bg-brand-light rounded transition">Education & Dev.</a></li>
+                                <!-- Highlight current page -->
+                                <li><a href="/solutions/eventsupply.html" class="block py-1 px-2 text-brand-dark font-bold bg-brand-light rounded transition">Event & Supply</a></li>
+                                <li><a href="/solutions/accommodation.html" class="block py-1 px-2 text-gray-700 hover:bg-brand-light rounded transition">Accommodation</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="/solutions/contact.html" class="cta-button bg-brand-accent text-white hover:bg-brand-primary shadow-brand-accent/50">
+                            Contact Us
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Hamburger Button -->
+                <button @click="open = !open" class="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 focus:outline-none">
+                    <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    <svg x-show="open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
             </div>
 
-            <!-- Navigation Links and Contact Button -->
-            <ul class="flex items-center space-x-6">
-
-                <!-- Solutions Section Home Link -->
-                <li>
-                    <a href="/solutions/index.html"
-                        class="text-base font-semibold text-green-600 border-b-2 border-green-600 transition hidden sm:inline-block">
-                        GreenAmmo Solutions
-                    </a>
-                </li>
-
-                <!-- About Us Link -->
-                <li>
-                    <a href="/aboutus.html"
-                        class="text-gray-700 hover:text-green-600 transition hidden lg:inline-block">
-                        About Us
-                    </a>
-                </li>
-
-                <!-- Services Dropdown -->
-                <li class="relative group hidden sm:block">
-                    <button class="text-gray-700 hover:text-green-600 transition inline-flex items-center gap-1">
-                        Services
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div
-                        class="absolute hidden group-hover:block bg-white rounded-xl shadow-xl p-3 top-5 -left-4 w-48 transition-all z-10 border border-green-100">
-                        <ul class="text-sm space-y-1">
-                            <li><a href="/solutions/finance.html"
-                                    class="block py-1 px-2 text-gray-700 hover:bg-green-50 rounded transition">Finance
-                                    Services</a></li>
-                            <li><a href="/solutions/education.html"
-                                    class="block py-1 px-2 text-gray-700 hover:bg-green-50 rounded transition">Education
-                                    & Dev.</a></li>
-                            <li><a href="/solutions/eventsupply.html"
-                                    class="block py-1 px-2 text-green-700 font-bold hover:bg-green-50 rounded transition">Event
-                                    & Supply</a></li>
-                            <li><a href="/solutions/accommodation.html"
-                                    class="block py-1 px-2 text-gray-700 hover:bg-green-50 rounded transition">Accommodation</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Contact Us Button -->
-                <li>
-                    <a href="/solutions/contact.html"
-                        class="bg-green-600 text-white font-semibold py-2 px-4 rounded-full hover:bg-green-700 transition shadow-lg shadow-green-500/50">
-                        Contact Us
-                    </a>
-                </li>
-            </ul>
+            <!-- Mobile Menu -->
+            <div x-show="open" x-transition class="md:hidden mt-4 border-t border-gray-200 pt-4">
+                <ul class="flex flex-col space-y-3">
+                    <li><a href="/index.html" class="block py-2 px-3 text-base font-semibold text-gray-700 hover:bg-brand-light rounded">HOME</a></li>
+                    <li><a href="/about-us.html" class="block py-2 px-3 text-gray-700 hover:bg-brand-light rounded">About Us</a></li>
+                     <!-- Simple Mobile Links for Services -->
+                     <li><a href="/solutions/finance.html" class="block py-2 px-3 text-gray-700 hover:bg-brand-light rounded">Finance Services</a></li>
+                     <li><a href="/solutions/education.html" class="block py-2 px-3 text-gray-700 hover:bg-brand-light rounded">Education & Dev.</a></li>
+                     <li><a href="/solutions/eventsupply.html" class="block py-2 px-3 text-brand-dark font-bold bg-brand-light rounded">Event & Supply</a></li>
+                     <li><a href="/solutions/accommodation.html" class="block py-2 px-3 text-gray-700 hover:bg-brand-light rounded">Accommodation</a></li>
+                    <li>
+                        <a href="/solutions/contact.html" class="block text-center mt-2 cta-button bg-brand-accent text-white hover:bg-brand-primary w-full">
+                            Contact Us
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
     <!-- MAIN CONTENT -->
     <main>
-        <!-- HERO SECTION -->
-        <section class="bg-gray-100 py-16 md:py-24">
-            <div class="container mx-auto px-4 md:px-8 max-w-5xl text-center">
-                <p class="text-green-600 font-semibold text-sm uppercase mb-2">GreenAmmo Solutions</p>
-                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
-                    Event and Supply Services
+
+        <!-- HERO SECTION with Background Image and Overlay -->
+        <section class="relative bg-gray-700 py-16 md:py-24 text-white">
+            <!-- Background Image -->
+            <div class="absolute inset-0">
+                 <!-- Event/Supply Themed Image -->
+                <img src="eventsupply.jpg" alt="Event and Supply background" class="w-full h-full object-cover">
+                <!-- Dark Overlay -->
+                <div class="absolute inset-0 bg-black opacity-60"></div>
+            </div>
+
+            <!-- Content -->
+            <div class="container mx-auto px-4 md:px-8 max-w-5xl text-center relative z-10">
+                <p class="text-brand-light font-semibold text-sm uppercase mb-2">GreenAmmo Solutions</p>
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4 font-heading">
+                    Event & Supply Services
                 </h1>
-                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-                    Create experiences. Deliver essentials.
+                <p class="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto font-heading font-semibold">
+                   Create experiences. Deliver essentials.
                 </p>
             </div>
         </section>
 
         <!-- SERVICE TABS & ACCORDION DETAILS -->
-        <section class="py-16 bg-white" x-data="{ activeTab: 'taxation' }">
+        <section class="py-16 bg-white" x-data="{ activeTab: 'event' }"> <!-- Default to 'event' tab -->
             <div class="container mx-auto px-4 md:px-8 max-w-6xl">
 
-                <!-- Tab Navigation (Buttons) -->
+                <!-- Tab Navigation (Buttons - Blue Theme) -->
                 <div class="flex flex-wrap justify-center gap-3 mb-12 border-b border-gray-200 pb-4">
-                    <button @click="activeTab = 'taxation'" :class="{ 'active': activeTab === 'taxation' }"
-                        class="tab-button px-5 py-2 text-base font-semibold rounded-full border border-gray-300 text-gray-700 hover:border-green-700 hover:text-green-700">
+                    <button @click="activeTab = 'event'" :class="{ 'active': activeTab === 'event' }"
+                        class="tab-button px-5 py-2 text-base font-semibold rounded-full border border-gray-300 text-gray-700">
                         Event Management Services
                     </button>
-                    <button @click="activeTab = 'accounting'" :class="{ 'active': activeTab === 'accounting' }"
-                        class="tab-button px-5 py-2 text-base font-semibold rounded-full border border-gray-300 text-gray-700 hover:border-green-700 hover:text-green-700">
+                    <button @click="activeTab = 'supply'" :class="{ 'active': activeTab === 'supply' }"
+                        class="tab-button px-5 py-2 text-base font-semibold rounded-full border border-gray-300 text-gray-700">
                         Supply Services
                     </button>
-
                 </div>
 
-                <!-- Dynamic Tab Content (Now containing Accordions) -->
-                <div class="p-4 md:p-8 bg-gray-50 rounded-2xl shadow-lg border border-gray-200">
+                <!-- Dynamic Tab Content -->
+                <div class="p-4 md:p-8 bg-brand-base rounded-2xl shadow-lg border border-gray-200 min-h-[400px]"> <!-- Added min-h for consistent height -->
 
                     <!-- 1. Event Management Services Tab -->
-                    <div x-show="activeTab === 'taxation'" x-transition.opacity.duration.500 class="space-y-6"
-                        x-data="{ open: null }">
-                        <h2 class="text-3xl font-bold text-green-800">EVENT MANAGEMENT SERVICES</h2>
-                        <p class="text-lg text-gray-700">.</p>
+                    <div x-show="activeTab === 'event'" x-transition.opacity.duration.500 class="space-y-6" x-data="{ open: null }">
+                        <h2 class="text-3xl font-bold text-brand-dark font-heading">I. EVENT MANAGEMENT SERVICES 🎉</h2>
+                        <p class="text-lg text-gray-700">From concept to execution, we manage diverse events ensuring seamless experiences that align with your objectives, whether corporate, public, educational, or social.</p>
 
-                        <!-- Accordion Items for Event Management Services -->
+                        <!-- Accordion Items for Event Management -->
                         <div class="divide-y divide-gray-200 border-t border-b border-gray-200">
-
-                            <!-- Sub-Service 1: Sales, Marketing & Public Events -->
+                            <!-- Accordion 1: Sales, Marketing & Public Events -->
                             <div class="py-1">
-                                <button @click="open = (open === 1 ? null : 1)"
-                                    class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                                <button @click="open = (open === 1 ? null : 1)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-brand-primary hover:text-brand-dark transition font-heading">
                                     <span>Sales, Marketing & Public Events</span>
-                                    <svg :class="{ 'rotate-180': open === 1, 'rotate-0': open !== 1 }"
-                                        class="w-5 h-5 transition-transform text-green-600" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7" />
-                                    </svg>
+                                    <svg :class="{ 'rotate-180': open === 1, 'rotate-0': open !== 1 }" class="w-5 h-5 transition-transform text-brand-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                                 </button>
-                                <div x-show="open === 1" x-transition:enter="transition ease-out duration-300"
-                                    x-transition:enter-start="opacity-0 max-h-0"
-                                    x-transition:enter-end="opacity-100 max-h-screen"
-                                    x-transition:leave="transition ease-in duration-300"
-                                    x-transition:leave-start="opacity-100 max-h-screen"
-                                    x-transition:leave-end="opacity-0 max-h-0"
-                                    class="overflow-hidden pb-3 pr-6 text-gray-600">
+                                <div x-show="open === 1" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6">
                                     <ul class="accordion-list space-y-2">
-
-                                        <li>
-                                            <strong class="text-emerald-700">Exhibitions and Trade Shows</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Product expos</li>
-                                                <li>Startup showcases</li>
-                                                <li>Sustainability fairs</li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <strong class="text-emerald-700">Promotional Campaigns</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Roadshows</li>
-                                                <li>Brand activations</li>
-                                                <li>Sampling and demo booths</li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <strong class="text-emerald-700">CSR & Philanthropy Events</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Fundraisers and charity galas</li>
-                                                <li>Donation drives</li>
-                                                <li>Volunteer activities</li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <strong class="text-emerald-700">Public Speaking & Influencer
-                                                Events</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Ted-style talks</li>
-                                                <li>Influencer panels</li>
-                                                <li>Brand ambassador meet-and-greets</li>
-                                            </ul>
-                                        </li>
+                                        <li><strong class="text-brand-dark">Exhibitions and Trade Shows:</strong><ul><li>Product expos</li><li>Startup showcases</li><li>Sustainability fairs</li></ul></li>
+                                        <li><strong class="text-brand-dark">Promotional Campaigns:</strong><ul><li>Roadshows</li><li>Brand activations</li><li>Sampling and demo booths</li></ul></li>
+                                        <li><strong class="text-brand-dark">CSR & Philanthropy Events:</strong><ul><li>Fundraisers and charity galas</li><li>Donation drives</li><li>Volunteer activities</li></ul></li>
+                                        <li><strong class="text-brand-dark">Public Speaking & Influencer Events:</strong><ul><li>Ted-style talks</li><li>Influencer panels</li><li>Brand ambassador meet-and-greets</li></ul></li>
                                     </ul>
                                 </div>
                             </div>
-
-                            <!-- Sub-Service 2: Corporate & Professional Events -->
+                            <!-- Accordion 2: Corporate & Professional Events -->
                             <div class="py-1">
-                                <button @click="open = (open === 2 ? null : 2)"
-                                    class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-emerald-700 hover:text-emerald-800 transition">
+                                <button @click="open = (open === 2 ? null : 2)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-brand-primary hover:text-brand-dark transition font-heading">
                                     <span>Corporate & Professional Events</span>
-                                    <svg :class="{ 'rotate-180': open === 2, 'rotate-0': open !== 2 }"
-                                        class="w-5 h-5 transition-transform text-emerald-600" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7" />
-                                    </svg>
+                                     <svg :class="{ 'rotate-180': open === 2, 'rotate-0': open !== 2 }" class="w-5 h-5 transition-transform text-brand-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                                 </button>
-                                <div x-show="open === 2" x-transition:enter="transition ease-out duration-300"
-                                    x-transition:enter-start="opacity-0 max-h-0"
-                                    x-transition:enter-end="opacity-100 max-h-screen"
-                                    x-transition:leave="transition ease-in duration-300"
-                                    x-transition:leave-start="opacity-100 max-h-screen"
-                                    x-transition:leave-end="opacity-0 max-h-0"
-                                    class="overflow-hidden pb-3 pr-6 text-gray-600">
-
-                                    <ul class="accordion-list space-y-2">
-
-                                        <li>
-                                            <strong class="text-gray-800">Conferences and Summits</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Industry-specific conferences (e.g. Tech Summit, Education Conclave)
-                                                </li>
-                                                <li>Annual general meetings (AGMs)</li>
-                                                <li>Leadership forums</li>
-                                                <li>Policy dialogue sessions</li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <strong class="text-gray-800">Seminars and Workshops</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Skills development workshops</li>
-                                                <li>Technical training sessions</li>
-                                                <li>Expert panel discussions</li>
-                                                <li>Thought-leadership seminars</li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <strong class="text-gray-800">Product & Service Launches</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>New product unveilings</li>
-                                                <li>Press release and media events</li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <strong class="text-gray-800">Networking Events</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Business mixers</li>
-                                                <li>Investor meet-ups</li>
-                                                <li>Vendor and supplier meets</li>
-                                                <li>Executive networking sessions</li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <strong class="text-gray-800">Team Building & Employee Engagement</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Team retreats</li>
-                                                <li>Office games and activities</li>
-                                                <li>Icebreaker and bonding sessions</li>
-                                                <li>Hackathons and innovation challenges</li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <strong class="text-gray-800">Internal Organisational Events</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Town halls and quarterly reviews</li>
-                                                <li>Performance award ceremonies</li>
-                                                <li>Employee recognition events</li>
-                                                <li>Retirement/farewell parties</li>
-                                            </ul>
-                                        </li>
-
+                                <div x-show="open === 2" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6">
+                                     <ul class="accordion-list space-y-2">
+                                        <li><strong class="text-brand-dark">Conferences and Summits:</strong><ul><li>Industry-specific conferences</li><li>Annual general meetings (AGMs)</li><li>Leadership forums</li><li>Policy dialogue sessions</li></ul></li>
+                                        <li><strong class="text-brand-dark">Seminars and Workshops:</strong><ul><li>Skills development workshops</li><li>Technical training sessions</li><li>Expert panel discussions</li><li>Thought-leadership seminars</li></ul></li>
+                                        <li><strong class="text-brand-dark">Product & Service Launches:</strong><ul><li>New product unveilings</li><li>Press release and media events</li></ul></li>
+                                        <li><strong class="text-brand-dark">Networking Events:</strong><ul><li>Business mixers</li><li>Investor meet-ups</li><li>Vendor and supplier meets</li><li>Executive networking sessions</li></ul></li>
+                                        <li><strong class="text-brand-dark">Team Building & Employee Engagement:</strong><ul><li>Team retreats</li><li>Office games and activities</li><li>Icebreaker and bonding sessions</li><li>Hackathons and innovation challenges</li></ul></li>
+                                        <li><strong class="text-brand-dark">Internal Organisational Events:</strong><ul><li>Town halls and quarterly reviews</li><li>Performance award ceremonies</li><li>Employee recognition events</li><li>Retirement/farewell parties</li></ul></li>
                                     </ul>
-
                                 </div>
                             </div>
-
-                            <!-- Sub-Service 3: Educational & Capacity-Building Events -->
-                            <div class="py-1">
-                                <button @click="open = (open === 3 ? null : 3)"
-                                    class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-emerald-700 hover:text-emerald-800 transition">
+                            <!-- Accordion 3: Educational & Capacity-Building Events -->
+                           <div class="py-1">
+                                <button @click="open = (open === 3 ? null : 3)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-brand-primary hover:text-brand-dark transition font-heading">
                                     <span>Educational & Capacity-Building Events</span>
-                                    <svg :class="{ 'rotate-180': open === 3, 'rotate-0': open !== 3 }"
-                                        class="w-5 h-5 transition-transform text-emerald-600" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7" />
-                                    </svg>
+                                    <svg :class="{ 'rotate-180': open === 3, 'rotate-0': open !== 3 }" class="w-5 h-5 transition-transform text-brand-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                                 </button>
-                                <div x-show="open === 3" x-transition:enter="transition ease-out duration-300"
-                                    x-transition:enter-start="opacity-0 max-h-0"
-                                    x-transition:enter-end="opacity-100 max-h-screen"
-                                    x-transition:leave="transition ease-in duration-300"
-                                    x-transition:leave-start="opacity-100 max-h-screen"
-                                    x-transition:leave-end="opacity-0 max-h-0"
-                                    class="overflow-hidden pb-3 pr-6 text-gray-600">
-
+                                <div x-show="open === 3" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6">
                                     <ul class="accordion-list space-y-2">
-
-                                        <li>
-                                            <strong class="text-gray-800">Training Programs</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Soft skills and leadership training</li>
-                                                <li>Sustainability and awareness training</li>
-                                                <li>Digital literacy or IT skill training</li>
-                                                <li>Financial literacy workshops</li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <strong class="text-gray-800">Webinars and Online Masterclasses</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Subject expert lectures</li>
-                                                <li>Interactive Q&A sessions</li>
-                                                <li>Certificate-based sessions</li>
-                                                <li>Panel webinars</li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <strong class="text-gray-800">Hackathons and Competitions</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Innovation challenges</li>
-                                                <li>Debate, quiz, and writing competitions</li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <strong class="text-gray-800">Field Visits & Learning Expeditions</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Industry visits</li>
-                                                <li>Educational tours</li>
-                                                <li>Experiential learning</li>
-                                                <li>Transformative learning</li>
-                                                <li>Exposure trips</li>
-                                            </ul>
-                                        </li>
-
+                                        <li><strong class="text-brand-dark">Training Programs:</strong><ul><li>Soft skills and leadership training</li><li>Sustainability and awareness training</li><li>Digital literacy or IT skill training</li><li>Financial literacy workshops</li></ul></li>
+                                        <li><strong class="text-brand-dark">Webinars and Online Masterclasses:</strong><ul><li>Subject expert lectures</li><li>Interactive Q&A sessions</li><li>Certificate-based sessions</li><li>Panel webinars</li></ul></li>
+                                        <li><strong class="text-brand-dark">Hackathons and Competitions:</strong><ul><li>Innovation challenges</li><li>Debate, quiz, and writing competitions</li></ul></li>
+                                        <li><strong class="text-brand-dark">Field Visits & Learning Expeditions:</strong><ul><li>Industry visits</li><li>Educational tours</li><li>Experiential learning</li><li>Transformative learning</li><li>Exposure trips</li></ul></li>
                                     </ul>
-
                                 </div>
                             </div>
-
-                            <!-- Sub-Service 4: Social Impact & Community Events -->
+                            <!-- Accordion 4: Social Impact & Community Events -->
                             <div class="py-1">
-                                <button @click="open = (open === 4 ? null : 4)"
-                                    class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-emerald-700 hover:text-emerald-800 transition">
+                                <button @click="open = (open === 4 ? null : 4)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-brand-primary hover:text-brand-dark transition font-heading">
                                     <span>Social Impact & Community Events</span>
-                                    <svg :class="{ 'rotate-180': open === 4, 'rotate-0': open !== 4 }"
-                                        class="w-5 h-5 transition-transform text-emerald-600" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7" />
-                                    </svg>
+                                     <svg :class="{ 'rotate-180': open === 4, 'rotate-0': open !== 4 }" class="w-5 h-5 transition-transform text-brand-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                                 </button>
-                                <div x-show="open === 4" x-transition:enter="transition ease-out duration-300"
-                                    x-transition:enter-start="opacity-0 max-h-0"
-                                    x-transition:enter-end="opacity-100 max-h-screen"
-                                    x-transition:leave="transition ease-in duration-300"
-                                    x-transition:leave-start="opacity-100 max-h-screen"
-                                    x-transition:leave-end="opacity-0 max-h-0"
-                                    class="overflow-hidden pb-3 pr-6 text-gray-600">
-
+                                <div x-show="open === 4" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6">
                                     <ul class="accordion-list space-y-2">
-
-                                        <li>
-                                            <strong class="text-gray-800">Awareness Campaigns</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Health camps (menstrual health, mental health, etc.)</li>
-                                                <li>Plastic-free awareness drives</li>
-                                                <li>Voter awareness or legal literacy camps</li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <strong class="text-gray-800">Clean-up Drives and Environmental
-                                                Actions</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Beach, forest, or urban cleanups</li>
-                                                <li>Tree plantation drives</li>
-                                                <li>Waste management awareness activities</li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <strong class="text-gray-800">Community Engagement Events</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Gram Sabha or community meetings</li>
-                                                <li>Dialogue circles and community storytelling</li>
-                                                <li>Local stakeholder consultations</li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <strong class="text-gray-800">Festivals and Celebrations</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>International Day observances (e.g. Earth Day, Women’s Day)</li>
-                                                <li>Cultural exchange programs</li>
-                                                <li>Heritage day celebrations</li>
-                                            </ul>
-                                        </li>
-
+                                        <li><strong class="text-brand-dark">Awareness Campaigns:</strong><ul><li>Health camps (menstrual health, mental health, etc.)</li><li>Plastic-free awareness drives</li><li>Voter awareness or legal literacy camps</li></ul></li>
+                                        <li><strong class="text-brand-dark">Clean-up Drives and Environmental Actions:</strong><ul><li>Beach, forest, or urban cleanups</li><li>Tree plantation drives</li><li>Waste management awareness activities</li></ul></li>
+                                        <li><strong class="text-brand-dark">Community Engagement Events:</strong><ul><li>Gram Sabha or community meetings</li><li>Dialogue circles and community storytelling</li><li>Local stakeholder consultations</li></ul></li>
+                                        <li><strong class="text-brand-dark">Festivals and Celebrations:</strong><ul><li>International Day observances (e.g. Earth Day, Women’s Day)</li><li>Cultural exchange programs</li><li>Heritage day celebrations</li></ul></li>
                                     </ul>
-
                                 </div>
                             </div>
-
-                            <!-- Sub-Service 5: Cultural, Sports & Recreational Events -->
+                            <!-- Accordion 5: Cultural, Sports & Recreational Events -->
                             <div class="py-1">
-                                <button @click="open = (open === 5 ? null : 5)"
-                                    class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-emerald-700 hover:text-emerald-800 transition">
+                                <button @click="open = (open === 5 ? null : 5)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-brand-primary hover:text-brand-dark transition font-heading">
                                     <span>Cultural, Sports & Recreational Events</span>
-                                    <svg :class="{ 'rotate-180': open === 5, 'rotate-0': open !== 5 }"
-                                        class="w-5 h-5 transition-transform text-emerald-600" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7" />
-                                    </svg>
+                                     <svg :class="{ 'rotate-180': open === 5, 'rotate-0': open !== 5 }" class="w-5 h-5 transition-transform text-brand-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                                 </button>
-                                <div x-show="open === 5" x-transition:enter="transition ease-out duration-300"
-                                    x-transition:enter-start="opacity-0 max-h-0"
-                                    x-transition:enter-end="opacity-100 max-h-screen"
-                                    x-transition:leave="transition ease-in duration-300"
-                                    x-transition:leave-start="opacity-100 max-h-screen"
-                                    x-transition:leave-end="opacity-0 max-h-0"
-                                    class="overflow-hidden pb-3 pr-6 text-gray-600">
-
+                                <div x-show="open === 5" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6">
                                     <ul class="accordion-list space-y-2">
-
-                                        <li>
-                                            <strong class="text-gray-800">Cultural Programs</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Music, dance, and theatre shows</li>
-                                                <li>Art exhibitions</li>
-                                                <li>Heritage, music and folk events</li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <strong class="text-gray-800">Sports and Fitness Activities</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Marathons and cycling rallies</li>
-                                                <li>Inter-company/intra-school tournaments</li>
-                                                <li>Yoga and wellness sessions</li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <strong class="text-gray-800">Festive Events</strong>
-                                            <ul class="list-disc ml-6 mt-1 space-y-0.5">
-                                                <li>Festival celebrations</li>
-                                                <li>New Year or Foundation Day celebrations</li>
-                                                <li>Local or regional festivals</li>
-                                            </ul>
-                                        </li>
-
+                                        <li><strong class="text-brand-dark">Cultural Programs:</strong><ul><li>Music, dance, and theatre shows</li><li>Art exhibitions</li><li>Heritage, music and folk events</li></ul></li>
+                                        <li><strong class="text-brand-dark">Sports and Fitness Activities:</strong><ul><li>Marathons and cycling rallies</li><li>Inter-company/intra-school tournaments</li><li>Yoga and wellness sessions</li></ul></li>
+                                        <li><strong class="text-brand-dark">Festive Events:</strong><ul><li>Festival celebrations</li><li>New Year or Foundation Day celebrations</li><li>Local or regional festivals</li></ul></li>
                                     </ul>
-
                                 </div>
                             </div>
-
-                            <!-- Sub-Service 6: Hybrid & Virtual Events -->
-                            <div class="py-1">
-                                <button @click="open = (open === 6 ? null : 6)"
-                                    class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-green-700 hover:text-green-800 transition">
+                             <!-- Accordion 6: Hybrid & Virtual Events -->
+                             <div class="py-1">
+                                <button @click="open = (open === 6 ? null : 6)" class="flex justify-between items-center w-full py-3 text-left font-semibold text-xl text-brand-primary hover:text-brand-dark transition font-heading">
                                     <span>Hybrid & Virtual Events</span>
-                                    <svg :class="{ 'rotate-180': open === 6, 'rotate-0': open !== 6 }"
-                                        class="w-5 h-5 transition-transform text-green-600" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7" />
-                                    </svg>
+                                     <svg :class="{ 'rotate-180': open === 6, 'rotate-0': open !== 6 }" class="w-5 h-5 transition-transform text-brand-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                                 </button>
-                                <div x-show="open === 6" x-transition:enter="transition ease-out duration-300"
-                                    x-transition:enter-start="opacity-0 max-h-0"
-                                    x-transition:enter-end="opacity-100 max-h-screen"
-                                    x-transition:leave="transition ease-in duration-300"
-                                    x-transition:leave-start="opacity-100 max-h-screen"
-                                    x-transition:leave-end="opacity-0 max-h-0"
-                                    class="overflow-hidden pb-3 pr-6 text-gray-600">
-                                    <ul class="accordion-list">
+                                <div x-show="open === 6" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-screen" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 max-h-screen" x-transition:leave-end="opacity-0 max-h-0" class="overflow-hidden pb-3 pr-6">
+                                     <ul class="accordion-list">
                                         <li>Virtual conferences and summits</li>
                                         <li>Online expos or trade fairs</li>
                                         <li>Livestreamed product launches</li>
@@ -536,180 +311,131 @@
                                 </div>
                             </div>
                         </div>
-
-                        <a href="/solutions/contact.html?service=EventManagementServices"
-                            class="mt-8 inline-block bg-green-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-700 transition">Contact
-                            for Event?</a>
+                        <a href="/solutions/contact.html?service=EventManagement" class="mt-8 cta-button bg-brand-accent text-white hover:bg-brand-primary">Plan Your Event</a>
                     </div>
 
                     <!-- 2. Supply Services Tab -->
-                    <div x-show="activeTab === 'accounting'" x-transition.opacity.duration.500 class="space-y-6"
-                        x-data="{ open: null }">
-                        <h2 class="text-3xl font-bold text-green-800">SUPPLY SERVICES</h2>
-                        <p class="text-lg text-gray-700">FMCG Supply to Retail & Wholesale Clients with Bulk Order
-                            Delivery Services.</p>
+                    <div x-show="activeTab === 'supply'" x-transition.opacity.duration.500 class="space-y-6">
+                        <h2 class="text-3xl font-bold text-brand-dark font-heading">II. SUPPLY SERVICES 🚚</h2>
+                        <p class="text-lg text-gray-700">Reliable FMCG supply for retail and wholesale clients, including efficient bulk order delivery services across various product categories.</p>
 
-                        <div class="divide-y divide-gray-200 border-t border-b border-gray-200">
-                            <div class="py-4">
-                                <p class="text-xl font-bold text-gray-800 mb-2">Product Categories:</p>
-                                <div class="text-lg text-gray-700 leading-relaxed space-y-1">
-                                    <p>
-                                        <strong class="text-emerald-700">Food & Staples:</strong> Food (packaged and
-                                        frozen), Beverages (packaged), Cooking Essentials, Staples, Oils & Cereals, Meat
-                                        & Fish (fresh), Vegetables & Fruits (fresh).
-                                    </p>
-                                    <p>
-                                        <strong class="text-emerald-700">Daily Needs:</strong> Personal Care, Home Care,
-                                        Baby Care, Stationery & Daily Essentials, Confectionery.
-                                    </p>
-                                    <p>
-                                        <strong class="text-emerald-700">Home & Lifestyle:</strong> Seasonal /
-                                        Occasion-Based Products, Home & Kitchen Utilities, Cosmetics & Makeup.
-                                    </p>
-                                    <p>
-                                        <strong class="text-emerald-700">Sustainability:</strong> Eco-Friendly /
-                                        Sustainable Products, Cleaning Tools, Disposable Products.
-                                    </p>
-                                    <p>
-                                        <strong class="text-emerald-700">Apparel:</strong> Men’s Apparels, Women’s
-                                        Apparels, Kid’s Apparels.
-                                    </p>
-                                </div>
-                            </div>
+                        <div class="border-t border-b border-gray-200 py-6">
+                             <h3 class="text-2xl font-semibold text-brand-dark mb-4 font-heading">Product Categories We Supply:</h3>
+                             <div class="grid md:grid-cols-2 gap-x-8 gap-y-4 text-gray-700">
+                                 <div>
+                                     <h4 class="font-semibold text-brand-primary text-lg mb-2">Food & Staples</h4>
+                                     <p class="text-sm leading-relaxed">Packaged and frozen food, beverages, cooking essentials, oils, cereals, fresh meat & fish, fresh vegetables & fruits.</p>
+                                 </div>
+                                  <div>
+                                     <h4 class="font-semibold text-brand-primary text-lg mb-2">Daily Needs</h4>
+                                     <p class="text-sm leading-relaxed">Personal care, home care, baby care, stationery, daily essentials, confectionery.</p>
+                                 </div>
+                                  <div>
+                                     <h4 class="font-semibold text-brand-primary text-lg mb-2">Home & Lifestyle</h4>
+                                     <p class="text-sm leading-relaxed">Seasonal/occasion-based products, home & kitchen utilities, cosmetics & makeup.</p>
+                                 </div>
+                                  <div>
+                                     <h4 class="font-semibold text-brand-primary text-lg mb-2">Sustainability</h4>
+                                     <p class="text-sm leading-relaxed">Eco-friendly/sustainable products, cleaning tools, disposable products.</p>
+                                 </div>
+                                  <div>
+                                     <h4 class="font-semibold text-brand-primary text-lg mb-2">Apparel</h4>
+                                     <p class="text-sm leading-relaxed">Men’s, women’s, and kid’s apparels.</p>
+                                 </div>
+                             </div>
                         </div>
-                        <a href="/solutions/contact.html?service=Supply"
-                            class="mt-8 inline-block bg-green-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-700 transition">Get in Touch</a>
+                        <a href="/solutions/contact.html?service=Supply" class="mt-8 cta-button bg-brand-accent text-white hover:bg-brand-primary">Inquire About Supply</a>
                     </div>
 
                 </div>
-
             </div>
         </section>
 
         <!-- CALL TO ACTION -->
-        <section class="py-12 bg-green-700 text-white text-center">
+        <section class="py-16 bg-brand-primary text-white text-center">
             <div class="container mx-auto px-4 md:px-8 max-w-4xl">
-                <h2 class="text-3xl font-bold mb-4">Need Comprehensive Financial Clarity?</h2>
-                <p class="text-lg mb-6">
-                    Contact our expert team today to schedule a free initial assessment of your financial and strategic
-                    needs.
+                <h2 class="text-3xl font-bold mb-4 font-heading">Need Reliable Event or Supply Solutions?</h2>
+                <p class="text-lg mb-6 text-blue-100">
+                    Let GreenAmmo Solutions handle the logistics. Contact us to discuss your event or supply chain requirements.
                 </p>
                 <a href="/solutions/contact.html"
-                    class="inline-block bg-green-300 text-green-800 font-extrabold py-3 px-8 rounded-full text-lg hover:bg-white transition shadow-lg">
-                    Contact GreenAmmo Solutions
+                   class="cta-button bg-white text-brand-dark hover:bg-brand-light transition shadow-lg">
+                    Get Started Today
                 </a>
             </div>
         </section>
 
     </main>
 
-    <!-- FOOTER (Copied from solutions_landing.html) -->
-    <footer class="bg-green-800 text-white pt-12">
+    <!-- FOOTER (Blue Theme) -->
+     <footer class="bg-brand-dark text-white pt-12">
         <div class="container mx-auto px-4 md:px-8">
-
-            <!-- 1. TOP ROW: Logo, Description & Nav Columns -->
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-green-700">
-
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-blue-800">
                 <!-- Logo and Description -->
                 <div class="md:col-span-2 space-y-4">
-                    <h3 class="text-3xl font-bold text-green-300">GreenAmmo Group</h3>
-                    <p class="text-sm text-green-200 max-w-sm">
-                        Empowering sustainable living and waste management through community action, research, and
-                        project initiation.
+                    <h3 class="text-3xl font-bold text-brand-light font-heading">GreenAmmo Group</h3>
+                    <p class="text-sm text-blue-200 max-w-sm">
+                        Empowering sustainable living and waste management through community action, research, and project initiation.
                     </p>
                 </div>
-
                 <!-- Navigation Columns -->
                 <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
-
                     <!-- Column 1: GreenAmmo -->
                     <div class="space-y-3">
-                        <h4 class="font-semibold text-green-50 mb-3">GreenAmmo</h4>
-                        <ul class="text-sm space-y-2 text-green-200">
-                            <li><a href="/about-us.html" class="hover:text-green-300 transition">About Us</a></li>
-                            <li><a href="/gallery.html" class="hover:text-green-300 transition">Media (Gallery)</a></li>
-                            <li><a href="/certifications.html" class="hover:text-green-300 transition">Certificates</a>
-                            </li>
-                            <li><a href="/alliances.html" class="hover:text-green-300 transition">Alliances</a></li>
+                        <h4 class="font-semibold text-white mb-3 font-heading">GreenAmmo</h4>
+                        <ul class="text-sm space-y-2 text-blue-200">
+                            <li><a href="/aboutus" class="hover:text-brand-light transition">About Us</a></li>
+                            <li><a href="/gallery" class="hover:text-brand-light transition">Media (Gallery)</a></li>
+                            <li><a href="/certifications" class="hover:text-brand-light transition">Certificates</a></li>
+                            <li><a href="/alliances" class="hover:text-brand-light transition">Alliances</a></li>
                         </ul>
                     </div>
-
                     <!-- Column 2: Solutions -->
                     <div class="space-y-3">
-                        <h4 class="font-semibold text-green-50 mb-3">Solutions</h4>
-                        <ul class="text-sm space-y-2 text-green-200">
-                            <li><a href="/solutions/finance.html" class="hover:text-green-300 transition">Finance</a>
-                            </li>
-                            <li><a href="/solutions/education.html" class="hover:text-green-300 transition">Education &
-                                    Development</a></li>
-                            <li><a href="/solutions/event-supply.html" class="hover:text-green-300 transition">Event &
-                                    Supply</a></li>
-                            <li><a href="/solutions/accommodation.html"
-                                    class="hover:text-green-300 transition">Accommodations</a></li>
+                        <h4 class="font-semibold text-white mb-3 font-heading">Solutions</h4>
+                        <ul class="text-sm space-y-2 text-blue-200">
+                            <li><a href="/solutions/finance.html" class="hover:text-brand-light transition">Finance</a></li>
+                            <li><a href="/solutions/education.html" class="hover:text-brand-light transition">Education & Development</a></li>
+                            <li><a href="/solutions/eventsupply.html" class="hover:text-brand-light transition">Event & Supply</a></li>
+                            <li><a href="/solutions/accommodation.html" class="hover:text-brand-light transition">Accommodations</a></li>
                         </ul>
                     </div>
-
                     <!-- Column 3: Trust -->
                     <div class="space-y-3">
-                        <h4 class="font-semibold text-green-50 mb-3">Trust</h4>
-                        <ul class="text-sm space-y-2 text-green-200">
-                            <li><a href="/trust/projects.html" class="hover:text-green-300 transition">Projects &
-                                    Milestones</a></li>
-                            <li><a href="/trust/campaigns.html" class="hover:text-green-300 transition">Campaigns</a>
-                            </li>
-                            <li><a href="/trust/reports.html" class="hover:text-green-300 transition">Reports &
-                                    Research</a></li>
+                        <h4 class="font-semibold text-white mb-3 font-heading">Trust</h4>
+                        <ul class="text-sm space-y-2 text-blue-200">
+                            <li><a href="/trust/projects.html" class="hover:text-brand-light transition">Projects & Milestones</a></li>
+                            <li><a href="/trust/campaigns.html" class="hover:text-brand-light transition">Campaigns</a></li>
+                            <li><a href="/trust/reports.html" class="hover:text-brand-light transition">Reports & Research</a></li>
                         </ul>
                     </div>
-
                     <!-- Column 4: Action/Explore -->
                     <div class="space-y-3">
-                        <h4 class="font-semibold text-green-50 mb-3">Take Action</h4>
+                        <h4 class="font-semibold text-white mb-3 font-heading">Take Action</h4>
                         <div class="space-y-2">
-                            <a href="/join-us.html"
-                                class="block bg-green-600 text-white text-center text-sm font-medium py-2 rounded-lg hover:bg-green-700 transition">
+                             <a href="../joinus.html"
+                                class="block text-center py-2 px-4 rounded-full bg-brand-accent text-white hover:bg-brand-primary transition text-sm font-semibold shadow-md">
                                 Join Us
                             </a>
                             <a href="/explore.html"
-                                class="block border border-green-600 text-green-50 text-center text-sm font-medium py-2 rounded-lg hover:border-green-300 hover:text-green-300 transition">
+                                class="block text-center py-2 px-4 rounded-full border-2 border-brand-light text-brand-light hover:bg-brand-light hover:text-brand-dark transition text-sm font-semibold">
                                 Explore
                             </a>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
-            <!-- 2. BOTTOM ROW: Copyright and Socials -->
-            <div class="flex flex-col sm:flex-row justify-between items-center py-6 text-sm text-green-200">
+            <!-- Bottom Row: Copyright and Socials -->
+            <div class="flex flex-col sm:flex-row justify-between items-center py-6 text-sm text-blue-200">
                 <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
-
-                <!-- Social Icons -->
                 <div class="flex gap-4 mt-4 sm:mt-0">
-                    <a href="#" class="hover:text-green-400 transition" aria-label="Facebook">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3 8h-2v2h2v2h-2v4h-2v-4H9V12h2V10c0-1.104.896-2 2-2h2v2z" />
-                        </svg>
-                    </a>
-                    <a href="#" class="hover:text-green-400 transition" aria-label="Instagram">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.179 2.541c.883 0 1.632.748 1.632 1.632v.005c0 .883-.749 1.631-1.632 1.631h-.005c-.883 0-1.632-.748-1.632-1.631v-.005c0-.883.749-1.632 1.632-1.632h.005zM12 8c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4zm-2.821 8.879c.148.093.308.175.474.246.36.155.76.246 1.171.246h2.348c.41 0 .81-.091 1.17-.246.166-.071.326-.153.473-.246.22-.138.423-.306.605-.5.182-.194.34-.413.474-.658.134-.245.242-.516.326-.811.168-.598.256-1.233.256-1.879v-2.352c0-.646-.088-1.281-.256-1.879a4.897 4.897 0 0 0-.326-.811 4.795 4.795 0 0 0-.474-.658 4.67 4.67 0 0 0-.605-.5 4.908 4.908 0 0 0-.474-.246c-.36-.155-.76-.246-1.17-.246h-2.348c-.41 0-.81.091-1.17.246a4.908 4.908 0 0 0-.474.246 4.67 4.67 0 0 0-.605.5 4.795 4.795 0 0 0-.474.658 4.897 4.897 0 0 0-.326.811c-.168.598-.256 1.233-.256 1.879v2.352c0 .646.088 1.281.256 1.879a4.897 4.897 0 0 0 .326.811 4.795 4.795 0 0 0 .474.658 4.67 4.67 0 0 0 .605.5z" />
-                        </svg>
-                    </a>
-                    <a href="#" class="hover:text-green-400 transition" aria-label="LinkedIn">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-2 16H8V11h2v7zm-1-8H9V8h1v2zM16 18h-2v-3c0-1.657-1.343-3-3-3s-3 1.343-3 3v3h-2V11h2v1.5c.618-.844 1.877-1.5 3-1.5 2.206 0 4 1.794 4 4v3z" />
-                        </svg>
-                    </a>
+                    <a href="#" class="hover:text-brand-light transition" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3 8h-2v2h2v2h-2v4h-2v-4H9V12h2V10c0-1.104.896-2 2-2h2v2z"/></svg></a>
+                    <a href="#" class="hover:text-brand-light transition" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.179 2.541c.883 0 1.632.748 1.632 1.632v.005c0 .883-.749 1.631-1.632 1.631h-.005c-.883 0-1.632-.748-1.632-1.631v-.005c0-.883.749-1.632 1.632-1.632h.005zM12 8c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4zm-2.821 8.879c.148.093.308.175.474.246.36.155.76.246 1.171.246h2.348c.41 0 .81-.091 1.17-.246.166-.071.326-.153.473-.246.22-.138.423-.306.605-.5.182-.194.34-.413.474-.658.134-.245.242-.516.326-.811.168-.598.256-1.233.256-1.879v-2.352c0-.646-.088-1.281-.256-1.879a4.897 4.897 0 0 0-.326-.811 4.795 4.795 0 0 0-.474-.658 4.67 4.67 0 0 0-.605-.5 4.908 4.908 0 0 0-.474-.246c-.36-.155-.76-.246-1.17-.246h-2.348c-.41 0-.81.091-1.17.246a4.908 4.908 0 0 0-.474.246 4.67 4.67 0 0 0-.605.5 4.795 4.795 0 0 0-.474.658 4.897 4.897 0 0 0-.326.811c-.168.598-.256 1.233-.256 1.879v2.352c0 .646.088 1.281.256 1.879a4.897 4.897 0 0 0 .326.811 4.795 4.795 0 0 0 .474.658 4.67 4.67 0 0 0 .605.5z"/></svg></a>
+                    <a href="#" class="hover:text-brand-light transition" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-2 16H8V11h2v7zm-1-8H9V8h1v2zM16 18h-2v-3c0-1.657-1.343-3-3-3s-3 1.343-3 3v3h-2V11h2v1.5c.618-.844 1.877-1.5 3-1.5 2.206 0 4 1.794 4 4v3z"/></svg></a>
                 </div>
             </div>
         </div>
     </footer>
 
 </body>
-
 </html>
