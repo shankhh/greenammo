@@ -3,493 +3,522 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./src/style.css">
-    <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js">
-        // Initialize Lenis
-        const lenis = new Lenis({
-            autoRaf: true,
-        });
+    <link rel="icon" type="image/svg+xml" href="./assets/greenammo.jpeg" /> <!-- Updated favicon path --><meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        // Listen for the scroll event and log the event data
-        lenis.on('scroll', (e) => {
-            console.log(e);
-        });
+    <!-- 1. Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 2. Load Alpine.js for interactivity (Mobile Menu + Dropdown) --><script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Lenis Smooth Scroll --><script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
+
+    <title>Join Us - GreenAmmo Group</title>
+
+    <!-- 3. Configure Tailwind with BOTH palettes & fonts --><script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // GreenAmmo Group (Blended Pop Pastel Theme)
+              "group-primary-green": "#4CAF50", // Deep Mint (Primary Branding)
+              "group-pastel-green":  "#A8D7B0", // Soft Sage (Accents, Backgrounds)
+              "group-pastel-blue":   "#9FD8E4", // Sky Mist (Secondary Accent)
+              "group-accent-neutral":"#F0EAD6", // Sandy Beige (Warm Highlights)
+              "group-base-white":    "#FDFDFD", // Clean Base (Background)
+              "group-text-dark":     "#1F2937", // Dark Gray for Text (Good Contrast)
+              "group-text-medium":   "#6B7280", // Medium Gray for Subtext
+              
+              // Solutions Blue Palette (for CTA section)
+              "sol-dark": "#2A6496",    
+              "sol-primary": "#56A0D3",
+              "sol-light": "#BFDBFE",
+            },
+            fontFamily: {
+              // Setup font families
+              'sans': ['Inter', 'sans-serif'],
+              'heading': ['Bricolage Grotesque', 'sans-serif'],
+            },
+             animation: {
+                'fade-in': 'fade-in 0.3s ease-out',
+                'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'marquee': 'marquee 30s linear infinite',
+            },
+            keyframes: {
+                'fade-in': {
+                    'from': { opacity: 0, transform: 'translateY(10px)' },
+                    'to': { opacity: 1, transform: 'translateY(0)' },
+                },
+                pulse: {
+                  '0%, 100%': { opacity: 1 },
+                  '50%': { opacity: .5 },
+                },
+                'marquee': {
+                    '0%': { transform: 'translateX(0%)' },
+                    '100%': { transform: 'translateX(-100%)' },
+                }
+            }
+          },
+        },
+      };
     </script>
-    <title>GreenAmmo</title>
+
+    <!-- 4. Import Google Fonts --><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- 5. Apply new font rules and CTA button styles --><style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #FDFDFD; /* group-base-white */
+        color: #1F2937; /* group-text-dark */
+      }
+      h1, h2, h3, h4, .font-heading {
+        font-family: "Bricolage Grotesque", sans-serif;
+      }
+      .cta-button {
+        display: inline-block; padding: 0.75rem 2.5rem; border-radius: 9999px;
+        font-size: 1rem; font-weight: 600; transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transform: scale(1); text-align: center;
+      }
+      .cta-button:hover {
+        transform: scale(1.03) translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      .cta-button-secondary {
+        padding: 0.75rem 2.5rem; border-radius: 9999px; font-size: 1rem;
+        font-weight: 600; transition: all 0.3s ease-in-out; border-width: 2px;
+         transform: scale(1); text-align: center;
+      }
+       .cta-button-secondary:hover { transform: scale(1.03) translateY(-2px); }
+       
+       /* Modal transitions */
+      .modal-hidden { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-out, visibility 0s linear 0.3s; }
+      .modal-visible { opacity: 1; visibility: visible; transition: opacity 0.3s ease-out; }
+    </style>
 </head>
 
-<body class="bg-gray-50 text-gray-900 font-sans">
-    <!-- 🌿 NAV COMPONENT for GreenAmmo Group -->
-    <nav class="w-full bg-white shadow-sm sticky top-0 z-50">
+<body class="bg-group-base-white text-group-text-dark font-sans">
+    
+    <!-- 🌿 NAV COMPONENT for GreenAmmo Group --><nav class="w-full bg-white shadow-sm sticky top-0 z-50" x-data="{ mobileMenuOpen: false }">
         <div class="container mx-auto flex justify-between items-center px-6 py-4">
-            <!-- Logo -->
-            <a href="/" class="font-bold text-2xl text-green-700 tracking-tight">
-                GreenAmmo
+            <!-- Logo --><a href="/" class="font-heading font-extrabold text-2xl text-group-primary-green tracking-tight flex items-center gap-2">
+                 <img src="./assets/greenammo.jpeg" alt="GreenAmmo Logo" class="h-10 w-auto rounded-full object-cover">
+                 <span class="text-group-pastel-green">Green</span><span class="text-group-pastel-blue">Ammo</span>
             </a>
-
-            <!-- Primary Nav Links -->
-            <ul class="hidden md:flex space-x-6 text-gray-700 font-medium items-center">
-                <li><a href="/aboutus" class="hover:text-green-600 transition">About Us</a></li>
-
-                <!-- Solutions Dropdown -->
+            <!-- Primary Nav Links (Desktop) --><ul class="hidden md:flex space-x-6 text-group-text-medium font-medium items-center">
+                <li><a href="/aboutus.html" class="hover:text-group-primary-green transition">About Us</a></li>
                 <li class="relative group">
-                    <button class="hover:text-green-600 transition inline-flex items-center gap-1">
-                        Solutions
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div
-                        class="absolute hidden group-hover:grid grid-cols-3 gap-4 bg-white rounded-2xl shadow-lg p-6 top-5 -left-12 w-[800px] transition-all">
-                        <div>
-                            <h4 class="font-semibold text-green-700 mb-2">Finance</h4>
-                            <ul class="text-sm space-y-1">
-                                <li><a href="#" class="hover:text-green-600">Taxation</a></li>
-                                <li><a href="#" class="hover:text-green-600">Accounting & Compliance</a></li>
-                                <li><a href="#" class="hover:text-green-600">Project Facilitation</a></li>
-                                <li><a href="#" class="hover:text-green-600">Business Consulting</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-green-700 mb-2">Education & Development</h4>
-                            <ul class="text-sm space-y-1">
-                                <li><a href="#" class="hover:text-green-600">Education & Training</a></li>
-                                <li><a href="#" class="hover:text-green-600">Skill Development</a></li>
-                                <li><a href="#" class="hover:text-green-600">Website & Content</a></li>
-                            </ul>
-                        </div>
-                        <div class="flex flex-col">
-                            <div>
-                                <h4 class="font-semibold text-green-700 mb-2">Event and Supply</h4>
-                                <ul class="text-sm space-y-1">
-                                    <li><a href="#" class="hover:text-green-600">Event & Management</a></li>
-                                    <li><a href="#" class="hover:text-green-600">Supply Services</a></li>
-
-                            </div>
-                            <br>
-                            <div>
-                                <h4 class="font-semibold text-green-700 mb-2" title="Powered by GreenCabin">
-                                    Accommodation</h4>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Trust Dropdown -->
-                <li class="relative group">
-                    <button class="hover:text-green-600 transition inline-flex items-center gap-1">
-                        Trust
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div
-                        class="absolute hidden group-hover:grid grid-cols-2 gap-4 bg-white rounded-2xl shadow-lg p-6 top-5 -left-12 w-[600px] transition-all">
-                        <div>
-                            <h4 class="font-semibold text-green-700 mb-2">Programs</h4>
-                            <ul class="text-sm space-y-1">
-                                <li><a href="#" class="hover:text-green-600">Projects & Milestones</a></li>
-                                <li><a href="#" class="hover:text-green-600">Campaigns</a></li>
-                                <li><a href="#" class="hover:text-green-600">Reports & Research</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-green-700 mb-2">Get Involved</h4>
-                            <ul class="text-sm space-y-1">
-                                <li><a href="#" class="hover:text-green-600">Join the Change</a></li>
-                                <li><a href="#" class="hover:text-green-600">Donate / Sponsor</a></li>
-                                <li><a href="#" class="hover:text-green-600">Volunteer</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="relative group">
-                    <button class="hover:text-green-600 transition inline-flex items-center gap-1">
+                    <button class="hover:text-group-primary-green transition inline-flex items-center gap-1">
                         Media
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                     </button>
-                    <div
-                        class="absolute hidden group-hover:grid grid-cols-2 gap-4 bg-white rounded-2xl shadow-lg p-6 top-5 -left-12 w-[500px] transition-all">
-                        <div>
-                            <h4 class="font-semibold text-green-700 mb-2">Our Story</h4>
-                            <ul class="text-sm space-y-1">
-                                <li><a href="/gallery.html" class="hover:text-green-600">Gallery</a></li>
-                                <li><a href="/testimonials.html" class="hover:text-green-600">Testimonials</a></li>
-                                <li><a href="/digitalcontent.html" class="hover:text-green-600">Digital Content</a></li>
-                            </ul>
-                        </div>
-
+                    <div class="absolute hidden group-hover:block bg-white rounded-xl shadow-lg p-4 top-5 -left-4 w-56 transition-all z-10 border border-gray-100">
+                        <ul class="text-sm space-y-1">
+                            <li><a href="/gallery.html" class="block py-1 px-3 text-group-text-medium hover:bg-group-pastel-green/30 rounded transition">Gallery</a></li>
+                            <li><a href="/testimonials.html" class="block py-1 px-3 text-group-text-medium hover:bg-group-pastel-green/30 rounded transition">Testimonials</a></li>
+                            <li><a href="/digitalcontent.html" class="block py-1 px-3 text-group-text-medium hover:bg-group-pastel-green/30 rounded transition">Digital Content</a></li>
+                        </ul>
+                    </div>
                 </li>
-                <li><a href="#" class="hover:text-green-600 transition">Blog</a></li>
-                <li><a href="./joinus" class="hover:text-green-600 transition">Join Us</a></li>
-            </ul>
-
-            <!-- Explore Button -->
-            <button class="bg-green-600 text-white px-4 py-2 rounded-xl shadow hover:bg-green-700 transition md:ml-4"
-                onclick="openModal()">
+                <li><a href="/blog.html" class="hover:text-group-primary-green transition">Blog</a></li>
+                <li><a href="/joinus.html" class="text-group-primary-green font-semibold transition">Join Us</a></li> <!-- Active Link --></ul>
+            <!-- Explore Button (Desktop) --><button id="explore-btn-desktop" class="hidden md:block cta-button bg-group-primary-green text-white hover:bg-opacity-90">
                 Explore
             </button>
-
-            <!-- Mobile Menu Toggle -->
-            <button class="md:hidden flex items-center text-green-700" id="menu-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
+            <!-- Mobile Menu Toggle --><button id="mobile-menu-toggle" class="md:hidden flex items-center text-group-primary-green focus:outline-none">
+                <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
-
-        <!-- Mobile Dropdown -->
-        <div class="md:hidden hidden flex-col space-y-2 bg-white shadow-inner px-6 py-4" id="mobile-menu">
-            <a href="#" class="block hover:text-green-600">Home</a>
-            <a href="#" class="block hover:text-green-600">Solutions</a>
-            <a href="#" class="block hover:text-green-600">Trust</a>
-            <a href="#" class="block hover:text-green-600">Media</a>
-            <a href="#" class="block hover:text-green-600">Blog</a>
-            <a href="#" class="block hover:text-green-600">Join Us</a>
+        <!-- Mobile Dropdown --><div id="mobile-menu" class="hidden md:hidden flex-col space-y-2 bg-white shadow-inner px-6 py-4 border-t border-gray-100">
+            <a href="/aboutus.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">About Us</a>
+            <a href="/gallery.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">Media</a>
+            <a href="/blog.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">Blog</a>
+            <a href="/joinus.html" class="block py-2 text-group-primary-green font-bold bg-group-pastel-green/30 rounded">Join Us</a> <!-- Active Link --><button id="explore-btn-mobile" class="mt-2 w-full cta-button bg-group-primary-green text-white hover:bg-opacity-90">
+                Explore
+             </button>
         </div>
     </nav>
-    <!-- 🔧 Simple JS for Mobile Toggle -->
-    <script>
-        document.getElementById('menu-toggle').addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-    </script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <main class="min-h-screen bg-green-50">
+    <!-- MAIN CONTENT --><main>
 
-        <section class="bg-green-700 text-white py-16">
-            <div class="container mx-auto px-4 md:px-8 text-center">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">Join Our Mission</h1>
-                <p class="text-lg md:text-xl max-w-3xl mx-auto">
-                    Your support is vital to our growth. Select a pathway below to join the GreenAmmo family.
+        <!-- 1. HERO SECTION (from Inspo) --><section class="relative h-[60vh] min-h-[400px] flex items-center justify-center text-white text-center px-4">
+            <!-- Background Image Placeholder --><div class="absolute inset-0">
+                <img src="https://source.unsplash.com/random/1600x900/?volunteers,community,planting" alt="Join Us Hero" class="w-full h-full object-cover">
+                <!-- Dark Overlay --><div class="absolute inset-0 bg-black opacity-50"></div>
+            </div>
+            <!-- Content --><div class="relative z-10 max-w-3xl">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 font-heading">
+                    Join Us
+                </h1>
+                <p class="text-lg md:text-xl text-gray-200">
+                   Be a part of our journey. Join a team dedicated to innovation, sustainability, and real-world impact.
                 </p>
             </div>
         </section>
 
-<section class="py-16" x-data="{ 
-    role: 'initiator', 
-    open: false, 
-    roles: [
-        { value: 'initiator', text: 'Project Initiator' },
-        { value: 'intern', text: 'Intern' },
-        { value: 'workshop', text: 'Workshop Participant' },
-        { value: 'volunteer', text: 'Volunteer (Other)' },
-        { value: 'donor', text: 'Donor' },
-    ] 
-}">
-    <div class="container mx-auto px-4 md:px-8 flex flex-col justify-center">
-        <div class="max-w-xl mx-auto mb-10">
-
-            <div class="flex items-center text-xl font-semibold text-green-900 mb-2 ml !border-none">
-
-                <label for="join-role" class="block mr-2">
-                    Join Us as...
-                </label>
-
-                <div class="relative inline-block text-left" @click.outside="open = false">
-
-                    <button @click="open = !open" type="button"
-                        class="flex items-center text-green-700 bg-transparent border-b border-green-700 hover:text-green-800 focus:outline-none focus:border-green-800 transition duration-150 ease-in-out font-bold text-lg p-0"
-                        :class="{ 'border-green-800': open }">
-
-                        <span x-text="roles.find(r => r.value === role).text"
-                            class="text-green-700 hover:text-green-800">Project Initiator</span>
-
-                        <svg class="w-4 h-4 ml-1 transition-transform transform"
-                            :class="{ 'rotate-180': open, 'rotate-0': !open }" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-
-                    <div x-show="open" x-transition:enter="transition ease-out duration-100"
-                        x-transition:enter-start="opacity-0 scale-95"
-                        x-transition:enter-end="opacity-100 scale-100"
-                        x-transition:leave="transition ease-in duration-75"
-                        x-transition:leave-start="opacity-100 scale-100"
-                        x-transition:leave-end="opacity-0 scale-95"
-                        class="absolute left-0 mt-2 origin-top-left bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg z-10"
-                        style="min-width: max-content;">
-
-                        <div class="py-1" role="menu" aria-orientation="vertical"
-                            aria-labelledby="options-menu">
-                            <template x-for="item in roles" :key="item.value">
-                                <button type="button" @click="role = item.value; open = false"
-                                    x-text="item.text"
-                                    :class="{'bg-green-50 text-green-800': item.value === role, 'text-gray-700': item.value !== role}"
-                                    class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 hover:text-green-700 transition duration-150 ease-in-out"
-                                    role="menuitem">
-                                </button>
-                            </template>
-                        </div>
-
+        <!-- 2. TEXT + STATS (from Inspo) --><section class="py-16 bg-group-base-white">
+            <div class="container mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-12 items-center max-w-6xl">
+                <!-- Left: Text --><div class="space-y-6">
+                    <h2 class="text-3xl font-bold text-group-text-dark font-heading">Join us on this journey of growth, innovation, and sustainable living.</h2>
+                    <p class="text-group-text-medium">With years of experience in dedicated groundwork, our team is a blend of expertise and passion. We're proud of our professional, supportive culture and the success of every project we undertake, big or small.</p>
+                </div>
+                <!-- Right: Stats --><div class="grid grid-cols-2 gap-6 bg-group-accent-neutral/60 p-8 rounded-2xl border border-group-accent-neutral">
+                    <div class="text-center">
+                        <h3 class="text-4xl font-bold text-group-primary-green mb-1 font-heading">50+</h3>
+                        <p class="text-group-text-medium font-semibold">Projects</p>
+                    </div>
+                     <div class="text-center">
+                        <h3 class="text-4xl font-bold text-group-primary-green mb-1 font-heading">10k+</h3>
+                        <p class="text-group-text-medium font-semibold">Community Hours</p>
+                    </div>
+                     <div class="text-center">
+                        <h3 class="text-4xl font-bold text-group-primary-green mb-1 font-heading">100+</h3>
+                        <p class="text-group-text-medium font-semibold">Partners</p>
+                    </div>
+                     <div class="text-center">
+                        <h3 class="text-4xl font-bold text-group-primary-green mb-1 font-heading">4+</h3>
+                        <p class="text-group-text-medium font-semibold">States</p>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="max-w-5xl mx-auto p-6 bg-white rounded-xl shadow-lg border border-green-200">
-
-            <div x-show="role === 'initiator'" class="space-y-6 transition duration-300 ease-in-out">
-                <h2 class="text-3xl font-bold text-green-900">Become a Project Initiator 🌱</h2>
-                <p class="text-gray-700">Lead a GreenAmmo project from anywhere in the world. This unpaid role
-                    gives you the resources and expertise to replicate our campaigns in your community.</p>
-                <div class="bg-green-50 p-6 rounded-lg space-y-4">
-                    <h3 class="text-xl font-semibold text-green-800">Key Information</h3>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                        <li><span class="font-semibold">Role:</span> Unpaid Volunteer, perfect for local
-                            community impact.</li>
-                        <li><span class="font-semibold">Benefit:</span> 30% lifetime discount on stays at any of
-                            our Green Cabins.</li>
-                        <li><span class="font-semibold">Registration Fee:</span> One-time, non-refundable fee of
-                            ₹500.</li>
-                    </ul>
-                </div>
-                <a href="mailto:support@greenammo.org"
-                    class="inline-block px-6 py-3 bg-green-700 text-white font-semibold rounded-lg hover:bg-green-600 transition">Contact
-                    Us to Start</a>
-            </div>
-
-            <div x-show="role === 'intern'" class="space-y-8 transition duration-300 ease-in-out">
-                <h2 class="text-3xl font-bold text-green-900">Internship Opportunities 💻</h2>
-                <p class="text-gray-700">Gain hands-on experience in sustainability through our unpaid
-                    internship program. We offer various roles, including remote content creation, podcast
-                    hosting, and on-site project management.</p>
-
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="p-4 bg-green-50 rounded-lg border border-green-200">
-                        <h4 class="font-bold text-lg text-green-800">Content & Digital Outreach</h4>
-                        <p class="text-sm text-gray-600">Remote | 6 Months Min.</p>
-                    </div>
-                    <div class="p-4 bg-green-50 rounded-lg border border-green-200">
-                        <h4 class="font-bold text-lg text-green-800">On-Site Project Manager</h4>
-                        <p class="text-sm text-gray-600">Assam, Goa, or HP | 1 Month Min.</p>
-                    </div>
-                </div>
-                <p class="text-sm text-gray-700">Application requires a CV, Statement of Purpose, and Letter of
-                    Recommendation. A one-time fee of ₹500 applies.</p>
-                <a href="mailto:support@greenammo.in"
-                    class="inline-block px-6 py-3 bg-green-700 text-white font-semibold rounded-lg hover:bg-green-600 transition">Apply
-                    Now</a>
-            </div>
-
-            <div x-show="role === 'workshop'" class="space-y-6 transition duration-300 ease-in-out">
-                <h2 class="text-3xl font-bold text-green-900">7-Day Sustainability Workshop 🗓️</h2>
-                <p class="text-gray-700">This intensive workshop helps you adopt minimal, sustainable, and
-                    waste-free living skills. Choose between our **Online Immersion** or the **On-Site
-                    Experience** at a GreenCabin location.</p>
-
-                <div class="grid md:grid-cols-2 gap-6 text-center">
-                    <div class="p-6 border-2 border-green-400 bg-white rounded-lg shadow-md">
-                        <h4 class="text-xl font-bold text-green-800">Online</h4>
-                        <p class="text-4xl font-extrabold text-green-700 mt-2">₹200</p>
-                        <p class="text-sm text-gray-600">7 days of guided activities from home.</p>
-                    </div>
-                    <div class="p-6 border-2 border-green-400 bg-white rounded-lg shadow-md">
-                        <h4 class="text-xl font-bold text-green-800">On-Site Stay</h4>
-                        <p class="text-4xl font-extrabold text-green-700 mt-2">₹4,000</p>
-                        <p class="text-sm text-gray-600">Includes accommodation, food, and local transport.</p>
-                    </div>
-                </div>
-                <a href="#"
-                    class="inline-block px-6 py-3 bg-green-700 text-white font-semibold rounded-lg hover:bg-green-600 transition">Register
-                    for a Workshop</a>
-            </div>
-
-            <div x-show="role === 'volunteer'"
-                class="text-center space-y-6 transition duration-300 ease-in-out">
-                <h2 class="text-3xl font-bold text-green-900">General Volunteer / Innovative Ideas 💡</h2>
-                <p class="text-lg text-gray-700 max-w-3xl mx-auto">Do you have a specialized skill, or an
-                    innovative, creative idea that doesn't fit the roles above? We are always open to new ways
-                    of collaborating.</p>
-                <p class="text-base font-semibold text-green-800">Contact us to discuss your unique proposal!
-                </p>
-                <a href="mailto:support@greenammo.org"
-                    class="inline-block px-6 py-3 bg-green-700 text-white font-semibold rounded-lg hover:bg-green-600 transition">Propose
-                    Your Idea</a>
-            </div>
-
-            <div x-show="role === 'donor'" class="text-center space-y-6 transition duration-300 ease-in-out">
-                <h2 class="text-3xl font-bold text-green-900">Support Our Work Through Donations 💚</h2>
-                <p class="text-lg text-gray-700 mt-4 max-w-3xl mx-auto">Your financial contribution directly
-                    fuels our vision. By donating, you help us expand our projects, engage more communities, and
-                    keep our planet cleaner. Every contribution makes a tangible difference.</p>
-                <a href="#"
-                    class="inline-block mt-8 px-8 py-3 bg-green-600 text-white font-bold rounded-lg shadow-lg hover:bg-green-700 transition duration-300 transform hover:scale-105">
-                    Donate Now
-                </a>
-            </div>
-
-        </div>
-
-        <p class="text-center text-sm text-gray-500 mt-10">
-            <span class="font-semibold">Note:</span> If you believe you yet have a scope of joining us beyond
-            what we have listed, please feel free to contact us.
-        </p>
-    </div>
-</section>
-
-        <footer class="bg-green-800 text-white pt-12">
+        <!-- 3. JOIN US DROPDOWN (Existing Functionality) --><section class="py-16 bg-group-accent-neutral/60" x-data="{ role: 'initiator' }">
             <div class="container mx-auto px-4 md:px-8">
-
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-green-700">
-
-                    <div class="md:col-span-2 space-y-4">
-                        <h3 class="text-3xl font-bold text-green-300">GreenAmmo</h3>
-                        <p class="text-sm text-green-200 max-w-sm">
-                            Empowering sustainable living and waste management through community action, research, and
-                            project initiation.
-                        </p>
+                <!-- Dropdown Selector --><div class="max-w-xl mx-auto mb-10">
+                    <label for="join-role" class="block text-3xl font-bold text-group-text-dark mb-4 font-heading text-center">
+                        Join Our Big Family as...
+                    </label>
+                    <p class="text-center text-group-text-medium mb-6">Find the perfect way to contribute your skills and passion. Select an opportunity below to learn more.</p>
+                    
+                    <div class="relative" x-data="{ open: false }" @click.outside="open = false">
+                        <!-- Custom Select Button --><button @click="open = !open" class="relative w-full py-3 px-4 bg-white border border-gray-300 text-group-text-dark font-semibold text-lg rounded-lg text-left flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-group-primary-green">
+                            <span x-text="{ initiator: 'Project Initiator', intern: 'Intern', workshop: 'Workshop Participant', volunteer: 'Volunteer (Other)', donor: 'Donor' }[role]">Project Initiator</span>
+                            <svg class="w-5 h-5 text-gray-500 transition-transform" :class="{'rotate-180': open}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <!-- Dropdown Panel --><div x-show="open" x-transition class="absolute z-10 w-full mt-1 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
+                            <ul class="py-1">
+                                <li @click="role = 'initiator'; open = false" class="px-4 py-2 text-gray-700 hover:bg-group-pastel-green/30 hover:text-group-primary-green cursor-pointer">Project Initiator</li>
+                                <li @click="role = 'intern'; open = false" class="px-4 py-2 text-gray-700 hover:bg-group-pastel-green/30 hover:text-group-primary-green cursor-pointer">Intern</li>
+                                <li @click="role = 'workshop'; open = false" class="px-4 py-2 text-gray-700 hover:bg-group-pastel-green/30 hover:text-group-primary-green cursor-pointer">Workshop Participant</li>
+                                <li @click="role = 'volunteer'; open = false" class="px-4 py-2 text-gray-700 hover:bg-group-pastel-green/30 hover:text-group-primary-green cursor-pointer">Volunteer (Other)</li>
+                                <li @click="role = 'donor'; open = false" class="px-4 py-2 text-gray-700 hover:bg-group-pastel-green/30 hover:text-group-primary-green cursor-pointer">Donor</li>
+                            </ul>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
-
-                        <div class="space-y-3">
-                            <h4 class="font-semibold text-green-50 mb-3">GreenAmmo</h4>
-                            <ul class="text-sm space-y-2 text-green-200">
-                                <li><a href="/about-us.html" class="hover:text-green-300 transition">About Us</a></li>
-                                <li><a href="/gallery.html" class="hover:text-green-300 transition">Media (Gallery)</a>
-                                </li>
-                                <li><a href="/certifications.html"
-                                        class="hover:text-green-300 transition">Certificates</a></li>
-                                <li><a href="/alliances.html" class="hover:text-green-300 transition">Alliances</a></li>
+                <!-- Dynamic Content Blocks --><div class="max-w-5xl mx-auto p-6 bg-white rounded-xl shadow-lg border border-gray-200">
+                    <!-- 1. Project Initiator Content --><div x-show="role === 'initiator'" class="space-y-6 animate-fade-in">
+                        <h2 class="text-3xl font-bold text-group-text-dark font-heading">Become a Project Initiator 🌱</h2>
+                        <p class="text-group-text-medium">Lead a GreenAmmo project from anywhere in the world. This unpaid role gives you the resources and expertise to replicate our campaigns in your community.</p>
+                        <div class="bg-group-pastel-green/30 p-6 rounded-lg space-y-4 border border-group-pastel-green">
+                            <h3 class="text-xl font-semibold text-group-text-dark font-heading">Key Information</h3>
+                            <ul class="styled-list">
+                                <li><span class="font-semibold text-gray-700">Role:</span> Unpaid Volunteer, perfect for local community impact.</li>
+                                <li><span class="font-semibold text-gray-700">Benefit:</span> 30% lifetime discount on stays at any of our Green Cabins.</li>
+                                <li><span class="font-semibold text-gray-700">Registration Fee:</span> One-time, non-refundable fee of ₹500.</li>
                             </ul>
                         </div>
-
-                        <div class="space-y-3">
-                            <h4 class="font-semibold text-green-50 mb-3">Solutions</h4>
-                            <ul class="text-sm space-y-2 text-green-200">
-                                <li><a href="/solutions/finance.html"
-                                        class="hover:text-green-300 transition">Finance</a></li>
-                                <li><a href="/solutions/education.html"
-                                        class="hover:text-green-300 transition">Education & Development</a></li>
-                                <li><a href="/solutions/event-supply.html" class="hover:text-green-300 transition">Event
-                                        & Supply</a></li>
-                                <li><a href="/solutions/accommodations.html"
-                                        class="hover:text-green-300 transition">Accommodations</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="space-y-3">
-                            <h4 class="font-semibold text-green-50 mb-3">Trust</h4>
-                            <ul class="text-sm space-y-2 text-green-200">
-                                <li><a href="/trust/projects.html" class="hover:text-green-300 transition">Projects &
-                                        Milestones</a></li>
-                                <li><a href="/trust/campaigns.html"
-                                        class="hover:text-green-300 transition">Campaigns</a></li>
-                                <li><a href="/trust/reports.html" class="hover:text-green-300 transition">Reports &
-                                        Research</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="space-y-3">
-                            <h4 class="font-semibold text-green-50 mb-3">Take Action</h4>
-                            <div class="space-y-2">
-                                <a href="/join-us.html"
-                                    class="block bg-green-600 text-white text-center text-sm font-medium py-2 rounded-lg hover:bg-green-700 transition">
-                                    Join Us
-                                </a>
-                                <a href="/explore.html"
-                                    class="block border border-green-600 text-green-50 text-center text-sm font-medium py-2 rounded-lg hover:border-green-300 hover:text-green-300 transition">
-                                    Explore
-                                </a>
+                        <a href="mailto:support@greenammo.org" class="cta-button bg-group-primary-green text-white hover:bg-opacity-90">Contact Us to Start</a>
+                    </div>
+                    <!-- 2. Intern Content --><div x-show="role === 'intern'" class="space-y-8 animate-fade-in">
+                        <h2 class="text-3xl font-bold text-group-text-dark font-heading">Internship Opportunities 💻</h2>
+                        <p class="text-group-text-medium">Gain hands-on experience in sustainability through our unpaid internship program. We offer various roles, including remote content creation, podcast hosting, and on-site project management.</p>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="p-4 bg-group-pastel-green/30 rounded-lg border border-group-pastel-green">
+                                <h4 class="font-bold text-lg text-group-text-dark font-heading">Content & Digital Outreach</h4>
+                                <p class="text-sm text-group-text-medium">Remote | 6 Months Min.</p>
+                            </div>
+                            <div class="p-4 bg-group-pastel-green/30 rounded-lg border border-group-pastel-green">
+                                <h4 class="font-bold text-lg text-group-text-dark font-heading">On-Site Project Manager</h4>
+                                <p class="text-sm text-group-text-medium">Assam, Goa, or HP | 1 Month Min.</p>
                             </div>
                         </div>
-
+                        <a href="mailto:support@greenammo.in" class="cta-button bg-group-primary-green text-white hover:bg-opacity-90">Apply Now</a>
                     </div>
-
-                </div>
-
-                <div class="flex flex-col sm:flex-row justify-between items-center py-6 text-sm text-green-200">
-                    <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
-
-                    <div class="flex gap-4 mt-4 sm:mt-0">
-                        <a href="#" class="hover:text-green-400 transition" aria-label="Facebook">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="currentColor">
-                                <path
-                                    d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3 8h-2v2h2v2h-2v4h-2v-4H9V12h2V10c0-1.104.896-2 2-2h2v2z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="hover:text-green-400 transition" aria-label="Instagram">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="currentColor">
-                                <path
-                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.179 2.541c.883 0 1.632.748 1.632 1.632v.005c0 .883-.749 1.631-1.632 1.631h-.005c-.883 0-1.632-.748-1.632-1.631v-.005c0-.883.749-1.632 1.632-1.632h.005zM12 8c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4zm-2.821 8.879c.148.093.308.175.474.246.36.155.76.246 1.171.246h2.348c.41 0 .81-.091 1.17-.246.166-.071.326-.153.473-.246.22-.138.423-.306.605-.5.182-.194.34-.413.474-.658.134-.245.242-.516.326-.811.168-.598.256-1.233.256-1.879v-2.352c0-.646-.088-1.281-.256-1.879a4.897 4.897 0 0 0-.326-.811 4.795 4.795 0 0 0-.474-.658 4.67 4.67 0 0 0-.605-.5 4.908 4.908 0 0 0-.474-.246c-.36-.155-.76-.246-1.17-.246h-2.348c-.41 0-.81.091-1.17.246a4.908 4.908 0 0 0-.474.246 4.67 4.67 0 0 0-.605.5 4.795 4.795 0 0 0-.474.658 4.897 4.897 0 0 0-.326.811c-.168.598-.256 1.233-.256 1.879v2.352c0 .646.088 1.281.256 1.879a4.897 4.897 0 0 0 .326.811 4.795 4.795 0 0 0 .474.658 4.67 4.67 0 0 0 .605.5z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="hover:text-green-400 transition" aria-label="LinkedIn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="currentColor">
-                                <path
-                                    d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-2 16H8V11h2v7zm-1-8H9V8h1v2zM16 18h-2v-3c0-1.657-1.343-3-3-3s-3 1.343-3 3v3h-2V11h2v1.5c.618-.844 1.877-1.5 3-1.5 2.206 0 4 1.794 4 4v3z" />
-                            </svg>
+                    <!-- 3. Workshop Content --><div x-show="role === 'workshop'" class="space-y-6 animate-fade-in">
+                        <h2 class="text-3xl font-bold text-group-text-dark font-heading">7-Day Sustainability Workshop 🗓️</h2>
+                        <p class="text-group-text-medium">This intensive workshop helps you adopt minimal, sustainable, and waste-free living skills. Choose between our **Online Immersion** or the **On-Site Experience**.</p>
+                        <div class="grid md:grid-cols-2 gap-6 text-center">
+                            <div class="p-6 border-2 border-group-primary-green bg-white rounded-lg shadow-md">
+                                <h4 class="text-xl font-bold text-group-text-dark font-heading">Online</h4>
+                                <p class="text-4xl font-extrabold text-group-primary-green mt-2">₹200</p>
+                                <p class="text-sm text-group-text-medium">7 days of guided activities from home.</p>
+                            </div>
+                            <div class="p-6 border-2 border-group-primary-green bg-white rounded-lg shadow-md">
+                                <h4 class="text-xl font-bold text-group-text-dark font-heading">On-Site Stay</h4>
+                                <p class="text-4xl font-extrabold text-group-primary-green mt-2">₹4,000</p>
+                                <p class="text-sm text-group-text-medium">Includes accommodation, food, and transport.</p>
+                            </div>
+                        </div>
+                        <a href="#" class="cta-button bg-group-primary-green text-white hover:bg-opacity-90">Register for a Workshop</a>
+                    </div>
+                    <!-- 4. Volunteer (Other) Content --><div x-show="role === 'volunteer'" class="text-center space-y-6 animate-fade-in">
+                        <h2 class="text-3xl font-bold text-group-text-dark font-heading">General Volunteer / Innovative Ideas 💡</h2>
+                        <p class="text-lg text-group-text-medium max-w-3xl mx-auto">Do you have a specialized skill, or an innovative, creative idea that doesn't fit the roles above? We are always open to new ways of collaborating.</p>
+                        <a href="mailto:support@greenammo.org" class="cta-button bg-group-primary-green text-white hover:bg-opacity-90">Propose Your Idea</a>
+                    </div>
+                    <!-- 5. Donor Content --><div x-show="role === 'donor'" class="text-center space-y-6 animate-fade-in">
+                        <h2 class="text-3xl font-bold text-group-text-dark font-heading">Support Our Work Through Donations 💚</h2>
+                        <p class="text-lg text-group-text-medium mt-4 max-w-3xl mx-auto">Your financial contribution directly fuels our vision. By donating, you help us expand our projects, engage more communities, and keep our planet cleaner.</p>
+                        <a href="#" class="cta-button bg-group-primary-green text-white hover:bg-opacity-90">
+                            Donate Now
                         </a>
                     </div>
                 </div>
             </div>
-        </footer>
+        </section>
+
+        <!-- 4. ALLIANCES LOGO MARQUEE (New Section) -->      <section class="bg-white py-12">
+        <!-- border-t border-b border-brand-light -->
+        <div class="max-w-7xl mx-auto mb-6">
+          <h2 class="text-3xl font-bold text-center text-brand-dark mb-4">
+            Our Alliances
+          </h2>
+        </div>
+
+        <div class="overflow-hidden">
+          <div class="animate-marquee flex gap-16" style="min-width: 200%">
+            <img
+              src="/assets/state-logo-maharashtra.png"
+              class="h-12 inline-block logo-muted"
+              alt="Maharashtra State Logo"
+            />
+            <img
+              src="/assets/state-logo-gujarat.png"
+              class="h-12 inline-block logo-muted"
+              alt="Gujarat State Logo"
+            />
+            <img
+              src="/assets/state-logo-assam.png"
+              class="h-12 inline-block logo-muted"
+              alt="Assam State Logo"
+            />
+            <img
+              src="/assets/state-logo-karnataka.png"
+              class="h-12 inline-block logo-muted"
+              alt="Karnataka State Logo"
+            />
+            <img
+              src="/assets/state-logo-tamilnadu.png"
+              class="h-12 inline-block logo-muted"
+              alt="Tamil Nadu State Logo"
+            />
+            <img
+              src="/assets/state-logo-westbengal.png"
+              class="h-12 inline-block logo-muted"
+              alt="West Bengal State Logo"
+            />
+            <img
+              src="/assets/state-logo-uttarpradesh.png"
+              class="h-12 inline-block logo-muted"
+              alt="Uttar Pradesh State Logo"
+            />
+            <img
+              src="/assets/state-logo-rajasthan.png"
+              class="h-12 inline-block logo-muted"
+              alt="Rajasthan State Logo"
+            />
+
+            <img
+              src="/assets/state-logo-maharashtra.png"
+              class="h-12 inline-block logo-muted"
+              alt="Maharashtra State Logo"
+              aria-hidden="true"
+            />
+            <img
+              src="/assets/state-logo-gujarat.png"
+              class="h-12 inline-block logo-muted"
+              alt="Gujarat State Logo"
+              aria-hidden="true"
+            />
+            <img
+              src="/assets/state-logo-assam.png"
+              class="h-12 inline-block logo-muted"
+              alt="Assam State Logo"
+              aria-hidden="true"
+            />
+            <img
+              src="/assets/state-logo-karnataka.png"
+              class="h-12 inline-block logo-muted"
+              alt="Karnataka State Logo"
+              aria-hidden="true"
+            />
+            <img
+              src="/assets/state-logo-tamilnadu.png"
+              class="h-12 inline-block logo-muted"
+              alt="Tamil Nadu State Logo"
+              aria-hidden="true"
+            />
+            <img
+              src="/assets/state-logo-westbengal.png"
+              class="h-12 inline-block logo-muted"
+              alt="West Bengal State Logo"
+              aria-hidden="true"
+            />
+            <img
+              src="/assets/state-logo-uttarpradesh.png"
+              class="h-12 inline-block logo-muted"
+              alt="Uttar Pradesh State Logo"
+              aria-hidden="true"
+            />
+            <img
+              src="/assets/state-logo-rajasthan.png"
+              class="h-12 inline-block logo-muted"
+              alt="Rajasthan State Logo"
+              aria-hidden="true"
+            />
+          </div>
+        </div>
+      </section>
+
+        <!-- 5. CTA to SOLUTIONS (New Section, Blue Theme - Now with Contact Form) --><section class="py-20 bg-group-pastel-blue/30">
+            <div class="container mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-12 items-center max-w-6xl">
+                <!-- Left: Contact Form --><div class="bg-group-pastel-green/20 p-8 rounded-2xl shadow-xl border border-group-pastel-green/30">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-group-text-dark mb-6 font-heading">
+                        Book your favorite service now!
+                    </h2>
+                    <form action="#" method="POST" class="space-y-5">
+                        <div>
+                            <input type="text" id="name" name="name" placeholder="Your name"
+                                class="w-full px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-group-primary-green focus:border-transparent transition duration-200 bg-white text-group-text-dark"
+                                required>
+                        </div>
+                        <div>
+                            <input type="email" id="email" name="email" placeholder="Your email"
+                                class="w-full px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-group-primary-green focus:border-transparent transition duration-200 bg-white text-group-text-dark"
+                                required>
+                        </div>
+                        <div class="relative" x-data="{ openService: false }" @click.outside="openService = false">
+                            <button type="button" @click="openService = !openService"
+                                class="w-full px-5 py-3 border border-gray-300 rounded-lg text-left text-group-text-medium bg-white flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-group-primary-green transition duration-200">
+                                <span x-text="selectedService || 'Select a Service'">Select a Service</span>
+                                <svg class="w-5 h-5 text-gray-500 transition-transform" :class="{'rotate-180': openService}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div x-show="openService" x-transition class="absolute z-10 w-full mt-1 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
+                                <ul class="py-1">
+                                    <li @click="selectedService = 'Finance Consulting'; openService = false" class="px-4 py-2 text-gray-700 hover:bg-group-pastel-green/30 hover:text-group-primary-green cursor-pointer">Finance Consulting</li>
+                                    <li @click="selectedService = 'Educational Workshops'; openService = false" class="px-4 py-2 text-gray-700 hover:bg-group-pastel-green/30 hover:text-group-primary-green cursor-pointer">Educational Workshops</li>
+                                    <li @click="selectedService = 'Event Management'; openService = false" class="px-4 py-2 text-gray-700 hover:bg-group-pastel-green/30 hover:text-group-primary-green cursor-pointer">Event Management</li>
+                                    <li @click="selectedService = 'Eco-Accommodation Booking'; openService = false" class="px-4 py-2 text-gray-700 hover:bg-group-pastel-green/30 hover:text-group-primary-green cursor-pointer">Eco-Accommodation Booking</li>
+                                    <li @click="selectedService = 'Other Services'; openService = false" class="px-4 py-2 text-gray-700 hover:bg-group-pastel-green/30 hover:text-group-primary-green cursor-pointer">Other Services</li>
+                                </ul>
+                            </div>
+                            <input type="hidden" name="service" x-model="selectedService">
+                        </div>
+                        <div class="flex space-x-4 pt-2">
+                             <button type="submit" class="cta-button bg-group-primary-green text-white hover:bg-opacity-90 flex-grow">
+                                Let's Talk
+                            </button>
+                            <a href="/solutions/index.html#services-section" class="cta-button-secondary border-group-primary-green text-group-primary-green hover:bg-group-pastel-green/50 flex-grow">
+                                Explore Services
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Right: Image Placeholder (now for contact form section) --><div>
+                    <img src="./assets/greenammo.jpeg" alt="Contact Us" class="rounded-2xl shadow-lg w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
+
 
     </main>
 
-    <!-- 🌍 EXPLORE MODAL -->
-    <div id="exploreModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden justify-center items-center z-50">
-        <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full mx-4 md:mx-0 overflow-hidden animate-fade-in">
-            <div class="flex justify-between items-center px-6 py-4 border-b">
-                <h3 class="text-xl font-semibold text-green-700">Explore GreenAmmo</h3>
-                <button class="text-gray-500 hover:text-green-700" onclick="closeModal()">
-                    ✕
+    <!-- FOOTER (Group Theme) --><footer class="bg-group-text-dark text-white pt-12">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-gray-700">
+                <!-- Logo and Description --><div class="md:col-span-2 space-y-4">
+                    <h3 class="text-3xl font-bold text-group-pastel-green font-heading">GreenAmmo Group</h3>
+                    <p class="text-sm text-gray-300 max-w-sm">
+                        Empowering sustainable living and waste management through community action, research, and project initiation.
+                    </p>
+                </div>
+                <!-- Navigation Columns --><div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
+                    <!-- Column 1: GreenAmmo --><div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3 font-heading">GreenAmmo</h4>
+                        <ul class="text-sm space-y-2 text-gray-300">
+                            <li><a href="/aboutus.html" class="hover:text-group-pastel-green transition">About Us</a></li>
+                            <li><a href="/gallery.html" class="hover:text-group-pastel-green transition">Media (Gallery)</a></li>
+                            <li><a href="/certifications.html" class="hover:text-group-pastel-green transition">Certificates</a></li>
+                            <li><a href="/alliances.html" class="hover:text-group-pastel-green transition">Alliances</a></li>
+                        </ul>
+                    </div>
+                    <!-- Column 2: Solutions --><div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3 font-heading">Solutions</h4>
+                        <ul class="text-sm space-y-2 text-gray-300">
+                            <li><a href="/solutions/finance.html" class="hover:text-group-pastel-green transition">Finance</a></li>
+                            <li><a href="/solutions/education.html" class="hover:text-group-pastel-green transition">Education & Development</a></li>
+                            <li><a href="/solutions/eventsupply.html" class="hover:text-group-pastel-green transition">Event & Supply</a></li>
+                            <li><a href="/solutions/accommodation.html" class="hover:text-group-pastel-green transition">Accommodations</a></li>
+                        </ul>
+                    </div>
+                    <!-- Column 3: Trust --><div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3 font-heading">Trust</h4>
+                        <ul class="text-sm space-y-2 text-gray-300">
+                            <li><a href="/trust/projects.html" class="hover:text-group-pastel-green transition">Projects & Milestones</a></li>
+                            <li><a href="/trust/campaigns.html" class="hover:text-group-pastel-green transition">Campaigns</a></li>
+                            <li><a href="/trust/reports.html" class="hover:text-group-pastel-green transition">Reports & Research</a></li>
+                        </ul>
+                    </div>
+                    <!-- Column 4: Action/Explore --><div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3 font-heading">Take Action</h4>
+                        <div class="space-y-2">
+                            <a href="/join-us.html" class="block text-center py-2 px-4 rounded-full bg-group-primary-green text-white hover:bg-opacity-80 transition text-sm font-semibold shadow-md">Join Us</a>
+                            <button id="explore-btn-footer" class="block w-full text-center py-2 px-4 rounded-full border-2 border-group-pastel-green text-group-pastel-green hover:bg-group-pastel-green hover:text-group-text-dark transition text-sm font-semibold">Explore</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Row: Copyright and Socials --><div class="flex flex-col sm:flex-row justify-between items-center py-6 text-sm text-gray-400">
+                <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
+                <div class="flex gap-4 mt-4 sm:mt-0">
+                    <a href="#" class="hover:text-group-pastel-blue transition" aria-label="Facebook"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3 8h-2v2h2v2h-2v4h-2v-4H9V12h2V10c0-1.104.896-2 2-2h2v2z"/></svg></a>
+                    <a href="#" class="hover:text-group-pastel-blue transition" aria-label="Instagram"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.179 2.541c.883 0 1.632.748 1.632 1.632v.005c0 .883-.749 1.631-1.632 1.631h-.005c-.883 0-1.632-.748-1.632-1.631v-.005c0-.883.749-1.632 1.632-1.632h.005zM12 8c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4zm-2.821 8.879c.148.093.308.175.474.246.36.155.76.246 1.171.246h2.348c.41 0 .81-.091 1.17-.246.166-.071.326-.153.473-.246.22-.138.423-.306.605-.5.182-.194.34-.413.474-.658.134-.245.242-.516.326-.811.168-.598.256-1.233.256-1.879v-2.352c0-.646-.088-1.281-.256-1.879a4.897 4.897 0 0 0-.326-.811 4.795 4.795 0 0 0-.474-.658 4.67 4.67 0 0 0-.605-.5 4.908 4.908 0 0 0-.474-.246c-.36-.155-.76-.246-1.17-.246h-2.348c-.41 0-.81.091-1.17.246a4.908 4.908 0 0 0-.474.246 4.67 4.67 0 0 0-.605.5 4.795 4.795 0 0 0-.474.658 4.897 4.897 0 0 0-.326.811c-.168.598-.256 1.233-.256 1.879v2.352c0 .646.088 1.281.256 1.879a4.897 4.897 0 0 0 .326.811 4.795 4.795 0 0 0 .474.658 4.67 4.67 0 0 0 .605.5z"/></svg></a>
+                    <a href="#" class="hover:text-group-pastel-blue transition" aria-label="LinkedIn"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-2 16H8V11h2v7zm-1-8H9V8h1v2zM16 18h-2v-3c0-1.657-1.343-3-3-3s-3 1.343-3 3v3h-2V11h2v1.5c.618-.844 1.877-1.5 3-1.5 2.206 0 4 1.794 4 4v3z"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 🌍 EXPLORE Button MODAL (Vanilla JS) --><div id="exploreModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden justify-center items-center z-50 p-4 modal-hidden">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full mx-auto overflow-hidden animate-fade-in" id="modal-content">
+             <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+                <h3 class="text-xl font-semibold text-group-text-dark font-heading">Explore GreenAmmo</h3>
+                <button id="modal-close-btn" class="text-gray-400 hover:text-group-primary-green focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
-
-            <!-- Two-Panel Grid -->
             <div class="grid md:grid-cols-2 gap-6 p-8">
-                <!-- Panel 1: GreenAmmo Solutions -->
-                <div class="bg-green-50 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-green-100"
-                    onclick="window.location.href='/solutions'">
+                <!-- Panel 1: GreenAmmo Solutions --><div class="bg-group-pastel-blue/20 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-group-pastel-blue/30 border border-group-pastel-blue/40" onclick="window.location.href='./solutions/index.html'">
                     <div>
-                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4">
-                            <p class="text-green-600 text-sm">[Undraw SVG: Business / Growth]</p>
+                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-group-pastel-blue/20">
+                            <svg class="w-16 h-16 text-group-pastel-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                         </div>
-                        <h4 class="text-2xl font-semibold text-green-700 mb-2">GreenAmmo Solutions</h4>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            Professional, scalable services spanning Finance, Education, Events, and Accommodation —
-                            uniting purpose with performance for sustainable growth.
+                        <h4 class="text-2xl font-semibold text-sol-dark mb-2 font-heading">GreenAmmo Solutions</h4>
+                        <p class="text-group-text-medium text-sm leading-relaxed">
+                            Professional, scalable services spanning Finance, Education, Events, and Accommodation — uniting purpose with performance for sustainable growth.
                         </p>
                     </div>
                     <div class="mt-6">
-                        <button class="bg-green-600 text-white px-4 py-2 rounded-xl hover:bg-green-700 transition">
+                        <button class="cta-button-secondary border-group-pastel-blue text-sol-dark hover:bg-group-pastel-blue/20 w-full sm:w-auto">
                             Visit Solutions
                         </button>
                     </div>
                 </div>
-
-                <!-- Panel 2: GreenAmmo Trust -->
-                <div class="bg-emerald-50 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-emerald-100"
-                    onclick="window.location.href='/trust'">
-                    <div>
-                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4">
-                            <p class="text-green-600 text-sm">[Undraw SVG: Community / Nature]</p>
+                <!-- Panel 2: GreenAmmo Trust --><div class="bg-group-pastel-green/30 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-group-pastel-green/40 border border-group-pastel-green/50" onclick="window.location.href='./trust/index.html'">
+                     <div>
+                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-group-pastel-green/20">
+                           <svg class="w-16 h-16 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         </div>
-                        <h4 class="text-2xl font-semibold text-green-700 mb-2">GreenAmmo Trust</h4>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            Non-profit initiatives for environmental awareness, youth empowerment, and community
-                            development — turning sustainability into action.
-                        </p>
+                        <h4 class="text-2xl font-semibold text-group-primary-green mb-2 font-heading">GreenAmmo Trust</h4>
+                        <p class="text-group-text-medium text-sm leading-relaxed">
+                            Non-profit initiatives for environmental awareness, youth empowerment, and community development — turning sustainability into action.
+                        </d>
                     </div>
                     <div class="mt-6">
-                        <button class="bg-emerald-600 text-white px-4 py-2 rounded-xl hover:bg-emerald-700 transition">
+                         <button class="cta-button-secondary border-group-primary-green text-group-primary-green hover:bg-group-pastel-green/50 w-full sm:w-auto">
                             Visit Trust
                         </button>
                     </div>
@@ -498,38 +527,78 @@
         </div>
     </div>
 
-    <!-- 🧠 JS: Open / Close Logic -->
-    <script>
-        function openModal() {
-            document.getElementById('exploreModal').classList.remove('hidden');
-            document.getElementById('exploreModal').classList.add('flex');
-        }
+    <!-- 🧠 VANILLA JS for Mobile Menu, Modal, and Lenis --><script>
+       document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const menuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIconOpen = document.getElementById('menu-icon-open');
+            const menuIconClose = document.getElementById('menu-icon-close');
 
-        function closeModal() {
-            document.getElementById('exploreModal').classList.remove('flex');
-            document.getElementById('exploreModal').classList.add('hidden');
-        }
+            if (menuToggle && mobileMenu && menuIconOpen && menuIconClose) {
+                menuToggle.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                    menuIconOpen.classList.toggle('hidden');
+                    menuIconClose.classList.toggle('hidden');
+                });
+            }
+
+            // Explore Modal Logic
+            const exploreModal = document.getElementById('exploreModal');
+            const modalContent = document.getElementById('modal-content'); // Main modal content window
+            const exploreBtns = [
+                document.getElementById('explore-btn-desktop'),
+                document.getElementById('explore-btn-mobile'),
+                document.getElementById('explore-btn-footer')
+            ];
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+
+            function openModalJS() {
+                 if(exploreModal) {
+                    exploreModal.classList.remove('hidden', 'modal-hidden');
+                    exploreModal.classList.add('flex', 'modal-visible');
+                    document.body.style.overflow = 'hidden'; // Prevent background scroll
+                 }
+            }
+
+            function closeModalJS() {
+                 if(exploreModal) {
+                    exploreModal.classList.remove('flex', 'modal-visible');
+                    exploreModal.classList.add('modal-hidden');
+                    setTimeout(() => {
+                        exploreModal.classList.add('hidden');
+                    }, 300); // Match CSS transition duration
+                    document.body.style.overflow = ''; // Restore background scroll
+                 }
+            }
+
+            exploreBtns.forEach(btn => {
+                if (btn) btn.addEventListener('click', openModalJS);
+            });
+
+            if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModalJS);
+            
+            if (exploreModal) {
+                exploreModal.addEventListener('click', (event) => { 
+                    // Close if clicking on the backdrop (the modal container itself)
+                    if (event.target === exploreModal) closeModalJS(); 
+                });
+            }
+
+            // Initialize Lenis Smooth Scroll
+            if (typeof Lenis !== 'undefined') {
+                const lenis = new Lenis()
+                function raf(time) {
+                    lenis.raf(time)
+                    requestAnimationFrame(raf)
+                }
+                requestAnimationFrame(raf)
+            } else {
+                console.warn('Lenis script not loaded or failed to initialize.');
+            }
+        });
     </script>
 
-    <!-- 💫 Optional small fade-in animation -->
-    <style>
-        @keyframes fade-in {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-fade-in {
-            animation: fade-in 0.3s ease-out;
-        }
-    </style>
-
 </body>
-
 </html>
+

@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="../assets/trust.png" /> <!-- Corrected path to trust favicon -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- 1. Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 2. Load Alpine.js for interactivity -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
+
+    <title>Reports & Research - GreenAmmo Trust</title>
+
+    <!-- 3. Configure Tailwind with TRUST (Green) Palette & Fonts -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // Custom Brand Palette (Trust Theme)
+              "brand-dark": "#1D371F", // Primary Dark Green
+              "brand-primary": "#7C966A", // Secondary Olive Green
+              "brand-accent": "#6E8546", // Tertiary Vibrant Moss
+              "brand-light": "#D2E3AB", // Lightest Green
+              "brand-base": "#F7FAF7", // Off-White Base
+            },
+            fontFamily: {
+              // Setup font families
+              'sans': ['Inter', 'sans-serif'],
+              'heading': ['Bricolage Grotesque', 'sans-serif'],
+            },
+             animation: { 
+                'fade-in': 'fade-in 0.3s ease-out',
+                'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+                'fade-in': {
+                    'from': { opacity: 0, transform: 'translateY(10px)' },
+                    'to': { opacity: 1, transform: 'translateY(0)' },
+                },
+                pulse: {
+                  '0%, 100%': { opacity: 1 },
+                  '50%': { opacity: .5 },
+                }
+            }
+          },
+        },
+      };
+    </script>
+
+    <!-- 4. Import Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- 5. Apply new font rules and CTA button styles -->
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #F7FAF7; /* brand-base */
+        color: #1D371F; /* brand-dark */
+      }
+      h1, h2, h3, h4, .font-heading {
+        font-family: "Bricolage Grotesque", sans-serif;
+      }
+      /* Using the CTA button style from trust/index.html */
+      .cta-button {
+        display: inline-block;
+        padding: 0.5rem 1.5rem; 
+        border-radius: 9999px; 
+        font-size: 1.125rem; /* text-lg */
+        transition: all 0.3s;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        transform: scale(1);
+      }
+      .cta-button:hover {
+        transform: scale(1.05);
+      }
+       
+       /* Modal transitions */
+      .modal-hidden { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-out, visibility 0s linear 0.3s; }
+      .modal-visible { opacity: 1; visibility: visible; transition: opacity 0.3s ease-out; }
+      
+      /* Style for the iframe container */
+      .report-iframe-container {
+        position: relative;
+        background-color: #e5e7eb; /* gray-200 */
+        border: 1px solid #d1d5db; /* gray-300 */
+        border-radius: 0.5rem; /* rounded-lg */
+        overflow: hidden;
+        /* A4 paper aspect ratio (approx 1 / 1.414) */
+        aspect-ratio: 1 / 1.414; 
+      }
+      .report-iframe-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+</head>
+
+<body class="bg-brand-base text-brand-dark font-sans">
+    
+    <!-- 🌿 TRUST NAV COMPONENT (from trust/index.html) -->
+     <nav class="w-full bg-white shadow-lg sticky top-0 z-50" x-data="{ open: false }">
+        <div class="container mx-auto px-4 md:px-8 py-3 flex justify-between items-center">
+            
+            <div class="flex items-center">
+                <a href="/trust/index.html" class="block"> <!-- Link to Trust Home -->
+                    <img src="../assets/trust.png" alt="GreenAmmo Trust Logo" class="h-12 w-auto object-contain" title="GreenAmmo Trust" /> <!-- Corrected path -->
+                </a>
+            </div>
+
+            <!-- Desktop Nav -->
+            <div class="hidden lg:flex items-center space-x-8">
+                <a href="/index.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Home</a> <!-- Link to Group Home -->
+                <a href="/gallery.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Media</a>
+                <a href="/trust/campaigns.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Campaigns</a>
+
+                <!-- Milestones Dropdown (Reports is active) -->
+                <div x-data="{ dropdownOpen: false }" class="relative">
+                    <button @click="dropdownOpen = !dropdownOpen" @click.away="dropdownOpen = false" class="text-brand-accent font-bold transition inline-flex items-center gap-1">
+                        Milestones
+                        <svg :class="{'rotate-180': dropdownOpen}" class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div x-show="dropdownOpen" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="absolute bg-white rounded-xl shadow-xl p-3 top-10 right-0 w-48 transition-all z-30 border border-brand-light origin-top-right">
+                        <ul class="text-sm space-y-1">
+                            <li><a href="/trust/projects.html" @click="dropdownOpen = false" class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition">Projects</a></li>
+                            <li><a href="/trust/reports.html" @click="dropdownOpen = false" class="block py-1 px-2 text-brand-dark font-bold bg-brand-light/50 rounded transition">Reports</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <a href="/joinus.html" class="cta-button bg-brand-accent text-white hover:bg-brand-dark/90 shadow-brand-accent/50">
+                    Let's Talk
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button @click="open = !open" class="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <svg x-show="open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+         <div x-show="open" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-4" class="lg:hidden px-4 pb-4 bg-white border-t border-gray-100 absolute w-full shadow-2xl z-10">
+            <ul class="flex flex-col space-y-2 font-medium">
+                <a href="/index.html" @click="open = false" class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Home</a>
+                <a href="/gallery.html" @click="open = false" class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Media</a>
+                <a href="/campaigns.html" @click="open = false" class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Campaigns</a>
+                <div x-data="{ mobileDropdownOpen: true }"> <!-- Default to open -->
+                    <button @click="mobileDropdownOpen = !mobileDropdownOpen" class="w-full text-left py-2 text-brand-accent font-bold rounded flex justify-between items-center">
+                        Milestones
+                        <svg :class="{'rotate-180': mobileDropdownOpen}" class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div x-show="mobileDropdownOpen" x-cloak class="ml-4 border-l border-brand-light pl-4 space-y-1">
+                        <a href="/trust/projects.html" @click="open = false" class="block py-1 text-sm text-gray-600 hover:text-brand-accent">Projects</a>
+                        <a href="/trust/reports.html" @click="open = false" class="block py-1 text-sm text-brand-dark font-bold">Reports</a>
+                    </div>
+                </div>
+                <a href="/joinus.html" @click="open = false" class="mt-4 block text-center cta-button bg-brand-accent text-white hover:bg-brand-dark/90 shadow-brand-accent/50">
+                    Join the Change
+                </a>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <!-- 1. HERO SECTION -->
+        <section class="bg-brand-light/60 py-16 md:py-24">
+            <div class="container mx-auto px-4 md:px-8 max-w-5xl text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-brand-dark mb-4 font-heading">
+                    Reports & Research
+                </h1>
+                <p class="text-lg md:text-xl text-brand-dark/80 max-w-3xl mx-auto">
+                    Transparency in action. Explore our annual reports, impact data, and publications.
+                </p>
+            </div>
+        </section>
+
+        <!-- 2. REPORTS GRID -->
+        <section class="py-16 bg-brand-base">
+            <div class="container mx-auto px-4 md:px-8 max-w-6xl">
+                
+                <!-- Skeleton Loader -->
+                <div id="reports-skeleton" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Skeleton Card 1 -->
+                    <div class="bg-white rounded-2xl shadow-md p-6 animate-pulse">
+                        <div class="h-8 bg-gray-300 rounded-md w-3/4 mb-4"></div>
+                        <div class="h-4 bg-gray-300 rounded-md w-full mb-6"></div>
+                        <div class="report-iframe-container bg-gray-200"></div>
+                    </div>
+                    <!-- Skeleton Card 2 -->
+                    <div class="bg-white rounded-2xl shadow-md p-6 animate-pulse">
+                        <div class="h-8 bg-gray-300 rounded-md w-1/2 mb-4"></div>
+                        <div class="h-4 bg-gray-300 rounded-md w-full mb-6"></div>
+                        <div class="report-iframe-container bg-gray-200"></div>
+                    </div>
+                </div>
+
+                <!-- Actual Reports Grid (Populated by JS) -->
+                <div id="reports-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Report cards will be injected here -->
+                </div>
+
+                <!-- Loading/End Messages -->
+                <div id="loading-message" class="hidden text-center py-8 text-gray-500">
+                    <p>Loading reports...</p>
+                </div>
+                <div id="end-message" class="hidden text-center py-8 text-gray-500">
+                    <p>No reports found.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER (Trust Theme) -->
+     <footer class="bg-brand-dark text-white pt-12">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-brand-primary">
+                <div class="md:col-span-2 space-y-4">
+                    <h3 class="text-3xl font-bold text-brand-light font-heading">GreenAmmo Group</h3>
+                    <p class="text-sm text-brand-light/70 max-w-sm">
+                        Empowering sustainable living and waste management through community action, research, and project initiation.
+                    </p>
+                </div>
+                <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3 font-heading">GreenAmmo</h4>
+                        <ul class="text-sm space-y-2 text-brand-light/80">
+                            <li><a href="/aboutus.html" class="hover:text-brand-light transition">About Us</a></li>
+                            <li><a href="/gallery.html" class="hover:text-brand-light transition">Media (Gallery)</a></li>
+                            <li><a href="/certifications.html" class="hover:text-brand-light transition">Certificates</a></li>
+                            <li><a href="/alliances.html" class="hover:text-brand-light transition">Alliances</a></li>
+                        </ul>
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3 font-heading">Solutions</h4>
+                        <ul class="text-sm space-y-2 text-brand-light/80">
+                            <li><a href="/solutions/finance.html" class="hover:text-brand-light transition">Finance</a></li>
+                            <li><a href="/solutions/education.html" class="hover:text-brand-light transition">Education & Development</a></li>
+                            <li><a href="/solutions/event-supply.html" class="hover:text-brand-light transition">Event & Supply</a></li>
+                            <li><a href="/solutions/accommodation.html" class="hover:text-brand-light transition">Accommodations</a></li>
+                        </ul>
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3 font-heading">Trust</h4>
+                        <ul class="text-sm space-y-2 text-brand-light/80">
+                            <li><a href="/trust/projects.html" class="hover:text-brand-light transition">Projects & Milestones</a></li>
+                            <li><a href="/trust/campaigns.html" class="hover:text-brand-light transition">Campaigns</a></li>
+                            <li><a href="/trust/reports.html" class="hover:text-brand-light transition">Reports & Research</a></li>
+                        </ul>
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3 font-heading">Take Action</h4>
+                        <div class="space-y-2">
+                            <a href="/join-us.html" class="block text-center py-2 px-4 rounded-full bg-brand-accent text-white hover:bg-brand-dark/90 transition text-sm font-semibold shadow-md">Join Us</a>
+                            <button id="explore-btn-footer" class="block w-full text-center py-2 px-4 rounded-full border-2 border-brand-light text-brand-light hover:bg-brand-light hover:text-brand-dark transition text-sm font-semibold">Explore</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col sm:flex-row justify-between items-center py-6 text-sm text-brand-light/80">
+                <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
+                <div class="flex space-x-4 mt-2 sm:mt-0">
+                    <a href="#" class="hover:text-white transition">Facebook</a>
+                    <a href="#" class="hover:text-white transition">Instagram</a>
+                    <a href="#" class="hover:text-white transition">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 🌍 EXPLORE Button MODAL (Vanilla JS) -->
+    <div id="exploreModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden justify-center items-center z-50 p-4 modal-hidden">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full mx-auto overflow-hidden animate-fade-in" id="modal-content">
+             <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+                <h3 class="text-xl font-semibold text-brand-dark font-heading">Explore GreenAmmo</h3>
+                <button id="modal-close-btn" class="text-gray-400 hover:text-brand-accent focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6 p-8">
+                <!-- Panel 1: GreenAmmo Solutions -->
+                <div class="bg-blue-50 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-blue-100" onclick="window.location.href='../solutions/index.html'">
+                    <div>
+                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-blue-200">
+                           <svg class="w-16 h-16 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h4 class="text-2xl font-semibold text-blue-800 mb-2 font-heading">GreenAmmo Solutions</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Professional, scalable services spanning Finance, Education, Events, and Accommodation.
+                        </p>
+                    </div>
+                    <div class="mt-6">
+                         <button class="cta-button-secondary border-blue-600 text-blue-700 hover:bg-blue-100 w-full sm:w-auto">
+                            Visit Solutions
+                        </button>
+                    </div>
+                </div>
+                <!-- Panel 2: GreenAmmo Trust -->
+                <div class="bg-green-50 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-green-100 border border-green-200" onclick="window.location.href='../trust/index.html'">
+                     <div>
+                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-green-200">
+                           <svg class="w-16 h-16 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        </div>
+                        <h4 class="text-2xl font-semibold text-green-700 mb-2 font-heading">GreenAmmo Trust</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Non-profit initiatives for environmental awareness, youth empowerment, and community development.
+                        </d>
+                    </div>
+                    <div class="mt-6">
+                         <button class="cta-button-secondary border-green-600 text-green-700 hover:bg-green-100 w-full sm:w-auto">
+                            Visit Trust
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🧠 VANILLA JS for Mobile Menu, Modal, and Lenis -->
+    <script>
+       document.addEventListener('DOMContentLoaded', () => {
+           
+            // --- State & API Variables ---
+            let currentPage = 1;
+            const perPage = 6; // Load 6 reports at a time
+            let isLoading = false;
+            let hasMore = true;
+            const proxy = 'https://corsproxy.io/?'; // CORS Proxy
+            const apiUrl = 'https://greenammo.in/wp-json/wp/v2/media';
+
+            // --- DOM Elements ---
+            const reportsGrid = document.getElementById('reports-grid');
+            const reportsSkeleton = document.getElementById('reports-skeleton');
+            const loadingMessage = document.getElementById('loading-message');
+            const endMessage = document.getElementById('end-message');
+
+            // --- API Fetching (PDF Only) ---
+            async function fetchReports() {
+                if (isLoading || !hasMore) return;
+                isLoading = true;
+                
+                if (currentPage === 1) {
+                    reportsSkeleton.classList.remove('hidden');
+                } else {
+                    loadingMessage.classList.remove('hidden');
+                }
+                endMessage.classList.add('hidden');
+
+                try {
+                    const fetchUrl = `${proxy}${encodeURIComponent(`${apiUrl}?media_type=application/pdf&per_page=${perPage}&page=${currentPage}`)}`;
+                    const res = await fetch(fetchUrl);
+                    
+                    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+
+                    const totalPages = res.headers.get('X-WP-TotalPages');
+                    const data = await res.json();
+
+                    if (data.length === 0 || (totalPages && currentPage >= parseInt(totalPages))) {
+                        hasMore = false;
+                        if(currentPage === 1) endMessage.classList.remove('hidden'); // Show "No reports" if empty on first load
+                    } else {
+                        data.forEach(renderReportCard);
+                        currentPage++;
+                    }
+                } catch (error) {
+                    console.error("Error fetching reports:", error);
+                    endMessage.textContent = 'Failed to load reports.';
+                    endMessage.classList.remove('hidden');
+                    hasMore = false;
+                } finally {
+                    isLoading = false;
+                    reportsSkeleton.classList.add('hidden');
+                    loadingMessage.classList.add('hidden');
+                }
+            }
+
+            // --- Render Report Card ---
+            function renderReportCard(item) {
+                const pdfUrl = item.source_url;
+                if (!pdfUrl) return;
+
+                const title = item.title?.rendered || 'Untitled Report';
+                // Clean up caption text
+                let description = item.caption?.rendered?.replace(/<[^>]*>?/gm, '') || 'View our latest report.';
+
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl shadow-md p-6 animate-fade-in';
+
+                card.innerHTML = `
+                    <h3 class="text-2xl font-bold text-brand-dark font-heading mb-3">${title}</h3>
+                    <p class="text-brand-dark/70 text-sm mb-5 min-h-[40px]">${description}</p>
+                    <div class="report-iframe-container">
+                        <iframe src="${pdfUrl}" frameborder="0" loading="lazy"></iframe>
+                    </div>
+                `;
+                reportsGrid.appendChild(card);
+            }
+            
+            // --- Initial Fetch ---
+            fetchReports(); // Fetch reports on page load
+
+            // --- Mobile Menu Toggle ---
+            const menuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIconOpen = document.getElementById('menu-icon-open');
+            const menuIconClose = document.getElementById('menu-icon-close');
+
+            if (menuToggle && mobileMenu && menuIconOpen && menuIconClose) {
+                menuToggle.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                    menuIconOpen.classList.toggle('hidden');
+                    menuIconClose.classList.toggle('hidden');
+                });
+            }
+
+            // --- Explore Modal Logic ---
+            const exploreModal = document.getElementById('exploreModal');
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+            const exploreBtns = [
+                document.getElementById('explore-btn-desktop'),
+                document.getElementById('explore-btn-mobile'),
+                document.getElementById('explore-btn-footer')
+            ];
+
+            function openModalJS() {
+                 if(exploreModal) {
+                    exploreModal.classList.remove('hidden', 'modal-hidden');
+                    exploreModal.classList.add('flex', 'modal-visible');
+                    document.body.style.overflow = 'hidden'; 
+                 }
+            }
+
+            function closeModalJS() {
+                 if(exploreModal) {
+                    exploreModal.classList.remove('flex', 'modal-visible');
+                    exploreModal.classList.add('modal-hidden');
+                    setTimeout(() => {
+                        exploreModal.classList.add('hidden');
+                    }, 300); 
+                    document.body.style.overflow = ''; 
+                 }
+            }
+
+            exploreBtns.forEach(btn => {
+                if (btn) btn.addEventListener('click', openModalJS);
+            });
+            if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModalJS);
+            if (exploreModal) {
+                exploreModal.addEventListener('click', (event) => { 
+                    if (event.target === exploreModal) closeModalJS(); 
+                });
+            }
+
+            // --- Lenis Init ---
+            if (typeof Lenis !== 'undefined') {
+                const lenis = new Lenis()
+                function raf(time) {
+                    lenis.raf(time)
+                    requestAnimationFrame(raf)
+                }
+                requestAnimationFrame(raf)
+            } else {
+                console.warn('Lenis script not loaded.');
+            }
+        });
+    </script>
+
+</body>
+</html>
