@@ -361,7 +361,7 @@
                 endMessage.classList.add('hidden');
 
                 try {
-                    const fetchUrl = `${proxy}${encodeURIComponent(`${apiUrl}?mime_type=application/pdf&per_page=${perPage}&page=${currentPage}`)}`;
+                    const fetchUrl = `${proxy}${encodeURIComponent(`${apiUrl}?mime_type=pdf&per_page=${perPage}&page=${currentPage}`)}`;
                     const res = await fetch(fetchUrl);
                     
                     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
