@@ -414,7 +414,7 @@
 
                 try {
                     // Fetch images or videos based on mediaType
-                    const res = await fetch(`https://greenammo.in/wp-json/wp/v2/media?mime_type=${mediaType}&per_page=${perPage}&page=${page}`);
+                    const res = await fetch(`https://greenammo.in/wp-json/wp/v2/media?media_type=${mediaType}&per_page=${perPage}&page=${page}`);
                     const totalPages = res.headers.get('X-WP-TotalPages');
                     const data = await res.json();
 
