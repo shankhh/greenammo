@@ -85,22 +85,22 @@
       .modal-hidden { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-out, visibility 0s linear 0.3s; }
       .modal-visible { opacity: 1; visibility: visible; transition: opacity 0.3s ease-out; }
       
-      /* Style for the iframe container */
-      .report-iframe-container {
+      /* NEW: Style for the Report Cover Image */
+      .report-image-container {
         position: relative;
         background-color: #e5e7eb; /* gray-200 */
         border: 1px solid #d1d5db; /* gray-300 */
         border-radius: 0.5rem; /* rounded-lg */
         overflow: hidden;
-        /* A4 paper aspect ratio (approx 1 / 1.414) */
-        aspect-ratio: 1 / 1.414; 
+        aspect-ratio: 16 / 9; /* Widescreen for image */
       }
-      .report-iframe-container iframe {
+      .report-image-container img {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
+        object-fit: cover; /* Cover the area */
       }
     </style>
 </head>
@@ -113,7 +113,7 @@
             
             <div class="flex items-center">
                 <a href="/trust/index.html" class="block"> <!-- Link to Trust Home -->
-                    <img src="../assets/trust.png" alt="GreenAmmo Trust Logo" class="h-12 w-auto object-contain" title="GreenAmmo Trust" /> <!-- Corrected path -->
+                    <img src="trust.png" alt="GreenAmmo Trust Logo" class="h-12 w-auto object-contain" title="GreenAmmo Trust" /> <!-- Corrected path -->
                 </a>
             </div>
 
@@ -143,14 +143,14 @@
             </div>
 
             <!-- Mobile Menu Toggle -->
-            <button @click="open = !open" class="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100">
-                <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                <svg x-show="open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <button id="mobile-menu-toggle" @click="open = !open" class="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                <svg id="menu-icon-open" x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <svg id="menu-icon-close" x-show="open" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
 
         <!-- Mobile Menu -->
-         <div x-show="open" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-4" class="lg:hidden px-4 pb-4 bg-white border-t border-gray-100 absolute w-full shadow-2xl z-10">
+         <div id="mobile-menu" x-show="open" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-4" class="lg:hidden px-4 pb-4 bg-white border-t border-gray-100 absolute w-full shadow-2xl z-10">
             <ul class="flex flex-col space-y-2 font-medium">
                 <a href="/index.html" @click="open = false" class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Home</a>
                 <a href="/gallery.html" @click="open = false" class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Media</a>
@@ -197,13 +197,17 @@
                     <div class="bg-white rounded-2xl shadow-md p-6 animate-pulse">
                         <div class="h-8 bg-gray-300 rounded-md w-3/4 mb-4"></div>
                         <div class="h-4 bg-gray-300 rounded-md w-full mb-6"></div>
-                        <div class="report-iframe-container bg-gray-200"></div>
+                        <!-- Updated Skeleton: Image placeholder -->
+                        <div class="report-image-container bg-gray-200"></div>
+                        <div class="h-10 bg-gray-300 rounded-full w-1/2 mt-6"></div>
                     </div>
                     <!-- Skeleton Card 2 -->
                     <div class="bg-white rounded-2xl shadow-md p-6 animate-pulse">
                         <div class="h-8 bg-gray-300 rounded-md w-1/2 mb-4"></div>
                         <div class="h-4 bg-gray-300 rounded-md w-full mb-6"></div>
-                        <div class="report-iframe-container bg-gray-200"></div>
+                        <!-- Updated Skeleton: Image placeholder -->
+                        <div class="report-image-container bg-gray-200"></div>
+                        <div class="h-10 bg-gray-300 rounded-full w-1/2 mt-6"></div>
                     </div>
                 </div>
 
@@ -217,8 +221,9 @@
                     <p>Loading reports...</p>
                 </div>
                 <div id="end-message" class="hidden text-center py-8 text-gray-500">
-                    <p>No reports found.</p>
+                    <p>No more reports found.</p>
                 </div>
+                <div id="sentinel" class="h-10"></div> <!-- Infinite scroll trigger -->
 
             </div>
         </section>
@@ -336,10 +341,10 @@
            
             // --- State & API Variables ---
             let currentPage = 1;
-            const perPage = 6; // Load 6 reports at a time
+            const perPage = 20; // Fetch more items to get enough PDFs
             let isLoading = false;
             let hasMore = true;
-            const proxy = 'https://corsproxy.io/?'; // CORS Proxy
+            let pdfCount = 0; // Track how many PDFs we've found
             const apiUrl = 'https://greenammo.in/wp-json/wp/v2/media';
 
             // --- DOM Elements ---
@@ -347,8 +352,9 @@
             const reportsSkeleton = document.getElementById('reports-skeleton');
             const loadingMessage = document.getElementById('loading-message');
             const endMessage = document.getElementById('end-message');
+            const sentinel = document.getElementById('sentinel'); // Infinite scroll trigger
 
-            // --- API Fetching (PDF Only) ---
+            // --- API Fetching (Filter Client-Side) ---
             async function fetchReports() {
                 if (isLoading || !hasMore) return;
                 isLoading = true;
@@ -361,24 +367,57 @@
                 endMessage.classList.add('hidden');
 
                 try {
-                    const fetchUrl = `${proxy}${encodeURIComponent(`${apiUrl}?mime_type=pdf&per_page=${perPage}&page=${currentPage}`)}`;
+                    // **FIXED: Fetching ALL media directly without proxy**
+                    const fetchUrl = `${apiUrl}?per_page=${perPage}&page=${currentPage}`;
                     const res = await fetch(fetchUrl);
                     
-                    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+                    if (!res.ok) {
+                         let errorText = `HTTP error! status: ${res.status}`;
+                         try {
+                            const errorJson = await res.json();
+                            if (errorJson && errorJson.message) {
+                                errorText += `. Message: ${errorJson.message}`;
+                            }
+                         } catch (e) {}
+                         throw new Error(errorText);
+                    }
 
-                    const totalPages = res.headers.get('X-WP-TotalPages');
                     const data = await res.json();
+                    
+                    if(data.code) {
+                         throw new Error(`WordPress API Error: ${data.message}`);
+                    }
+                    
+                    if (!Array.isArray(data)) {
+                         throw new Error("Invalid data format received. Expected an array.");
+                    }
 
-                    if (data.length === 0 || (totalPages && currentPage >= parseInt(totalPages))) {
+                    // **FIXED: Filter for PDFs on the client-side**
+                    const pdfs = data.filter(item => item.mime_type === 'application/pdf');
+                    
+                    if (pdfs.length > 0) {
+                        pdfs.forEach(renderReportCard);
+                        pdfCount += pdfs.length;
+                    }
+                    
+                    // Check if we've reached the end of the media library
+                    const totalPages = res.headers.get('X-WP-TotalPages');
+                    if (data.length < perPage || (totalPages && currentPage >= parseInt(totalPages, 10))) {
                         hasMore = false;
-                        if(currentPage === 1) endMessage.classList.remove('hidden'); // Show "No reports" if empty on first load
+                        if (pdfCount === 0 && currentPage === 1) { // No PDFs found at all
+                            endMessage.classList.remove('hidden');
+                        } else if (pdfCount > 0) {
+                             // If we've loaded at least one PDF and run out of media, show a different end message
+                             endMessage.textContent = 'All reports have been loaded.';
+                             endMessage.classList.remove('hidden');
+                        }
                     } else {
-                        data.forEach(renderReportCard);
                         currentPage++;
                     }
+
                 } catch (error) {
                     console.error("Error fetching reports:", error);
-                    endMessage.textContent = 'Failed to load reports.';
+                    endMessage.textContent = 'Failed to load reports. Please try again later.'; 
                     endMessage.classList.remove('hidden');
                     hasMore = false;
                 } finally {
@@ -388,27 +427,44 @@
                 }
             }
 
-            // --- Render Report Card ---
+            // --- Render Report Card (NEW UI) ---
             function renderReportCard(item) {
                 const pdfUrl = item.source_url;
                 if (!pdfUrl) return;
 
+                // Find the PNG/JPEG cover image
+                const imageUrl = item.media_details?.sizes?.medium_large?.source_url 
+                               || item.media_details?.sizes?.full?.source_url
+                               || "https://placehold.co/600x400/D2E3AB/1D371F?text=Report"; // Fallback placeholder
+
                 const title = item.title?.rendered || 'Untitled Report';
-                // Clean up caption text
                 let description = item.caption?.rendered?.replace(/<[^>]*>?/gm, '') || 'View our latest report.';
 
                 const card = document.createElement('div');
-                card.className = 'bg-white rounded-2xl shadow-md p-6 animate-fade-in';
+                card.className = 'bg-white rounded-2xl shadow-md p-6 animate-fade-in flex flex-col';
 
                 card.innerHTML = `
                     <h3 class="text-2xl font-bold text-brand-dark font-heading mb-3">${title}</h3>
                     <p class="text-brand-dark/70 text-sm mb-5 min-h-[40px]">${description}</p>
-                    <div class="report-iframe-container">
-                        <iframe src="${pdfUrl}" frameborder="0" loading="lazy"></iframe>
+                    <div class="report-image-container mb-6">
+                         <img src="${imageUrl}" alt="${title} cover" loading="lazy" />
                     </div>
+                    <a href="${pdfUrl}" target="_blank" rel="noopener noreferrer" 
+                       class="cta-button bg-brand-accent text-white hover:bg-brand-dark/90 shadow-brand-accent/50 text-center text-base py-2 mt-auto">
+                        Download PDF
+                    </a>
                 `;
                 reportsGrid.appendChild(card);
             }
+            
+            // --- Infinite Scroll Observer ---
+            const infiniteScrollObserver = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting && !isLoading && hasMore) {
+                    fetchReports();
+                }
+            }, { threshold: 0.5 }); 
+
+            if(sentinel) infiniteScrollObserver.observe(sentinel);
             
             // --- Initial Fetch ---
             fetchReports(); // Fetch reports on page load
@@ -481,3 +537,4 @@
 
 </body>
 </html>
+
