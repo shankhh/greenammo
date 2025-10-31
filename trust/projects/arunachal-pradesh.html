@@ -3,21 +3,16 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="trust.png" /> <!-- Corrected path to trust favicon -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- 1. Load Tailwind CSS -->
+    <link rel="icon" type="image/svg+xml" href="../../assets/trust.png" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- 2. Load Alpine.js for interactivity -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
-    <!-- Lenis Smooth Scroll -->
     <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
 
-    <title>Projects & Milestones - GreenAmmo Trust</title>
+    <title>Arunachal Pradesh Projects - GreenAmmo Trust</title>
 
-    <!-- 3. Configure Tailwind with TRUST (Green) Palette & Fonts -->
     <script>
       tailwind.config = {
         theme: {
@@ -38,15 +33,11 @@
              animation: { 
                 'fade-in': 'fade-in 0.3s ease-out',
                 'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            },
-            keyframes: {
+              },
+              keyframes: {
                 'fade-in': {
                     'from': { opacity: 0, transform: 'translateY(10px)' },
                     'to': { opacity: 1, transform: 'translateY(0)' },
-                },
-                pulse: {
-                  '0%, 100%': { opacity: 1 },
-                  '50%': { opacity: .5 },
                 }
             }
           },
@@ -54,10 +45,8 @@
       };
     </script>
 
-    <!-- 4. Import Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- 5. Apply new font rules and CTA button styles -->
     <style>
       body {
         font-family: "Inter", sans-serif;
@@ -67,7 +56,6 @@
       h1, h2, h3, h4, .font-heading {
         font-family: "Bricolage Grotesque", sans-serif;
       }
-      /* Using the CTA button style from trust/index.html */
       .cta-button {
         display: inline-block;
         padding: 0.5rem 1.5rem; 
@@ -84,47 +72,95 @@
        /* Modal transitions */
       .modal-hidden { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-out, visibility 0s linear 0.3s; }
       .modal-visible { opacity: 1; visibility: visible; transition: opacity 0.3s ease-out; }
-      
-      /* Project Card hover effect */
-      .project-card:hover .project-card-arrow {
-          transform: translateX(4px);
-      }
-      /* Style for the map image */
-      .map-svg {
+       
+      /* Style for the timeline */
+      .timeline-container::before {
+        content: '';
         position: absolute;
-        right: -1rem;
-        bottom: -1rem;
-        width: 8rem; /* 128px */
-        height: 8rem; /* 128px */
-        opacity: 0.15;
-        transition: all 0.3s ease-out;
+        top: 0;
+        bottom: 0; /* FIXED: This ensures it goes all the way down */
+        left: 1.25rem; /* 20px / 1.25rem */
+        width: 4px;
+        background-color: #D2E3AB; /* brand-light */
+        z-index: 0;
       }
-      .project-card:hover .map-svg {
-        opacity: 0.3;
-        transform: scale(1.1);
+       
+      /* Desktop timeline alignment */
+      @media (min-width: 768px) {
+        .timeline-container::before {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            width: 50%;
+            padding-left: 0; /* Reset mobile padding */
+        }
+
+        /* --- CSS SWAPPED PER USER REQUEST --- */
+
+        /* Odd items (1, 3, 5) align RIGHT, pad left */
+        .timeline-item:nth-child(odd) {
+             align-self: flex-end;
+             padding-left: 2.5rem; /* 40px */
+             text-align: left;
+        }
+        /* Even items (2, 4) align LEFT, pad right */
+         .timeline-item:nth-child(even) {
+             align-self: flex-start;
+             padding-right: 2.5rem; /* 40px */
+             text-align: right;
+        }
+         
+        /* Dot positioning for desktop */
+        .timeline-dot {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Dot styles swapped */
+         .timeline-item:nth-child(odd) .timeline-dot {
+            left: -0.625rem;
+            transform: translateX(0);
+         }
+         .timeline-item:nth-child(even) .timeline-dot {
+            left: auto;
+            right: -0.625rem; 
+            transform: translateX(0);
+         }
+         
+         /* Trigger styles swapped */
+         .timeline-item:nth-child(odd) .timeline-trigger {
+             flex-direction: row;
+             text-align: left;
+         }
+          .timeline-item:nth-child(even) .timeline-trigger {
+             flex-direction: row-reverse;
+             text-align: right;
+         }
+          .timeline-item:nth-child(odd) .timeline-trigger-text {
+             align-items: flex-start;
+         }
+          .timeline-item:nth-child(even) .timeline-trigger-text {
+             align-items: flex-end;
+         }
       }
+
     </style>
 </head>
 
 <body class="bg-brand-base text-brand-dark font-sans">
     
-    <!-- 🌿 TRUST NAV COMPONENT (from trust/index.html) -->
-     <nav class="w-full bg-white shadow-lg sticky top-0 z-50" x-data="{ open: false }">
+    <nav class="w-full bg-white shadow-lg sticky top-0 z-50" x-data="{ open: false }">
         <div class="container mx-auto px-4 md:px-8 py-3 flex justify-between items-center">
             
             <div class="flex items-center">
-                <a href="/trust/index.html" class="block"> <!-- Link to Trust Home -->
-                    <img src="trust.png" alt="GreenAmmo Trust Logo" class="h-12 w-auto object-contain" title="GreenAmmo Trust" /> <!-- Corrected path -->
-                </a>
+                <a href="/trust/index.html" class="block"> <img src="../../assets/trust.png" alt="GreenAmmo Trust Logo" class="h-12 w-auto object-contain" title="GreenAmmo Trust" /> </a>
             </div>
 
-            <!-- Desktop Nav -->
             <div class="hidden lg:flex items-center space-x-8">
-                <a href="/index.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Home</a> <!-- Link to Group Home -->
-                <a href="/gallery.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Media</a>
+                <a href="/index.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Home</a> <a href="/gallery.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Media</a>
                 <a href="/trust/campaigns.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Campaigns</a>
 
-                <!-- Milestones Dropdown (Projects is active) -->
                 <div x-data="{ dropdownOpen: false }" class="relative">
                     <button @click="dropdownOpen = !dropdownOpen" @click.away="dropdownOpen = false" class="text-brand-accent font-bold transition inline-flex items-center gap-1">
                         Milestones
@@ -133,7 +169,7 @@
                     <div x-show="dropdownOpen" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="absolute bg-white rounded-xl shadow-xl p-3 top-10 right-0 w-48 transition-all z-30 border border-brand-light origin-top-right">
                         <ul class="text-sm space-y-1">
                             <li><a href="/trust/projects.html" @click="dropdownOpen = false" class="block py-1 px-2 text-brand-dark font-bold bg-brand-light/50 rounded transition">Projects</a></li>
-                            <li><a href="/trust/reports.html" @click="dropdownOpen = false" class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition">Reports</a></li>
+                            <li><a href="/trust/reports.html" @@click="dropdownOpen = false" class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition">Reports</a></li>
                         </ul>
                     </div>
                 </div>
@@ -143,21 +179,18 @@
                 </a>
             </div>
 
-            <!-- Mobile Menu Toggle -->
             <button id="mobile-menu-toggle" @click="open = !open" class="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100">
                 <svg id="menu-icon-open" x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 <svg id="menu-icon-close" x-show="open" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
 
-        <!-- Mobile Menu -->
-         <div id="mobile-menu" x-show="open" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-4" class="lg:hidden px-4 pb-4 bg-white border-t border-gray-100 absolute w-full shadow-2xl z-10">
+        <div id="mobile-menu" x-show="open" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-4" class="lg:hidden px-4 pb-4 bg-white border-t border-gray-100 absolute w-full shadow-2xl z-10">
             <ul class="flex flex-col space-y-2 font-medium">
                 <a href="/index.html" @click="open = false" class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Home</a>
                 <a href="/gallery.html" @click="open = false" class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Media</a>
                 <a href="/campaigns.html" @click="open = false" class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Campaigns</a>
-                <div x-data="{ mobileDropdownOpen: true }"> <!-- Default to open -->
-                    <button @click="mobileDropdownOpen = !mobileDropdownOpen" class="w-full text-left py-2 text-brand-accent font-bold rounded flex justify-between items-center">
+                <div x-data="{ mobileDropdownOpen: true }"> <button @click="mobileDropdownOpen = !mobileDropdownOpen" class="w-full text-left py-2 text-brand-accent font-bold rounded flex justify-between items-center">
                         Milestones
                         <svg :class="{'rotate-180': mobileDropdownOpen}" class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
@@ -173,164 +206,85 @@
         </div>
     </nav>
 
-    <!-- MAIN CONTENT -->
-    <main>
+    <main x-data="{ openAccordion: 1, showModal: false, modalImage: '', modalCaption: '' }">
 
-        <!-- 1. HERO SECTION -->
         <section class="bg-brand-light/60 py-16 md:py-24">
             <div class="container mx-auto px-4 md:px-8 max-w-5xl text-center">
+                <p class="text-sm font-semibold text-brand-accent uppercase tracking-wider mb-2">Project Milestones</p>
                 <h1 class="text-4xl md:text-5xl font-extrabold text-brand-dark mb-4 font-heading">
-                    Projects & Milestones
+                    Arunachal Pradesh
                 </h1>
                 <p class="text-lg md:text-xl text-brand-dark/80 max-w-3xl mx-auto">
-                    Explore our on-the-ground work and key achievements across India and beyond.
+                    Grassroots, community-led waste action in Tezu, turning household plastic into future community assets.
                 </p>
             </div>
         </section>
 
-        <!-- 2. PROJECTS GRID (9 items) -->
-<!-- 2. PROJECTS GRID (9 items) -->
-<section class="py-16 bg-brand-base">
-    <div class="container mx-auto px-4 md:px-8 max-w-6xl">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <!-- Card 1: Meghalaya -->
-            <a href="/trust/projects/meghalaya.html" class="project-card relative bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden group">
-                <!-- UPDATED: Subtle Map SVG Background (Top Right, Zoom on Hover) -->
-                <img src="../assets/Meghalaya.svg" alt="Meghalaya Map" 
-                     class="absolute top-6 right-6 w-40 h-40 opacity-20 filter grayscale group-hover:opacity-30 group-hover:scale-110 transition-all duration-300 ease-out" 
-                     onerror="this.style.display='none'" />
+        <section class="py-20 bg-brand-base">
+            <div class="container mx-auto px-4 md:px-8 max-w-5xl relative timeline-container">
                 
-                <div class="relative z-10 flex flex-col h-full">
-                    <h3 class="text-2xl font-bold text-brand-dark font-heading mb-2">Meghalaya</h3>
-                    <p class="text-brand-dark/70 text-sm mb-4">S.U.P.E.R Campaign, Animal Homes Project, Mutong Plastic Festival, and more.</p>
-                    <span class="mt-auto font-semibold text-brand-accent group-hover:underline flex items-center">
-                        View Milestones <span class="project-card-arrow transition-transform duration-300 ml-1">&rarr;</span>
-                    </span>
-                </div>
-            </a>
+                <div class="relative flex flex-col gap-12">
 
-            <!-- Card 2: West Bengal -->
-            <a href="/trust/projects/west-bengal.html" class="project-card relative bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden group">
-                <img src="../assets/WestBengal.svg" alt="West Bengal Map" 
-                     class="absolute top-6 right-6 w-40 h-40 opacity-20 filter grayscale group-hover:opacity-30 group-hover:scale-110 transition-all duration-300 ease-out" 
-                     onerror="this.style.display='none'" />
-                <div class="relative z-10 flex flex-col h-full">
-                    <h3 class="text-2xl font-bold text-brand-dark font-heading mb-2">West Bengal</h3>
-                    <p class="text-brand-dark/70 text-sm mb-4">Community involvement in Darjeeling, Menstrual Health Campaigns, and urban projects in Kolkata.</p>
-                    <span class="mt-auto font-semibold text-brand-accent group-hover:underline flex items-center">
-                        View Milestones <span class="project-card-arrow transition-transform duration-300 ml-1">&rarr;</span>
-                    </span>
+                    <div class="timeline-item relative pl-10 md:pl-0">
+                        <div class="timeline-dot absolute top-1 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:translate-x-1/2"></div>
+                        
+                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+                            <button @click="openAccordion = (openAccordion === 1 ? null : 1)" class="w-full text-left">
+                                <div class="timeline-trigger flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                    <div class="timeline-trigger-text flex-grow flex flex-col md:items-start"> <h3 class="text-xl font-bold text-brand-dark font-heading">Grassroots Waste Action</h3>
+                                        <p class="text-sm text-brand-accent font-semibold">Tezu</p>
+                                    </div>
+                                    <img src="https://placehold.co/400x300/D2E3AB/1D371F?text=Tezu+Project" alt="Tezu Project" class="w-full md:w-24 h-48 md:h-24 object-cover rounded-lg flex-shrink-0">
+                                    <svg :class="{'rotate-180': openAccordion === 1}" class="w-6 h-6 text-brand-accent transform transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </div>
+                            </button>
+                            
+                            <div x-show="openAccordion === 1" x-transition class="animate-fade-in mt-6 pt-6 border-t border-gray-100">
+                                <div class="text-brand-dark/80 mb-6 text-left space-y-4">
+                                    <ul class="list-disc list-outside space-y-3 pl-5">
+                                        <li><strong>Community-Led Start</strong> – Project initiated exclusively by local champions Khushbu and Aditya.</li>
+                                        <li><strong>Household-Level Engagement</strong> – Residents encouraged to collect and process “dead plastic” from their homes and shops.</li>
+                                        <li><strong>School-Led Action</strong> – Telluliam Government Secondary School made a focal point:
+                                            <ul class="list-circle list-outside pl-5 mt-2 space-y-1">
+                                                <li>Students, teachers, and school administrators engaged in clean-ups.</li>
+                                                <li>Collected plastic immediately converted into BottleBricks during training sessions.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Next Phase</strong> – BottleBricks earmarked for construction of a community asset, coordinated by local correspondent(s).</li>
+                                    </ul>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <button @click="showModal = true; modalImage = 'https://placehold.co/800x600/F7FAF7/6E8546?text=School+Workshop'; modalCaption = 'Workshop at Telluliam Government Secondary School'">
+                                        <img src="https://placehold.co/400x300/F7FAF7/6E8546?text=School+Workshop" alt="School Workshop" class="rounded-lg object-cover w-full h-full aspect-square hover:opacity-80 transition">
+                                    </button>
+                                    <button @click="showModal = true; modalImage = 'https://placehold.co/800x600/F7FAF7/6E8546?text=Community+Bricks'; modalCaption = 'BottleBricks collected from homes and shops'">
+                                        <img src="https://placehold.co/400x300/F7FAF7/6E8546?text=Community+Bricks" alt="Community Bricks" class="rounded-lg object-cover w-full h-full aspect-square hover:opacity-80 transition">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
-            </a>
+            </div>
+        </section>
 
-            <!-- Card 3: Himachal Pradesh -->
-            <a href="/trust/projects/himachal-pradesh.html" class="project-card relative bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden group">
-                <img src="../assets/HimachalPradesh.svg" alt="Himachal Pradesh Map" 
-                     class="absolute top-6 right-6 w-40 h-40 opacity-20 filter grayscale group-hover:opacity-30 group-hover:scale-110 transition-all duration-300 ease-out" 
-                     onerror="this.style.display='none'" />
-                <div class="relative z-10 flex flex-col h-full">
-                    <h3 class="text-2xl font-bold text-brand-dark font-heading mb-2">Himachal Pradesh</h3>
-                    <p class="text-brand-dark/70 text-sm mb-4">Eco-tourism waste collection in Kalga, Eco-Toilet innovation, and glass bottle architecture in Manali.</p>
-                    <span class="mt-auto font-semibold text-brand-accent group-hover:underline flex items-center">
-                        View Milestones <span class="project-card-arrow transition-transform duration-300 ml-1">&rarr;</span>
-                    </span>
-                </div>
-            </a>
-
-            <!-- Card 4: Assam -->
-            <a href="/trust/projects/assam.html" class="project-card relative bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden group">
-                <img src="../assets/Assam.svg" alt="Assam Map" 
-                     class="absolute top-6 right-6 w-40 h-40 opacity-20 filter grayscale group-hover:opacity-30 group-hover:scale-110 transition-all duration-300 ease-out" 
-                     onerror="this.style.display='none'" />
-                <div class="relative z-10 flex flex-col h-full">
-                    <h3 class="text-2xl font-bold text-brand-dark font-heading mb-2">Assam</h3>
-                    <p class="text-brand-dark/70 text-sm mb-4">Island-wide plastic-free drive in Majuli, building flood-resilient designs with BottleBricks and bamboo.</p>
-                    <span class="mt-auto font-semibold text-brand-accent group-hover:underline flex items-center">
-                        View Milestones <span class="project-card-arrow transition-transform duration-300 ml-1">&rarr;</span>
-                    </span>
-                </div>
-            </a>
-
-            <!-- Card 5: Arunachal Pradesh -->
-            <a href="/trust/projects/arunachal-pradesh.html" class="project-card relative bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden group">
-                <img src="../assets/ArunachalPradesh.svg" alt="Arunachal Pradesh Map" 
-                     class="absolute top-6 right-6 w-40 h-40 opacity-20 filter grayscale group-hover:opacity-30 group-hover:scale-110 transition-all duration-300 ease-out" 
-                     onerror="this.style.display='none'" />
-                <div class="relative z-10 flex flex-col h-full">
-                    <h3 class="text-2xl font-bold text-brand-dark font-heading mb-2">Arunachal Pradesh</h3>
-                    <p class="text-brand-dark/70 text-sm mb-4">Grassroots waste action in Tezu, engaging households and schools in plastic collection.</p>
-                    <span class="mt-auto font-semibold text-brand-accent group-hover:underline flex items-center">
-                        View Milestones <span class="project-card-arrow transition-transform duration-300 ml-1">&rarr;</span>
-                    </span>
-                </div>
-            </a>
-            
-            <!-- Card 6: Tamil Nadu -->
-            <a href="/trust/projects/tamil-nadu.html" class="project-card relative bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden group">
-                <img src="../assets/TamilNadu.svg" alt="Tamil Nadu Map" 
-                     class="absolute top-6 right-6 w-40 h-40 opacity-20 filter grayscale group-hover:opacity-30 group-hover:scale-110 transition-all duration-300 ease-out" 
-                     onerror="this.style.display='none'" />
-                <div class="relative z-10 flex flex-col h-full">
-                    <h3 class="text-2xl font-bold text-brand-dark font-heading mb-2">Tamil Nadu</h3>
-                    <p class="text-brand-dark/70 text-sm mb-4">Urban and coastal sustainability in Chennai, Marina Beach clean-ups, and institutional workshops.</p>
-                    <span class="mt-auto font-semibold text-brand-accent group-hover:underline flex items-center">
-                        View Milestones <span class="project-card-arrow transition-transform duration-300 ml-1">&rarr;</span>
-                    </span>
-                </div>
-            </a>
-
-            <!-- Card 7: Odisha -->
-            <a href="/trust/projects/odisha.html" class="project-card relative bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden group">
-                 <img src="../assets/Odisha.svg" alt="Odisha Map" 
-                      class="absolute top-6 right-6 w-40 h-40 opacity-20 filter grayscale group-hover:opacity-30 group-hover:scale-110 transition-all duration-300 ease-out" 
-                      onerror="this.style.display='none'" />
-                <div class="relative z-10 flex flex-col h-full">
-                    <h3 class="text-2xl font-bold text-brand-dark font-heading mb-2">Odisha</h3>
-                    <p class="text-brand-dark/70 text-sm mb-4">Rural sanitation and energy transformation in remote districts, including eco-toilet construction and solar lamp distribution.</p>
-                    <span class="mt-auto font-semibold text-brand-accent group-hover:underline flex items-center">
-                        View Milestones <span class="project-card-arrow transition-transform duration-300 ml-1">&rarr;</span>
-                    </span>
-                </div>
-            </a>
-
-            <!-- Card 8: Goa -->
-            <a href="/trust/projects/goa.html" class="project-card relative bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden group">
-                <img src="../assets/Goa.svg" alt="Goa Map" 
-                     class="absolute top-6 right-6 w-40 h-40 opacity-20 filter grayscale group-hover:opacity-30 group-hover:scale-110 transition-all duration-300 ease-out" 
-                     onerror="this.style.display='none'" />
-                <div class="relative z-10 flex flex-col h-full">
-                    <h3 class="text-2xl font-bold text-brand-dark font-heading mb-2">Goa</h3>
-                    <p class="text-brand-dark/70 text-sm mb-4">Eco-retreat from waste project in South Goa, utilizing materials from clean-ups at Arambol, Anjuna, and Baga.</p>
-                    <span class="mt-auto font-semibold text-brand-accent group-hover:underline flex items-center">
-                        View Milestones <span class="project-card-arrow transition-transform duration-300 ml-1">&rarr;</span>
-                    </span>
-                </div>
-            </a>
-
-            <!-- Card 9: Nepal -->
-            <a href="/trust/projects/nepal.html" class="project-card relative bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden group">
-                <img src="../assets/Nepal.svg" alt="Nepal Map" 
-                     class="absolute top-6 right-6 w-40 h-40 opacity-20 filter grayscale group-hover:opacity-30 group-hover:scale-110 transition-all duration-300 ease-out" 
-                     onerror="this.style.display='none'" />
-                <div class="relative z-10 flex flex-col h-full">
-                    <h3 class="text-2xl font-bold text-brand-dark font-heading mb-2">Nepal (International)</h3>
-                    <p class="text-brand-dark/70 text-sm mb-4">Cross-border adaptation in Lamzung, Pokhara, & Chitwan, integrating BottleBricks into municipal waste systems.</p>
-                    <span class="mt-auto font-semibold text-brand-accent group-hover:underline flex items-center">
-                        View Milestones <span class="project-card-arrow transition-transform duration-300 ml-1">&rarr;</span>
-                    </span>
-                </div>
-            </a>
-
+        <div x-show="showModal" x-cloak
+             class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[99] flex items-center justify-center p-4 modal-hidden" 
+             x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" 
+             x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" 
+             x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+             @click="showModal = false">
+            <figure class="max-w-3xl max-h-[80vh] relative" @click.stop>
+                <button @click="showModal = false" class="absolute -top-4 -right-4 m-2 text-white bg-black/50 rounded-full p-1 z-[60] hover:text-brand-light transition text-3xl">&times;</button>
+                <img :src="modalImage" class="rounded-lg shadow-xl max-h-[80vh] w-auto">
+                <figcaption class="text-center text-white text-sm mt-2 font-medium" x-text="modalCaption"></figcaption>
+            </figure>
         </div>
-    </div>
-</section>
-
 
     </main>
 
-    <!-- FOOTER (Trust Theme) -->
-     <footer class="bg-brand-dark text-white pt-12">
+    <footer class="bg-brand-dark text-white pt-12">
         <div class="container mx-auto px-4 md:px-8">
             <div class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-brand-primary">
                 <div class="md:col-span-2 space-y-4">
@@ -386,7 +340,6 @@
         </div>
     </footer>
 
-    <!-- 🌍 EXPLORE Button MODAL (Vanilla JS) -->
     <div id="exploreModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden justify-center items-center z-50 p-4 modal-hidden">
         <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full mx-auto overflow-hidden animate-fade-in" id="modal-content">
              <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100">
@@ -396,7 +349,6 @@
                 </button>
             </div>
             <div class="grid md:grid-cols-2 gap-6 p-8">
-                <!-- Panel 1: GreenAmmo Solutions -->
                 <div class="bg-blue-50 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-blue-100" onclick="window.location.href='../solutions/index.html'">
                     <div>
                         <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-blue-200">
@@ -413,7 +365,6 @@
                         </button>
                     </div>
                 </div>
-                <!-- Panel 2: GreenAmmo Trust -->
                 <div class="bg-green-50 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-green-100 border border-green-200" onclick="window.location.href='../trust/index.html'">
                      <div>
                         <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-green-200">
@@ -434,7 +385,6 @@
         </div>
     </div>
 
-    <!-- 🧠 VANILLA JS for Mobile Menu, Modal, and Lenis -->
     <script>
        document.addEventListener('DOMContentLoaded', () => {
            
@@ -506,4 +456,3 @@
 
 </body>
 </html>
-
