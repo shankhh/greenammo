@@ -10,7 +10,7 @@ async function fetch_post() {
 
     while (true) {
       const response = await fetch(
-        `https://greenammo.in/wp-json/wp/v2/posts?per_page=${limit}&page=${page}`
+        `https://cms.greenammo.in/wp-json/wp/v2/posts?per_page=${limit}&page=${page}`
       );
 
       // Stop if page does not exist (404) or any other non-OK status
