@@ -889,7 +889,7 @@
       async function get_post_by_slug() {
         try {
           const res = await fetch(
-            `https://greenammo.in/wp-json/wp/v2/posts?slug=${slug}`
+            `https://cms.greenammo.in/wp-json/wp/v2/posts?slug=${slug}`
           );
           const data = await res.json();
           document.querySelector(".title").innerHTML = data[0].title.rendered;
