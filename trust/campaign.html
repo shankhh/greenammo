@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Campaign</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Typography -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      font-family: Inter, sans-serif;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- HERO -->
+  <section class="bg-[#1D371F] text-white py-16">
+    <div class="container mx-auto px-4 max-w-5xl">
+      <h1 class="title text-3xl md:text-5xl font-bold mb-6"></h1>
+
+      <img
+        id="heroImage"
+        class="w-full h-[420px] object-cover rounded-xl shadow-lg"
+        alt=""
+      />
+    </div>
+  </section>
+
+  <!-- ARTICLE CONTENT -->
+  <section class="py-16 bg-white">
+    <div
+      class="content prose prose-lg max-w-4xl mx-auto px-4"
+    ></div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallerySection" class="py-16 bg-gray-100 hidden">
+    <div class="container mx-auto px-4 max-w-6xl">
+      <h2 class="text-2xl font-bold mb-6">Gallery</h2>
+
+      <div class="flex gap-6 overflow-x-auto pb-4">
+        <div id="galleryCarousel" class="flex gap-6"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCRIPT -->
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get("slug");
+
+    async function loadCampaign() {
+      if (!slug) {
+        document.querySelector(".content").innerHTML =
+          "<p>Campaign not found.</p>";
+        return;
+      }
+
+      try {
+        const res = await fetch(
+          `https://cms.greenammo.in/wp-json/wp/v2/pages?slug=${slug}&_embed`
+        );
+        const data = await res.json();
+
+        if (!data.length) {
+          document.querySelector(".content").innerHTML =
+            "<p>Campaign not found.</p>";
+          return;
+        }
+
+        const page = data[0];
+
+        /* TITLE */
+        document.querySelector(".title").innerHTML =
+          page.title.rendered;
+
+        /* FEATURED IMAGE */
+        const featured =
+          page._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+
+        if (featured) {
+          document.getElementById("heroImage").src = featured;
+        }
+
+        /* CONTENT */
+        document.querySelector(".content").innerHTML =
+          page.content.rendered;
+
+        /* EXTRACT IMAGES FOR GALLERY */
+        const imgs = document.querySelectorAll(".content figure img");
+        const galleryImages = [...imgs].map(img => img.src);
+
+        /* REMOVE GALLERY IMAGES FROM CONTENT */
+        imgs.forEach(img => {
+          const fig = img.closest("figure");
+          if (fig) fig.remove();
+        });
+
+        /* RENDER GALLERY */
+        if (galleryImages.length) {
+          const gallery = document.getElementById("galleryCarousel");
+          const section = document.getElementById("gallerySection");
+
+          galleryImages.forEach(src => {
+            gallery.innerHTML += `
+              <img
+                src="${src}"
+                class="h-64 w-auto rounded-lg shadow-md flex-shrink-0"
+                loading="lazy"
+              />
+            `;
+          });
+
+          section.classList.remove("hidden");
+        }
+
+      } catch (err) {
+        console.error(err);
+        document.querySelector(".content").innerHTML =
+          "<p>Error loading campaign.</p>";
+      }
+    }
+
+    loadCampaign();
+  </script>
+
+</body>
+</html>
