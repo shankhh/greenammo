@@ -3,132 +3,99 @@
 <head>
   <meta charset="UTF-8" />
   <title>Campaign</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Tailwind -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Typography -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
-    rel="stylesheet"
-  />
-
-  <style>
-    body {
-      font-family: Inter, sans-serif;
-    }
-  </style>
 </head>
 
 <body class="bg-gray-50 text-gray-800">
 
   <!-- HERO -->
-  <section class="bg-[#1D371F] text-white py-16">
+  <section class="bg-brand-dark text-white py-16">
     <div class="container mx-auto px-4 max-w-5xl">
       <h1 class="title text-3xl md:text-5xl font-bold mb-6"></h1>
-
       <img
         id="heroImage"
-        class="w-full h-[420px] object-cover rounded-xl shadow-lg"
-        alt=""
+        class="w-full max-h-[420px] object-cover rounded-xl hidden"
+        alt="Campaign hero"
       />
     </div>
   </section>
 
-  <!-- ARTICLE CONTENT -->
+  <!-- CONTENT -->
   <section class="py-16 bg-white">
     <div
-      class="content prose prose-lg max-w-4xl mx-auto px-4"
+      class="content container mx-auto px-4 max-w-4xl prose prose-lg"
     ></div>
   </section>
 
   <!-- GALLERY -->
-  <section id="gallerySection" class="py-16 bg-gray-100 hidden">
+  <section class="py-16 bg-gray-100">
     <div class="container mx-auto px-4 max-w-6xl">
       <h2 class="text-2xl font-bold mb-6">Gallery</h2>
-
-      <div class="flex gap-6 overflow-x-auto pb-4">
-        <div id="galleryCarousel" class="flex gap-6"></div>
-      </div>
+      <div
+        id="gallery"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
+      ></div>
     </div>
   </section>
 
-  <!-- SCRIPT -->
   <script>
     const params = new URLSearchParams(window.location.search);
     const slug = params.get("slug");
 
     async function loadCampaign() {
-      if (!slug) {
-        document.querySelector(".content").innerHTML =
-          "<p>Campaign not found.</p>";
-        return;
+      if (!slug) return;
+
+      // 1️⃣ Fetch page WITH embedded media
+      const pageRes = await fetch(
+        `https://cms.greenammo.in/wp-json/wp/v2/pages?slug=${slug}&_embed`
+      );
+      const pages = await pageRes.json();
+      if (!pages.length) return;
+
+      const page = pages[0];
+
+      // 2️⃣ Title
+      document.querySelector(".title").innerHTML =
+        page.title.rendered;
+
+      // 3️⃣ Featured image (hero)
+      const featured =
+        page._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+
+      if (featured) {
+        const hero = document.getElementById("heroImage");
+        hero.src = featured;
+        hero.classList.remove("hidden");
       }
 
-      try {
-        const res = await fetch(
-          `https://cms.greenammo.in/wp-json/wp/v2/pages?slug=${slug}&_embed`
-        );
-        const data = await res.json();
+      // 4️⃣ Fix relative image URLs in content
+      let content = page.content.rendered;
+      content = content.replaceAll(
+        'src="/wp-content',
+        'src="https://cms.greenammo.in/wp-content'
+      );
 
-        if (!data.length) {
-          document.querySelector(".content").innerHTML =
-            "<p>Campaign not found.</p>";
-          return;
-        }
+      document.querySelector(".content").innerHTML = content;
 
-        const page = data[0];
+      // 5️⃣ Fetch gallery images (media attached to page)
+      const mediaRes = await fetch(
+        `https://cms.greenammo.in/wp-json/wp/v2/media?parent=${page.id}&per_page=50`
+      );
+      const media = await mediaRes.json();
 
-        /* TITLE */
-        document.querySelector(".title").innerHTML =
-          page.title.rendered;
-
-        /* FEATURED IMAGE */
-        const featured =
-          page._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
-
-        if (featured) {
-          document.getElementById("heroImage").src = featured;
-        }
-
-        /* CONTENT */
-        document.querySelector(".content").innerHTML =
-          page.content.rendered;
-
-        /* EXTRACT IMAGES FOR GALLERY */
-        const imgs = document.querySelectorAll(".content figure img");
-        const galleryImages = [...imgs].map(img => img.src);
-
-        /* REMOVE GALLERY IMAGES FROM CONTENT */
-        imgs.forEach(img => {
-          const fig = img.closest("figure");
-          if (fig) fig.remove();
-        });
-
-        /* RENDER GALLERY */
-        if (galleryImages.length) {
-          const gallery = document.getElementById("galleryCarousel");
-          const section = document.getElementById("gallerySection");
-
-          galleryImages.forEach(src => {
-            gallery.innerHTML += `
-              <img
-                src="${src}"
-                class="h-64 w-auto rounded-lg shadow-md flex-shrink-0"
-                loading="lazy"
-              />
-            `;
-          });
-
-          section.classList.remove("hidden");
-        }
-
-      } catch (err) {
-        console.error(err);
-        document.querySelector(".content").innerHTML =
-          "<p>Error loading campaign.</p>";
-      }
+      const gallery = document.getElementById("gallery");
+      gallery.innerHTML = media
+        .map(
+          (img) => `
+          <img
+            src="${img.source_url}"
+            class="w-full h-60 object-cover rounded-lg"
+            alt="${img.alt_text || ""}"
+          />
+        `
+        )
+        .join("");
     }
 
     loadCampaign();
