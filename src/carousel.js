@@ -10,7 +10,7 @@ async function fetch_post() {
 
     while (true) {
       const response = await fetch(
-        `https://cms.greenammo.in/wp-json/wp/v2/posts?per_page=${limit}&page=${page}`
+        `https://cms.greenammo.in/wp-json/wp/v2/posts?per_page=${limit}&page=${page}&_embed`,
       );
 
       // Stop if page does not exist (404) or any other non-OK status
@@ -124,7 +124,7 @@ async function fetch_campaign_pages() {
 
   while (true) {
     const res = await fetch(
-      `https://cms.greenammo.in/wp-json/wp/v2/pages?per_page=${limit}&page=${page}`
+      `https://cms.greenammo.in/wp-json/wp/v2/pages?per_page=${limit}&page=${page}&_embed`,
     );
     if (res.status === 400) break;
     if (!res.ok) throw new Error("Fetch failed");
@@ -156,16 +156,18 @@ async function render_carousel() {
         <li class="glide__slide">
           <div class="flex flex-col gap-5">
             <img
-              src="https://images.pexels.com/photos/29498849/pexels-photo-29498849.jpeg"
-              class="w-full h-60 object-cover rounded"
-            />
+  src="${item._embedded?.["wp:featuredmedia"]?.[0]?.source_url || ""}"
+  class="w-full h-60 object-cover rounded"
+  alt="${item.title.rendered}"
+/>
+
             <div>
               <a href="./campaign.html?slug=${item.slug}">
                 <p class="text-xl font-semibold line-clamp-2">
                   ${item.title.rendered}
                 </p>
               </a>
-              <span class="text-sm text-slate-400">@ greenammo</span>
+              
             </div>
           </div>
         </li>

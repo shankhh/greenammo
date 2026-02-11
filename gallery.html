@@ -108,7 +108,7 @@
 
 <body class="bg-group-base-white text-group-text-dark font-sans" x-data="{ showModal: false }">
     <!-- 🌿 NAV COMPONENT for GreenAmmo Group -->
-     <nav class="w-full bg-white shadow-sm sticky top-0 z-50" x-data="{ mobileMenuOpen: false }">
+     <nav class="w-full bg-white shadow-sm sticky top-0 z-50"> <!-- Removed x-data -->
         <div class="container mx-auto flex justify-between items-center px-6 py-4">
             <!-- Logo -->
             <a href="/" class="font-heading font-extrabold text-2xl text-group-primary-green tracking-tight flex items-center gap-2">
@@ -119,15 +119,15 @@
             <!-- Primary Nav Links (Desktop) -->
             <ul class="hidden md:flex space-x-6 text-group-text-medium font-medium items-center">
                 <li><a href="/aboutus.html" class="hover:text-group-primary-green transition">About Us</a></li>
-                 <!-- Media Dropdown - Highlight current page -->
+                 <!-- Media Dropdown -->
                 <li class="relative group">
-                    <button class="text-group-primary-green font-semibold transition inline-flex items-center gap-1">
+                    <button class="hover:text-group-primary-green transition inline-flex items-center gap-1">
                         Media
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        <svg xmlns="http://www.w.3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                     </button>
                     <div class="absolute hidden group-hover:block bg-white rounded-xl shadow-lg p-4 top-5 -left-4 w-56 transition-all z-10 border border-gray-100">
                         <ul class="text-sm space-y-1">
-                            <li><a href="/gallery.html" class="block py-1 px-3 text-group-primary-green font-bold bg-group-pastel-green/30 rounded transition">Gallery</a></li>
+                            <li><a href="/gallery.html" class="block py-1 px-3 text-group-text-medium hover:bg-group-pastel-green/30 rounded transition">Gallery</a></li>
                             <li><a href="/testimonials.html" class="block py-1 px-3 text-group-text-medium hover:bg-group-pastel-green/30 rounded transition">Testimonials</a></li>
                             <li><a href="/digitalcontent.html" class="block py-1 px-3 text-group-text-medium hover:bg-group-pastel-green/30 rounded transition">Digital Content</a></li>
                         </ul>
@@ -137,25 +137,27 @@
                 <li><a href="/joinus.html" class="hover:text-group-primary-green transition">Join Us</a></li>
             </ul>
 
-            <!-- Explore Button (Desktop) -->
-            <button class="hidden md:block cta-button bg-group-primary-green text-white hover:bg-opacity-90" @click="showModal = true">
+            <!-- Explore Button (Desktop) - ADDED ID -->
+            <button id="explore-btn-desktop" class="hidden md:block cta-button bg-group-primary-green text-white hover:bg-opacity-90">
                 Explore
             </button>
 
-            <!-- Mobile Menu Toggle -->
-            <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden flex items-center text-group-primary-green focus:outline-none">
-                <svg x-show="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                <svg x-show="mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <!-- Mobile Menu Toggle - ADDED ID -->
+            <button id="mobile-menu-toggle" class="md:hidden flex items-center text-group-primary-green focus:outline-none">
+                <!-- SVGs remain the same, logic handled by JS -->
+                 <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
 
-        <!-- Mobile Dropdown -->
-        <div x-show="mobileMenuOpen" x-transition class="md:hidden flex-col space-y-2 bg-white shadow-inner px-6 py-4 border-t border-gray-100">
+        <!-- Mobile Dropdown - ADDED ID, initially hidden -->
+        <div id="mobile-menu" class="hidden md:hidden flex-col space-y-2 bg-white shadow-inner px-6 py-4 border-t border-gray-100">
             <a href="/aboutus.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">About Us</a>
-            <a href="/gallery.html" class="block py-2 text-group-primary-green font-bold bg-group-pastel-green/30 rounded">Media</a> <!-- Highlight current -->
+            <a href="/gallery.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">Media</a>
             <a href="/blog.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">Blog</a>
             <a href="/joinus.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">Join Us</a>
-             <button class="mt-2 w-full cta-button bg-group-primary-green text-white hover:bg-opacity-90" @click="showModal = true; mobileMenuOpen = false;">
+             <!-- Explore Button (Mobile) - ADDED ID -->
+             <button id="explore-btn-mobile" class="mt-2 w-full cta-button bg-group-primary-green text-white hover:bg-opacity-90">
                 Explore
              </button>
         </div>
@@ -500,28 +502,30 @@
             }
 
 // --- Skeleton Loader Logic ---
-            function showSkeleton(mediaType, show) {
-                 // MOVED element lookup inside the function
-                 const photosSkeleton = document.getElementById('photos-skeleton');
-                 const videosSkeleton = document.getElementById('videos-skeleton');
-                 const photosGrid = document.getElementById('photos-grid');
-                 const videosGrid = document.getElementById('videos-grid');
+            // --- Skeleton Loader Logic (Fixed) ---
+function showSkeleton(mediaType, show) {
+    const photosSkeleton = document.getElementById('photos-skeleton');
+    const videosSkeleton = document.getElementById('videos-skeleton');
+    const photosGrid = document.getElementById('photos-grid');
+    const videosGrid = document.getElementById('videos-grid');
 
-                 const skeleton = (mediaType === 'image') ? photosSkeleton : videosSkeleton;
-                 const grid = (mediaType === 'image') ? photosGrid : videosGrid;
-                 
-                 if (!skeleton || !grid) return; // Exit if elements aren't found
+    const skeleton = (mediaType === 'image') ? photosSkeleton : videosSkeleton;
+    const grid = (mediaType === 'image') ? photosGrid : videosGrid;
 
-                 if (show && grid.childElementCount === 0) { 
-                     // Only show skeleton if grid is empty and we are told to show
-                     skeleton.style.display = 'grid';
-                     skeleton.classList.remove('hidden');
-                 } else if (!show) {
-                     // Only hide skeleton if we are explicitly told to hide
-                     skeleton.classList.add('hidden');
-                 }
-                 // If show is true BUT grid is not empty (infinite scroll), do nothing.
-            }
+    if (!skeleton || !grid) return;
+
+    if (show && grid.childElementCount === 0) {
+        // SHOW logic
+        // We remove 'hidden'. We do NOT add inline style 'grid' because 
+        // the HTML class="grid" already handles that.
+        skeleton.classList.remove('hidden');
+        skeleton.style.display = ''; // Clean up any leftover inline styles
+    } else if (!show) {
+        // HIDE logic
+        skeleton.classList.add('hidden');
+        skeleton.style.display = ''; // CRITICAL: Removes inline 'display: grid' so .hidden can work
+    }
+}
 
 
             // --- Lazy Loading Observer ---

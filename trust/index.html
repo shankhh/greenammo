@@ -204,7 +204,7 @@
             >Media</a
           >
           <a
-            href="/campaigns.html"
+            href="/trust/campaign.html"
             class="text-gray-700 hover:text-brand-accent transition font-semibold"
             >Campaigns</a
           >
@@ -447,30 +447,24 @@
             x-data="{ flipped: false }"
             @click="flipped = !flipped"
           >
-            <h3
-              class="absolute -top-8 left-0 text-[100px] font-extrabold text-brand-light leading-none select-none z-0"
-            >
-              01
-            </h3>
+
             <div class="flip-card cursor-pointer mt-5 ml-6">
               <div class="flip-card-inner" :class="{ 'flipped': flipped }">
                 <div class="flip-card-front p-8 flex flex-col justify-between">
                   <div>
-                    <h4 class="text-2xl font-bold text-brand-dark mb-4">
-                      Vision
-                    </h4>
+                    <h4 class="text-2xl font-bold mb-4 text-brand-accent">
+                    Our Vision
+                  </h4>
                     <p class="text-gray-600 mb-6 italic"></p>
                   </div>
-                  <img
+                  <!-- <img
                     src="/assets/vision.jpg"
                     alt="Vision"
                     class="w-full h-56 object-cover rounded-xl mt-4"
-                  />
+                  /> -->
                 </div>
                 <div class="flip-card-back">
-                  <h4 class="text-2xl font-bold mb-4 text-brand-accent">
-                    Our Vision
-                  </h4>
+                  
                   <p class="text-lg leading-relaxed">
                     Our vision is a future where every individual recognizes
                     their responsibility towards the environment and actively
@@ -486,30 +480,24 @@
             x-data="{ flipped: false }"
             @click="flipped = !flipped"
           >
-            <h3
-              class="absolute -top-8 left-0 text-[100px] font-extrabold text-brand-light leading-none select-none z-0"
-            >
-              02
-            </h3>
+
             <div class="flip-card cursor-pointer mt-5 ml-6">
               <div class="flip-card-inner" :class="{ 'flipped': flipped }">
                 <div class="flip-card-front p-8 flex flex-col justify-between">
                   <div>
-                    <h4 class="text-2xl font-bold text-brand-dark mb-4">
-                      Mission
-                    </h4>
+                    <h4 class="text-2xl font-bold mb-4 text-brand-accent">
+                    Our Mission
+                  </h4>
                     <p class="text-gray-600 mb-6 italic"></p>
                   </div>
-                  <img
+                  <!-- <img
                     src="/assets/mission.jpg"
                     alt="Mission"
                     class="w-full h-56 object-cover rounded-xl mt-4"
-                  />
+                  /> -->
                 </div>
                 <div class="flip-card-back">
-                  <h4 class="text-2xl font-bold mb-4 text-brand-accent">
-                    Our Mission
-                  </h4>
+                  
                   <p class="text-lg leading-relaxed">
                     GreenAmmo Trust is dedicated to protecting the environment,
                     fostering sustainable development, empowering communities,
@@ -527,30 +515,27 @@
             x-data="{ flipped: false }"
             @click="flipped = !flipped"
           >
-            <h3
-              class="absolute -top-8 left-0 text-[100px] font-extrabold text-brand-light leading-none select-none z-0"
-            >
-              03
-            </h3>
+
             <div class="flip-card cursor-pointer mt-5 ml-6">
               <div class="flip-card-inner" :class="{ 'flipped': flipped }">
                 <div class="flip-card-front p-8 flex flex-col justify-between">
                   <div>
-                    <h4 class="text-2xl font-bold text-brand-dark mb-4">
-                      Motto
-                    </h4>
+                    <h2 class="text-2xl font-bold mb-4 text-brand-accent">
+                    Our
+                  </h2>
+                    <h2 class="text-2xl font-bold mb-4 text-brand-accent">
+                    Motto
+                  </h2>
                     <p class="text-gray-600 mb-6 italic"></p>
                   </div>
-                  <img
+                  <!-- <img
                     src="/assets/motto.jpg"
                     alt="Motto"
                     class="w-full h-56 object-cover rounded-xl mt-4"
-                  />
+                  /> -->
                 </div>
                 <div class="flip-card-back">
-                  <h4 class="text-2xl font-bold mb-4 text-brand-accent">
-                    Our Motto
-                  </h4>
+                  
                   <p class="text-lg leading-relaxed">
                     Now is the opportune moment to take action and give back to
                     the extraordinary nature that sustains every aspect of our
@@ -562,117 +547,45 @@
           </div>
         </div>
       </section>
-      <!-- bout us -->
-      <section class="py-20 px-6 lg:px-20 bg-white" id="about-us">
-        <div
-          class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
-        >
-          <div class="order-2 lg:order-1">
-            <h2 class="text-4xl font-extrabold text-brand-dark mb-6">
-              Weclome To GreenAmmo, <br />We bridges impact and innovation
-            </h2>
+<section class="py-20 px-6 lg:px-20 bg-white" id="about-us">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    
+    <div class="order-2 lg:order-1">
+      <h2 class="text-4xl lg:text-5xl font-extrabold text-brand-dark mb-6 leading-tight">
+        Welcome to GreenAmmo,<br />
+        Where Impact Meets Innovation
+      </h2>
 
-            <a
-              href="#explore"
-              class="inline-block py-3 px-8 bg-brand-accent text-white font-semibold rounded-full hover:bg-brand-dark transition transform hover:scale-105"
-            >
-              Explore Our Initiatives
-            </a>
-          </div>
+      <a
+        href="#explore"
+        class="inline-block py-3 px-8 bg-brand-accent text-white font-semibold rounded-full hover:bg-brand-dark transition transform hover:scale-105 shadow-md"
+      >
+        Explore Our Initiatives
+      </a>
+    </div>
 
-          <div class="order-1 lg:order-2">
-            <p
-              class="text-gray-600 leading-relaxed space-y-4 font-light font-stretch-condensed"
-            >
-              <span class="block">
-                GreenAmmo is a Trust working towards environmental protection,
-                sustainable development, community engagement/empowerment, and
-                infrastructure development.
-              </span>
-              <span class="block">
-                We venture out to various vulnerable ecological, economical, and
-                geographical locations—from mountains, to sea, to Ghats—and
-                raise awareness about **waste management** and build
-                **self-sustaining waste management systems** that can be run by
-                the locals themselves, thus ensuring its sustainability.
-              </span>
-              <span class="block font-light font-stretch-condensed">
-                Nature knows no boundaries, neither do we! Waste knows no
-                domain, neither do we.
-              </span>
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- core values -->
-      <!-- <section class="relative overflow-hidden">
-    <div 
-        x-data="{ currentSlide: 0,    
-                  images: [
-                    'https://placehold.co/1920x400/1D371F/ffffff?text=Nature+Zen+Garden+1',
-                    'https://placehold.co/1920x400/2C5331/ffffff?text=Nature+Zen+Garden+2',
-                    'https://placehold.co/1920x400/3A6F42/ffffff?text=Nature+Zen+Garden+3'
-                  ],
-                  init() {
-                      setInterval(() => {
-                          this.currentSlide = (this.currentSlide + 1) % this.images.length;
-                      }, 4000); // Change image every 4 seconds (4000ms)
-                  }
-        }"
-        class="absolute inset-0 h-full w-full"
-    >
-        <template x-for="(image, index) in images" :key="index">
-            <img 
-                :src="image" 
-                alt="Zen Garden Background"
-                class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
-                :class="{ 'opacity-100': currentSlide === index, 'opacity-0': currentSlide !== index }"
-            >
-        </template>
-        <div class="absolute inset-0 bg-brand-dark opacity-80"></div>
+    <div class="order-1 lg:order-2">
+      <p class="text-gray-700 leading-relaxed space-y-6 text-lg font-medium">
+        <span class="block">
+          GreenAmmo is a Trust dedicated to environmental protection, 
+          sustainable development, community empowerment, and 
+          infrastructure innovation.
+        </span>
+        <span class="block">
+          We venture into vulnerable ecological and geographical landscapes—from 
+          mountain ranges to coastal ghats—to establish 
+          <b>self-sustaining waste management systems.</b> By empowering locals 
+          to lead these initiatives, we ensure lasting environmental resilience.
+        </span>
+        <span class="block italic text-brand-dark">
+          Nature knows no boundaries, and neither do we. Waste knows no 
+          domain, and neither do we.
+        </span>
+      </p>
     </div>
     
-    <div class="relative py-20 px-6 lg:px-20 text-white">
-        
-        <div class="max-w-4xl mx-auto text-center mb-16">
-            <h2 class="text-4xl sm:text-5xl font-extrabold mb-4">
-                Our Impact at a Glance
-            </h2>
-            <p class="text-xl text-gray-200">
-                Driven by passion, measured by results. See the difference GreenAmmo makes on the ground.
-            </p>
-        </div>
-
-        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-            
-            <div class="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm">
-                <p class="text-5xl font-extrabold text-brand-accent mb-2">25+</p>
-                <h3 class="text-xl font-semibold uppercase tracking-wider text-white">Communities</h3>
-                <p class="text-sm text-gray-300">Empowered Globally</p>
-            </div>
-
-            <div class="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm">
-                <p class="text-5xl font-extrabold text-brand-accent mb-2">500</p>
-                <h3 class="text-xl font-semibold uppercase tracking-wider text-white">Metric Tons</h3>
-                <p class="text-sm text-gray-300">Waste Diverted Annually</p>
-            </div>
-
-            <div class="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm">
-                <p class="text-5xl font-extrabold text-brand-accent mb-2">150+</p>
-                <h3 class="text-xl font-semibold uppercase tracking-wider text-white">Field Workers</h3>
-                <p class="text-sm text-gray-300">Trained & Employed</p>
-            </div>
-
-            <div class="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm">
-                <p class="text-5xl font-extrabold text-brand-accent mb-2">12</p>
-                <h3 class="text-xl font-semibold uppercase tracking-wider text-white">New Sites</h3>
-                <p class="text-sm text-gray-300">Sustainable Systems Built</p>
-            </div>
-
-        </div>
-    </div>
-</section> -->
+  </div>
+</section>
 
       <!-- campaign -->
       <section class="py-16 px-6 lg:px-20">
@@ -780,144 +693,146 @@
       </section>
       <!-- allainces -->
       <section class="bg-white py-12">
-        <!-- border-t border-b border-brand-light -->
-        <div class="max-w-7xl mx-auto mb-6">
-          <h2 class="text-3xl font-bold text-center text-brand-dark mb-4">
-            Our Alliances
-          </h2>
-        </div>
+  <div class="max-w-7xl mx-auto mb-6">
+    <h2 class="text-3xl font-bold text-center text-brand-dark mb-4">
+      Our Alliances
+    </h2>
+  </div>
 
-        <div class="overflow-hidden">
-          <div class="animate-marquee flex gap-16" style="min-width: 200%">
-            <img
-              src="/assets/state-logo-maharashtra.png"
-              class="h-12 inline-block logo-muted"
-              alt="Maharashtra State Logo"
-            />
-            <img
-              src="/assets/state-logo-gujarat.png"
-              class="h-12 inline-block logo-muted"
-              alt="Gujarat State Logo"
-            />
-            <img
-              src="/assets/state-logo-assam.png"
-              class="h-12 inline-block logo-muted"
-              alt="Assam State Logo"
-            />
-            <img
-              src="/assets/state-logo-karnataka.png"
-              class="h-12 inline-block logo-muted"
-              alt="Karnataka State Logo"
-            />
-            <img
-              src="/assets/state-logo-tamilnadu.png"
-              class="h-12 inline-block logo-muted"
-              alt="Tamil Nadu State Logo"
-            />
-            <img
-              src="/assets/state-logo-westbengal.png"
-              class="h-12 inline-block logo-muted"
-              alt="West Bengal State Logo"
-            />
-            <img
-              src="/assets/state-logo-uttarpradesh.png"
-              class="h-12 inline-block logo-muted"
-              alt="Uttar Pradesh State Logo"
-            />
-            <img
-              src="/assets/state-logo-rajasthan.png"
-              class="h-12 inline-block logo-muted"
-              alt="Rajasthan State Logo"
-            />
+  <div class="overflow-hidden relative">
+    <div class="animate-marquee flex gap-12 items-start whitespace-nowrap">
+      
+      <div class="flex flex-col items-center justify-start shrink-0 w-40">
+        <img src="/assets/alliances-logo/channels4_profile.jpg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Channel Profile</span>
+      </div>
 
-            <img
-              src="/assets/state-logo-maharashtra.png"
-              class="h-12 inline-block logo-muted"
-              alt="Maharashtra State Logo"
-              aria-hidden="true"
-            />
-            <img
-              src="/assets/state-logo-gujarat.png"
-              class="h-12 inline-block logo-muted"
-              alt="Gujarat State Logo"
-              aria-hidden="true"
-            />
-            <img
-              src="/assets/state-logo-assam.png"
-              class="h-12 inline-block logo-muted"
-              alt="Assam State Logo"
-              aria-hidden="true"
-            />
-            <img
-              src="/assets/state-logo-karnataka.png"
-              class="h-12 inline-block logo-muted"
-              alt="Karnataka State Logo"
-              aria-hidden="true"
-            />
-            <img
-              src="/assets/state-logo-tamilnadu.png"
-              class="h-12 inline-block logo-muted"
-              alt="Tamil Nadu State Logo"
-              aria-hidden="true"
-            />
-            <img
-              src="/assets/state-logo-westbengal.png"
-              class="h-12 inline-block logo-muted"
-              alt="West Bengal State Logo"
-              aria-hidden="true"
-            />
-            <img
-              src="/assets/state-logo-uttarpradesh.png"
-              class="h-12 inline-block logo-muted"
-              alt="Uttar Pradesh State Logo"
-              aria-hidden="true"
-            />
-            <img
-              src="/assets/state-logo-rajasthan.png"
-              class="h-12 inline-block logo-muted"
-              alt="Rajasthan State Logo"
-              aria-hidden="true"
-            />
-          </div>
-        </div>
-      </section>
-      <style>
-        /* Define the scrolling banner animation */
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(
-              -50%
-            ); /* Crucial for looping the duplicated content */
-          }
-        }
+      <div class="flex flex-col items-center justify-start shrink-0 w-40">
+        <img src="/assets/alliances-logo/images (1).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Swachh Bharat</span>
+      </div>
 
-        /* Apply the animation to a utility class */
-        .animate-marquee {
-          animation: scroll 40s linear infinite; /* 40s is the speed, adjust as needed */
-          display: flex;
-          width: fit-content;
-        }
+      <div class="flex flex-col items-center justify-start shrink-0 w-40">
+        <img src="/assets/alliances-logo/images (2).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Dhakti Craft</span>
+      </div>
 
-        /* Pause animation on hover */
-        .animate-marquee:hover {
-          animation-play-state: paused;
-        }
+      <div class="flex flex-col items-center justify-start shrink-0 w-40">
+        <img src="/assets/alliances-logo/images (3).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">CWE Nepal</span>
+      </div>
 
-        /* NEW: Muting/Grayscale effect for the logos */
-        .logo-muted {
-          /* Grayscale and low opacity for a subtle, professional look */
-          filter: grayscale(100%) opacity(70%);
-          transition: filter 0.3s ease; /* Smooth transition on hover */
-        }
+      <div class="flex flex-col items-center justify-start shrink-0 w-40">
+        <img src="/assets/alliances-logo/images (4).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Alliance 04</span>
+      </div>
 
-        /* Optional: Make them color/brighter on hover */
-        .logo-muted:hover {
-          filter: grayscale(0%) opacity(100%);
-        }
-      </style>
+      <div class="flex flex-col items-center justify-start shrink-0 w-40">
+        <img src="/assets/alliances-logo/images (5).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Seok Foundation</span>
+      </div>
+
+      <div class="flex flex-col items-center justify-start shrink-0 w-40">
+        <img src="/assets/alliances-logo/images (38).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">DSE&L</span>
+      </div>
+
+      <div class="flex flex-col items-center justify-start shrink-0 w-40">
+        <img src="/assets/alliances-logo/images (39).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Shillong Municipal Board</span>
+      </div>
+
+       <div class="flex flex-col items-center justify-start shrink-0 w-40">
+        <img src="/assets/alliances-logo/images (40).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">MSPBC</span>
+      </div>
+
+
+      <div class="flex flex-col items-center justify-start shrink-0 w-40">
+        <img src="/assets/alliances-logo/channels4_profile.jpg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Channel Profile</span>
+      </div>
+
+      <div class="flex flex-col items-center justify-start shrink-0 w-40">
+        <img src="/assets/alliances-logo/images (1).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Swachh Bharat</span>
+      </div>
+
+      <div class="flex flex-col items-center justify-start shrink-0 w-40">
+        <img src="/assets/alliances-logo/images (2).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Dhakti Craft</span>
+      </div>
+
+      <div class="flex flex-col items-center justify-start shrink-0 w-40">
+        <img src="/assets/alliances-logo/images (3).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">CWE Nepal</span>
+      </div>
+
+      <div class="flex flex-col items-center justify-start shrink-0 w-40">
+        <img src="/assets/alliances-logo/images (4).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Alliance 04</span>
+      </div>
+
+      <div class="flex flex-col items-center justify-start shrink-0 w-40">
+        <img src="/assets/alliances-logo/images (5).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Seok Foundation</span>
+      </div>
+
+      <div class="flex flex-col items-center justify-start shrink-0 w-40">
+        <img src="/assets/alliances-logo/images (38).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">DSE&L</span>
+      </div>
+
+      <div class="flex flex-col items-center justify-start shrink-0 w-40">
+        <img src="/assets/alliances-logo/images (39).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Shillong Municipal Board</span>
+      </div>
+
+       <div class="flex flex-col items-center justify-start shrink-0 w-40">
+        <img src="/assets/alliances-logo/images (40).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">MSPBC</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Define the scrolling banner animation */
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      /* -50% works because we duplicated the content. 
+         It scrolls exactly half the width (the length of the original set), 
+         then snaps back to 0 instantly, creating the illusion of infinity. 
+      */
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: scroll 40s linear infinite;
+    display: flex;
+    width: fit-content; 
+  }
+
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  .logo-muted {
+    filter: grayscale(100%) opacity(70%);
+    transition: all 0.3s ease;
+  }
+
+  /* When hovering over the *container* (the div holding image+text), un-mute the logo */
+  .flex:hover .logo-muted {
+    filter: grayscale(0%) opacity(100%);
+    transform: scale(1.05); /* Optional: slight pop effect */
+  }
+</style>
 
       <section class="bg-brand-base/40 py-20 px-6 lg:px-20 text-center">
         <h2 class="text-3xl font-bold text-brand-dark mb-10">
