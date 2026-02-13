@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Campaign Details - GreenAmmo Trust</title>
-    <link rel="icon" type="image/svg+xml" href="./assets/greenammo.jpeg" />
+    <link rel="icon" type="image/svg+xml" href="./trust.png" />
 
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
@@ -21,20 +21,14 @@
               "trust-accent":  "#6E8546",
               "trust-light":   "#D2E3AB",
               "brand-base":    "#F8F9FA", 
+              "brand-dark":    "#1D371F",
+              "brand-accent":  "#6E8546",
+              "brand-light":   "#D2E3AB",
             },
             fontFamily: {
               'sans': ['Inter', 'sans-serif'],
               'heading': ['Bricolage Grotesque', 'sans-serif'],
             },
-            animation: {
-                'fade-in': 'fadeIn 1s ease-out forwards',
-            },
-            keyframes: {
-                fadeIn: {
-                    '0%': { opacity: '0', transform: 'translateY(10px)' },
-                    '100%': { opacity: '1', transform: 'translateY(0)' },
-                }
-            }
           },
         },
       };
@@ -43,32 +37,40 @@
     <style>
         body { font-family: "Inter", sans-serif; background-color: #F8F9FA; overflow-x: hidden; }
         
-        /* Skeleton Loader */
-        .skeleton {
-            background: linear-gradient(90deg, #e5e7eb 25%, #d1d5db 50%, #e5e7eb 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-        }
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } 
         }
 
-        /* Hide Scrollbar for Carousel */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .animate-marquee {
+            animation: scroll 40s linear infinite;
         }
 
-        /* Text Justification & Typography */
+        .hover\:pause:hover {
+            animation-play-state: paused;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
         #page-content p {
             text-align: justify;
             margin-bottom: 1.5em;
             line-height: 1.9;
             color: #374151;
+        }
+
+        /* Essential for unblocking images inside prose */
+        .marquee-container {
+            display: flex;
+            overflow: hidden;
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            background: transparent;
         }
     </style>
 </head>
@@ -87,238 +89,501 @@
         <img :src="lightboxSrc" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl" @click.outside="lightboxOpen = false">
     </div>
 
-    <nav x-data="{ open: false }" class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-100">
-      <div class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
-        <a href="./index.html" class="block group">
-            <img src="trust.png" alt="GreenAmmo Trust" class="h-10 md:h-12 w-auto object-contain transition group-hover:opacity-80" />
-        </a>
-
-        <div class="hidden lg:flex items-center space-x-8 text-sm font-medium tracking-wide">
-          <a href="/index.html" class="text-gray-600 hover:text-trust-accent transition">Home</a>
-          <a href="/gallery.html" class="text-gray-600 hover:text-trust-accent transition">Media</a>
-          <a href="/trust/campaign.html" class="text-trust-dark font-bold">Campaigns</a>
-          
-          <div x-data="{ dropdownOpen: false }" class="relative">
-            <button @click="dropdownOpen = !dropdownOpen" @click.away="dropdownOpen = false" class="text-gray-600 hover:text-trust-accent transition inline-flex items-center gap-1">
-              Milestones
-              <svg :class="{'rotate-180': dropdownOpen}" class="w-4 h-4 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-            </button>
-            <div x-show="dropdownOpen" x-cloak x-transition class="absolute bg-white rounded-xl shadow-xl p-2 top-12 right-0 w-48 border border-gray-100 origin-top-right">
-              <a href="projects.html" class="block py-2 px-4 text-gray-700 hover:bg-trust-light/30 rounded-lg transition">Projects</a>
-              <a href="reports.html" class="block py-2 px-4 text-gray-700 hover:bg-trust-light/30 rounded-lg transition">Reports</a>
-            </div>
-          </div>
+    <nav x-data="{ open: false }" class="bg-white shadow-lg sticky top-0 z-20">
+      <div
+        class="container mx-auto px-4 md:px-8 py-3 flex justify-between items-center"
+      >
+        <div class="flex items-center">
+          <a href="./index.html" class="block">
+            <img
+              src="trust.png"
+              alt="GreenAmmo Trust Logo"
+              class="h-12 w-auto object-contain"
+              title="GreenAmmo Trust"
+            />
+          </a>
         </div>
 
-        <button @click="open = !open" class="lg:hidden text-gray-700">
-          <svg x-show="!open" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-          <svg x-show="open" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        <div class="hidden lg:flex items-center space-x-8">
+          <a
+            href="/index.html"
+            class="text-gray-700 hover:text-brand-accent transition font-semibold"
+            >Home</a
+          >
+          <a
+            href="/gallery.html"
+            class="text-gray-700 hover:text-brand-accent transition font-semibold"
+            >Media</a
+          >
+          <a
+            href="/trust/campaign.html"
+            class="text-gray-700 hover:text-brand-accent transition font-semibold"
+            >Campaigns</a
+          >
+
+          <div x-data="{ dropdownOpen: false }" class="relative">
+            <button
+              @click="dropdownOpen = !dropdownOpen"
+              @click.away="dropdownOpen = false"
+              class="text-gray-700 hover:text-brand-accent transition inline-flex items-center gap-1 font-semibold"
+            >
+              Milestones
+              <svg
+                :class="{'rotate-180': dropdownOpen}"
+                class="w-4 h-4 transform transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </button>
+            <div
+              x-show="dropdownOpen"
+              x-cloak
+              x-transition:enter="transition ease-out duration-200"
+              x-transition:enter-start="opacity-0 scale-95"
+              x-transition:enter-end="opacity-100 scale-100"
+              x-transition:leave="transition ease-in duration-150"
+              x-transition:leave-start="opacity-100 scale-100"
+              x-transition:leave-end="opacity-0 scale-95"
+              class="absolute bg-white rounded-xl shadow-xl p-3 top-10 right-0 w-48 transition-all z-30 border border-brand-light origin-top-right"
+            >
+              <ul class="text-sm space-y-1">
+                <li>
+                  <a
+                    href="projects.html"
+                    @click="dropdownOpen = false"
+                    class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition"
+                  >
+                    Projects
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="reports.html"
+                    @click="dropdownOpen = false"
+                    class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition"
+                  >
+                    Reports
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <a
+            href="/joinus.html"
+            class="cta-button bg-brand-accent text-white hover:bg-brand-dark/90 shadow-brand-accent/50"
+          >
+            Let's Talk
+          </a>
+        </div>
+
+        <button
+          @click="open = !open"
+          class="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100"
+        >
+          <svg
+            x-show="!open"
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            ></path>
+          </svg>
+          <svg
+            x-show="open"
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
         </button>
       </div>
 
-      <div x-show="open" x-collapse class="lg:hidden bg-white border-t border-gray-100 shadow-xl">
-        <ul class="flex flex-col p-4 space-y-2 font-medium text-gray-700">
-          <a href="/index.html" class="py-2 hover:text-trust-accent">Home</a>
-          <a href="/gallery.html" class="py-2 hover:text-trust-accent">Media</a>
-          <a href="/trust/campaign.html" class="py-2 hover:text-trust-accent">Campaigns</a>
+      <div
+        x-show="open"
+        x-cloak
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0 -translate-y-4"
+        x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 -translate-y-4"
+        class="lg:hidden px-4 pb-4 bg-white border-t border-gray-100 absolute w-full shadow-2xl z-10"
+      >
+        <ul class="flex flex-col space-y-2 font-medium">
+          <a
+            href="/index.html"
+            @click="open = false"
+            class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded"
+            >Home</a
+          >
+          <a
+            href="/gallery.html"
+            @click="open = false"
+            class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded"
+            >Media</a
+          >
+          <a
+            href="/trust/campaign.html"
+            @click="open = false"
+            class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded"
+            >Campaigns</a
+          >
+
+          <div x-data="{ mobileDropdownOpen: false }">
+            <button
+              @click="mobileDropdownOpen = !mobileDropdownOpen"
+              class="w-full text-left py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded flex justify-between items-center"
+            >
+              Milestones
+              <svg
+                :class="{'rotate-180': mobileDropdownOpen}"
+                class="w-4 h-4 transform transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </button>
+            <div
+              x-show="mobileDropdownOpen"
+              x-cloak
+              x-transition:enter="transition ease-out duration-100"
+              x-transition:enter-start="transform opacity-0 scale-y-90"
+              x-transition:enter-end="transform opacity-100 scale-y-100"
+              x-transition:leave="transition ease-in duration-75"
+              x-transition:leave-start="transform opacity-100 scale-y-100"
+              x-transition:leave-end="transform opacity-0 scale-y-90"
+              class="ml-4 border-l border-brand-light pl-4 space-y-1"
+            >
+              <a
+                href="/trust/projects.html"
+                @click="open = false"
+                class="block py-1 text-sm text-gray-600 hover:text-brand-accent"
+                >Projects</a
+              >
+              <a
+                href="/trust/reports.html"
+                @click="open = false"
+                class="block py-1 text-sm text-gray-600 hover:text-brand-accent"
+                >Reports</a
+              >
+            </div>
+          </div>
+
+          <a
+            href="/joinus.html"
+            @click="open = false"
+            class="mt-4 block text-center cta-button bg-brand-accent text-white hover:bg-brand-dark/90 shadow-brand-accent/50"
+          >
+            Join the Change
+          </a>
         </ul>
       </div>
     </nav>
 
     <main class="flex-grow">
-        
         <section class="bg-trust-dark text-white relative py-20 md:py-24 text-center overflow-hidden">
-            <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
-            
-            <div class="container mx-auto px-4 relative z-10 animate-fade-in">
-                <span class="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-trust-primary/30 text-trust-light text-xs font-bold uppercase tracking-widest border border-trust-primary/40 mb-6 backdrop-blur-sm">
-                    <span class="w-2 h-2 rounded-full bg-trust-accent"></span> Campaign Report
-                </span>
-                
-                <h1 id="page-title" class="text-4xl md:text-6xl font-extrabold mb-6 max-w-4xl mx-auto leading-tight text-white tracking-tight">
-                    <span class="skeleton px-32 py-4 rounded bg-white/10 inline-block w-2/3"></span>
-                </h1>
-                
-                <div class="flex justify-center items-center gap-3 text-brand-light/80 text-sm font-medium">
-                    <a href="/trust/index.html" class="hover:text-white transition border-b border-transparent hover:border-white">Trust</a>
-                    <span class="opacity-50">•</span>
-                    <a href="/trust/campaign.html" class="hover:text-white transition border-b border-transparent hover:border-white">All Campaigns</a>
-                </div>
+            <div class="container mx-auto px-4 relative z-10">
+                <span class="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-trust-primary/30 text-trust-light text-xs font-bold uppercase tracking-widest border border-trust-primary/40 mb-6">Campaign Report</span>
+                <h1 id="page-title" class="text-4xl md:text-6xl font-extrabold mb-6 max-w-4xl mx-auto leading-tight text-white tracking-tight">Loading...</h1>
             </div>
         </section>
 
         <div class="container mx-auto px-4 -mt-16 md:-mt-20 relative z-20 max-w-5xl">
-            <div id="hero-image-container" class="rounded-3xl overflow-hidden shadow-2xl bg-gray-100 aspect-video md:aspect-[21/9] border-4 border-white ring-1 ring-gray-200/50 relative group">
-                <div class="skeleton w-full h-full absolute inset-0"></div>
-                </div>
+            <div id="hero-image-container" class="rounded-3xl overflow-hidden shadow-2xl bg-gray-100 aspect-video md:aspect-[21/9] border-4 border-white ring-1 ring-gray-200/50"></div>
         </div>
 
-        <section id="gallery-section" class="py-12 bg-transparent hidden">
-            <div class="container mx-auto px-4">
-                <div class="flex items-center gap-4 mb-6">
-                     <h3 class="text-2xl font-heading font-bold text-trust-dark">Gallery</h3>
-                     <div class="h-px flex-grow bg-gray-200"></div>
-                </div>
-                
-                <div class="relative group">
-                    <div class="absolute left-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-r from-brand-base to-transparent z-10 pointer-events-none"></div>
-                    <div class="absolute right-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-l from-brand-base to-transparent z-10 pointer-events-none"></div>
-
-                    <div id="carousel-track" class="flex gap-4 md:gap-6 overflow-x-auto no-scrollbar py-4 px-4 md:px-12 scroll-smooth snap-x snap-mandatory">
-                        </div>
-                </div>
-                <p class="text-center text-xs text-gray-400 mt-2 italic">Swipe to explore</p>
-            </div>
-        </section>
-
-
-        <section class="pb-20 pt-8 bg-brand-base">
+        <section class="pb-20 pt-12 bg-brand-base">
             <div class="container mx-auto px-4 max-w-3xl">
-                <div id="page-content" class="prose prose-lg prose-headings:font-heading prose-headings:text-trust-dark prose-headings:text-center prose-green max-w-none">
-                    <div class="space-y-6 opacity-50">
-                        <div class="skeleton h-4 w-full rounded"></div>
-                        <div class="skeleton h-4 w-5/6 rounded"></div>
-                        <div class="skeleton h-4 w-full rounded"></div>
-                    </div>
+                <div id="page-content" class="prose prose-lg prose-headings:font-heading prose-headings:text-trust-dark prose-headings:text-center max-w-none">
+                    <div class="skeleton h-4 w-full rounded mb-4"></div>
+                    <div class="skeleton h-4 w-5/6 rounded mb-4"></div>
+                    <div class="skeleton h-4 w-full rounded"></div>
                 </div>
             </div>
         </section>
-
     </main>
+   <footer class="bg-brand-dark text-white pt-12">
+      <div class="container mx-auto px-4 md:px-8">
+        <div
+          class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-brand-primary"
+        >
+          <div class="md:col-span-2 space-y-4">
+            <h3 class="text-3xl font-bold text-brand-light">GreenAmmo Group</h3>
+            <p class="text-sm text-brand-light/70 max-w-sm">
+              Empowering sustainable living and waste management through
+              community action, research, and project initiation.
+            </p>
+          </div>
 
-    <footer class="bg-trust-dark text-white pt-16 pb-8 border-t border-white/5">
-        <div class="container mx-auto px-4 md:px-8 text-center md:text-left">
-             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <div>
-                    <h3 class="text-2xl font-bold font-heading text-brand-light">GreenAmmo Trust</h3>
-                    <p class="text-sm text-brand-light/60 mt-2">Action. Research. Impact.</p>
-                </div>
-                <div class="flex gap-6 text-sm text-brand-light/80">
-                    <a href="/trust/projects.html" class="hover:text-white transition">Projects</a>
-                    <a href="/trust/reports.html" class="hover:text-white transition">Reports</a>
-                    <a href="/joinus.html" class="hover:text-white transition">Join Us</a>
-                </div>
-             </div>
-             <div class="mt-12 pt-8 border-t border-white/10 text-center text-xs text-gray-500">
-                &copy; 2025 GreenAmmo Group. All rights reserved.
-             </div>
+          <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
+            <div class="space-y-3">
+              <h4 class="font-semibold text-white mb-3">GreenAmmo</h4>
+              <ul class="text-sm space-y-2 text-brand-light/80">
+                <li>
+                  <a href="/aboutus" class="hover:text-brand-light transition"
+                    >About Us</a
+                  >
+                </li>
+                <li>
+                  <a href="/gallery" class="hover:text-brand-light transition"
+                    >Media (Gallery)</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/certifications"
+                    class="hover:text-brand-light transition"
+                    >Certificates</a
+                  >
+                </li>
+                <li>
+                  <a href="/alliances" class="hover:text-brand-light transition"
+                    >Alliances</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="space-y-3">
+              <h4 class="font-semibold text-white mb-3">Solutions</h4>
+              <ul class="text-sm space-y-2 text-brand-light/80">
+                <li>
+                  <a
+                    href="/solutions/finance"
+                    class="hover:text-brand-light transition"
+                    >Finance</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/solutions/education"
+                    class="hover:text-brand-light transition"
+                    >Education & Development</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/solutions/event-supply"
+                    class="hover:text-brand-light transition"
+                    >Event & Supply</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/solutions/accommodation"
+                    class="hover:text-brand-light transition"
+                    >Accommodations</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="space-y-3">
+              <h4 class="font-semibold text-white mb-3">Trust</h4>
+              <ul class="text-sm space-y-2 text-brand-light/80">
+                <li>
+                  <a
+                    href="/trust/projects.html"
+                    class="hover:text-brand-light transition"
+                    >Projects & Milestones</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/trust/campaign.html"
+                    class="hover:text-brand-light transition"
+                    >Campaigns</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/trust/reports.html"
+                    class="hover:text-brand-light transition"
+                    >Annual Reports</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/joinus.html/donate"
+                    class="hover:text-brand-light transition"
+                    >Donate Now</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="space-y-3">
+              <h4 class="font-semibold text-white mb-3">Support</h4>
+              <ul class="text-sm space-y-2 text-brand-light/80">
+                <li>
+                  <a
+                    href="/solutions/contact.html"
+                    class="hover:text-brand-light transition"
+                    >Contact Us</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/joinus.html"
+                    class="hover:text-brand-light transition"
+                    >Join Us</a
+                  >
+                </li>
+                <li>
+                  <a href="/faq" class="hover:text-brand-light transition"
+                    >FAQ</a
+                  >
+                </li>
+                <li>
+                  <a href="/privacy" class="hover:text-brand-light transition"
+                    >Privacy Policy</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-    </footer>
 
+        <div
+          class="container mx-auto px-4 md:px-8 py-4 flex flex-col sm:flex-row justify-between items-center text-sm text-brand-light/80"
+        >
+          <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
+          <div class="flex space-x-4 mt-2 sm:mt-0">
+            <a href="#" class="hover:text-white transition">Facebook</a>
+            <a href="#" class="hover:text-white transition">Instagram</a>
+            <a href="#" class="hover:text-white transition">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </footer>
     <script>
         const params = new URLSearchParams(window.location.search);
         const slug = params.get("slug");
-
         const titleEl = document.getElementById("page-title");
         const heroContainer = document.getElementById("hero-image-container");
         const contentEl = document.getElementById("page-content");
-        const gallerySection = document.getElementById("gallery-section");
-        const carouselTrack = document.getElementById("carousel-track");
+
+        function openLightbox(src) {
+            const body = document.querySelector('body');
+            if (body && body.__x) {
+                body.__x.$data.lightboxSrc = src;
+                body.__x.$data.lightboxOpen = true;
+            }
+        }
+
+        const createInfiniteMarquee = (sources) => {
+            if (sources.length === 0) return null;
+            const wrapper = document.createElement('div');
+            wrapper.className = "marquee-container my-16"; 
+            const track = document.createElement('div');
+            track.className = "flex gap-6 h-64 md:h-80 w-max animate-marquee hover:pause";
+
+            let baseSet = [...sources];
+            while (baseSet.length < 10) { baseSet = [...baseSet, ...sources]; }
+            const renderList = [...baseSet, ...baseSet];
+
+            renderList.forEach(src => {
+                const slide = document.createElement('div');
+                slide.className = "flex-none h-full w-auto aspect-[4/3] md:aspect-video rounded-xl overflow-hidden shadow-lg border border-gray-100 bg-white hover:scale-[1.02] transition duration-300 cursor-zoom-in";
+                const img = document.createElement('img');
+                img.src = src;
+                img.className = "h-full w-full object-cover block";
+                img.onclick = () => openLightbox(src);
+                slide.appendChild(img);
+                track.appendChild(slide);
+            });
+            wrapper.appendChild(track);
+            return wrapper;
+        };
 
         async function loadCampaign() {
-            if (!slug) {
-                window.location.href = '/trust/campaign.html';
-                return;
-            }
-
+            if (!slug) return;
             try {
-                // Fetch Content
-                const pageRes = await fetch(`https://cms.greenammo.in/wp-json/wp/v2/pages?slug=${encodeURIComponent(slug)}&_embed`);
-                if (!pageRes.ok) throw new Error("API Error");
-                const pages = await pageRes.json();
-                if (!pages.length) { titleEl.innerText = "Project Not Found"; return; }
-                
+                const res = await fetch(`https://cms.greenammo.in/wp-json/wp/v2/pages?slug=${slug}&_embed`);
+                const pages = await res.json();
+                if (!pages.length) return;
                 const page = pages[0];
 
-                // 1. Set Title & Doc Title
-                document.title = `${page.title.rendered} - GreenAmmo Trust`;
-                if (titleEl) titleEl.innerHTML = page.title.rendered;
-
-                // 2. Featured Image (Clean Container)
+                titleEl.innerHTML = page.title.rendered;
                 const featuredUrl = page._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
-                if (heroContainer) {
-                    heroContainer.innerHTML = featuredUrl 
-                        ? `<img src="${featuredUrl}" alt="${page.title.rendered}" class="w-full h-full object-cover transition duration-700 hover:scale-105 cursor-pointer" onclick="Alpine.store('lightbox').open('${featuredUrl}')">`
-                        : `<div class="w-full h-full flex items-center justify-center bg-gray-200 text-gray-400 font-heading text-xl">GreenAmmo Project</div>`;
-                    
-                    // Hook up Alpine logic manually for the hero if needed, 
-                    // or just let the body x-data handle it via event bubbling logic below.
-                    const heroImg = heroContainer.querySelector('img');
-                    if(heroImg) {
-                        heroImg.addEventListener('click', () => {
-                            // Access Alpine scope
-                            document.querySelector('[x-data]').__x.$data.lightboxSrc = featuredUrl;
-                            document.querySelector('[x-data]').__x.$data.lightboxOpen = true;
-                        });
-                    }
+                if (featuredUrl) {
+                    heroContainer.innerHTML = `<img src="${featuredUrl}" class="w-full h-full object-cover cursor-pointer" onclick="openLightbox('${featuredUrl}')">`;
                 }
 
-                // 3. Process Content & Extract Images
-                if (contentEl) {
-                    // Create a temp div to parse HTML
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = page.content.rendered;
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = page.content.rendered;
+                
+                // Aggressive image extraction and grouping
+                const nodes = Array.from(tempDiv.childNodes);
+                const processed = [];
+                let currentImgs = [];
 
-                    // Extract Images for Carousel
-                    const contentImages = tempDiv.querySelectorAll('img');
+                nodes.forEach(node => {
+                    const img = node.tagName === 'IMG' ? node : node.querySelector?.('img');
+                    const isJunk = node.nodeType === 3 && !node.textContent.trim() || node.tagName === 'BR' || (node.tagName === 'P' && !node.innerText.trim() && !node.querySelector('img'));
                     
-                    if (contentImages.length > 0) {
-                        gallerySection.classList.remove('hidden'); // Show gallery section
-                        
-                        contentImages.forEach(img => {
-                            // 1. Create Carousel Slide
-                            const slide = document.createElement('div');
-                            slide.className = "flex-none w-72 md:w-96 h-56 md:h-64 relative rounded-xl overflow-hidden shadow-md bg-white border border-gray-100 snap-center group/slide";
-                            
-                            const slideImg = document.createElement('img');
-                            slideImg.src = img.src; // Keep original source
-                            slideImg.className = "w-full h-full object-cover transition duration-500 group-hover/slide:scale-110 cursor-pointer";
-                            
-                            // Lightbox Click
-                            slideImg.addEventListener('click', () => {
-                                document.querySelector('[x-data]').__x.$data.lightboxSrc = img.src;
-                                document.querySelector('[x-data]').__x.$data.lightboxOpen = true;
-                            });
-
-                            slide.appendChild(slideImg);
-                            carouselTrack.appendChild(slide);
-
-                            // 2. Remove Image from Content Flow (Clean up text)
-                            // Remove the figure tag if it's the parent
-                            if (img.parentElement.tagName === 'FIGURE') {
-                                img.parentElement.remove();
-                            } else {
-                                img.remove();
-                            }
-                        });
-                    }
-
-                    // Insert Cleaned Text Content
-                    contentEl.innerHTML = tempDiv.innerHTML;
-                    
-                    // Clean up empty paragraphs left by removed images
-                    contentEl.querySelectorAll('p').forEach(p => {
-                        if (p.innerText.trim() === '' && p.children.length === 0) {
-                            p.remove();
+                    if (img) {
+                        currentImgs.push(img.src);
+                    } else if (!isJunk) {
+                        if (currentImgs.length > 0) {
+                            processed.push(currentImgs.length > 1 ? createInfiniteMarquee(currentImgs) : createSingleImg(currentImgs[0]));
+                            currentImgs = [];
                         }
-                    });
+                        processed.push(node);
+                    }
+                });
+                
+                if (currentImgs.length > 0) {
+                    processed.push(currentImgs.length > 1 ? createInfiniteMarquee(currentImgs) : createSingleImg(currentImgs[0]));
                 }
 
-            } catch (error) {
-                console.error("Error:", error);
-                if (titleEl) titleEl.innerText = "Error Loading Campaign";
-                if (contentEl) contentEl.innerHTML = `<p class="text-center text-red-500">Unable to load content.</p>`;
-            }
+                contentEl.innerHTML = '';
+                processed.forEach(n => n && contentEl.appendChild(n));
+
+            } catch (e) { console.error(e); }
         }
 
-        document.addEventListener('alpine:init', () => {
-             loadCampaign();
-        });
-        
-        // Fallback
-        if (document.readyState === 'complete') {
-             // loadCampaign();
+        function createSingleImg(src) {
+            const div = document.createElement('div');
+            div.className = "flex justify-center my-8";
+            div.innerHTML = `<img src="${src}" class="rounded-2xl shadow-lg max-h-[500px] w-auto cursor-zoom-in" onclick="openLightbox('${src}')">`;
+            return div;
         }
+
+        document.addEventListener('alpine:init', loadCampaign);
     </script>
 </body>
 </html>
