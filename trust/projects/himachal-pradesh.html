@@ -76,10 +76,9 @@
             position: absolute;
             top: 0;
             bottom: 0;
-            left: 1.25rem; /* 20px */
-            width: 4px;
-            background-color: #D2E3AB;
-            z-index: 0;
+            left: 0.75rem;
+            width: 2px;
+            background-color: rgba(124, 150, 106, 0.35);
         }
 
         @media (min-width: 768px) {
@@ -101,7 +100,7 @@
 
             /* --- Zig Zag Logic --- */
             
-            /* ODD Items (1, 3, 5...): Content Left, Image Right */
+            /* ODD Items (1, 3...): Content Left, Image Right */
             .timeline-row:nth-child(odd) {
                 flex-direction: row;
             }
@@ -118,7 +117,7 @@
                 padding-left: 3rem;
             }
 
-            /* EVEN Items (2, 4, 6...): Image Left, Content Right */
+            /* EVEN Items (2, 4...): Image Left, Content Right */
             .timeline-row:nth-child(even) {
                 flex-direction: row-reverse;
             }
@@ -191,177 +190,201 @@
         </div>
     </nav>
 
-    <main>
+<main>
 
-        <section class="bg-brand-light/60 py-16 md:py-24">
-            <div class="container mx-auto px-4 md:px-8 max-w-5xl text-center">
-                <p class="text-sm font-semibold text-brand-accent uppercase tracking-wider mb-2">Project Milestones</p>
-                <h1 class="text-4xl md:text-5xl font-extrabold text-brand-dark mb-4 font-heading">
-                    Himachal Pradesh
-                </h1>
-                <p class="text-lg md:text-xl text-brand-dark/80 max-w-3xl mx-auto">
-                    Pioneering waste solutions in high-altitude regions, from eco-tourism innovations in Kalga to glass bottle architecture in Manali.
-                </p>
-            </div>
-        </section>
+    <section class="bg-brand-light/60 py-20 md:py-28">
+        <div class="container mx-auto px-4 md:px-8 max-w-5xl text-center">
+            <p class="text-sm font-semibold text-brand-accent uppercase tracking-wider mb-2">
+                Project Milestones
+            </p>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-brand-dark mb-4 font-heading">
+                Himachal Pradesh
+            </h1>
+            <p class="text-lg md:text-xl text-brand-dark/80 max-w-3xl mx-auto">
+                Pioneering waste solutions in high-altitude regions, from eco-tourism innovations in Kalga to glass bottle architecture in Manali.
+            </p>
+        </div>
+    </section>
 
-        <section class="py-20 bg-brand-base overflow-hidden">
-            <div class="container mx-auto px-4 md:px-8 max-w-6xl relative timeline-container">
+    <section class="py-20 bg-brand-base overflow-hidden">
+        <div class="container mx-auto px-4 md:px-8 max-w-6xl relative timeline-container">
 
-                <div class="relative flex flex-col gap-12 md:gap-0">
+            <article class="timeline-row relative pl-6 md:pl-0">
+                <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
 
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
-                        
-                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
-                                <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Managing remote mountain waste</h3>
-                                    <p class="text-sm text-brand-accent font-semibold">Kalga</p>
-                                </div>
-                                
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/hp-1.png" class="w-full h-full object-cover" alt="Kalga Waste Solutions">
-                                </div>
+                <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full">
+                        <h3 class="text-xl font-bold text-brand-dark font-heading">
+                            Managing remote mountain waste
+                        </h3>
+                        <p class="text-sm text-brand-accent font-semibold">
+                            Kalga
+                        </p>
 
-                                <div class="mt-4 pt-4 border-t border-gray-100">
-                                    <ul class="list-disc list-outside space-y-3 pl-5 text-sm text-brand-dark/80">
-                                        <li>Addressed the plastic waste crisis at The Gypsy House by converting discarded bottles and wrappers into eco-friendly BottleBricks.</li>
-                                        <li>Created a permanent BottleBrick Drop Zone along trekking routes to Kheerganga and Bhunbhuni, enabling trekkers to deposit bricks made during their clean-up drives, directly reducing plastic leakage in fragile Himalayan ecosystems.</li>
-                                    </ul>
-                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Bottlebricks drop-off</div>
-                                </div>
-                            </div>
+                        <div class="md:hidden mt-6 smart-gallery-container w-full"
+                             data-wp-slug="majuli-plastic-free">
                         </div>
 
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/hp-1.png" alt="Kalga Waste Solutions" class="w-full h-full object-cover">
-                            </div>
+                        <div class="mt-6 pt-4 border-t border-gray-100">
+                            <ul class="list-disc space-y-3 pl-5 text-sm text-brand-dark/80">
+                                <li>Addressed the plastic waste crisis at The Gypsy House by converting discarded bottles and wrappers into eco-friendly BottleBricks.</li>
+                                <li>Created a permanent BottleBrick Drop Zone along trekking routes to Kheerganga and Bhunbhuni, enabling trekkers to deposit bricks made during their clean-up drives, directly reducing plastic leakage in fragile Himalayan ecosystems.</li>
+                            </ul>
+                            <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Bottlebricks drop-off</div>
                         </div>
                     </div>
-
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
-                        
-                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
-                                <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">GreenCabin and Eco-toilet Construction</h3>
-                                    <p class="text-sm text-brand-accent font-semibold">Shanag</p>
-                                </div>
-                                
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/hp-2.png" class="w-full h-full object-cover" alt="GreenCabin and Eco-toilet">
-                                </div>
-
-                                <div class="mt-4 pt-4 border-t border-gray-100">
-                                    <ul class="list-disc list-outside space-y-3 pl-5 text-sm text-brand-dark/80">
-                                        <li>Constructed a model toilet using 1200 bottlebricks and 200 glass bottles at Shanag, Manali along with local mason workers.</li>
-                                        <li>Renovated and converted a dead store room into a sustainable eco-friendly cabin for accommodation using bottlebricks, spare wood, all natural decor items and design.</li>
-                                    </ul>
-                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Bottlebricks Cabin; Bottlebricks Toilet</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/hp-2.png" alt="GreenCabin and Eco-toilet" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
-                        
-                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
-                                <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Public Infrastructure Pipeline</h3>
-                                    <p class="text-sm text-brand-accent font-semibold">Shanag (Manali)</p>
-                                </div>
-                                
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/hp-3.png" class="w-full h-full object-cover" alt="Public Toilet Construction">
-                                </div>
-
-                                <div class="mt-4 pt-4 border-t border-gray-100">
-                                    <p class="text-brand-dark/80 text-sm">Currently building a public toilet for an under-construction parking space in Shanag Village to serve both residents and visitors.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/hp-3.png" alt="Public Toilet Construction" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
-                        
-                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
-                                <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Glass bottle shop for GreenAware</h3>
-                                    <p class="text-sm text-brand-accent font-semibold">Shanag</p>
-                                </div>
-                                
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/hp-4.png" class="w-full h-full object-cover" alt="Glass bottle shop">
-                                </div>
-
-                                <div class="mt-4 pt-4 border-t border-gray-100">
-                                    <ul class="list-disc list-outside space-y-3 pl-5 text-sm text-brand-dark/80">
-                                        <li>Partnered with multiple cafés, homestays, and restaurants in Old Manali to collect empty glass bottles due to non-motorable logistics barriers.</li>
-                                        <li>1500 waste glass bottles were used for the construction of a Sustainable lifestyle Store at Shanag, Manali.</li>
-                                    </ul>
-                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Waste glass constitution; Sustainable Store</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/hp-4.png" alt="Glass bottle shop" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
-                        
-                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
-                                <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Local Skills Development</h3>
-                                    <p class="text-sm text-brand-accent font-semibold">Shanag (Manali)</p>
-                                </div>
-                                
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/hp-5.png" class="w-full h-full object-cover" alt="Local Skills Development">
-                                </div>
-
-                                <div class="mt-4 pt-4 border-t border-gray-100">
-                                    <p class="text-brand-dark/80 text-sm">Trained local masons and carpenters in innovative, waste-based construction techniques.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/hp-5.png" alt="Local Skills Development" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
-        </section>
 
-    </main>
+                <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+                    <div class="smart-gallery-container"
+                         data-wp-slug="majuli-plastic-free">
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-row relative pl-6 md:pl-0">
+                <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
+
+                <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full">
+                        <h3 class="text-xl font-bold text-brand-dark font-heading">
+                            GreenCabin and Eco-toilet Construction
+                        </h3>
+                        <p class="text-sm text-brand-accent font-semibold">
+                            Shanag
+                        </p>
+
+                        <div class="md:hidden mt-6 smart-gallery-container w-full"
+                             data-wp-slug="majuli-plastic-free">
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-100">
+                            <ul class="list-disc space-y-3 pl-5 text-sm text-brand-dark/80">
+                                <li>Constructed a model toilet using 1200 bottlebricks and 200 glass bottles at Shanag, Manali along with local mason workers.</li>
+                                <li>Renovated and converted a dead store room into a sustainable eco-friendly cabin for accommodation using bottlebricks, spare wood, all natural decor items and design.</li>
+                            </ul>
+                            <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Bottlebricks Cabin; Bottlebricks Toilet</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+                    <div class="smart-gallery-container"
+                         data-wp-slug="majuli-plastic-free">
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-row relative pl-6 md:pl-0">
+                <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
+
+                <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full">
+                        <h3 class="text-xl font-bold text-brand-dark font-heading">
+                            Public Infrastructure Pipeline
+                        </h3>
+                        <p class="text-sm text-brand-accent font-semibold">
+                            Shanag (Manali)
+                        </p>
+
+                        <div class="md:hidden mt-6 smart-gallery-container w-full"
+                             data-wp-slug="majuli-plastic-free">
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-100">
+                            <p class="text-brand-dark/80 text-sm">Currently building a public toilet for an under-construction parking space in Shanag Village to serve both residents and visitors.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+                    <div class="smart-gallery-container"
+                         data-wp-slug="majuli-plastic-free">
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-row relative pl-6 md:pl-0">
+                <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
+
+                <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full">
+                        <h3 class="text-xl font-bold text-brand-dark font-heading">
+                            Glass bottle shop for GreenAware
+                        </h3>
+                        <p class="text-sm text-brand-accent font-semibold">
+                            Shanag
+                        </p>
+
+                        <div class="md:hidden mt-6 smart-gallery-container w-full"
+                             data-wp-slug="majuli-plastic-free">
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-100">
+                            <ul class="list-disc space-y-3 pl-5 text-sm text-brand-dark/80">
+                                <li>Partnered with multiple cafés, homestays, and restaurants in Old Manali to collect empty glass bottles due to non-motorable logistics barriers.</li>
+                                <li>1500 waste glass bottles were used for the construction of a Sustainable lifestyle Store at Shanag, Manali.</li>
+                            </ul>
+                            <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Waste glass constitution; Sustainable Store</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+                    <div class="smart-gallery-container"
+                         data-wp-slug="majuli-plastic-free">
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-row relative pl-6 md:pl-0">
+                <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
+
+                <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full">
+                        <h3 class="text-xl font-bold text-brand-dark font-heading">
+                            Local Skills Development
+                        </h3>
+                        <p class="text-sm text-brand-accent font-semibold">
+                            Shanag (Manali)
+                        </p>
+
+                        <div class="md:hidden mt-6 smart-gallery-container w-full"
+                             data-wp-slug="majuli-plastic-free">
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-100">
+                            <p class="text-brand-dark/80 text-sm">Trained local masons and carpenters in innovative, waste-based construction techniques.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+                    <div class="smart-gallery-container"
+                         data-wp-slug="majuli-plastic-free">
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <div id="image-modal"
+         role="dialog"
+         aria-modal="true"
+         class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50 p-6 transition-opacity duration-300"
+    >
+        <button id="modal-close"
+                class="absolute top-6 right-6 text-white text-3xl font-light">
+            &times;
+        </button>
+    
+        <img id="modal-image"
+             class="max-h-[90vh] max-w-[90vw] object-contain rounded-xl shadow-2xl"
+             src=""
+             alt="">
+    </div>
+</main>
     
     <footer class="bg-brand-dark text-white pt-12">
         <div class="container mx-auto px-4 md:px-8">
@@ -419,38 +442,6 @@
         </div>
     </footer>
 
-    <script>
-       document.addEventListener('DOMContentLoaded', () => {
-           
-            // --- Mobile Menu Toggle ---
-            const menuToggle = document.getElementById('mobile-menu-toggle');
-            const mobileMenu = document.getElementById('mobile-menu');
-
-            if (menuToggle && mobileMenu) {
-                menuToggle.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                    const openIcon = menuToggle.querySelector('svg:first-child');
-                    const closeIcon = menuToggle.querySelector('svg:last-child');
-                    if(openIcon && closeIcon) {
-                        openIcon.classList.toggle('hidden');
-                        closeIcon.classList.toggle('hidden');
-                    }
-                });
-            }
-
-            // --- Lenis Init ---
-            if (typeof Lenis !== 'undefined') {
-                const lenis = new Lenis()
-                function raf(time) {
-                    lenis.raf(time)
-                    requestAnimationFrame(raf)
-                }
-                requestAnimationFrame(raf)
-            } else {
-                console.warn('Lenis script not loaded.');
-            }
-        });
-    </script>
-
+<script type="module" src="../../src/project-gallery.js"></script>
 </body>
 </html>

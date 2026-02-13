@@ -76,10 +76,9 @@
             position: absolute;
             top: 0;
             bottom: 0;
-            left: 1.25rem; /* 20px */
-            width: 4px;
-            background-color: #D2E3AB;
-            z-index: 0;
+            left: 0.75rem;
+            width: 2px;
+            background-color: rgba(124, 150, 106, 0.35);
         }
 
         @media (min-width: 768px) {
@@ -92,17 +91,16 @@
             /* The Row Wrapper */
             .timeline-row {
                 display: flex;
-                /* Align to top so description and image start at same level */
-                align-items: flex-start; 
+                align-items: flex-start;
                 justify-content: space-between;
                 width: 100%;
-                margin-bottom: 5rem; /* Increased spacing since boxes are open */
+                margin-bottom: 5rem;
                 position: relative;
             }
 
             /* --- Zig Zag Logic --- */
             
-            /* ODD Items (1, 3, 5...): Content Left, Image Right */
+            /* ODD Items (1, 3...): Content Left, Image Right */
             .timeline-row:nth-child(odd) {
                 flex-direction: row;
             }
@@ -113,13 +111,13 @@
             /* Corrects list alignment for Right-aligned text */
             .timeline-row:nth-child(odd) .timeline-content ul {
                 display: inline-block;
-                text-align: left; /* Keep list items readable */
+                text-align: left;
             }
             .timeline-row:nth-child(odd) .timeline-image-desktop {
                 padding-left: 3rem;
             }
 
-            /* EVEN Items (2, 4, 6...): Image Left, Content Right */
+            /* EVEN Items (2, 4...): Image Left, Content Right */
             .timeline-row:nth-child(even) {
                 flex-direction: row-reverse;
             }
@@ -131,14 +129,13 @@
                 padding-right: 3rem;
             }
 
-            /* Center the dot on the line - Fixed to top of the row */
-            /* Center the dot on the line - Fixed to top of the row */
-.timeline-dot {
-    left: 50% !important; /* Added !important to force centering */
-    transform: translateX(-50%);
-    top: 2rem; /* Aligns with the card title */
-    margin-top: 0; 
-}
+            /* Center the dot on the line */
+            .timeline-dot {
+                left: 50% !important; /* Force centering */
+                transform: translateX(-50%);
+                top: 2rem; /* Aligns with the card title */
+                margin-top: 0;
+            }
         }
     </style>
 </head>
@@ -193,364 +190,398 @@
         </div>
     </nav>
 
-    <main>
+<main>
 
-        <section class="bg-brand-light/60 py-16 md:py-24">
-            <div class="container mx-auto px-4 md:px-8 max-w-5xl text-center">
-                <p class="text-sm font-semibold text-brand-accent uppercase tracking-wider mb-2">Project Milestones</p>
-                <h1 class="text-4xl md:text-5xl font-extrabold text-brand-dark mb-4 font-heading">
-                    Meghalaya
-                </h1>
-                <p class="text-lg md:text-xl text-brand-dark/80 max-w-3xl mx-auto">
-                    From statewide school campaigns in Shillong to pandemic resilience projects and eco-tourism development in the Khasi and Jaintia Hills.
-                </p>
-            </div>
-        </section>
+    <section class="bg-brand-light/60 py-20 md:py-28">
+        <div class="container mx-auto px-4 md:px-8 max-w-5xl text-center">
+            <p class="text-sm font-semibold text-brand-accent uppercase tracking-wider mb-2">
+                Project Milestones
+            </p>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-brand-dark mb-4 font-heading">
+                Meghalaya
+            </h1>
+            <p class="text-lg md:text-xl text-brand-dark/80 max-w-3xl mx-auto">
+                From statewide school campaigns in Shillong to pandemic resilience projects and eco-tourism development in the Khasi and Jaintia Hills.
+            </p>
+        </div>
+    </section>
 
-        <section class="py-20 bg-brand-base overflow-hidden">
-            <div class="container mx-auto px-4 md:px-8 max-w-6xl relative timeline-container">
+    <section class="py-20 bg-brand-base overflow-hidden">
+        <div class="container mx-auto px-4 md:px-8 max-w-6xl relative timeline-container">
 
-                <div class="relative flex flex-col gap-12 md:gap-0">
+            <article class="timeline-row relative pl-6 md:pl-0">
+                <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
 
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
-                        
-                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
-                                <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">International Day of Clean Air for Blue Skies</h3>
-                                    <p class="text-sm text-brand-accent font-semibold">Shillong</p>
-                                </div>
-                                
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/1.png" class="w-full h-full object-cover" alt="Clean Air Day Mobile">
-                                </div>
+                <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full">
+                        <h3 class="text-xl font-bold text-brand-dark font-heading">
+                            International Day of Clean Air for Blue Skies
+                        </h3>
+                        <p class="text-sm text-brand-accent font-semibold">
+                            Shillong
+                        </p>
 
-                                <div class="mt-4 pt-4 border-t border-gray-100">
-                                    <p class="text-brand-dark/80 mb-2">Celebrating International Day of Clean Air for Blue Skies in collaboration with Meghalaya State Pollution Control Board</p>
-                                    <ul class="list-disc list-outside space-y-2 pl-5 text-sm text-brand-dark/80">
-                                        <li>Mobilized 25 waste sorters from Shillong and raised awareness towards dignity, equality and inclusivity of waste sorters into the society</li>
-                                        <li>Trained the participants on segregated hands-on cleanup and conversion of soft plastic into Bottlebricks</li>
-                                        <li>Enrolled the participants in the Plastic for Purpose Campaign</li>
-                                    </ul>
-                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: MSPBC; Waste Sorters</div>
-                                </div>
-                            </div>
+                        <div class="md:hidden mt-6 smart-gallery-container w-full"
+                             data-wp-slug="clean-air-day">
                         </div>
 
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/1.png" alt="Clean Air Day" class="w-full h-full object-cover">
-                            </div>
+                        <div class="mt-6 pt-4 border-t border-gray-100">
+                            <p class="text-brand-dark/80 mb-2">Celebrating International Day of Clean Air for Blue Skies in collaboration with Meghalaya State Pollution Control Board</p>
+                            <ul class="list-disc space-y-2 pl-5 text-sm text-brand-dark/80">
+                                <li>Mobilized 25 waste sorters from Shillong and raised awareness towards dignity, equality and inclusivity of waste sorters into the society</li>
+                                <li>Trained the participants on segregated hands-on cleanup and conversion of soft plastic into Bottlebricks</li>
+                                <li>Enrolled the participants in the Plastic for Purpose Campaign</li>
+                            </ul>
+                            <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: MSPBC; Waste Sorters</div>
                         </div>
                     </div>
-
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
-                        
-                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
-                                <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">International Dog Day</h3>
-                                    <p class="text-sm text-brand-accent font-semibold">Shillong</p>
-                                </div>
-                                
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/2.png" class="w-full h-full object-cover" alt="International Dog Day Mobile">
-                                </div>
-
-                                <div class="mt-4 pt-4 border-t border-gray-100">
-                                    <p class="text-brand-dark/80 mb-2">Collaborating with Shillong Municipal Board</p>
-                                    <ul class="list-disc list-outside space-y-2 pl-5 text-sm text-brand-dark/80">
-                                        <li>Constructed 5 Bottlebricks eco-friendly Sterilization Units for Stray Dogs</li>
-                                        <li>Donated the Bottlebricks eco-friendly Sterilization Units to God's Creatures Animal Shelter</li>
-                                        <li>Donated 10 warm clothing for dogs made from recycled fabric</li>
-                                        <li>Extensive discussion on the issues and solutions towards increasing population of stray dogs in Shillong</li>
-                                    </ul>
-                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: SMB; Dog Shelters</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/2.png" alt="International Dog Day" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
-                        
-                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
-                                <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">International Youth Day</h3>
-                                    <p class="text-sm text-brand-accent font-semibold">Shillong</p>
-                                </div>
-                                
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/3.png" class="w-full h-full object-cover" alt="Youth Day Mobile">
-                                </div>
-
-                                <div class="mt-4 pt-4 border-t border-gray-100">
-                                    <p class="text-brand-dark/80 mb-2">Collaborating with Directorate of School Education and Literacy with students of BSF, Shillong</p>
-                                    <ul class="list-disc list-outside space-y-2 pl-5 text-sm text-brand-dark/80">
-                                        <li>Conducted workshop on AI Awareness & Digital Empowerment for Youth</li>
-                                        <li>20 students were given study material for their future guide to ethical AI</li>
-                                        <li>Students directly trained in AI-assisted academic & career skill-building and portfolio building</li>
-                                    </ul>
-                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: DSEL; BSF School</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/3.png" alt="International Youth Day" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
-                        
-                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
-                                <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">World Paper Bag Day</h3>
-                                    <p class="text-sm text-brand-accent font-semibold">Shillong</p>
-                                </div>
-                                
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/4.png" class="w-full h-full object-cover" alt="Paper Bag Day Mobile">
-                                </div>
-
-                                <div class="mt-4 pt-4 border-t border-gray-100">
-                                    <div class="text-brand-dark/80 text-sm space-y-3">
-                                        <p>Celebrating World Paper Bag Day, 2025, with students of Shillong Public School, Shillong in collaboration with the Directorate of School Education and Literacy, Meghalaya.</p>
-                                        <p>The first day GreenAmmo team members raised awareness on the importance of paper, forest protection, plantation and conducted a workshop on reusing old newspapers by making paper bags and paper bin liners.</p>
-                                        <p>The second day, 6 selected students from the school were taken to the nearby Laitumkhrah Market where they raised awareness on using old newspaper bags as opposed to plastic bags for suitable vegetables and groceries.</p>
-                                    </div>
-                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: DSEL; Shillong Public School</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/4.png" alt="World Paper Bag Day" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
-                        
-                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
-                                <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">SUPER Campaign</h3>
-                                    <p class="text-sm text-brand-accent font-semibold">Shillong</p>
-                                </div>
-                                
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/21.png" class="w-full h-full object-cover" alt="SUPER Campaign Mobile">
-                                </div>
-
-                                <div class="mt-4 pt-4 border-t border-gray-100">
-                                    <div class="text-brand-dark/80 text-sm space-y-4">
-                                        <div>
-                                            <strong>Phase I – Student Engagement at Scale:</strong>
-                                            <ul class="list-circle list-outside pl-5 mt-2 space-y-1">
-                                                <li>Statewide inter-school BottleBrick competition with Directorate of School Education & Literacy and My Meghalaya My Pride.</li>
-                                                <li>Students are encouraged to make BottleBricks at home and in school as part of source waste tapping.</li>
-                                                <li>Culminated on Children’s Day 2024 with a BottleBrick installation and award ceremony led by the Honorable Governor of Meghalaya.</li>
-                                                <li>Output: Over 8,000 BottleBricks produced by the students.</li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <strong>Phase II – Practical Infrastructure Use:</strong>
-                                            <ul class="list-circle list-outside pl-5 mt-2 space-y-1">
-                                                <li>BottleBricks quality-checked and rectified by local women from Shillong and generated employment by remunerating the bottlebricks.</li>
-                                                <li>Used 3,000 BottleBricks to construct a model green toilet at Nongpuir Lower Primary School.</li>
-                                                <li>Inaugurated by Hon. CM Conrad Sangma, senior education officials, and village leaders.</li>
-                                                <li>Intended as a replicable model for integrating environmental education into practical school infrastructure.</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Governor felicitation: CM Inauguration</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/21.png" alt="S.U.P.E.R Campaign" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
-                        
-                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
-                                <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Animal Sterilization Centers</h3>
-                                    <p class="text-sm text-brand-accent font-semibold">Shillong</p>
-                                </div>
-                                
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/17.png" class="w-full h-full object-cover" alt="Sterilization Centers Mobile">
-                                </div>
-
-                                <div class="mt-4 pt-4 border-t border-gray-100">
-                                    <div class="text-brand-dark/80 text-sm space-y-2">
-                                        <p><strong>Collaboration:</strong> Partnered with Shillong Municipal Board and donated 5 Sterilization Units to God's Creatures Animal Shelter, Shillong</p>
-                                        <p><strong>Product Design</strong> – Built lightweight, portable animal shelters for dogs, cats, and other animals from BottleBricks and wood.</p>
-                                        <p><strong>Carpenter Training</strong> – Local carpenters taught how to work with BottleBrick structures.</p>
-                                        <p><strong>Dual Benefit</strong> – Addresses animal welfare while converting plastic waste into durable, reusable assets.</p>
-                                        <p class="italic mt-2"><strong>Discussion:</strong> Extensive discussion with the members of Shillong Municipal Board and God Creatures (animal shelter) on the issues with stray dogs, their protection, vaccination etc. along with viable collaborative solutions.</p>
-                                    </div>
-                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Shillong Municipal Board; God’s Creatures</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/17.png" alt="Animal Sterilization Centers" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
-                        
-                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
-                                <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Mutong Plastic Festival and Museum</h3>
-                                    <p class="text-sm text-brand-accent font-semibold">East Jaintia Hills</p>
-                                </div>
-                                
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/25.png" class="w-full h-full object-cover" alt="Mutong Festival Mobile">
-                                </div>
-
-                                <div class="mt-4 pt-4 border-t border-gray-100">
-                                    <div class="text-brand-dark/80 text-sm space-y-3">
-                                        <p><strong>High-Volume Waste Conversion in Record Time –</strong><br>In Mutong (East Jaintia Hills), along with Gram Panchayat, the NGO Grassroot, Shillong, and Swatch Bharat Abhiyan, organised daily awareness workshops, clean ups and bottlebricks training to locals culminating in a 3-Plastic Festival where over 5000+ BottleBricks (of 1l or equivalent) were produced in just two weeks.</p>
-                                        <p><strong>Long-Term Eco-Tourism Asset Development –</strong><br>Construction of a Bottlebrick Eco-Museum, showcasing the success of the Plastic Festival, local heritage and sustainability innovations leading to eco-tourism.</p>
-                                    </div>
-                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Plastic Festival; Eco-museum</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/25.png" alt="Mutong Plastic Festival" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
-                        
-                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
-                                <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Eco-furniture and Decor</h3>
-                                    <p class="text-sm text-brand-accent font-semibold">Vintage Hub NEHU, Shillong</p>
-                                </div>
-                                
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/28.png" class="w-full h-full object-cover" alt="Eco Furniture Mobile">
-                                </div>
-
-                                <div class="mt-4 pt-4 border-t border-gray-100">
-                                    <p class="text-brand-dark/80 text-sm"><strong>Urban Awareness & Market Showcasing</strong> – At NEHU’s Vintage Hub restaurant in Shillong, presented a display of eco-products, including tire-based furniture, BottleBricks, and jute goods, promoting sustainable consumer choices.</p>
-                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Eco-furniture; Clean-ups</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/28.png" alt="Eco-furniture" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
-                        
-                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
-                                <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Ngunraw Project</h3>
-                                    <p class="text-sm text-brand-accent font-semibold">West Khasi Hills</p>
-                                </div>
-                                
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/9.png" class="w-full h-full object-cover" alt="Ngunraw Mobile">
-                                </div>
-
-                                <div class="mt-4 pt-4 border-t border-gray-100">
-                                    <p class="text-brand-dark/80 text-sm"><strong>Pandemic Resilience Through Environmental Action</strong> – In Ngunraw (South West Khasi Hills), trained local youth online to organise Saturday clean-ups and run a ₹8-per-BottleBrick scheme, using the proceeds to fund a community Eco-Library for children and youth.</p>
-                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Eco library; Online training</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/9.png" alt="Ngunraw Project" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
-                        
-                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
-                                <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Winter Tales Festival Collaboration</h3>
-                                    <p class="text-sm text-brand-accent font-semibold">Shillong</p>
-                                </div>
-                                
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/22.png" class="w-full h-full object-cover" alt="Winter Tales Mobile">
-                                </div>
-
-                                <div class="mt-4 pt-4 border-t border-gray-100">
-                                    <ul class="list-disc list-outside space-y-2 pl-5 text-sm text-brand-dark/80">
-                                        <li><strong>Festival Waste Management</strong> – Partnered with M/s Dakti to manage all waste for the 3-day Christmas-time Winter Tales Festival (2021 and 2022).</li>
-                                        <li><strong>Eco-Awareness Programming</strong> – Conducted workshops on organising eco-friendly community festivals.</li>
-                                        <li><strong>Public Art & Upcycling</strong> – Installed BottleBrick-based and upcycled-material sculptures, recycled clothing etc annually to showcase circular economy principles.</li>
-                                        <li><strong>Skills Development</strong> – Delivered waste management, segregation, and BottleBrick-making lessons to visitors of the Festival.</li>
-                                        <li><strong>Women’s Enterprise</strong> – Trained Adivasi women to produce cushions from waste fabric and cleaned/disinfected soft plastic, later used in Dak_Ti’s bamboo cushion covers.</li>
-                                    </ul>
-                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Winter Tales Festival; Eco-festival</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/22.png" alt="Winter Tales Festival" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
-        </section>
 
-    </main>
+                <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+                    <div class="smart-gallery-container"
+                         data-wp-slug="clean-air-day">
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-row relative pl-6 md:pl-0">
+                <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
+
+                <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full">
+                        <h3 class="text-xl font-bold text-brand-dark font-heading">
+                            International Dog Day
+                        </h3>
+                        <p class="text-sm text-brand-accent font-semibold">
+                            Shillong
+                        </p>
+
+                        <div class="md:hidden mt-6 smart-gallery-container w-full"
+                             data-wp-slug="international-dog-day">
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-100">
+                            <p class="text-brand-dark/80 mb-2">Collaborating with Shillong Municipal Board</p>
+                            <ul class="list-disc space-y-2 pl-5 text-sm text-brand-dark/80">
+                                <li>Constructed 5 Bottlebricks eco-friendly Sterilization Units for Stray Dogs</li>
+                                <li>Donated the Bottlebricks eco-friendly Sterilization Units to God's Creatures Animal Shelter</li>
+                                <li>Donated 10 warm clothing for dogs made from recycled fabric</li>
+                                <li>Extensive discussion on the issues and solutions towards increasing population of stray dogs in Shillong</li>
+                            </ul>
+                            <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: SMB; Dog Shelters</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+                    <div class="smart-gallery-container"
+                         data-wp-slug="international-dog-day">
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-row relative pl-6 md:pl-0">
+                <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
+
+                <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full">
+                        <h3 class="text-xl font-bold text-brand-dark font-heading">
+                            International Youth Day
+                        </h3>
+                        <p class="text-sm text-brand-accent font-semibold">
+                            Shillong
+                        </p>
+
+                        <div class="md:hidden mt-6 smart-gallery-container w-full"
+                             data-wp-slug="international-youth-day">
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-100">
+                            <p class="text-brand-dark/80 mb-2">Collaborating with Directorate of School Education and Literacy with students of BSF, Shillong</p>
+                            <ul class="list-disc space-y-2 pl-5 text-sm text-brand-dark/80">
+                                <li>Conducted workshop on AI Awareness & Digital Empowerment for Youth</li>
+                                <li>20 students were given study material for their future guide to ethical AI</li>
+                                <li>Students directly trained in AI-assisted academic & career skill-building and portfolio building</li>
+                            </ul>
+                            <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: DSEL; BSF School</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+                    <div class="smart-gallery-container"
+                         data-wp-slug="international-youth-day">
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-row relative pl-6 md:pl-0">
+                <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
+
+                <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full">
+                        <h3 class="text-xl font-bold text-brand-dark font-heading">
+                            World Paper Bag Day
+                        </h3>
+                        <p class="text-sm text-brand-accent font-semibold">
+                            Shillong
+                        </p>
+
+                        <div class="md:hidden mt-6 smart-gallery-container w-full"
+                             data-wp-slug="world-paper-bag-day">
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-100">
+                            <div class="text-brand-dark/80 text-sm space-y-3">
+                                <p>Celebrating World Paper Bag Day, 2025, with students of Shillong Public School, Shillong in collaboration with the Directorate of School Education and Literacy, Meghalaya.</p>
+                                <p>The first day GreenAmmo team members raised awareness on the importance of paper, forest protection, plantation and conducted a workshop on reusing old newspapers by making paper bags and paper bin liners.</p>
+                                <p>The second day, 6 selected students from the school were taken to the nearby Laitumkhrah Market where they raised awareness on using old newspaper bags as opposed to plastic bags for suitable vegetables and groceries.</p>
+                            </div>
+                            <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: DSEL; Shillong Public School</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+                    <div class="smart-gallery-container"
+                         data-wp-slug="world-paper-bag-day">
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-row relative pl-6 md:pl-0">
+                <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
+
+                <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full">
+                        <h3 class="text-xl font-bold text-brand-dark font-heading">
+                            SUPER Campaign
+                        </h3>
+                        <p class="text-sm text-brand-accent font-semibold">
+                            Shillong
+                        </p>
+
+                        <div class="md:hidden mt-6 smart-gallery-container w-full"
+                             data-wp-slug="super-campaign">
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-100">
+                            <div class="text-brand-dark/80 text-sm space-y-4">
+                                <div>
+                                    <strong>Phase I – Student Engagement at Scale:</strong>
+                                    <ul class="list-disc pl-5 mt-2 space-y-1">
+                                        <li>Statewide inter-school BottleBrick competition with Directorate of School Education & Literacy and My Meghalaya My Pride.</li>
+                                        <li>Students are encouraged to make BottleBricks at home and in school as part of source waste tapping.</li>
+                                        <li>Culminated on Children’s Day 2024 with a BottleBrick installation and award ceremony led by the Honorable Governor of Meghalaya.</li>
+                                        <li>Output: Over 8,000 BottleBricks produced by the students.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <strong>Phase II – Practical Infrastructure Use:</strong>
+                                    <ul class="list-disc pl-5 mt-2 space-y-1">
+                                        <li>BottleBricks quality-checked and rectified by local women from Shillong and generated employment by remunerating the bottlebricks.</li>
+                                        <li>Used 3,000 BottleBricks to construct a model green toilet at Nongpuir Lower Primary School.</li>
+                                        <li>Inaugurated by Hon. CM Conrad Sangma, senior education officials, and village leaders.</li>
+                                        <li>Intended as a replicable model for integrating environmental education into practical school infrastructure.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Governor felicitation: CM Inauguration</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+                    <div class="smart-gallery-container"
+                         data-wp-slug="super-campaign">
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-row relative pl-6 md:pl-0">
+                <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
+
+                <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full">
+                        <h3 class="text-xl font-bold text-brand-dark font-heading">
+                            Animal Sterilization Centers
+                        </h3>
+                        <p class="text-sm text-brand-accent font-semibold">
+                            Shillong
+                        </p>
+
+                        <div class="md:hidden mt-6 smart-gallery-container w-full"
+                             data-wp-slug="animal-sterilization-centers">
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-100">
+                            <div class="text-brand-dark/80 text-sm space-y-2">
+                                <p><strong>Collaboration:</strong> Partnered with Shillong Municipal Board and donated 5 Sterilization Units to God's Creatures Animal Shelter, Shillong</p>
+                                <p><strong>Product Design</strong> – Built lightweight, portable animal shelters for dogs, cats, and other animals from BottleBricks and wood.</p>
+                                <p><strong>Carpenter Training</strong> – Local carpenters taught how to work with BottleBrick structures.</p>
+                                <p><strong>Dual Benefit</strong> – Addresses animal welfare while converting plastic waste into durable, reusable assets.</p>
+                                <p class="italic mt-2"><strong>Discussion:</strong> Extensive discussion with the members of Shillong Municipal Board and God Creatures (animal shelter) on the issues with stray dogs, their protection, vaccination etc. along with viable collaborative solutions.</p>
+                            </div>
+                            <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Shillong Municipal Board; God’s Creatures</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+                    <div class="smart-gallery-container"
+                         data-wp-slug="animal-sterilization-centers">
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-row relative pl-6 md:pl-0">
+                <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
+
+                <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full">
+                        <h3 class="text-xl font-bold text-brand-dark font-heading">
+                            Mutong Plastic Festival and Museum
+                        </h3>
+                        <p class="text-sm text-brand-accent font-semibold">
+                            East Jaintia Hills
+                        </p>
+
+                        <div class="md:hidden mt-6 smart-gallery-container w-full"
+                             data-wp-slug="mutong-plastic-festival">
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-100">
+                            <div class="text-brand-dark/80 text-sm space-y-3">
+                                <p><strong>High-Volume Waste Conversion in Record Time –</strong><br>In Mutong (East Jaintia Hills), along with Gram Panchayat, the NGO Grassroot, Shillong, and Swatch Bharat Abhiyan, organised daily awareness workshops, clean ups and bottlebricks training to locals culminating in a 3-Plastic Festival where over 5000+ BottleBricks (of 1l or equivalent) were produced in just two weeks.</p>
+                                <p><strong>Long-Term Eco-Tourism Asset Development –</strong><br>Construction of a Bottlebrick Eco-Museum, showcasing the success of the Plastic Festival, local heritage and sustainability innovations leading to eco-tourism.</p>
+                            </div>
+                            <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Plastic Festival; Eco-museum</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+                    <div class="smart-gallery-container"
+                         data-wp-slug="mutong-plastic-festival">
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-row relative pl-6 md:pl-0">
+                <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
+
+                <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full">
+                        <h3 class="text-xl font-bold text-brand-dark font-heading">
+                            Eco-furniture and Decor
+                        </h3>
+                        <p class="text-sm text-brand-accent font-semibold">
+                            Vintage Hub NEHU, Shillong
+                        </p>
+
+                        <div class="md:hidden mt-6 smart-gallery-container w-full"
+                             data-wp-slug="eco-furniture-decor">
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-100">
+                            <p class="text-brand-dark/80 text-sm"><strong>Urban Awareness & Market Showcasing</strong> – At NEHU’s Vintage Hub restaurant in Shillong, presented a display of eco-products, including tire-based furniture, BottleBricks, and jute goods, promoting sustainable consumer choices.</p>
+                            <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Eco-furniture; Clean-ups</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+                    <div class="smart-gallery-container"
+                         data-wp-slug="eco-furniture-decor">
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-row relative pl-6 md:pl-0">
+                <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
+
+                <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full">
+                        <h3 class="text-xl font-bold text-brand-dark font-heading">
+                            Ngunraw Project
+                        </h3>
+                        <p class="text-sm text-brand-accent font-semibold">
+                            West Khasi Hills
+                        </p>
+
+                        <div class="md:hidden mt-6 smart-gallery-container w-full"
+                             data-wp-slug="ngunraw-project">
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-100">
+                            <p class="text-brand-dark/80 text-sm"><strong>Pandemic Resilience Through Environmental Action</strong> – In Ngunraw (South West Khasi Hills), trained local youth online to organise Saturday clean-ups and run a ₹8-per-BottleBrick scheme, using the proceeds to fund a community Eco-Library for children and youth.</p>
+                            <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Eco library; Online training</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+                    <div class="smart-gallery-container"
+                         data-wp-slug="ngunraw-project">
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline-row relative pl-6 md:pl-0">
+                <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
+
+                <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full">
+                        <h3 class="text-xl font-bold text-brand-dark font-heading">
+                            Winter Tales Festival Collaboration
+                        </h3>
+                        <p class="text-sm text-brand-accent font-semibold">
+                            Shillong
+                        </p>
+
+                        <div class="md:hidden mt-6 smart-gallery-container w-full"
+                             data-wp-slug="winter-tales-festival">
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-100">
+                            <ul class="list-disc space-y-2 pl-5 text-sm text-brand-dark/80">
+                                <li><strong>Festival Waste Management</strong> – Partnered with M/s Dakti to manage all waste for the 3-day Christmas-time Winter Tales Festival (2021 and 2022).</li>
+                                <li><strong>Eco-Awareness Programming</strong> – Conducted workshops on organising eco-friendly community festivals.</li>
+                                <li><strong>Public Art & Upcycling</strong> – Installed BottleBrick-based and upcycled-material sculptures, recycled clothing etc annually to showcase circular economy principles.</li>
+                                <li><strong>Skills Development</strong> – Delivered waste management, segregation, and BottleBrick-making lessons to visitors of the Festival.</li>
+                                <li><strong>Women’s Enterprise</strong> – Trained Adivasi women to produce cushions from waste fabric and cleaned/disinfected soft plastic, later used in Dak_Ti’s bamboo cushion covers.</li>
+                            </ul>
+                            <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Winter Tales Festival; Eco-festival</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+                    <div class="smart-gallery-container"
+                         data-wp-slug="winter-tales-festival">
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <div id="image-modal"
+         role="dialog"
+         aria-modal="true"
+         class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50 p-6 transition-opacity duration-300"
+    >
+        <button id="modal-close"
+                class="absolute top-6 right-6 text-white text-3xl font-light">
+            &times;
+        </button>
+    
+        <img id="modal-image"
+             class="max-h-[90vh] max-w-[90vw] object-contain rounded-xl shadow-2xl"
+             src=""
+             alt="">
+    </div>
+</main>
     
     <footer class="bg-brand-dark text-white pt-12">
         <div class="container mx-auto px-4 md:px-8">
@@ -608,38 +639,6 @@
         </div>
     </footer>
 
-    <script>
-       document.addEventListener('DOMContentLoaded', () => {
-           
-            // --- Mobile Menu Toggle ---
-            const menuToggle = document.getElementById('mobile-menu-toggle');
-            const mobileMenu = document.getElementById('mobile-menu');
-
-            if (menuToggle && mobileMenu) {
-                menuToggle.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                    const openIcon = menuToggle.querySelector('svg:first-child');
-                    const closeIcon = menuToggle.querySelector('svg:last-child');
-                    if(openIcon && closeIcon) {
-                        openIcon.classList.toggle('hidden');
-                        closeIcon.classList.toggle('hidden');
-                    }
-                });
-            }
-
-            // --- Lenis Init ---
-            if (typeof Lenis !== 'undefined') {
-                const lenis = new Lenis()
-                function raf(time) {
-                    lenis.raf(time)
-                    requestAnimationFrame(raf)
-                }
-                requestAnimationFrame(raf)
-            } else {
-                console.warn('Lenis script not loaded.');
-            }
-        });
-    </script>
-
+<script type="module" src="../../src/project-gallery.js"></script>
 </body>
 </html>
