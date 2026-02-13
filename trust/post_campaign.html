@@ -1,906 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GreenAmmo Trust</title>
-    <link
-      rel="stylesheet"
-      href="node_modules/@glidejs/glide/dist/css/glide.core.min.css"
-    />
+    <title>Campaign Details - GreenAmmo Trust</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/greenammo.jpeg" />
 
-    <!-- Optional Theme stylesheet -->
-    <link
-      rel="stylesheet"
-      href="node_modules/@glidejs/glide/dist/css/glide.theme.min.css"
-    />
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              // Custom Brand Palette (Defined by User Request)
-              "brand-dark": "#1D371F", // Primary Dark Green (Headings, Main Text)
-              "brand-primary": "#7C966A", // Secondary Olive Green (Borders, Secondary Text)
-              "brand-accent": "#6E8546", // Tertiary Vibrant Moss (CTA Background, Highlights)
-              "brand-light": "#D2E3AB", // Lightest Green (Light backgrounds, Watermarks)
-              "brand-base": "#F7FAF7", // Suggested Off-White Base
+              "trust-dark":    "#1D371F",
+              "trust-primary": "#7C966A",
+              "trust-accent":  "#6E8546",
+              "trust-light":   "#D2E3AB",
+              "brand-base":    "#F8F9FA", 
             },
+            fontFamily: {
+              'sans': ['Inter', 'sans-serif'],
+              'heading': ['Bricolage Grotesque', 'sans-serif'],
+            },
+            animation: {
+                'fade-in': 'fadeIn 1s ease-out forwards',
+            },
+            keyframes: {
+                fadeIn: {
+                    '0%': { opacity: '0', transform: 'translateY(10px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                }
+            }
           },
         },
       };
     </script>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
-      defer
-    ></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-
-    <link rel="icon" type="image/x-icon" href="trust.png" />
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Montserrat:wght@600&display=swap");
+        body { font-family: "Inter", sans-serif; background-color: #F8F9FA; overflow-x: hidden; }
+        
+        /* Skeleton Loader */
+        .skeleton {
+            background: linear-gradient(90deg, #e5e7eb 25%, #d1d5db 50%, #e5e7eb 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Hide Scrollbar for Carousel */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Text Justification & Typography */
+        #page-content p {
+            text-align: justify;
+            margin-bottom: 1.5em;
+            line-height: 1.9;
+            color: #374151;
+        }
     </style>
-    
-    <style>
-      /* @layer components {
-          .cta-button {
-            @apply inline-block py-3 px-10 rounded-full text-lg transition shadow-xl transform hover:scale-105;
-          }
-        } */
-      .cta-button {
-        display: inline-block;
-        padding: 0.75rem 2.5rem; /* py-3 px-10 */
-        border-radius: 9999px; /* rounded-full */
-        font-size: 1.125rem; /* text-lg */
-        transition: all 0.3s;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        transform: scale(1);
-      }
-      .cta-button:hover {
-        transform: scale(1.05);
-      }
+</head>
 
-      body {
-        font-family: "Inter", sans-serif; /* Keep Inter for body text */
-        /* Using the Off-White Base color */
-        background-color: #f7fafc;
-        /* ... rest of the body styles (watermark, etc.) ... */
-      }
+<body class="flex flex-col min-h-screen" x-data="{ lightboxOpen: false, lightboxSrc: '' }">
 
-      /* NEW: Apply Bricolage Grotesque to all headings */
-      h1,
-      h2,
-      h3,
-      h4 {
-        font-family: "Bricolage Grotesque", sans-serif;
-      }
-      /* CORRECTED: Defining cta-button within @layer components */
+    <div 
+        x-show="lightboxOpen" 
+        x-transition.opacity.duration.300ms
+        class="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-sm p-4"
+        style="display: none;"
+    >
+        <button @click="lightboxOpen = false" class="absolute top-6 right-6 text-white/80 hover:text-white transition transform hover:scale-110">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <img :src="lightboxSrc" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl" @click.outside="lightboxOpen = false">
+    </div>
 
-      /* Custom CSS for continuous scrolling logo/brand banner */
-      .scrolling-banner {
-        animation: scroll 40s linear infinite;
-        display: flex;
-        width: fit-content;
-      }
-      @keyframes scroll {
-        0% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(-50%);
-        }
-      }
-      .scrolling-banner:hover {
-        animation-play-state: paused;
-      }
+    <nav x-data="{ open: false }" class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-100">
+      <div class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
+        <a href="./index.html" class="block group">
+            <img src="trust.png" alt="GreenAmmo Trust" class="h-10 md:h-12 w-auto object-contain transition group-hover:opacity-80" />
+        </a>
 
-      /* Style for the Campaign Image Placeholder (Updated with brand-accent color #6E8546) */
-      .campaign-card {
-        background: linear-gradient(
-            rgba(110, 133, 70, 0.4),
-            rgba(110, 133, 70, 0.8)
-          ),
-          url("https://placehold.co/400x700/6E8546/ffffff?text=Campaign+Image")
-            center/cover;
-        height: 400px;
-        position: relative;
-      }
-      /* ... rest of the styles ... */
-    </style>
-    
-    <style>
-      /* Add this to your existing <style> block */
-
-      /* ---------------------------------------------------- */
-      /* NEW: CSS for the 3D Flip Card Effect in Principles Section */
-      /* ---------------------------------------------------- */
-      .flip-card {
-        perspective: 1000px; /* Establishes the 3D context */
-        height: 480px; /* Fixed height for consistent flipping */
-      }
-
-      .flip-card-inner {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        transition: transform 0.8s;
-        transform-style: preserve-3d; /* Key to the 3D effect */
-        transform: rotateY(0deg); /* Start state */
-      }
-
-      /* State when clicked/active */
-      .flip-card-inner.flipped {
-        transform: rotateY(180deg);
-      }
-
-      .flip-card-front,
-      .flip-card-back {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        -webkit-backface-visibility: hidden; /* Hide the back side during flip */
-        backface-visibility: hidden;
-        border-radius: 1rem;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-          0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      }
-
-      .flip-card-front {
-        background-color: #ffffff;
-        color: #333333;
-        z-index: 2;
-      }
-
-      .flip-card-back {
-        background-color: #1d371f; /* brand-dark color for the back */
-        color: white;
-        transform: rotateY(180deg); /* Position the back face */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 2rem;
-      }
-      
-      /* Remove or update the old principle-card hover style */
-      .principle-card {
-        /* Removed old styles for hover/transform */
-        position: relative;
-        z-index: 10;
-        transition: none; /* Remove transition as it interferes with flip */
-      }
-    </style>
-      <style>
-        body {
-          font-family: "Inter", sans-serif;
-          background-color: #f7fafc; /* Light gray background for contrast */
-        }
-        .bento-grid-item {
-          transition: transform 0.3s, box-shadow 0.3s;
-          background-size: cover;
-          background-position: center;
-          position: relative;
-          isolation: isolate; /* For z-index stacking */
-        }
-        .bento-grid-item::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background: rgba(0, 0, 0, 0.4);
-          transition: background 0.3s;
-          z-index: -1;
-        }
-        .bento-grid-item:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        .bento-grid-item:hover::before {
-          background: rgba(0, 0, 0, 0.25);
-        }
-        /* Specific background images for visual placeholders (Trust-specific) */
-        #projects-bg {
-          background-image: url("https://placehold.co/800x600/1C8D4B/ffffff?text=Major+Projects");
-        }
-        #reports-bg {
-          background-image: url("https://placehold.co/800x600/0E7444/ffffff?text=Reports+%26+Research");
-        }
-        #campaigns-bg {
-          background-image: url("https://placehold.co/800x600/065F46/ffffff?text=Community+Campaigns");
-        }
-        #alliances-bg {
-          background-image: url("https://placehold.co/800x600/047857/ffffff?text=Strategic+Alliances");
-        }
-      </style>
-  </head>
-  <body>
-    <nav x-data="{ open: false }" class="bg-white shadow-lg sticky top-0 z-20">
-      <div
-      class="container mx-auto px-4 md:px-8 py-3 flex justify-between items-center"
-      >
-        <div class="flex items-center">
-          <a href="./index.html" class="block">
-            <img
-            src="trust.png"
-              alt="GreenAmmo Trust Logo"
-              class="h-12 w-auto object-contain"
-              title="GreenAmmo Trust"
-              />
-          </a>
-        </div>
-
-        <div class="hidden lg:flex items-center space-x-8">
-          <a
-            href="/index.html"
-            class="text-gray-700 hover:text-brand-accent transition font-semibold"
-            >Home</a
-          >
-          <a
-            href="/gallery.html"
-            class="text-gray-700 hover:text-brand-accent transition font-semibold"
-            >Media</a
-          >
-          <a
-            href="/campaigns.html"
-            class="text-gray-700 hover:text-brand-accent transition font-semibold"
-            >Campaigns</a
-          >
-
+        <div class="hidden lg:flex items-center space-x-8 text-sm font-medium tracking-wide">
+          <a href="/index.html" class="text-gray-600 hover:text-trust-accent transition">Home</a>
+          <a href="/gallery.html" class="text-gray-600 hover:text-trust-accent transition">Media</a>
+          <a href="/trust/campaign.html" class="text-trust-dark font-bold">Campaigns</a>
+          
           <div x-data="{ dropdownOpen: false }" class="relative">
-            <button
-              @click="dropdownOpen = !dropdownOpen"
-              @click.away="dropdownOpen = false"
-              class="text-gray-700 hover:text-brand-accent transition inline-flex items-center gap-1 font-semibold"
-            >
+            <button @click="dropdownOpen = !dropdownOpen" @click.away="dropdownOpen = false" class="text-gray-600 hover:text-trust-accent transition inline-flex items-center gap-1">
               Milestones
-              <svg
-                :class="{'rotate-180': dropdownOpen}"
-                class="w-4 h-4 transform transition-transform duration-300"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                ></path>
-              </svg>
+              <svg :class="{'rotate-180': dropdownOpen}" class="w-4 h-4 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
-            <div
-              x-show="dropdownOpen"
-              x-cloak
-              x-transition:enter="transition ease-out duration-200"
-              x-transition:enter-start="opacity-0 scale-95"
-              x-transition:enter-end="opacity-100 scale-100"
-              x-transition:leave="transition ease-in duration-150"
-              x-transition:leave-start="opacity-100 scale-100"
-              x-transition:leave-end="opacity-0 scale-95"
-              class="absolute bg-white rounded-xl shadow-xl p-3 top-10 right-0 w-48 transition-all z-30 border border-brand-light origin-top-right"
-            >
-              <ul class="text-sm space-y-1">
-                <li>
-                  <a
-                    href="projects.html"
-                    @click="dropdownOpen = false"
-                    class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition"
-                  >
-                    Projects
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="reports.html"
-                    @click="dropdownOpen = false"
-                    class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition"
-                  >
-                    Reports
-                  </a>
-                </li>
-              </ul>
+            <div x-show="dropdownOpen" x-cloak x-transition class="absolute bg-white rounded-xl shadow-xl p-2 top-12 right-0 w-48 border border-gray-100 origin-top-right">
+              <a href="projects.html" class="block py-2 px-4 text-gray-700 hover:bg-trust-light/30 rounded-lg transition">Projects</a>
+              <a href="reports.html" class="block py-2 px-4 text-gray-700 hover:bg-trust-light/30 rounded-lg transition">Reports</a>
             </div>
           </div>
-
-          <a
-            href="/joinus.html"
-            class="cta-button bg-brand-accent text-white hover:bg-brand-dark/90 shadow-brand-accent/50"
-          >
-            Let's Talk
-          </a>
         </div>
 
-        <button
-          @click="open = !open"
-          class="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100"
-        >
-          <svg
-            x-show="!open"
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16m-7 6h7"
-            ></path>
-          </svg>
-          <svg
-            x-show="open"
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
+        <button @click="open = !open" class="lg:hidden text-gray-700">
+          <svg x-show="!open" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+          <svg x-show="open" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
       </div>
 
-      <div
-        x-show="open"
-        x-cloak
-        x-transition:enter="transition ease-out duration-200"
-        x-transition:enter-start="opacity-0 -translate-y-4"
-        x-transition:enter-end="opacity-100 translate-y-0"
-        x-transition:leave="transition ease-in duration-150"
-        x-transition:leave-start="opacity-100 translate-y-0"
-        x-transition:leave-end="opacity-0 -translate-y-4"
-        class="lg:hidden px-4 pb-4 bg-white border-t border-gray-100 absolute w-full shadow-2xl z-10"
-      >
-        <ul class="flex flex-col space-y-2 font-medium">
-          <a
-            href="/index.html"
-            @click="open = false"
-            class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded"
-            >Home</a
-          >
-          <a
-            href="/gallery.html"
-            @click="open = false"
-            class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded"
-            >Media</a
-          >
-          <a
-            href="/campaigns.html"
-            @click="open = false"
-            class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded"
-            >Campaigns</a
-          >
-
-          <div x-data="{ mobileDropdownOpen: false }">
-            <button
-              @click="mobileDropdownOpen = !mobileDropdownOpen"
-              class="w-full text-left py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded flex justify-between items-center"
-            >
-              Milestones
-              <svg
-                :class="{'rotate-180': mobileDropdownOpen}"
-                class="w-4 h-4 transform transition-transform duration-300"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                ></path>
-              </svg>
-            </button>
-            <div
-              x-show="mobileDropdownOpen"
-              x-cloak
-              x-transition:enter="transition ease-out duration-100"
-              x-transition:enter-start="transform opacity-0 scale-y-90"
-              x-transition:enter-end="transform opacity-100 scale-y-100"
-              x-transition:leave="transition ease-in duration-75"
-              x-transition:leave-start="transform opacity-100 scale-y-100"
-              x-transition:leave-end="transform opacity-0 scale-y-90"
-              class="ml-4 border-l border-brand-light pl-4 space-y-1"
-            >
-              <a
-                href="/milestones/projects.html"
-                @click="open = false"
-                class="block py-1 text-sm text-gray-600 hover:text-brand-accent"
-                >Projects</a
-              >
-              <a
-                href="/milestones/reports.html"
-                @click="open = false"
-                class="block py-1 text-sm text-gray-600 hover:text-brand-accent"
-                >Reports</a
-              >
-            </div>
-          </div>
-
-          <a
-            href="/joinus.html"
-            @click="open = false"
-            class="mt-4 block text-center cta-button bg-brand-accent text-white hover:bg-brand-dark/90 shadow-brand-accent/50"
-          >
-            Join the Change
-          </a>
+      <div x-show="open" x-collapse class="lg:hidden bg-white border-t border-gray-100 shadow-xl">
+        <ul class="flex flex-col p-4 space-y-2 font-medium text-gray-700">
+          <a href="/index.html" class="py-2 hover:text-trust-accent">Home</a>
+          <a href="/gallery.html" class="py-2 hover:text-trust-accent">Media</a>
+          <a href="/trust/campaign.html" class="py-2 hover:text-trust-accent">Campaigns</a>
         </ul>
       </div>
     </nav>
 
-    <main>
-      <section class="bg-green-700 text-white py-20 md:py-32">
-        <div class="container mx-auto px-4 md:px-8 text-center max-w-4xl">
-          <div class="title text-lg md:text-2xl max-w-3xl mx-auto">
-            <div class="animate-pulse space-y-4">
-              <!-- Heading -->
-              <div class="h-6 bg-gray-300 rounded w-3/4"></div>
-
-              <!-- Subheading / small line -->
-              <div class="h-4 bg-gray-300 rounded w-1/2"></div>
-
-              <!-- Paragraph lines -->
-              <div class="space-y-2">
-                <div class="h-4 bg-gray-300 rounded"></div>
-                <div class="h-4 bg-gray-300 rounded w-5/6"></div>
-                <div class="h-4 bg-gray-300 rounded w-4/6"></div>
-                <div class="h-4 bg-gray-300 rounded w-2/3"></div>
-              </div>
+    <main class="flex-grow">
+        
+        <section class="bg-trust-dark text-white relative py-20 md:py-24 text-center overflow-hidden">
+            <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+            
+            <div class="container mx-auto px-4 relative z-10 animate-fade-in">
+                <span class="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-trust-primary/30 text-trust-light text-xs font-bold uppercase tracking-widest border border-trust-primary/40 mb-6 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-trust-accent"></span> Campaign Report
+                </span>
+                
+                <h1 id="page-title" class="text-4xl md:text-6xl font-extrabold mb-6 max-w-4xl mx-auto leading-tight text-white tracking-tight">
+                    <span class="skeleton px-32 py-4 rounded bg-white/10 inline-block w-2/3"></span>
+                </h1>
+                
+                <div class="flex justify-center items-center gap-3 text-brand-light/80 text-sm font-medium">
+                    <a href="/trust/index.html" class="hover:text-white transition border-b border-transparent hover:border-white">Trust</a>
+                    <span class="opacity-50">•</span>
+                    <a href="/trust/campaign.html" class="hover:text-white transition border-b border-transparent hover:border-white">All Campaigns</a>
+                </div>
             </div>
-          </div>
+        </section>
+
+        <div class="container mx-auto px-4 -mt-16 md:-mt-20 relative z-20 max-w-5xl">
+            <div id="hero-image-container" class="rounded-3xl overflow-hidden shadow-2xl bg-gray-100 aspect-video md:aspect-[21/9] border-4 border-white ring-1 ring-gray-200/50 relative group">
+                <div class="skeleton w-full h-full absolute inset-0"></div>
+                </div>
         </div>
-      </section>
 
-      <!-- <section class="py-16 bg-white">
-        <div class="container mx-auto px-4 md:px-8 max-w-5xl">
-          <div class="grid md:grid-cols-3 gap-10 items-start">
-            <div class="md:col-span-2 space-y-4">
-              <h2 class="text-3xl font-bold text-green-800 mb-4">
-                Verifiable Impact. Total Transparency.
-              </h2>
-              <p class="text-gray-700">
-                Trust isn't given; it's earned through consistent, measurable
-                effort. We meticulously document our projects, public campaigns,
-                and financial reports, ensuring our stakeholders and the
-                community can trace the positive change we initiate.
-              </p>
+        <section id="gallery-section" class="py-12 bg-transparent hidden">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center gap-4 mb-6">
+                     <h3 class="text-2xl font-heading font-bold text-trust-dark">Gallery</h3>
+                     <div class="h-px flex-grow bg-gray-200"></div>
+                </div>
+                
+                <div class="relative group">
+                    <div class="absolute left-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-r from-brand-base to-transparent z-10 pointer-events-none"></div>
+                    <div class="absolute right-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-l from-brand-base to-transparent z-10 pointer-events-none"></div>
+
+                    <div id="carousel-track" class="flex gap-4 md:gap-6 overflow-x-auto no-scrollbar py-4 px-4 md:px-12 scroll-smooth snap-x snap-mandatory">
+                        </div>
+                </div>
+                <p class="text-center text-xs text-gray-400 mt-2 italic">Swipe to explore</p>
             </div>
+        </section>
 
-            <div
-              class="bg-green-50 p-6 rounded-xl border-l-4 border-green-600 shadow-sm"
-            >
-              <h3 class="text-xl font-semibold text-green-800 mb-2">
-                Our Pledge
-              </h3>
-              <p class="text-sm text-gray-700">
-                We pledge to maintain the highest standards of accountability.
-                Every resource deployed, every project completed, and every
-                alliance formed is aimed at maximizing our sustainable mission.
-              </p>
+
+        <section class="pb-20 pt-8 bg-brand-base">
+            <div class="container mx-auto px-4 max-w-3xl">
+                <div id="page-content" class="prose prose-lg prose-headings:font-heading prose-headings:text-trust-dark prose-headings:text-center prose-green max-w-none">
+                    <div class="space-y-6 opacity-50">
+                        <div class="skeleton h-4 w-full rounded"></div>
+                        <div class="skeleton h-4 w-5/6 rounded"></div>
+                        <div class="skeleton h-4 w-full rounded"></div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </section> -->
-
-      <section class="py-16 bg-gray-50">
-        <div class="content container mx-auto px-4 md:px-8 max-w-6xl">
-          <div class="space-y-6 p-4 max-w-3xl mx-auto">
-            <!-- Article 1 -->
-
-            <!-- Article 2 -->
-            <div class="animate-pulse space-y-4">
-              <div class="h-6 bg-gray-300 rounded w-2/3"></div>
-              <div class="h-4 bg-gray-300 rounded w-1/2"></div>
-              <div class="space-y-2">
-                <div class="h-4 bg-gray-300 rounded w-5/6"></div>
-                <div class="h-4 bg-gray-300 rounded w-3/4"></div>
-                <div class="h-4 bg-gray-300 rounded w-2/3"></div>
-              </div>
-            </div>
-
-            <!-- Article 3 -->
-            <div class="animate-pulse space-y-4">
-              <div class="h-6 bg-gray-300 rounded w-1/2"></div>
-              <div class="h-4 bg-gray-300 rounded w-1/3"></div>
-              <div class="space-y-2">
-                <div class="h-4 bg-gray-300 rounded w-4/5"></div>
-                <div class="h-4 bg-gray-300 rounded w-3/4"></div>
-                <div class="h-4 bg-gray-300 rounded w-2/3"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
+        </section>
 
     </main>
 
-    <!-- <footer class="bg-green-800 text-white pt-12">
-      <div class="container mx-auto px-4 md:px-8">
-        <div
-          class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-green-700"
-        >
-          <div class="md:col-span-2 space-y-4">
-            <h3 class="text-3xl font-bold text-green-300">GreenAmmo Group</h3>
-            <p class="text-sm text-green-200 max-w-sm">
-              Empowering sustainable living and waste management through
-              community action, research, and project initiation.
-            </p>
-          </div>
-
-          <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
-            <div class="space-y-3">
-              <h4 class="font-semibold text-green-50 mb-3">GreenAmmo</h4>
-              <ul class="text-sm space-y-2 text-green-200">
-                <li>
-                  <a href="/aboutus" class="hover:text-green-300 transition"
-                    >About Us</a
-                  >
-                </li>
-                <li>
-                  <a href="/gallery" class="hover:text-green-300 transition"
-                    >Media (Gallery)</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/certifications"
-                    class="hover:text-green-300 transition"
-                    >Certificates</a
-                  >
-                </li>
-                <li>
-                  <a href="/alliances" class="hover:text-green-300 transition"
-                    >Alliances</a
-                  >
-                </li>
-              </ul>
-            </div>
-
-            <div class="space-y-3">
-              <h4 class="font-semibold text-green-50 mb-3">Solutions</h4>
-              <ul class="text-sm space-y-2 text-green-200">
-                <li>
-                  <a
-                    href="/solutions/finance"
-                    class="hover:text-green-300 transition"
-                    >Finance</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/solutions/education"
-                    class="hover:text-green-300 transition"
-                    >Education & Development</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/solutions/event-supply"
-                    class="hover:text-green-300 transition"
-                    >Event & Supply</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/solutions/accommodation"
-                    class="hover:text-green-300 transition"
-                    >Accommodations</a
-                  >
-                </li>
-              </ul>
-            </div>
-
-            <div class="space-y-3">
-              <h4 class="font-semibold text-green-50 mb-3">Trust</h4>
-              <ul class="text-sm space-y-2 text-green-200">
-                <li>
-                  <a
-                    href="/trust/projects.html"
-                    class="hover:text-green-300 transition"
-                    >Projects & Milestones</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/trust/campaigns.html"
-                    class="hover:text-green-300 transition"
-                    >Campaigns</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/trust/reports.html"
-                    class="hover:text-green-300 transition"
-                    >Reports & Research</a
-                  >
-                </li>
-              </ul>
-            </div>
-
-            <div class="space-y-3">
-              <h4 class="font-semibold text-green-50 mb-3">Take Action</h4>
-              <div class="space-y-2">
-                <a
-                  href="../joinus.html"
-                  class="block bg-green-600 text-white text-center text-sm font-medium py-2 rounded-lg hover:bg-green-700 transition"
-                >
-                  Join Us
-                </a>
-                <a
-                  href="/explore.html"
-                  class="block border border-green-600 text-green-50 text-center text-sm font-medium py-2 rounded-lg hover:border-green-300 hover:text-green-300 transition"
-                >
-                  Explore
-                </a>
-              </div>
-            </div>
-          </div>
+    <footer class="bg-trust-dark text-white pt-16 pb-8 border-t border-white/5">
+        <div class="container mx-auto px-4 md:px-8 text-center md:text-left">
+             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                    <h3 class="text-2xl font-bold font-heading text-brand-light">GreenAmmo Trust</h3>
+                    <p class="text-sm text-brand-light/60 mt-2">Action. Research. Impact.</p>
+                </div>
+                <div class="flex gap-6 text-sm text-brand-light/80">
+                    <a href="/trust/projects.html" class="hover:text-white transition">Projects</a>
+                    <a href="/trust/reports.html" class="hover:text-white transition">Reports</a>
+                    <a href="/joinus.html" class="hover:text-white transition">Join Us</a>
+                </div>
+             </div>
+             <div class="mt-12 pt-8 border-t border-white/10 text-center text-xs text-gray-500">
+                &copy; 2025 GreenAmmo Group. All rights reserved.
+             </div>
         </div>
-
-        <div
-          class="flex flex-col sm:flex-row justify-between items-center py-6 text-sm text-green-200"
-        >
-          <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
-
-          <div class="flex gap-4 mt-4 sm:mt-0">
-            <a
-              href="#"
-              class="hover:text-green-400 transition"
-              aria-label="Facebook"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3 8h-2v2h2v2h-2v4h-2v-4H9V12h2V10c0-1.104.896-2 2-2h2v2z"
-                />
-              </svg>
-            </a>
-            <a
-              href="#"
-              class="hover:text-green-400 transition"
-              aria-label="Instagram"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.179 2.541c.883 0 1.632.748 1.632 1.632v.005c0 .883-.749 1.631-1.632 1.631h-.005c-.883 0-1.632-.748-1.632-1.631v-.005c0-.883.749-1.632 1.632-1.632h.005zM12 8c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4zm-2.821 8.879c.148.093.308.175.474.246.36.155.76.246 1.171.246h2.348c.41 0 .81-.091 1.17-.246.166-.071.326-.153.473-.246.22-.138.423-.306.605-.5.182-.194.34-.413.474-.658.134-.245.242-.516.326-.811.168-.598.256-1.233.256-1.879v-2.352c0-.646-.088-1.281-.256-1.879a4.897 4.897 0 0 0-.326-.811 4.795 4.795 0 0 0-.474-.658 4.67 4.67 0 0 0-.605-.5 4.908 4.908 0 0 0-.474-.246c-.36-.155-.76-.246-1.17-.246h-2.348c-.41 0-.81.091-1.17.246a4.908 4.908 0 0 0-.474.246 4.67 4.67 0 0 0-.605.5 4.795 4.795 0 0 0-.474.658 4.897 4.897 0 0 0-.326.811c-.168.598-.256 1.233-.256 1.879v2.352c0 .646.088 1.281.256 1.879a4.897 4.897 0 0 0 .326.811 4.795 4.795 0 0 0 .474.658 4.67 4.67 0 0 0 .605.5z"
-                />
-              </svg>
-            </a>
-            <a
-              href="#"
-              class="hover:text-green-400 transition"
-              aria-label="LinkedIn"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-2 16H8V11h2v7zm-1-8H9V8h1v2zM16 18h-2v-3c0-1.657-1.343-3-3-3s-3 1.343-3 3v3h-2V11h2v1.5c.618-.844 1.877-1.5 3-1.5 2.206 0 4 1.794 4 4v3z"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </footer> -->
-        <footer class="bg-brand-dark text-white pt-12">
-      <div class="container mx-auto px-4 md:px-8">
-        <div
-          class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-brand-primary"
-        >
-          <div class="md:col-span-2 space-y-4">
-            <h3 class="text-3xl font-bold text-brand-light">GreenAmmo Group</h3>
-            <p class="text-sm text-brand-light/70 max-w-sm">
-              Empowering sustainable living and waste management through
-              community action, research, and project initiation.
-            </p>
-          </div>
-
-          <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
-            <div class="space-y-3">
-              <h4 class="font-semibold text-white mb-3">GreenAmmo</h4>
-              <ul class="text-sm space-y-2 text-brand-light/80">
-                <li>
-                  <a href="/aboutus" class="hover:text-brand-light transition"
-                    >About Us</a
-                  >
-                </li>
-                <li>
-                  <a href="/gallery" class="hover:text-brand-light transition"
-                    >Media (Gallery)</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/certifications"
-                    class="hover:text-brand-light transition"
-                    >Certificates</a
-                  >
-                </li>
-                <li>
-                  <a href="/alliances" class="hover:text-brand-light transition"
-                    >Alliances</a
-                  >
-                </li>
-              </ul>
-            </div>
-
-            <div class="space-y-3">
-              <h4 class="font-semibold text-white mb-3">Solutions</h4>
-              <ul class="text-sm space-y-2 text-brand-light/80">
-                <li>
-                  <a
-                    href="/solutions/finance"
-                    class="hover:text-brand-light transition"
-                    >Finance</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/solutions/education"
-                    class="hover:text-brand-light transition"
-                    >Education & Development</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/solutions/event-supply"
-                    class="hover:text-brand-light transition"
-                    >Event & Supply</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/solutions/accommodation"
-                    class="hover:text-brand-light transition"
-                    >Accommodations</a
-                  >
-                </li>
-              </ul>
-            </div>
-
-            <div class="space-y-3">
-              <h4 class="font-semibold text-white mb-3">Trust</h4>
-              <ul class="text-sm space-y-2 text-brand-light/80">
-                <li>
-                  <a
-                    href="/trust/projects.html"
-                    class="hover:text-brand-light transition"
-                    >Projects & Milestones</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/trust/campaigns.html"
-                    class="hover:text-brand-light transition"
-                    >Campaigns</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/trust/reports.html"
-                    class="hover:text-brand-light transition"
-                    >Annual Reports</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/trust/donate.html"
-                    class="hover:text-brand-light transition"
-                    >Donate Now</a
-                  >
-                </li>
-              </ul>
-            </div>
-
-            <!-- <div class="space-y-3">
-              <h4 class="font-semibold text-white mb-3">Support</h4>
-              <ul class="text-sm space-y-2 text-brand-light/80">
-                <li>
-                  <a
-                    href="/solutions/contact.html"
-                    class="hover:text-brand-light transition"
-                    >Contact Us</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/joinus.html"
-                    class="hover:text-brand-light transition"
-                    >Join Us</a
-                  >
-                </li>
-                <li>
-                  <a href="/faq" class="hover:text-brand-light transition"
-                    >FAQ</a
-                  >
-                </li>
-                <li>
-                  <a href="/privacy" class="hover:text-brand-light transition"
-                    >Privacy Policy</a
-                  >
-                </li>
-              </ul>
-            </div> -->
-            <div class="space-y-3">
-              <h4 class="font-semibold text-green-50 mb-3">Take Action</h4>
-              <div class="space-y-2">
-                <a
-                  href="../joinus.html"
-                  class="block bg-brand-accent text-white text-center text-sm font-medium py-2 rounded-lg hover:bg-brand-light/40 transition"
-                >
-                  Join Us
-                </a>
-                <a
-                  href="/explore.html"
-                  class="block border border-green-600 text-green-50 text-center text-sm font-medium py-2 rounded-lg hover:border-green-300 hover:text-green-300 transition"
-                >
-                  Explore
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="container mx-auto px-4 md:px-8 py-4 flex flex-col sm:flex-row justify-between items-center text-sm text-brand-light/80"
-        >
-          <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
-          <div class="flex space-x-4 mt-2 sm:mt-0">
-            <a href="#" class="hover:text-white transition">Facebook</a>
-            <a href="#" class="hover:text-white transition">Instagram</a>
-            <a href="#" class="hover:text-white transition">LinkedIn</a>
-          </div>
-        </div>
-      </div>
     </footer>
+
     <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      const slug = urlParams.get("slug");
-      async function get_post_by_slug() {
-        try {
-          const res = await fetch(
-            `https://cms.greenammo.in/wp-json/wp/v2/posts?slug=${slug}`
-          );
-          const data = await res.json();
-          document.querySelector(".title").innerHTML = data[0].title.rendered;
-          document.querySelector(".content").innerHTML =
-            data[0].content.rendered;
-        } catch (error) {
-          console.log(error);
-          alert("POST MISSING!");
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get("slug");
+
+        const titleEl = document.getElementById("page-title");
+        const heroContainer = document.getElementById("hero-image-container");
+        const contentEl = document.getElementById("page-content");
+        const gallerySection = document.getElementById("gallery-section");
+        const carouselTrack = document.getElementById("carousel-track");
+
+        async function loadCampaign() {
+            if (!slug) {
+                window.location.href = '/trust/campaign.html';
+                return;
+            }
+
+            try {
+                // Fetch Content
+                const pageRes = await fetch(`https://cms.greenammo.in/wp-json/wp/v2/pages?slug=${encodeURIComponent(slug)}&_embed`);
+                if (!pageRes.ok) throw new Error("API Error");
+                const pages = await pageRes.json();
+                if (!pages.length) { titleEl.innerText = "Project Not Found"; return; }
+                
+                const page = pages[0];
+
+                // 1. Set Title & Doc Title
+                document.title = `${page.title.rendered} - GreenAmmo Trust`;
+                if (titleEl) titleEl.innerHTML = page.title.rendered;
+
+                // 2. Featured Image (Clean Container)
+                const featuredUrl = page._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+                if (heroContainer) {
+                    heroContainer.innerHTML = featuredUrl 
+                        ? `<img src="${featuredUrl}" alt="${page.title.rendered}" class="w-full h-full object-cover transition duration-700 hover:scale-105 cursor-pointer" onclick="Alpine.store('lightbox').open('${featuredUrl}')">`
+                        : `<div class="w-full h-full flex items-center justify-center bg-gray-200 text-gray-400 font-heading text-xl">GreenAmmo Project</div>`;
+                    
+                    // Hook up Alpine logic manually for the hero if needed, 
+                    // or just let the body x-data handle it via event bubbling logic below.
+                    const heroImg = heroContainer.querySelector('img');
+                    if(heroImg) {
+                        heroImg.addEventListener('click', () => {
+                            // Access Alpine scope
+                            document.querySelector('[x-data]').__x.$data.lightboxSrc = featuredUrl;
+                            document.querySelector('[x-data]').__x.$data.lightboxOpen = true;
+                        });
+                    }
+                }
+
+                // 3. Process Content & Extract Images
+                if (contentEl) {
+                    // Create a temp div to parse HTML
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = page.content.rendered;
+
+                    // Extract Images for Carousel
+                    const contentImages = tempDiv.querySelectorAll('img');
+                    
+                    if (contentImages.length > 0) {
+                        gallerySection.classList.remove('hidden'); // Show gallery section
+                        
+                        contentImages.forEach(img => {
+                            // 1. Create Carousel Slide
+                            const slide = document.createElement('div');
+                            slide.className = "flex-none w-72 md:w-96 h-56 md:h-64 relative rounded-xl overflow-hidden shadow-md bg-white border border-gray-100 snap-center group/slide";
+                            
+                            const slideImg = document.createElement('img');
+                            slideImg.src = img.src; // Keep original source
+                            slideImg.className = "w-full h-full object-cover transition duration-500 group-hover/slide:scale-110 cursor-pointer";
+                            
+                            // Lightbox Click
+                            slideImg.addEventListener('click', () => {
+                                document.querySelector('[x-data]').__x.$data.lightboxSrc = img.src;
+                                document.querySelector('[x-data]').__x.$data.lightboxOpen = true;
+                            });
+
+                            slide.appendChild(slideImg);
+                            carouselTrack.appendChild(slide);
+
+                            // 2. Remove Image from Content Flow (Clean up text)
+                            // Remove the figure tag if it's the parent
+                            if (img.parentElement.tagName === 'FIGURE') {
+                                img.parentElement.remove();
+                            } else {
+                                img.remove();
+                            }
+                        });
+                    }
+
+                    // Insert Cleaned Text Content
+                    contentEl.innerHTML = tempDiv.innerHTML;
+                    
+                    // Clean up empty paragraphs left by removed images
+                    contentEl.querySelectorAll('p').forEach(p => {
+                        if (p.innerText.trim() === '' && p.children.length === 0) {
+                            p.remove();
+                        }
+                    });
+                }
+
+            } catch (error) {
+                console.error("Error:", error);
+                if (titleEl) titleEl.innerText = "Error Loading Campaign";
+                if (contentEl) contentEl.innerHTML = `<p class="text-center text-red-500">Unable to load content.</p>`;
+            }
         }
-      }
-      get_post_by_slug();
+
+        document.addEventListener('alpine:init', () => {
+             loadCampaign();
+        });
+        
+        // Fallback
+        if (document.readyState === 'complete') {
+             // loadCampaign();
+        }
     </script>
-  </body>
+</body>
 </html>

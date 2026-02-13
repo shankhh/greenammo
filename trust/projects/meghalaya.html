@@ -3,152 +3,151 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="../../trust/trust.png" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="../../trust/trust.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-
     <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
 
     <title>Meghalaya Projects - GreenAmmo Trust</title>
 
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              // Custom Brand Palette (Trust Theme)
-              "brand-dark": "#1D371F", // Primary Dark Green
-              "brand-primary": "#7C966A", // Secondary Olive Green
-              "brand-accent": "#6E8546", // Tertiary Vibrant Moss
-              "brand-light": "#D2E3AB", // Lightest Green
-              "brand-base": "#F7FAF7", // Off-White Base
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "brand-dark": "#1D371F",
+                        "brand-primary": "#7C966A",
+                        "brand-accent": "#6E8546",
+                        "brand-light": "#D2E3AB",
+                        "brand-base": "#F7FAF7",
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'heading': ['Bricolage Grotesque', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fade-in 0.3s ease-out',
+                    },
+                    keyframes: {
+                        'fade-in': {
+                            'from': { opacity: 0, transform: 'translateY(10px)' },
+                            'to': { opacity: 1, transform: 'translateY(0)' },
+                        }
+                    }
+                },
             },
-            fontFamily: {
-              // Setup font families
-              'sans': ['Inter', 'sans-serif'],
-              'heading': ['Bricolage Grotesque', 'sans-serif'],
-            },
-             animation: { 
-                'fade-in': 'fade-in 0.3s ease-out',
-                'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              },
-              keyframes: {
-                'fade-in': {
-                    'from': { opacity: 0, transform: 'translateY(10px)' },
-                    'to': { opacity: 1, transform: 'translateY(0)' },
-                }
-            }
-          },
-        },
-      };
+        };
     </script>
 
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-      body {
-        font-family: "Inter", sans-serif;
-        background-color: #F7FAF7; /* brand-base */
-        color: #1D371F; /* brand-dark */
-      }
-      h1, h2, h3, h4, .font-heading {
-        font-family: "Bricolage Grotesque", sans-serif;
-      }
-      .cta-button {
-        display: inline-block;
-        padding: 0.5rem 1.5rem; 
-        border-radius: 9999px; 
-        font-size: 1.125rem; /* text-lg */
-        transition: all 0.3s;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        transform: scale(1);
-      }
-      .cta-button:hover {
-        transform: scale(1.05);
-      }
-       
-       /* Modal transitions */
-      .modal-hidden { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-out, visibility 0s linear 0.3s; }
-      .modal-visible { opacity: 1; visibility: visible; transition: opacity 0.3s ease-out; }
-       
-      /* Style for the timeline */
-      .timeline-container::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0; /* FIXED: This ensures it goes all the way down */
-        left: 1.25rem; /* 20px / 1.25rem */
-        width: 4px;
-        background-color: #D2E3AB; /* brand-light */
-        z-index: 0;
-      }
-       
-      /* Desktop timeline alignment */
-      @media (min-width: 768px) {
-        .timeline-container::before {
-            left: 50%;
-            transform: translateX(-50%);
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #F7FAF7;
+            color: #1D371F;
         }
-        .timeline-item {
-            width: 50%;
-            padding-left: 0; /* Reset mobile padding */
-        }
-        /* Odd items (1, 3, 5, 7) align left, pad right */
-        .timeline-item:nth-child(odd) {
-             align-self: flex-start;
-             padding-right: 2.5rem; /* 40px */
-             text-align: right;
-        }
-        /* Even items (2, 4, 6) align right, pad left */
-         .timeline-item:nth-child(even) {
-             align-self: flex-end;
-             padding-left: 2.5rem; /* 40px */
-             text-align: left;
-        }
-         
-        /* Dot positioning for desktop */
-        .timeline-dot {
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        /* Move dot to the line for odd/even items */
-         .timeline-item:nth-child(odd) .timeline-dot {
-            left: auto;
-            right: -0.625rem; 
-            transform: translateX(0);
-         }
-         .timeline-item:nth-child(even) .timeline-dot {
-            left: -0.625rem;
-            transform: translateX(0);
-         }
-         
-         /* Corrects alignment of accordion button items on desktop */
-         .timeline-item:nth-child(odd) .timeline-trigger {
-             flex-direction: row-reverse;
-             text-align: right;
-         }
-          .timeline-item:nth-child(even) .timeline-trigger {
-             flex-direction: row;
-             text-align: left;
-         }
-          .timeline-item:nth-child(odd) .timeline-trigger-text {
-             align-items: flex-end;
-         }
-          .timeline-item:nth-child(even) .timeline-trigger-text {
-             align-items: flex-start;
-         }
-      }
 
+        h1, h2, h3, h4, .font-heading {
+            font-family: "Bricolage Grotesque", sans-serif;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 1.125rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: scale(1);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- Timeline Layout CSS --- */
+
+        /* The vertical line - Mobile: Left aligned */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 1.25rem; /* 20px */
+            width: 4px;
+            background-color: #D2E3AB;
+            z-index: 0;
+        }
+
+        @media (min-width: 768px) {
+            /* Desktop: Center aligned line */
+            .timeline-container::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            /* The Row Wrapper */
+            .timeline-row {
+                display: flex;
+                /* Align to top so description and image start at same level */
+                align-items: flex-start; 
+                justify-content: space-between;
+                width: 100%;
+                margin-bottom: 5rem; /* Increased spacing since boxes are open */
+                position: relative;
+            }
+
+            /* --- Zig Zag Logic --- */
+            
+            /* ODD Items (1, 3, 5...): Content Left, Image Right */
+            .timeline-row:nth-child(odd) {
+                flex-direction: row;
+            }
+            .timeline-row:nth-child(odd) .timeline-content {
+                text-align: right;
+                padding-right: 3rem; 
+            }
+            /* Corrects list alignment for Right-aligned text */
+            .timeline-row:nth-child(odd) .timeline-content ul {
+                display: inline-block;
+                text-align: left; /* Keep list items readable */
+            }
+            .timeline-row:nth-child(odd) .timeline-image-desktop {
+                padding-left: 3rem;
+            }
+
+            /* EVEN Items (2, 4, 6...): Image Left, Content Right */
+            .timeline-row:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+            .timeline-row:nth-child(even) .timeline-content {
+                text-align: left;
+                padding-left: 3rem;
+            }
+            .timeline-row:nth-child(even) .timeline-image-desktop {
+                padding-right: 3rem;
+            }
+
+            /* Center the dot on the line - Fixed to top of the row */
+            /* Center the dot on the line - Fixed to top of the row */
+.timeline-dot {
+    left: 50% !important; /* Added !important to force centering */
+    transform: translateX(-50%);
+    top: 2rem; /* Aligns with the card title */
+    margin-top: 0; 
+}
+        }
     </style>
 </head>
 
 <body class="bg-brand-base text-brand-dark font-sans">
-    
+
     <nav class="w-full bg-white shadow-lg sticky top-0 z-50" x-data="{ open: false }">
         <div class="container mx-auto px-4 md:px-8 py-3 flex justify-between items-center">
-            
+
             <div class="flex items-center">
                 <a href="/trust/index.html" class="block"> <img src="../../trust/trust.png" alt="GreenAmmo Trust Logo" class="h-12 w-auto object-contain" title="GreenAmmo Trust" /> </a>
             </div>
@@ -160,12 +159,14 @@
                 <div x-data="{ dropdownOpen: false }" class="relative">
                     <button @click="dropdownOpen = !dropdownOpen" @click.away="dropdownOpen = false" class="text-brand-accent font-bold transition inline-flex items-center gap-1">
                         Milestones
-                        <svg :class="{'rotate-180': dropdownOpen}" class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <svg :class="{'rotate-180': dropdownOpen}" class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
                     </button>
-                    <div x-show="dropdownOpen" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="absolute bg-white rounded-xl shadow-xl p-3 top-10 right-0 w-48 transition-all z-30 border border-brand-light origin-top-right">
+                    <div x-show="dropdownOpen" x-cloak class="absolute bg-white rounded-xl shadow-xl p-3 top-10 right-0 w-48 transition-all z-30 border border-brand-light origin-top-right">
                         <ul class="text-sm space-y-1">
                             <li><a href="/trust/projects.html" @click="dropdownOpen = false" class="block py-1 px-2 text-brand-dark font-bold bg-brand-light/50 rounded transition">Projects</a></li>
-                            <li><a href="/trust/reports.html" @@click="dropdownOpen = false" class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition">Reports</a></li>
+                            <li><a href="/trust/reports.html" @click="dropdownOpen = false" class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition">Reports</a></li>
                         </ul>
                     </div>
                 </div>
@@ -176,33 +177,23 @@
             </div>
 
             <button id="mobile-menu-toggle" @click="open = !open" class="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100">
-                <svg id="menu-icon-open" x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                <svg id="menu-icon-close" x-show="open" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <svg x-show="open" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
 
-        <div id="mobile-menu" x-show="open" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-4" class="lg:hidden px-4 pb-4 bg-white border-t border-gray-100 absolute w-full shadow-2xl z-10">
+        <div id="mobile-menu" x-show="open" x-cloak class="lg:hidden px-4 pb-4 bg-white border-t border-gray-100 absolute w-full shadow-2xl z-10">
             <ul class="flex flex-col space-y-2 font-medium">
-                <a href="/index.html" @click="open = false" class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Home</a>
-                <a href="/gallery.html" @click="open = false" class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Media</a>
-                <a href="/campaigns.html" @click="open = false" class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Campaigns</a>
-                <div x-data="{ mobileDropdownOpen: true }"> <button @click="mobileDropdownOpen = !mobileDropdownOpen" class="w-full text-left py-2 text-brand-accent font-bold rounded flex justify-between items-center">
-                        Milestones
-                        <svg :class="{'rotate-180': mobileDropdownOpen}" class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div x-show="mobileDropdownOpen" x-cloak class="ml-4 border-l border-brand-light pl-4 space-y-1">
-                        <a href="/trust/projects.html" @click="open = false" class="block py-1 text-sm text-brand-dark font-bold">Projects</a>
-                        <a href="/trust/reports.html" @click="open = false" class="block py-1 text-sm text-gray-600 hover:text-brand-accent">Reports</a>
-                    </div>
-                </div>
-                <a href="/joinus.html" @click="open = false" class="mt-4 block text-center cta-button bg-brand-accent text-white hover:bg-brand-dark/90 shadow-brand-accent/50">
-                    Join the Change
-                </a>
+                <a href="/index.html" class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Home</a>
+                <a href="/gallery.html" class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Media</a>
+                <a href="/campaign.html" class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Campaigns</a>
+                <a href="/trust/projects.html" class="block py-2 text-brand-dark font-bold">Projects</a>
+                <a href="/joinus.html" class="mt-4 block text-center cta-button bg-brand-accent text-white">Join the Change</a>
             </ul>
         </div>
     </nav>
 
-    <main x-data="{ openAccordion: 1, showModal: false, modalImage: '', modalCaption: '' }">
+    <main>
 
         <section class="bg-brand-light/60 py-16 md:py-24">
             <div class="container mx-auto px-4 md:px-8 max-w-5xl text-center">
@@ -216,242 +207,341 @@
             </div>
         </section>
 
-        <section class="py-20 bg-brand-base">
-            <div class="container mx-auto px-4 md:px-8 max-w-5xl relative timeline-container">
-                
-                <div class="relative flex flex-col gap-12">
+        <section class="py-20 bg-brand-base overflow-hidden">
+            <div class="container mx-auto px-4 md:px-8 max-w-6xl relative timeline-container">
 
-                    <div class="timeline-item relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-1 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:translate-x-1/2"></div>
+                <div class="relative flex flex-col gap-12 md:gap-0">
+
+                    <div class="timeline-row relative pl-10 md:pl-0">
+                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
                         
-                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                            <button @click="openAccordion = (openAccordion === 1 ? null : 1)" class="w-full text-left">
-                                <div class="timeline-trigger flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                    <div class="timeline-trigger-text flex-grow flex flex-col md:items-end">
-                                        <h3 class="text-xl font-bold text-brand-dark font-heading">World Paper Bag Day Celebration</h3>
-                                        <p class="text-sm text-brand-accent font-semibold">Shillong</p>
-                                    </div>
-                                    <img src="https://placehold.co/400x300/D2E3AB/1D371F?text=Paper+Bag+Day" alt="World Paper Bag Day" class="w-full md:w-24 h-48 md:h-24 object-cover rounded-lg flex-shrink-0">
-                                    <svg :class="{'rotate-180': openAccordion === 1}" class="w-6 h-6 text-brand-accent transform transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
+                                <div>
+                                    <h3 class="text-xl font-bold text-brand-dark font-heading">International Day of Clean Air for Blue Skies</h3>
+                                    <p class="text-sm text-brand-accent font-semibold">Shillong</p>
                                 </div>
-                            </button>
-                            
-                            <div x-show="openAccordion === 1" x-transition class="animate-fade-in mt-6 pt-6 border-t border-gray-100">
-                                <p class="text-brand-dark/80 mb-6 text-left">Celebrating World Paper Bag Day, 2025, with students of Shillong Public School, Shillong in collaboration with the Directorate of School Education and Literacy, Meghalaya.</p>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <button @click="showModal = true; modalImage = 'https://placehold.co/800x600/F7FAF7/6E8546?text=Shillong+School'; modalCaption = 'Students at Shillong Public School'">
-                                        <img src="https://placehold.co/400x300/F7FAF7/6E8546?text=Shillong+School" alt="Shillong Public School" class="rounded-lg object-cover w-full h-full aspect-square hover:opacity-80 transition">
-                                    </button>
-                                    <button @click="showModal = true; modalImage = 'https://placehold.co/800x600/F7FAF7/6E8546?text=Education+Directorate'; modalCaption = 'Collaboration with Directorate of School Education'">
-                                        <img src="https://placehold.co/400x300/F7FAF7/6E8546?text=Education+Directorate" alt="Education Directorate" class="rounded-lg object-cover w-full h-full aspect-square hover:opacity-80 transition">
-                                    </button>
+                                
+                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
+                                    <img src="/assets/images/projects/1.png" class="w-full h-full object-cover" alt="Clean Air Day Mobile">
+                                </div>
+
+                                <div class="mt-4 pt-4 border-t border-gray-100">
+                                    <p class="text-brand-dark/80 mb-2">Celebrating International Day of Clean Air for Blue Skies in collaboration with Meghalaya State Pollution Control Board</p>
+                                    <ul class="list-disc list-outside space-y-2 pl-5 text-sm text-brand-dark/80">
+                                        <li>Mobilized 25 waste sorters from Shillong and raised awareness towards dignity, equality and inclusivity of waste sorters into the society</li>
+                                        <li>Trained the participants on segregated hands-on cleanup and conversion of soft plastic into Bottlebricks</li>
+                                        <li>Enrolled the participants in the Plastic for Purpose Campaign</li>
+                                    </ul>
+                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: MSPBC; Waste Sorters</div>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="timeline-image-desktop hidden md:block w-1/2">
+                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
+                                <img src="/assets/images/projects/1.png" alt="Clean Air Day" class="w-full h-full object-cover">
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="timeline-item relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-1 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2"></div>
-                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                            <button @click="openAccordion = (openAccordion === 2 ? null : 2)" class="w-full text-left">
-                                <div class="timeline-trigger flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                    <div class="timeline-trigger-text flex-grow flex flex-col md:items-start">
-                                        <h3 class="text-xl font-bold text-brand-dark font-heading">S.U.P.E.R Campaign</h3>
-                                        <p class="text-sm text-brand-accent font-semibold">Shillong</p>
-                                    </div>
-                                    <img src="https://placehold.co/400x300/D2E3AB/1D371F?text=S.U.P.E.R." alt="S.U.P.E.R Campaign" class="w-full md:w-24 h-48 md:h-24 object-cover rounded-lg flex-shrink-0">
-                                    <svg :class="{'rotate-180': openAccordion === 2}" class="w-6 h-6 text-brand-accent transform transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+
+                    <div class="timeline-row relative pl-10 md:pl-0">
+                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
+                        
+                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
+                                <div>
+                                    <h3 class="text-xl font-bold text-brand-dark font-heading">International Dog Day</h3>
+                                    <p class="text-sm text-brand-accent font-semibold">Shillong</p>
                                 </div>
-                            </button>
-                            
-                            <div x-show="openAccordion === 2" x-transition class="animate-fade-in mt-6 pt-6 border-t border-gray-100">
-                                <div class="text-brand-dark/80 mb-6 text-left space-y-4">
-                                    <ul class="list-disc list-outside space-y-3 pl-5">
-                                        <li><strong>Phase I – Student Engagement at Scale:</strong>
+                                
+                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
+                                    <img src="/assets/images/projects/2.png" class="w-full h-full object-cover" alt="International Dog Day Mobile">
+                                </div>
+
+                                <div class="mt-4 pt-4 border-t border-gray-100">
+                                    <p class="text-brand-dark/80 mb-2">Collaborating with Shillong Municipal Board</p>
+                                    <ul class="list-disc list-outside space-y-2 pl-5 text-sm text-brand-dark/80">
+                                        <li>Constructed 5 Bottlebricks eco-friendly Sterilization Units for Stray Dogs</li>
+                                        <li>Donated the Bottlebricks eco-friendly Sterilization Units to God's Creatures Animal Shelter</li>
+                                        <li>Donated 10 warm clothing for dogs made from recycled fabric</li>
+                                        <li>Extensive discussion on the issues and solutions towards increasing population of stray dogs in Shillong</li>
+                                    </ul>
+                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: SMB; Dog Shelters</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-image-desktop hidden md:block w-1/2">
+                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
+                                <img src="/assets/images/projects/2.png" alt="International Dog Day" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-row relative pl-10 md:pl-0">
+                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
+                        
+                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
+                                <div>
+                                    <h3 class="text-xl font-bold text-brand-dark font-heading">International Youth Day</h3>
+                                    <p class="text-sm text-brand-accent font-semibold">Shillong</p>
+                                </div>
+                                
+                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
+                                    <img src="/assets/images/projects/3.png" class="w-full h-full object-cover" alt="Youth Day Mobile">
+                                </div>
+
+                                <div class="mt-4 pt-4 border-t border-gray-100">
+                                    <p class="text-brand-dark/80 mb-2">Collaborating with Directorate of School Education and Literacy with students of BSF, Shillong</p>
+                                    <ul class="list-disc list-outside space-y-2 pl-5 text-sm text-brand-dark/80">
+                                        <li>Conducted workshop on AI Awareness & Digital Empowerment for Youth</li>
+                                        <li>20 students were given study material for their future guide to ethical AI</li>
+                                        <li>Students directly trained in AI-assisted academic & career skill-building and portfolio building</li>
+                                    </ul>
+                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: DSEL; BSF School</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-image-desktop hidden md:block w-1/2">
+                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
+                                <img src="/assets/images/projects/3.png" alt="International Youth Day" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-row relative pl-10 md:pl-0">
+                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
+                        
+                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
+                                <div>
+                                    <h3 class="text-xl font-bold text-brand-dark font-heading">World Paper Bag Day</h3>
+                                    <p class="text-sm text-brand-accent font-semibold">Shillong</p>
+                                </div>
+                                
+                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
+                                    <img src="/assets/images/projects/4.png" class="w-full h-full object-cover" alt="Paper Bag Day Mobile">
+                                </div>
+
+                                <div class="mt-4 pt-4 border-t border-gray-100">
+                                    <div class="text-brand-dark/80 text-sm space-y-3">
+                                        <p>Celebrating World Paper Bag Day, 2025, with students of Shillong Public School, Shillong in collaboration with the Directorate of School Education and Literacy, Meghalaya.</p>
+                                        <p>The first day GreenAmmo team members raised awareness on the importance of paper, forest protection, plantation and conducted a workshop on reusing old newspapers by making paper bags and paper bin liners.</p>
+                                        <p>The second day, 6 selected students from the school were taken to the nearby Laitumkhrah Market where they raised awareness on using old newspaper bags as opposed to plastic bags for suitable vegetables and groceries.</p>
+                                    </div>
+                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: DSEL; Shillong Public School</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-image-desktop hidden md:block w-1/2">
+                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
+                                <img src="/assets/images/projects/4.png" alt="World Paper Bag Day" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-row relative pl-10 md:pl-0">
+                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
+                        
+                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
+                                <div>
+                                    <h3 class="text-xl font-bold text-brand-dark font-heading">SUPER Campaign</h3>
+                                    <p class="text-sm text-brand-accent font-semibold">Shillong</p>
+                                </div>
+                                
+                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
+                                    <img src="/assets/images/projects/21.png" class="w-full h-full object-cover" alt="SUPER Campaign Mobile">
+                                </div>
+
+                                <div class="mt-4 pt-4 border-t border-gray-100">
+                                    <div class="text-brand-dark/80 text-sm space-y-4">
+                                        <div>
+                                            <strong>Phase I – Student Engagement at Scale:</strong>
                                             <ul class="list-circle list-outside pl-5 mt-2 space-y-1">
                                                 <li>Statewide inter-school BottleBrick competition with Directorate of School Education & Literacy and My Meghalaya My Pride.</li>
                                                 <li>Students are encouraged to make BottleBricks at home and in school as part of source waste tapping.</li>
-                                                <li>Culminated on Children’s Day 2024 with a BottleBrick installation and award ceremony led by the Governor.</li>
-                                                <li>Output: Over 8,000 BottleBricks produced.</li>
+                                                <li>Culminated on Children’s Day 2024 with a BottleBrick installation and award ceremony led by the Honorable Governor of Meghalaya.</li>
+                                                <li>Output: Over 8,000 BottleBricks produced by the students.</li>
                                             </ul>
-                                        </li>
-                                        <li><strong>Phase II – Practical Infrastructure Use:</strong>
+                                        </div>
+                                        <div>
+                                            <strong>Phase II – Practical Infrastructure Use:</strong>
                                             <ul class="list-circle list-outside pl-5 mt-2 space-y-1">
-                                                <li>BottleBricks quality-checked by local women.</li>
+                                                <li>BottleBricks quality-checked and rectified by local women from Shillong and generated employment by remunerating the bottlebricks.</li>
                                                 <li>Used 3,000 BottleBricks to construct a model green toilet at Nongpuir Lower Primary School.</li>
                                                 <li>Inaugurated by Hon. CM Conrad Sangma, senior education officials, and village leaders.</li>
                                                 <li>Intended as a replicable model for integrating environmental education into practical school infrastructure.</li>
                                             </ul>
-                                        </li>
-                                    </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Governor felicitation: CM Inauguration</div>
                                 </div>
-                                <div class="grid grid-cols-2 gap-4">
-                                     <button @click="showModal = true; modalImage = 'https://placehold.co/800x600/F7FAF7/6E8546?text=Governor+Event'; modalCaption = 'Award Ceremony with the Governor'">
-                                        <img src="https://placehold.co/400x300/F7FAF7/6E8546?text=Governor+Event" alt="Governor Event" class="rounded-lg object-cover w-full h-full aspect-square hover:opacity-80 transition">
-                                    </button>
-                                     <button @click="showModal = true; modalImage = 'https://placehold.co/800x600/F7FAF7/6E8546?text=CM+Inauguration'; modalCaption = 'Inauguration by Hon. CM Conrad Sangma'">
-                                        <img src="https://placehold.co/400x300/F7FAF7/6E8546?text=CM+Inauguration" alt="CM Inauguration" class="rounded-lg object-cover w-full h-full aspect-square hover:opacity-80 transition">
-                                    </button>
-                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-image-desktop hidden md:block w-1/2">
+                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
+                                <img src="/assets/images/projects/21.png" alt="S.U.P.E.R Campaign" class="w-full h-full object-cover">
                             </div>
                         </div>
                     </div>
 
-                    <div class="timeline-item relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-1 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:translate-x-1/2"></div>
-                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                            <button @click="openAccordion = (openAccordion === 3 ? null : 3)" class="w-full text-left">
-                                <div class="timeline-trigger flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                    <div class="timeline-trigger-text flex-grow flex flex-col md:items-end">
-                                        <h3 class="text-xl font-bold text-brand-dark font-heading">Animal Homes Project</h3>
-                                        <p class="text-sm text-brand-accent font-semibold">Shillong</p>
+                    <div class="timeline-row relative pl-10 md:pl-0">
+                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
+                        
+                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
+                                <div>
+                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Animal Sterilization Centers</h3>
+                                    <p class="text-sm text-brand-accent font-semibold">Shillong</p>
+                                </div>
+                                
+                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
+                                    <img src="/assets/images/projects/17.png" class="w-full h-full object-cover" alt="Sterilization Centers Mobile">
+                                </div>
+
+                                <div class="mt-4 pt-4 border-t border-gray-100">
+                                    <div class="text-brand-dark/80 text-sm space-y-2">
+                                        <p><strong>Collaboration:</strong> Partnered with Shillong Municipal Board and donated 5 Sterilization Units to God's Creatures Animal Shelter, Shillong</p>
+                                        <p><strong>Product Design</strong> – Built lightweight, portable animal shelters for dogs, cats, and other animals from BottleBricks and wood.</p>
+                                        <p><strong>Carpenter Training</strong> – Local carpenters taught how to work with BottleBrick structures.</p>
+                                        <p><strong>Dual Benefit</strong> – Addresses animal welfare while converting plastic waste into durable, reusable assets.</p>
+                                        <p class="italic mt-2"><strong>Discussion:</strong> Extensive discussion with the members of Shillong Municipal Board and God Creatures (animal shelter) on the issues with stray dogs, their protection, vaccination etc. along with viable collaborative solutions.</p>
                                     </div>
-                                    <img src="https://placehold.co/400x300/D2E3AB/1D371F?text=Animal+Homes" alt="Animal Homes" class="w-full md:w-24 h-48 md:h-24 object-cover rounded-lg flex-shrink-0">
-                                    <svg :class="{'rotate-180': openAccordion === 3}" class="w-6 h-6 text-brand-accent transform transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                </div>
-                            </button>
-                            
-                            <div x-show="openAccordion === 3" x-transition class="animate-fade-in mt-6 pt-6 border-t border-gray-100">
-                                <div class="text-brand-dark/80 mb-6 text-left space-y-4">
-                                    <ul class="list-disc list-outside space-y-3 pl-5">
-                                        <li><strong>Product Design</strong> – Built lightweight, portable animal shelters for dogs, cats, and other animals from BottleBricks and wood.</li>
-                                        <li><strong>Carpenter Training</strong> – Local carpenters taught how to work with BottleBrick structures.</li>
-                                        <li><strong>Dual Benefit</strong> – Addresses animal welfare while converting plastic waste into durable, reusable assets.</li>
-                                    </ul>
-                                </div>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <button @click="showModal = true; modalImage = 'https://placehold.co/800x600/F7FAF7/6E8546?text=Dog+Shelter'; modalCaption = 'Portable BottleBrick Dog Shelter'">
-                                        <img src="https://placehold.co/400x300/F7FAF7/6E8546?text=Dog+Shelter" alt="Dog Shelter" class="rounded-lg object-cover w-full h-full aspect-square hover:opacity-80 transition">
-                                    </button>
-                                     <button @click="showModal = true; modalImage = 'https://placehold.co/800x600/F7FAF7/6E8546?text=Carpenter+Training'; modalCaption = 'Training Carpenters on BottleBricks'">
-                                        <img src="https://placehold.co/400x300/F7FAF7/6E8546?text=Carpenter+Training" alt="Carpenter Training" class="rounded-lg object-cover w-full h-full aspect-square hover:opacity-80 transition">
-                                    </button>
+                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Shillong Municipal Board; God’s Creatures</div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="timeline-item relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-1 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2"></div>
-                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                            <button @click="openAccordion = (openAccordion === 4 ? null : 4)" class="w-full text-left">
-                                <div class="timeline-trigger flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                     <div class="timeline-trigger-text flex-grow flex flex-col md:items-start">
-                                        <h3 class="text-xl font-bold text-brand-dark font-heading">Mutong Plastic Festival</h3>
-                                        <p class="text-sm text-brand-accent font-semibold">East Jaintia Hills</p>
-                                    </div>
-                                    <img src="https://placehold.co/400x300/D2E3AB/1D371F?text=Mutong+Festival" alt="Mutong Plastic Festival" class="w-full md:w-24 h-48 md:h-24 object-cover rounded-lg flex-shrink-0">
-                                    <svg :class="{'rotate-180': openAccordion === 4}" class="w-6 h-6 text-brand-accent transform transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                </div>
-                            </button>
-                            
-                            <div x-show="openAccordion === 4" x-transition class="animate-fade-in mt-6 pt-6 border-t border-gray-100">
-                                <div class="text-brand-dark/80 mb-6 text-left space-y-4">
-                                    <ul class="list-disc list-outside space-y-3 pl-5">
-                                        <li><strong>High-Volume Waste Conversion in Record Time</strong> – In Mutong (East Jaintia Hills), organised daily awareness workshops culminating in a Plastic Festival where over 1,400 BottleBricks were produced in just two weeks.</li>
-                                        <li><strong>Long-Term Eco-Tourism Asset Development</strong> – Initiated planning for an Eco-Museum showcasing local heritage and sustainability innovations, to be built and maintained through community-led BottleBrick construction.</li>
-                                    </ul>
-                                </div>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <button @click="showModal = true; modalImage = 'https://placehold.co/800x600/F7FAF7/6E8546?text=Festival+Bricks'; modalCaption = '1,400 BottleBricks from the Festival'">
-                                        <img src="https://placehold.co/400x300/F7FAF7/6E8546?text=Festival+Bricks" alt="Festival Bricks" class="rounded-lg object-cover w-full h-full aspect-square hover:opacity-80 transition">
-                                    </button>
-                                     <button @click="showModal = true; modalImage = 'https://placehold.co/800x600/F7FAF7/6E8546?text=Eco-Museum+Plan'; modalCaption = 'Eco-Museum Planning Session'">
-                                        <img src="https://placehold.co/400x300/F7FAF7/6E8546?text=Eco-Museum+Plan" alt="Eco-Museum Plan" class="rounded-lg object-cover w-full h-full aspect-square hover:opacity-80 transition">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-1 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:translate-x-1/2"></div>
-                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                            <button @click="openAccordion = (openAccordion === 5 ? null : 5)" class="w-full text-left">
-                                <div class="timeline-trigger flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                    <div class="timeline-trigger-text flex-grow flex flex-col md:items-end">
-                                        <h3 class="text-xl font-bold text-brand-dark font-heading">Eco furniture and Decor at Vintage Hub</h3>
-                                        <p class="text-sm text-brand-accent font-semibold">Shillong</p>
-                                    </div>
-                                    <img src="https://placehold.co/400x300/D2E3AB/1D371F?text=Vintage+Hub" alt="Vintage Hub" class="w-full md:w-24 h-48 md:h-24 object-cover rounded-lg flex-shrink-0">
-                                    <svg :class="{'rotate-180': openAccordion === 5}" class="w-6 h-6 text-brand-accent transform transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                </div>
-                            </button>
-                            
-                            <div x-show="openAccordion === 5" x-transition class="animate-fade-in mt-6 pt-6 border-t border-gray-100">
-                                <p class="text-brand-dark/80 mb-6 text-left"><strong>Urban Awareness & Market Showcasing</strong> – At NEHU’s Vintage Hub restaurant in Shillong, presented a display of eco-products, including tire-based furniture, BottleBricks, and jute goods, promoting sustainable consumer choices.</p>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <button @click="showModal = true; modalImage = 'https://placehold.co/800x600/F7FAF7/6E8546?text=Tire+Furniture'; modalCaption = 'Tire-based furniture at Vintage Hub'">
-                                        <img src="https://placehold.co/400x300/F7FAF7/6E8546?text=Tire+Furniture" alt="Tire Furniture" class="rounded-lg object-cover w-full h-full aspect-square hover:opacity-80 transition">
-                                    </button>
-                                     <button @click="showModal = true; modalImage = 'https://placehold.co/800x600/F7FAF7/6E8546?text=Eco-Products'; modalCaption = 'Eco-Product Display at NEHU'">
-                                        <img src="https://placehold.co/400x300/F7FAF7/6E8546?text=Eco-Products" alt="Eco-Products" class="rounded-lg object-cover w-full h-full aspect-square hover:opacity-80 transition">
-                                    </button>
-                                </div>
+
+                        <div class="timeline-image-desktop hidden md:block w-1/2">
+                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
+                                <img src="/assets/images/projects/17.png" alt="Animal Sterilization Centers" class="w-full h-full object-cover">
                             </div>
                         </div>
                     </div>
 
-                    <div class="timeline-item relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-1 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2"></div>
-                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                            <button @click="openAccordion = (openAccordion === 6 ? null : 6)" class="w-full text-left">
-                                <div class="timeline-trigger flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                     <div class="timeline-trigger-text flex-grow flex flex-col md:items-start">
-                                        <h3 class="text-xl font-bold text-brand-dark font-heading">Ngunraw Project</h3>
-                                        <p class="text-sm text-brand-accent font-semibold">South West Khasi Hills</p>
+                    <div class="timeline-row relative pl-10 md:pl-0">
+                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
+                        
+                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
+                                <div>
+                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Mutong Plastic Festival and Museum</h3>
+                                    <p class="text-sm text-brand-accent font-semibold">East Jaintia Hills</p>
+                                </div>
+                                
+                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
+                                    <img src="/assets/images/projects/25.png" class="w-full h-full object-cover" alt="Mutong Festival Mobile">
+                                </div>
+
+                                <div class="mt-4 pt-4 border-t border-gray-100">
+                                    <div class="text-brand-dark/80 text-sm space-y-3">
+                                        <p><strong>High-Volume Waste Conversion in Record Time –</strong><br>In Mutong (East Jaintia Hills), along with Gram Panchayat, the NGO Grassroot, Shillong, and Swatch Bharat Abhiyan, organised daily awareness workshops, clean ups and bottlebricks training to locals culminating in a 3-Plastic Festival where over 5000+ BottleBricks (of 1l or equivalent) were produced in just two weeks.</p>
+                                        <p><strong>Long-Term Eco-Tourism Asset Development –</strong><br>Construction of a Bottlebrick Eco-Museum, showcasing the success of the Plastic Festival, local heritage and sustainability innovations leading to eco-tourism.</p>
                                     </div>
-                                    <img src="https://placehold.co/400x300/D2E3AB/1D371F?text=Ngunraw+Project" alt="Ngunraw Project" class="w-full md:w-24 h-48 md:h-24 object-cover rounded-lg flex-shrink-0">
-                                    <svg :class="{'rotate-180': openAccordion === 6}" class="w-6 h-6 text-brand-accent transform transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Plastic Festival; Eco-museum</div>
                                 </div>
-                            </button>
-                            
-                            <div x-show="openAccordion === 6" x-transition class="animate-fade-in mt-6 pt-6 border-t border-gray-100">
-                                <p class="text-brand-dark/80 mb-6 text-left"><strong>Pandemic Resilience Through Environmental Action</strong> – In Ngunraw (South West Khasi Hills), trained local youth online to organise Saturday clean-ups and run a ₹8-per-BottleBrick scheme, using the proceeds to fund a community Eco-Library for children and youth.</p>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <button @click="showModal = true; modalImage = 'https://placehold.co/800x600/F7FAF7/6E8546?text=Eco-Library'; modalCaption = 'Community Eco-Library in Ngunraw'">
-                                        <img src="https://placehold.co/400x300/F7FAF7/6E8546?text=Eco-Library" alt="Eco-Library" class="rounded-lg object-cover w-full h-full aspect-square hover:opacity-80 transition">
-                                    </button>
-                                     <button @click="showModal = true; modalImage = 'https://placehold.co/800x600/F7FAF7/6E8546?text=Online+Training'; modalCaption = 'Online Youth Training Session'">
-                                        <img src="https://placehold.co/400x300/F7FAF7/6E8546?text=Online+Training" alt="Online Training" class="rounded-lg object-cover w-full h-full aspect-square hover:opacity-80 transition">
-                                    </button>
-                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-image-desktop hidden md:block w-1/2">
+                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
+                                <img src="/assets/images/projects/25.png" alt="Mutong Plastic Festival" class="w-full h-full object-cover">
                             </div>
                         </div>
                     </div>
 
-                    <div class="timeline-item relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-1 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:translate-x-1/2"></div>
-                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                            <button @click="openAccordion = (openAccordion === 7 ? null : 7)" class="w-full text-left">
-                                <div class="timeline-trigger flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                    <div class="timeline-trigger-text flex-grow flex flex-col md:items-end">
-                                        <h3 class="text-xl font-bold text-brand-dark font-heading">Winter Tales Festival Collaboration</h3>
-                                        <p class="text-sm text-brand-accent font-semibold">Shillong</p>
-                                    </div>
-                                    <img src="https://placehold.co/400x300/D2E3AB/1D371F?text=Winter+Tales" alt="Winter Tales Festival" class="w-full md:w-24 h-48 md:h-24 object-cover rounded-lg flex-shrink-0">
-                                    <svg :class="{'rotate-180': openAccordion === 7}" class="w-6 h-6 text-brand-accent transform transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <div class="timeline-row relative pl-10 md:pl-0">
+                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
+                        
+                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
+                                <div>
+                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Eco-furniture and Decor</h3>
+                                    <p class="text-sm text-brand-accent font-semibold">Vintage Hub NEHU, Shillong</p>
                                 </div>
-                            </button>
-                            
-                            <div x-show="openAccordion === 7" x-transition class="animate-fade-in mt-6 pt-6 border-t border-gray-100">
-                                <div class="text-brand-dark/80 mb-6 text-left space-y-4">
-                                    <ul class="list-disc list-outside space-y-3 pl-5">
-                                        <li><strong>Festival Waste Management</strong> – Partnered with M/s Dakti to manage all waste for the week-long Christmas-time Winter Tales Festival.</li>
+                                
+                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
+                                    <img src="/assets/images/projects/28.png" class="w-full h-full object-cover" alt="Eco Furniture Mobile">
+                                </div>
+
+                                <div class="mt-4 pt-4 border-t border-gray-100">
+                                    <p class="text-brand-dark/80 text-sm"><strong>Urban Awareness & Market Showcasing</strong> – At NEHU’s Vintage Hub restaurant in Shillong, presented a display of eco-products, including tire-based furniture, BottleBricks, and jute goods, promoting sustainable consumer choices.</p>
+                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Eco-furniture; Clean-ups</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-image-desktop hidden md:block w-1/2">
+                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
+                                <img src="/assets/images/projects/28.png" alt="Eco-furniture" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-row relative pl-10 md:pl-0">
+                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
+                        
+                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
+                                <div>
+                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Ngunraw Project</h3>
+                                    <p class="text-sm text-brand-accent font-semibold">West Khasi Hills</p>
+                                </div>
+                                
+                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
+                                    <img src="/assets/images/projects/9.png" class="w-full h-full object-cover" alt="Ngunraw Mobile">
+                                </div>
+
+                                <div class="mt-4 pt-4 border-t border-gray-100">
+                                    <p class="text-brand-dark/80 text-sm"><strong>Pandemic Resilience Through Environmental Action</strong> – In Ngunraw (South West Khasi Hills), trained local youth online to organise Saturday clean-ups and run a ₹8-per-BottleBrick scheme, using the proceeds to fund a community Eco-Library for children and youth.</p>
+                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Eco library; Online training</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-image-desktop hidden md:block w-1/2">
+                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
+                                <img src="/assets/images/projects/9.png" alt="Ngunraw Project" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-row relative pl-10 md:pl-0">
+                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
+                        
+                        <div class="timeline-content w-full md:w-1/2 flex flex-col">
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
+                                <div>
+                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Winter Tales Festival Collaboration</h3>
+                                    <p class="text-sm text-brand-accent font-semibold">Shillong</p>
+                                </div>
+                                
+                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
+                                    <img src="/assets/images/projects/22.png" class="w-full h-full object-cover" alt="Winter Tales Mobile">
+                                </div>
+
+                                <div class="mt-4 pt-4 border-t border-gray-100">
+                                    <ul class="list-disc list-outside space-y-2 pl-5 text-sm text-brand-dark/80">
+                                        <li><strong>Festival Waste Management</strong> – Partnered with M/s Dakti to manage all waste for the 3-day Christmas-time Winter Tales Festival (2021 and 2022).</li>
                                         <li><strong>Eco-Awareness Programming</strong> – Conducted workshops on organising eco-friendly community festivals.</li>
-                                        <li><strong>Public Art & Upcycling</strong> – Installed BottleBrick-based and upcycled-material sculptures annually to showcase circular economy principles.</li>
-                                        <li><strong>Skills Development</strong> – Delivered waste management, segregation, and BottleBrick-making lessons to villagers under Dak_Ti’s operational clusters.</li>
+                                        <li><strong>Public Art & Upcycling</strong> – Installed BottleBrick-based and upcycled-material sculptures, recycled clothing etc annually to showcase circular economy principles.</li>
+                                        <li><strong>Skills Development</strong> – Delivered waste management, segregation, and BottleBrick-making lessons to visitors of the Festival.</li>
                                         <li><strong>Women’s Enterprise</strong> – Trained Adivasi women to produce cushions from waste fabric and cleaned/disinfected soft plastic, later used in Dak_Ti’s bamboo cushion covers.</li>
                                     </ul>
+                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Winter Tales Festival; Eco-festival</div>
                                 </div>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <button @click="showModal = true; modalImage = 'https://placehold.co/800x600/F7FAF7/6E8546?text=Festival+Art'; modalCaption = 'Upcycled Art at Winter Tales'">
-                                        <img src="https://placehold.co/400x300/F7FAF7/6E8546?text=Festival+Art" alt="Festival Art" class="rounded-lg object-cover w-full h-full aspect-square hover:opacity-80 transition">
-                                    </button>
-                                     <button @click="showModal = true; modalImage = 'https://placehold.co/800x600/F7FAF7/6E8546?text=Women+Training'; modalCaption = 'Women_s Enterprise Training'">
-                                        <img src="https://placehold.co/400x300/F7FAF7/6E8546?text=Women+Training" alt="Women Training" class="rounded-lg object-cover w-full h-full aspect-square hover:opacity-80 transition">
-                                    </button>
-                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-image-desktop hidden md:block w-1/2">
+                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
+                                <img src="/assets/images/projects/22.png" alt="Winter Tales Festival" class="w-full h-full object-cover">
                             </div>
                         </div>
                     </div>
@@ -460,21 +550,8 @@
             </div>
         </section>
 
-        <div x-show="showModal" x-cloak
-             class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[99] flex items-center justify-center p-4 modal-hidden" 
-             x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" 
-             x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" 
-             x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-             @click="showModal = false">
-            <figure class="max-w-3xl max-h-[80vh] relative" @click.stop>
-                <button @click="showModal = false" class="absolute -top-4 -right-4 m-2 text-white bg-black/50 rounded-full p-1 z-[60] hover:text-brand-light transition text-3xl">&times;</button>
-                <img :src="modalImage" class="rounded-lg shadow-xl max-h-[80vh] w-auto">
-                <figcaption class="text-center text-white text-sm mt-2 font-medium" x-text="modalCaption"></figcaption>
-            </figure>
-        </div>
-
     </main>
-
+    
     <footer class="bg-brand-dark text-white pt-12">
         <div class="container mx-auto px-4 md:px-8">
             <div class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-brand-primary">
@@ -507,7 +584,7 @@
                         <h4 class="font-semibold text-white mb-3 font-heading">Trust</h4>
                         <ul class="text-sm space-y-2 text-brand-light/80">
                             <li><a href="/trust/projects.html" class="hover:text-brand-light transition">Projects & Milestones</a></li>
-                            <li><a href="/trust/campaigns.html" class="hover:text-brand-light transition">Campaigns</a></li>
+                            <li><a href="/trust/campaign.html" class="hover:text-brand-light transition">Campaigns</a></li>
                             <li><a href="/trust/reports.html" class="hover:text-brand-light transition">Reports & Research</a></li>
                         </ul>
                     </div>
@@ -531,103 +608,22 @@
         </div>
     </footer>
 
-    <div id="exploreModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden justify-center items-center z-50 p-4 modal-hidden">
-        <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full mx-auto overflow-hidden animate-fade-in" id="modal-content">
-             <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100">
-                <h3 class="text-xl font-semibold text-brand-dark font-heading">Explore GreenAmmo</h3>
-                <button id="modal-close-btn" class="text-gray-400 hover:text-brand-accent focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-            <div class="grid md:grid-cols-2 gap-6 p-8">
-                <div class="bg-blue-50 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-blue-100" onclick="window.location.href='../solutions/index.html'">
-                    <div>
-                        <div class_s="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-blue-200">
-                           <svg class="w-16 h-16 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        </div>
-                        <h4 class="text-2xl font-semibold text-blue-800 mb-2 font-heading">GreenAmmo Solutions</h4>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            Professional, scalable services spanning Finance, Education, Events, and Accommodation.
-                        </p>
-                    </div>
-                    <div class="mt-6">
-                         <button class="cta-button-secondary border-blue-600 text-blue-700 hover:bg-blue-100 w-full sm:w-auto">
-                            Visit Solutions
-                        </button>
-                    </div>
-                </div>
-                <div class="bg-green-50 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-green-100 border border-green-200" onclick="window.location.href='../trust/index.html'">
-                     <div>
-                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-green-200">
-                           <svg class="w-16 h-16 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        </div>
-                        <h4 class="text-2xl font-semibold text-green-700 mb-2 font-heading">GreenAmmo Trust</h4>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            Non-profit initiatives for environmental awareness, youth empowerment, and community development.
-                        </d>
-                    </div>
-                    <div class="mt-6">
-                         <button class="cta-button-secondary border-green-600 text-green-700 hover:bg-green-100 w-full sm:w-auto">
-                            Visit Trust
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
        document.addEventListener('DOMContentLoaded', () => {
            
             // --- Mobile Menu Toggle ---
             const menuToggle = document.getElementById('mobile-menu-toggle');
             const mobileMenu = document.getElementById('mobile-menu');
-            const menuIconOpen = document.getElementById('menu-icon-open');
-            const menuIconClose = document.getElementById('menu-icon-close');
 
-            if (menuToggle && mobileMenu && menuIconOpen && menuIconClose) {
+            if (menuToggle && mobileMenu) {
                 menuToggle.addEventListener('click', () => {
                     mobileMenu.classList.toggle('hidden');
-                    menuIconOpen.classList.toggle('hidden');
-                    menuIconClose.classList.toggle('hidden');
-                });
-            }
-
-            // --- Explore Modal Logic ---
-            const exploreModal = document.getElementById('exploreModal');
-            const modalCloseBtn = document.getElementById('modal-close-btn');
-            const exploreBtns = [
-                document.getElementById('explore-btn-desktop'),
-                document.getElementById('explore-btn-mobile'),
-                document.getElementById('explore-btn-footer')
-            ];
-
-            function openModalJS() {
-                 if(exploreModal) {
-                    exploreModal.classList.remove('hidden', 'modal-hidden');
-                    exploreModal.classList.add('flex', 'modal-visible');
-                    document.body.style.overflow = 'hidden'; 
-                 }
-            }
-
-            function closeModalJS() {
-                 if(exploreModal) {
-                    exploreModal.classList.remove('flex', 'modal-visible');
-                    exploreModal.classList.add('modal-hidden');
-                    setTimeout(() => {
-                        exploreModal.classList.add('hidden');
-                    }, 300); 
-                    document.body.style.overflow = ''; 
-                 }
-            }
-
-            exploreBtns.forEach(btn => {
-                if (btn) btn.addEventListener('click', openModalJS);
-            });
-            if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModalJS);
-            if (exploreModal) {
-                exploreModal.addEventListener('click', (event) => { 
-                    if (event.target === exploreModal) closeModalJS(); 
+                    const openIcon = menuToggle.querySelector('svg:first-child');
+                    const closeIcon = menuToggle.querySelector('svg:last-child');
+                    if(openIcon && closeIcon) {
+                        openIcon.classList.toggle('hidden');
+                        closeIcon.classList.toggle('hidden');
+                    }
                 });
             }
 

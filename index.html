@@ -3,128 +3,141 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./assets/greenammo.jpeg" /> <!-- Consider updating favicon path -->
+    <link rel="icon" type="image/svg+xml" href="./assets/greenammo.jpeg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- 1. Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- 2. Alpine.js REMOVED -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script> -->
-
-    <!-- Lenis Smooth Scroll -->
     <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
 
     <title>GreenAmmo Group </title>
 
-    <!-- 3. Configure Tailwind with Pop Pastel Group Palette & Fonts -->
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              // GreenAmmo Group (Blended Pop Pastel Theme)
-              "group-primary-green": "#4CAF50", // Deep Mint (Primary Branding)
-              "group-pastel-green":  "#A8D7B0", // Soft Sage (Accents, Backgrounds)
-              "group-pastel-blue":   "#9FD8E4", // Sky Mist (Secondary Accent)
-              "group-accent-neutral":"#F0EAD6", // Sandy Beige (Warm Highlights)
-              "group-base-white":    "#FDFDFD", // Clean Base (Background)
-              "group-text-dark":     "#1F2937", // Dark Gray for Text (Good Contrast)
-              "group-text-medium":   "#6B7280", // Medium Gray for Subtext
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // GreenAmmo Group (Blended Pop Pastel Theme)
+                        "group-primary-green": "#4CAF50", // Deep Mint (Primary Branding)
+                        "group-pastel-green": "#A8D7B0", // Soft Sage (Accents, Backgrounds)
+                        "group-pastel-blue": "#9FD8E4", // Sky Mist (Secondary Accent)
+                        "group-accent-neutral": "#F0EAD6", // Sandy Beige (Warm Highlights)
+                        "group-base-white": "#FDFDFD", // Clean Base (Background)
+                        "group-text-dark": "#1F2937", // Dark Gray for Text (Good Contrast)
+                        "group-text-medium": "#6B7280", // Medium Gray for Subtext
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'heading': ['Bricolage Grotesque', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fade-in 0.3s ease-out',
+                        'fade-up': 'fade-up 0.5s ease-out forwards',
+                        'fade-out': 'fade-out 0.5s ease-in forwards',
+                    },
+                    keyframes: {
+                        'fade-in': {
+                            'from': { opacity: 0, transform: 'translateY(10px)' },
+                            'to': { opacity: 1, transform: 'translateY(0)' },
+                        },
+                        'fade-up': {
+                            'from': { opacity: 0, transform: 'translateY(20px)' },
+                            'to': { opacity: 1, transform: 'translateY(0)' },
+                        },
+                        'fade-out': {
+                            'from': { opacity: 1, transform: 'translateY(0)' },
+                            'to': { opacity: 0, transform: 'translateY(-20px)' },
+                        }
+                    }
+                },
             },
-            fontFamily: {
-              // Setup font families
-              'sans': ['Inter', 'sans-serif'],
-              'heading': ['Bricolage Grotesque', 'sans-serif'],
-            },
-             animation: { // Animation for modal
-                'fade-in': 'fade-in 0.3s ease-out',
-            },
-            keyframes: {
-                'fade-in': {
-                    'from': { opacity: 0, transform: 'translateY(10px)' },
-                    'to': { opacity: 1, transform: 'translateY(0)' },
-                }
-            }
-          },
-        },
-      };
+        };
     </script>
 
-    <!-- 4. Import Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- 5. Apply new font rules and CTA button styles -->
     <style>
-      body {
-        font-family: "Inter", sans-serif; /* Inter for body */
-        background-color: #FDFDFD; /* group-base-white */
-        color: #1F2937; /* group-text-dark */
-      }
-      h1, h2, h3, h4, .font-heading {
-        font-family: "Bricolage Grotesque", sans-serif; /* Bricolage for headings */
-      }
-      .cta-button {
-        display: inline-block;
-        padding: 0.75rem 2.5rem;
-        border-radius: 9999px;
-        font-size: 1rem; /* Slightly reduced size */
-        font-weight: 600;
-        transition: all 0.3s ease-in-out;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        transform: scale(1);
-        text-align: center;
-      }
-      .cta-button:hover {
-        transform: scale(1.03) translateY(-2px);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      }
-      .cta-button-secondary { /* Style for secondary/outline buttons */
-        padding: 0.75rem 2.5rem;
-        border-radius: 9999px;
-        font-size: 1rem;
-        font-weight: 600;
-        transition: all 0.3s ease-in-out;
-        border-width: 2px;
-         transform: scale(1);
-         text-align: center;
-      }
-       .cta-button-secondary:hover {
-        transform: scale(1.03) translateY(-2px);
-      }
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #FDFDFD;
+            color: #1F2937;
+        }
 
-       /* Added style for modal transitions */
-      .modal-hidden {
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease-out, visibility 0s linear 0.3s;
-      }
-       .modal-visible {
-        opacity: 1;
-        visibility: visible;
-        transition: opacity 0.3s ease-out;
-      }
+        h1, h2, h3, h4, .font-heading {
+            font-family: "Bricolage Grotesque", sans-serif;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.75rem 2.5rem;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transform: scale(1);
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.03) translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .cta-button-secondary {
+            padding: 0.75rem 2.5rem;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease-in-out;
+            border-width: 2px;
+            transform: scale(1);
+            text-align: center;
+        }
+
+        .cta-button-secondary:hover {
+            transform: scale(1.03) translateY(-2px);
+        }
+
+        /* Modal transitions */
+        .modal-hidden {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-out, visibility 0s linear 0.3s;
+        }
+
+        .modal-visible {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.3s ease-out;
+        }
+        
+        /* Utility for vanilla JS transitions */
+        .opacity-0 { opacity: 0; }
+        .opacity-100 { opacity: 1; }
+        .translate-y-8 { transform: translateY(2rem); }
+        .translate-y-0 { transform: translateY(0); }
+        .-translate-y-8 { transform: translateY(-2rem); }
     </style>
 </head>
 
-<body class="bg-group-base-white text-group-text-dark font-sans"> <!-- Removed x-data -->
-    <!-- 🌿 NAV COMPONENT for GreenAmmo Group (Updated) -->
-     <nav class="w-full bg-white shadow-sm sticky top-0 z-50"> <!-- Removed x-data -->
+<body class="bg-group-base-white text-group-text-dark font-sans">
+
+    <nav class="w-full bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center px-6 py-4">
-            <!-- Logo -->
             <a href="/" class="font-heading font-extrabold text-2xl text-group-primary-green tracking-tight flex items-center gap-2">
-                 <img src="./assets/greenammo.jpeg" alt="GreenAmmo Logo" class="h-10 w-auto rounded-full object-cover">
-                 <span class="text-group-pastel-green">Green</span><span class="text-group-pastel-blue">Ammo</span>
+                <img src="./assets/greenammo.jpeg" alt="GreenAmmo Logo" class="h-10 w-auto rounded-full object-cover">
+                <span class="text-group-pastel-green">Green</span><span class="text-group-pastel-blue">Ammo</span>
             </a>
 
-            <!-- Primary Nav Links (Desktop) -->
             <ul class="hidden md:flex space-x-6 text-group-text-medium font-medium items-center">
                 <li><a href="/aboutus.html" class="hover:text-group-primary-green transition">About Us</a></li>
-                 <!-- Media Dropdown -->
                 <li class="relative group">
                     <button class="hover:text-group-primary-green transition inline-flex items-center gap-1">
                         Media
-                        <svg xmlns="http://www.w.3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        <svg xmlns="http://www.w.3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
                     </button>
                     <div class="absolute hidden group-hover:block bg-white rounded-xl shadow-lg p-4 top-5 -left-4 w-56 transition-all z-10 border border-gray-100">
                         <ul class="text-sm space-y-1">
@@ -138,35 +151,32 @@
                 <li><a href="/joinus.html" class="hover:text-group-primary-green transition">Join Us</a></li>
             </ul>
 
-            <!-- Explore Button (Desktop) - ADDED ID -->
             <button id="explore-btn-desktop" class="hidden md:block cta-button bg-group-primary-green text-white hover:bg-opacity-90">
                 Explore
             </button>
 
-            <!-- Mobile Menu Toggle - ADDED ID -->
             <button id="mobile-menu-toggle" class="md:hidden flex items-center text-group-primary-green focus:outline-none">
-                <!-- SVGs remain the same, logic handled by JS -->
-                 <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+                <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
             </button>
         </div>
 
-        <!-- Mobile Dropdown - ADDED ID, initially hidden -->
         <div id="mobile-menu" class="hidden md:hidden flex-col space-y-2 bg-white shadow-inner px-6 py-4 border-t border-gray-100">
             <a href="/aboutus.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">About Us</a>
             <a href="/gallery.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">Media</a>
-            <a href="/blog.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">Blog</a>
             <a href="/joinus.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">Join Us</a>
-             <!-- Explore Button (Mobile) - ADDED ID -->
-             <button id="explore-btn-mobile" class="mt-2 w-full cta-button bg-group-primary-green text-white hover:bg-opacity-90">
+            <button id="explore-btn-mobile" class="mt-2 w-full cta-button bg-group-primary-green text-white hover:bg-opacity-90">
                 Explore
-             </button>
+            </button>
         </div>
     </nav>
 
     <main class="min-h-screen">
 
-        <!-- 💬 HERO SECTION -->
         <section class="container mx-auto px-4 md:px-8 py-16 grid md:grid-cols-2 gap-12 items-center">
             <div>
                 <h1 class="text-4xl md:text-5xl font-extrabold mb-5 leading-tight font-heading text-group-text-dark">
@@ -187,45 +197,45 @@
                 </div>
             </div>
             <div class="flex justify-center">
-                <!-- 🖼️ Simple SVG Illustration Placeholder -->
                 <div class="w-full max-w-md h-72 bg-group-pastel-green/30 rounded-2xl flex items-center justify-center p-6 border border-group-pastel-green">
-                    <svg class="w-24 h-24 text-group-primary-green opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v13m0-13V4a2 2 0 114 0v4m-4 0H8m4 13a9 9 0 110-18 9 9 0 010 18zm-4-9a4 4 0 108 0 4 4 0 00-8 0z"></path></svg>
-                     <!-- Replace with a more relevant illustration -->
+                    <svg class="w-24 h-24 text-group-primary-green opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v13m0-13V4a2 2 0 114 0v4m-4 0H8m4 13a9 9 0 110-18 9 9 0 010 18zm-4-9a4 4 0 108 0 4 4 0 00-8 0z"></path>
+                    </svg>
                 </div>
             </div>
         </section>
 
-        <!-- ... (Rest of the main content sections: Why Us, Discover Divisions, Alliances, Testimonials) ... -->
-        <!-- These sections remain the same as the previous version -->
-        
-        <!-- 💡 WHY US SECTION -->
         <section class="container mx-auto px-4 md:px-8 py-12">
             <h2 class="text-3xl font-bold text-center mb-10 font-heading text-group-text-dark">Why Choose GreenAmmo?</h2>
             <div class="grid md:grid-cols-3 gap-6">
-                 <!-- Card 1 -->
                 <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition border border-gray-100">
                     <div class="w-full h-32 bg-group-pastel-green/30 rounded-xl mb-4 flex items-center justify-center border border-group-pastel-green">
-                         <svg class="w-12 h-12 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <svg class="w-12 h-12 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
                     </div>
                     <h3 class="font-semibold text-xl mb-2 font-heading text-group-text-dark">Integrated Approach</h3>
                     <p class="text-group-text-medium text-sm">
                         Combining social and professional impact to create meaningful, scalable outcomes.
                     </p>
                 </div>
-                <!-- Card 2 -->
-                 <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition border border-gray-100">
+                <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition border border-gray-100">
                     <div class="w-full h-32 bg-group-pastel-green/30 rounded-xl mb-4 flex items-center justify-center border border-group-pastel-green">
-                        <svg class="w-12 h-12 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2c-2.355 0-4.605.698-6.502 2.016M12 22c-2.355 0-4.605-.698-6.502-2.016M18 10a6 6 0 00-6-6M6 10a6 6 0 00-6 6"></path></svg>
+                        <svg class="w-12 h-12 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2c-2.355 0-4.605.698-6.502 2.016M12 22c-2.355 0-4.605-.698-6.502-2.016M18 10a6 6 0 00-6-6M6 10a6 6 0 00-6 6"></path>
+                        </svg>
                     </div>
                     <h3 class="font-semibold text-xl mb-2 font-heading text-group-text-dark">Transparent Operations</h3>
                     <p class="text-group-text-medium text-sm">
                         People-first, transparent processes trusted by public, private, and civic sectors.
                     </p>
                 </div>
-                 <!-- Card 3 -->
-                 <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition border border-gray-100">
+                <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition border border-gray-100">
                     <div class="w-full h-32 bg-group-pastel-green/30 rounded-xl mb-4 flex items-center justify-center border border-group-pastel-green">
-                       <svg class="w-12 h-12 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        <svg class="w-12 h-12 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
                     </div>
                     <h3 class="font-semibold text-xl mb-2 font-heading text-group-text-dark">Scalable Solutions</h3>
                     <p class="text-group-text-medium text-sm">
@@ -235,209 +245,182 @@
             </div>
         </section>
 
-        <!-- 🔄 DISCOVER OUR DIVISIONS -->
         <section class="container mx-auto px-4 md:px-8 py-16">
             <h2 class="text-3xl font-bold text-center mb-10 font-heading text-group-text-dark">Discover Our Divisions</h2>
             <div class="grid md:grid-cols-2 gap-8">
-                 <!-- GreenAmmo Solutions -->
                 <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition flex flex-col justify-between border border-gray-100">
                     <div>
                         <h3 class="text-2xl font-semibold mb-3 font-heading text-group-pastel-blue">GreenAmmo Solutions</h3>
-                         <div class="w-full h-40 bg-group-pastel-blue/20 rounded-xl flex items-center justify-center mb-4 border border-group-pastel-blue/50">
-                             <svg class="w-16 h-16 text-group-pastel-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <div class="w-full h-40 bg-group-pastel-blue/20 rounded-xl flex items-center justify-center mb-4 border border-group-pastel-blue/50">
+                            <svg class="w-16 h-16 text-group-pastel-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
                         </div>
                         <p class="text-group-text-medium mb-4 text-sm">
                             Professional, scalable services across Finance, Education, Events, FMCG, and Accommodation — driving business and social growth together.
                         </p>
                     </div>
-                     <a href="./solutions/index.html" class="mt-4 inline-block cta-button-secondary border-group-pastel-blue text-group-pastel-blue hover:bg-group-pastel-blue/20 w-full sm:w-auto">
+                    <a href="./solutions/index.html" class="mt-4 inline-block cta-button-secondary border-group-pastel-blue text-group-pastel-blue hover:bg-group-pastel-blue/20 w-full sm:w-auto">
                         Visit Solutions
-                     </a>
+                    </a>
                 </div>
 
-                <!-- GreenAmmo Trust -->
                 <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition flex flex-col justify-between border border-gray-100">
                     <div>
                         <h3 class="text-2xl font-semibold mb-3 font-heading text-group-primary-green">GreenAmmo Trust</h3>
                         <div class="w-full h-40 bg-group-pastel-green/30 rounded-xl flex items-center justify-center mb-4 border border-group-pastel-green/50">
-                            <svg class="w-16 h-16 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <svg class="w-16 h-16 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
                         </div>
                         <p class="text-group-text-medium mb-4 text-sm">
                             Non-profit initiatives empowering people and protecting the planet — from climate action to women’s empowerment and community development.
                         </p>
                     </div>
-                     <a href="./trust/index.html" class="mt-4 inline-block cta-button-secondary border-group-primary-green text-group-primary-green hover:bg-group-pastel-green/50 w-full sm:w-auto">
+                    <a href="./trust/index.html" class="mt-4 inline-block cta-button-secondary border-group-primary-green text-group-primary-green hover:bg-group-pastel-green/50 w-full sm:w-auto">
                         Visit Trust
-                     </a>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- 🤝 ALLIANCES -->
         <section class="bg-white py-12">
-  <div class="max-w-7xl mx-auto mb-6">
-    <h2 class="text-3xl font-bold text-center text-brand-dark mb-4">
-      Our Alliances
-    </h2>
-  </div>
+            <div class="max-w-7xl mx-auto mb-6">
+                <h2 class="text-3xl font-bold text-center text-group-text-dark mb-4">
+                    Our Alliances
+                </h2>
+            </div>
 
-  <div class="overflow-hidden relative">
-    <div class="animate-marquee flex gap-12 items-start whitespace-nowrap">
-      
-      <div class="flex flex-col items-center justify-start shrink-0 w-40">
-        <img src="/assets/alliances-logo/channels4_profile.jpg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Channel Profile</span>
-      </div>
-
-      <div class="flex flex-col items-center justify-start shrink-0 w-40">
-        <img src="/assets/alliances-logo/images (1).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Swachh Bharat</span>
-      </div>
-
-      <div class="flex flex-col items-center justify-start shrink-0 w-40">
-        <img src="/assets/alliances-logo/images (2).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Dhakti Craft</span>
-      </div>
-
-      <div class="flex flex-col items-center justify-start shrink-0 w-40">
-        <img src="/assets/alliances-logo/images (3).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">CWE Nepal</span>
-      </div>
-
-      <div class="flex flex-col items-center justify-start shrink-0 w-40">
-        <img src="/assets/alliances-logo/images (4).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Alliance 04</span>
-      </div>
-
-      <div class="flex flex-col items-center justify-start shrink-0 w-40">
-        <img src="/assets/alliances-logo/images (5).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Seok Foundation</span>
-      </div>
-
-      <div class="flex flex-col items-center justify-start shrink-0 w-40">
-        <img src="/assets/alliances-logo/images (38).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">DSE&L</span>
-      </div>
-
-      <div class="flex flex-col items-center justify-start shrink-0 w-40">
-        <img src="/assets/alliances-logo/images (39).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Shillong Municipal Board</span>
-      </div>
-
-       <div class="flex flex-col items-center justify-start shrink-0 w-40">
-        <img src="/assets/alliances-logo/images (40).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">MSPBC</span>
-      </div>
-
-
-      <div class="flex flex-col items-center justify-start shrink-0 w-40">
-        <img src="/assets/alliances-logo/channels4_profile.jpg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Channel Profile</span>
-      </div>
-
-      <div class="flex flex-col items-center justify-start shrink-0 w-40">
-        <img src="/assets/alliances-logo/images (1).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Swachh Bharat</span>
-      </div>
-
-      <div class="flex flex-col items-center justify-start shrink-0 w-40">
-        <img src="/assets/alliances-logo/images (2).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Dhakti Craft</span>
-      </div>
-
-      <div class="flex flex-col items-center justify-start shrink-0 w-40">
-        <img src="/assets/alliances-logo/images (3).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">CWE Nepal</span>
-      </div>
-
-      <div class="flex flex-col items-center justify-start shrink-0 w-40">
-        <img src="/assets/alliances-logo/images (4).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Alliance 04</span>
-      </div>
-
-      <div class="flex flex-col items-center justify-start shrink-0 w-40">
-        <img src="/assets/alliances-logo/images (5).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Seok Foundation</span>
-      </div>
-
-      <div class="flex flex-col items-center justify-start shrink-0 w-40">
-        <img src="/assets/alliances-logo/images (38).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">DSE&L</span>
-      </div>
-
-      <div class="flex flex-col items-center justify-start shrink-0 w-40">
-        <img src="/assets/alliances-logo/images (39).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Shillong Municipal Board</span>
-      </div>
-
-       <div class="flex flex-col items-center justify-start shrink-0 w-40">
-        <img src="/assets/alliances-logo/images (40).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">MSPBC</span>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<style>
-  /* Define the scrolling banner animation */
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      /* -50% works because we duplicated the content. 
-         It scrolls exactly half the width (the length of the original set), 
-         then snaps back to 0 instantly, creating the illusion of infinity. 
-      */
-      transform: translateX(-50%);
-    }
-  }
-
-  .animate-marquee {
-    animation: scroll 40s linear infinite;
-    display: flex;
-    width: fit-content; 
-  }
-
-  .animate-marquee:hover {
-    animation-play-state: paused;
-  }
-
-  .logo-muted {
-    filter: grayscale(100%) opacity(70%);
-    transition: all 0.3s ease;
-  }
-
-  /* When hovering over the *container* (the div holding image+text), un-mute the logo */
-  .flex:hover .logo-muted {
-    filter: grayscale(0%) opacity(100%);
-    transform: scale(1.05); /* Optional: slight pop effect */
-  }
-</style>
-
-        <!-- 💬 TESTIMONIALS -->
-        <section class="bg-group-pastel-green/30 py-16">
-            <div class="container mx-auto px-4 md:px-8">
-                <h2 class="text-3xl font-bold text-center mb-10 font-heading text-group-text-dark">What People Say</h2>
-                 <div class="grid md:grid-cols-3 gap-8">
-                    <div class="bg-white rounded-2xl shadow p-6 border border-gray-100">
-                        <p class="text-group-text-medium text-sm mb-4 italic">
-                            “GreenAmmo’s blend of professionalism and purpose is unmatched. Their transparency builds trust at every step.”
-                        </p>
-                        <h4 class="font-semibold text-group-primary-green">– Community Partner</h4>
+            <div class="overflow-hidden relative">
+                <div class="animate-marquee flex gap-12 items-start whitespace-nowrap">
+                    <div class="flex flex-col items-center justify-start shrink-0 w-40">
+                        <img src="/assets/alliances-logo/channels4_profile.jpg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Channel Profile</span>
                     </div>
-                    <div class="bg-white rounded-2xl shadow p-6 border border-gray-100">
-                         <p class="text-group-text-medium text-sm mb-4 italic">
-                            “They make sustainability real — not just a buzzword. Our business saw growth and impact together.”
-                        </p>
-                        <h4 class="font-semibold text-group-primary-green">– Corporate Client</h4>
+                    <div class="flex flex-col items-center justify-start shrink-0 w-40">
+                        <img src="/assets/alliances-logo/images (1).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Swachh Bharat</span>
                     </div>
-                    <div class="bg-white rounded-2xl shadow p-6 border border-gray-100">
-                         <p class="text-group-text-medium text-sm mb-4 italic">
-                            “Volunteering with GreenAmmo Trust changed my perspective on what collaboration can achieve.”
+                    <div class="flex flex-col items-center justify-start shrink-0 w-40">
+                        <img src="/assets/alliances-logo/images (2).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Dhakti Craft</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-start shrink-0 w-40">
+                        <img src="/assets/alliances-logo/images (3).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">CWE Nepal</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-start shrink-0 w-40">
+                        <img src="/assets/alliances-logo/images (4).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Alliance 04</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-start shrink-0 w-40">
+                        <img src="/assets/alliances-logo/images (5).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Seok Foundation</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-start shrink-0 w-40">
+                        <img src="/assets/alliances-logo/images (38).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">DSE&L</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-start shrink-0 w-40">
+                        <img src="/assets/alliances-logo/images (39).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Shillong Municipal Board</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-start shrink-0 w-40">
+                        <img src="/assets/alliances-logo/images (40).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">MSPBC</span>
+                    </div>
+
+                    <div class="flex flex-col items-center justify-start shrink-0 w-40">
+                        <img src="/assets/alliances-logo/channels4_profile.jpg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Channel Profile</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-start shrink-0 w-40">
+                        <img src="/assets/alliances-logo/images (1).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Swachh Bharat</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-start shrink-0 w-40">
+                        <img src="/assets/alliances-logo/images (2).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Dhakti Craft</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-start shrink-0 w-40">
+                        <img src="/assets/alliances-logo/images (3).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">CWE Nepal</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-start shrink-0 w-40">
+                        <img src="/assets/alliances-logo/images (4).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Alliance 04</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-start shrink-0 w-40">
+                        <img src="/assets/alliances-logo/images (5).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Seok Foundation</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-start shrink-0 w-40">
+                        <img src="/assets/alliances-logo/images (38).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">DSE&L</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-start shrink-0 w-40">
+                        <img src="/assets/alliances-logo/images (39).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Shillong Municipal Board</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-start shrink-0 w-40">
+                        <img src="/assets/alliances-logo/images (40).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">MSPBC</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <style>
+            @keyframes scroll {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+            }
+            .animate-marquee {
+                animation: scroll 40s linear infinite;
+                display: flex;
+                width: fit-content;
+            }
+            .animate-marquee:hover {
+                animation-play-state: paused;
+            }
+            .logo-muted {
+                filter: grayscale(100%) opacity(70%);
+                transition: all 0.3s ease;
+            }
+            .flex:hover .logo-muted {
+                filter: grayscale(0%) opacity(100%);
+                transform: scale(1.05);
+            }
+        </style>
+
+        <section class="bg-group-pastel-green/10 py-20 px-6 lg:px-20 text-center">
+            <h2 class="text-3xl font-bold text-group-text-dark mb-10">
+                What Our Community Says
+            </h2>
+
+            <div class="mt-20 max-w-4xl mx-auto">
+                <div class="bg-group-text-dark text-white p-8 md:p-12 rounded-[2.5rem] relative overflow-hidden text-center shadow-2xl min-h-[300px] flex items-center justify-center">
+
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-group-primary-green/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                    <div class="absolute bottom-0 left-0 w-48 h-48 bg-group-pastel-blue/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+
+                    <div id="testimonial-container" class="relative z-10 w-full transition-all duration-700 ease-in-out">
+                        <p id="testimonial-text" class="text-2xl md:text-3xl font-heading mb-6 italic leading-relaxed">
+                            "GreenAmmo is one of the only organizations built from a concept to an entity without compromising on ethics."
                         </p>
-                        <h4 class="font-semibold text-group-primary-green">– Volunteer</h4>
+                        <p id="testimonial-author" class="text-group-pastel-green text-sm font-bold uppercase tracking-widest mb-8">
+                            - Navjot, Meghalaya
+                        </p>
+                    </div>
+
+                    <div class="absolute bottom-6 left-0 right-0 z-20">
+                        <a href="/testimonials.html" class="inline-flex items-center gap-2 bg-white text-group-text-dark px-8 py-3 rounded-full font-bold hover:bg-group-pastel-green/20 transition-all shadow-lg group text-sm">
+                            Read All Testimonials
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -445,30 +428,25 @@
 
     </main>
 
-    <!-- FOOTER (Group Theme) -->
-     <footer class="bg-group-text-dark text-white pt-12">
+    <footer class="bg-group-text-dark text-white pt-12">
         <div class="container mx-auto px-4 md:px-8">
             <div class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-gray-700">
-                <!-- Logo and Description -->
                 <div class="md:col-span-2 space-y-4">
                     <h3 class="text-3xl font-bold text-group-pastel-green font-heading">GreenAmmo Group</h3>
                     <p class="text-sm text-gray-300 max-w-sm">
                         Empowering sustainable living and waste management through community action, research, and project initiation.
                     </p>
                 </div>
-                <!-- Navigation Columns -->
                 <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
-                    <!-- Column 1: GreenAmmo -->
                     <div class="space-y-3">
                         <h4 class="font-semibold text-white mb-3 font-heading">GreenAmmo</h4>
                         <ul class="text-sm space-y-2 text-gray-300">
-                            <li><a href="/about-us.html" class="hover:text-group-pastel-green transition">About Us</a></li>
+                            <li><a href="/aboutus.html" class="hover:text-group-pastel-green transition">About Us</a></li>
                             <li><a href="/gallery.html" class="hover:text-group-pastel-green transition">Media (Gallery)</a></li>
                             <li><a href="/certifications.html" class="hover:text-group-pastel-green transition">Certificates</a></li>
                             <li><a href="/alliances.html" class="hover:text-group-pastel-green transition">Alliances</a></li>
                         </ul>
                     </div>
-                    <!-- Column 2: Solutions -->
                     <div class="space-y-3">
                         <h4 class="font-semibold text-white mb-3 font-heading">Solutions</h4>
                         <ul class="text-sm space-y-2 text-gray-300">
@@ -478,7 +456,6 @@
                             <li><a href="/solutions/accommodation.html" class="hover:text-group-pastel-green transition">Accommodations</a></li>
                         </ul>
                     </div>
-                    <!-- Column 3: Trust -->
                     <div class="space-y-3">
                         <h4 class="font-semibold text-white mb-3 font-heading">Trust</h4>
                         <ul class="text-sm space-y-2 text-gray-300">
@@ -487,18 +464,15 @@
                             <li><a href="/trust/reports.html" class="hover:text-group-pastel-green transition">Reports & Research</a></li>
                         </ul>
                     </div>
-                    <!-- Column 4: Action/Explore -->
                     <div class="space-y-3">
                         <h4 class="font-semibold text-white mb-3 font-heading">Take Action</h4>
                         <div class="space-y-2">
-                            <a href="/join-us.html" class="block text-center py-2 px-4 rounded-full bg-group-primary-green text-white hover:bg-opacity-80 transition text-sm font-semibold shadow-md">Join Us</a>
-                            <!-- UPDATED Explore Button - ADDED ID -->
+                            <a href="/joinus.html" class="block text-center py-2 px-4 rounded-full bg-group-primary-green text-white hover:bg-opacity-80 transition text-sm font-semibold shadow-md">Join Us</a>
                             <button id="explore-btn-footer" class="block w-full text-center py-2 px-4 rounded-full border-2 border-group-pastel-green text-group-pastel-green hover:bg-group-pastel-green hover:text-group-text-dark transition text-sm font-semibold">Explore</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Bottom Row: Copyright and Socials -->
             <div class="flex flex-col sm:flex-row justify-between items-center py-6 text-sm text-gray-400">
                 <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
                 <div class="flex gap-4 mt-4 sm:mt-0">
@@ -510,26 +484,26 @@
         </div>
     </footer>
 
-    <!-- 🌍 EXPLORE Button MODAL (Styled with Group Palette) - ADDED ID -->
-    <div id="exploreModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden justify-center items-center z-50 p-4 modal-hidden"> <!-- Initially hidden and ready for transition -->
-        <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full mx-auto overflow-hidden animate-fade-in" id="modal-content"> <!-- Added ID to content area -->
-             <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+    <div id="exploreModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden justify-center items-center z-50 p-4 modal-hidden">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full mx-auto overflow-hidden animate-fade-in" id="modal-content">
+            <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100">
                 <h3 class="text-xl font-semibold text-group-text-dark font-heading">Explore GreenAmmo</h3>
-                <!-- Added ID to close button -->
                 <button id="modal-close-btn" class="text-gray-400 hover:text-group-primary-green focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
                 </button>
             </div>
 
-             <!-- Two-Panel Grid -->
             <div class="grid md:grid-cols-2 gap-6 p-8">
-                <!-- Panel 1: GreenAmmo Solutions -->
                 <div class="bg-group-pastel-blue/20 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-group-pastel-blue/30 border border-group-pastel-blue/40" onclick="window.location.href='./solutions/index.html'">
                     <div>
                         <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-group-pastel-blue/20">
-                            <svg class="w-16 h-16 text-group-pastel-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <svg class="w-16 h-16 text-group-pastel-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
                         </div>
-                        <h4 class="text-2xl font-semibold text-brand-dark mb-2 font-heading">GreenAmmo Solutions</h4>
+                        <h4 class="text-2xl font-semibold text-group-text-dark mb-2 font-heading">GreenAmmo Solutions</h4>
                         <p class="text-group-text-medium text-sm leading-relaxed">
                             Professional, scalable services spanning Finance, Education, Events, and Accommodation — uniting purpose with performance for sustainable growth.
                         </p>
@@ -541,11 +515,13 @@
                     </div>
                 </div>
 
-                <!-- Panel 2: GreenAmmo Trust -->
                 <div class="bg-group-pastel-green/30 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-group-pastel-green/40 border border-group-pastel-green/50" onclick="window.location.href='./trust/index.html'">
-                     <div>
+                    <div>
                         <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-group-pastel-green/20">
-                           <svg class="w-16 h-16 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <svg class="w-16 h-16 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
                         </div>
                         <h4 class="text-2xl font-semibold text-group-primary-green mb-2 font-heading">GreenAmmo Trust</h4>
                         <p class="text-group-text-medium text-sm leading-relaxed">
@@ -553,7 +529,7 @@
                         </p>
                     </div>
                     <div class="mt-6">
-                         <button class="cta-button-secondary border-group-primary-green text-group-primary-green hover:bg-group-pastel-green/50 w-full sm:w-auto">
+                        <button class="cta-button-secondary border-group-primary-green text-group-primary-green hover:bg-group-pastel-green/50 w-full sm:w-auto">
                             Visit Trust
                         </button>
                     </div>
@@ -562,10 +538,9 @@
         </div>
     </div>
 
-    <!-- 🧠 VANILLA JS for Mobile Menu, Modal, and Lenis -->
     <script>
-       document.addEventListener('DOMContentLoaded', () => {
-            // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- 1. Mobile Menu Toggle ---
             const menuToggle = document.getElementById('mobile-menu-toggle');
             const mobileMenu = document.getElementById('mobile-menu');
             const menuIconOpen = document.getElementById('menu-icon-open');
@@ -577,11 +552,9 @@
                     menuIconOpen.classList.toggle('hidden');
                     menuIconClose.classList.toggle('hidden');
                 });
-            } else {
-                 console.error("Mobile menu elements not found");
             }
 
-            // Explore Modal Logic
+            // --- 2. Explore Modal Logic ---
             const exploreModal = document.getElementById('exploreModal');
             const modalContent = document.getElementById('modal-content');
             const exploreBtns = [
@@ -592,53 +565,82 @@
             const modalCloseBtn = document.getElementById('modal-close-btn');
 
             function openModal() {
-                 if(exploreModal) {
+                if (exploreModal) {
                     exploreModal.classList.remove('hidden', 'modal-hidden');
                     exploreModal.classList.add('flex', 'modal-visible');
-                 }
+                }
             }
 
             function closeModal() {
-                 if(exploreModal) {
+                if (exploreModal) {
                     exploreModal.classList.remove('flex', 'modal-visible');
-                    exploreModal.classList.add('modal-hidden'); // Add transition class first
-                    // Use setTimeout to add 'hidden' after transition completes
+                    exploreModal.classList.add('modal-hidden');
                     setTimeout(() => {
                         exploreModal.classList.add('hidden');
-                    }, 300); // Match CSS transition duration
-                 }
+                    }, 300);
+                }
             }
 
             exploreBtns.forEach(btn => {
-                if (btn) {
-                    btn.addEventListener('click', openModal);
-                }
+                if (btn) btn.addEventListener('click', openModal);
             });
 
-            if (modalCloseBtn) {
-                modalCloseBtn.addEventListener('click', closeModal);
-            }
+            if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
 
-            // Close modal if clicking outside the content area
-            if (exploreModal && modalContent) {
+            if (exploreModal) {
                 exploreModal.addEventListener('click', (event) => {
-                    // Check if the click was directly on the backdrop (exploreModal)
-                    if (event.target === exploreModal) {
-                        closeModal();
-                    }
+                    if (event.target === exploreModal) closeModal();
                 });
-            } else {
-                 console.error("Modal elements not found");
             }
 
+            // --- 3. Testimonials Carousel (Replaces Alpine.js) ---
+            const testimonials = [{
+                    text: 'GreenAmmo is one of the only organizations built from a concept to an entity without compromising on ethics.',
+                    author: 'Navjot, Meghalaya'
+                },
+                {
+                    text: 'They don’t treat clean-ups as events, but as systems that need time, trust, and follow-through.',
+                    author: 'Hiranyak, Kolkata'
+                },
+                {
+                    text: 'GreenAmmo brings structure without imposing control. Communities retain ownership of both the problem and the solution.',
+                    author: 'Francis, Goa'
+                }
+            ];
 
-            // Initialize Lenis Smooth Scroll
+            let currentIdx = 0;
+            const textEl = document.getElementById('testimonial-text');
+            const authorEl = document.getElementById('testimonial-author');
+            const containerEl = document.getElementById('testimonial-container');
+
+            if (textEl && authorEl && containerEl) {
+                setInterval(() => {
+                    // Fade out
+                    containerEl.style.opacity = '0';
+                    containerEl.style.transform = 'translateY(-20px)';
+
+                    setTimeout(() => {
+                        // Update content
+                        currentIdx = (currentIdx + 1) % testimonials.length;
+                        textEl.textContent = `"${testimonials[currentIdx].text}"`;
+                        authorEl.textContent = `- ${testimonials[currentIdx].author}`;
+
+                        // Fade in from bottom
+                        containerEl.style.transform = 'translateY(20px)';
+                        
+                        // Force reflow for transition
+                        void containerEl.offsetWidth; 
+
+                        containerEl.style.opacity = '1';
+                        containerEl.style.transform = 'translateY(0)';
+                    }, 500); // Wait for fade out to complete
+                }, 5000);
+            }
+
+            // --- 4. Initialize Lenis Smooth Scroll ---
             if (typeof Lenis !== 'undefined') {
                 const lenis = new Lenis()
-
-                lenis.on('scroll', (e) => {
-                   // console.log(e) // Optional: Log scroll events
-                })
+                lenis.on('scroll', (e) => {})
 
                 function raf(time) {
                     lenis.raf(time)
@@ -646,11 +648,11 @@
                 }
                 requestAnimationFrame(raf)
             } else {
-                console.warn('Lenis script not loaded or failed to initialize.');
+                console.warn('Lenis script not loaded.');
             }
         });
     </script>
 
 </body>
-</html>
 
+</html>

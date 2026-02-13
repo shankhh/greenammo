@@ -636,7 +636,8 @@
                     || 'https://placehold.co/600x400/e2e8f0/1D371F?text=GreenAmmo+Trust';
                 
                 // Ensure this points to your details page
-                const detailsLink = `campaign-details.html?slug=${post.slug}`;
+                // Point to the actual file containing the details logic
+const detailsLink = `post_campaign.html?slug=${post.slug}`;
                 const excerpt = post.excerpt?.rendered ? stripHtml(post.excerpt.rendered) : "Click to read more.";
 
                 return `
