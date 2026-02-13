@@ -70,38 +70,36 @@
 
         /* --- Timeline Layout CSS --- */
 
-        /* The vertical line - Mobile: Left aligned */
         .timeline-container::before {
             content: '';
             position: absolute;
             top: 0;
             bottom: 0;
-            left: 1.25rem; /* 20px */
-            width: 4px;
-            background-color: #D2E3AB;
-            z-index: 0;
+            left: 0.75rem;
+            width: 2px;
+            background-color: rgba(124, 150, 106, 0.35);
+        }
+
+        .timeline-dot {
+            left: 0.25rem;
         }
 
         @media (min-width: 768px) {
-            /* Desktop: Center aligned line */
             .timeline-container::before {
                 left: 50%;
                 transform: translateX(-50%);
             }
 
-            /* The Row Wrapper */
             .timeline-row {
                 display: flex;
-                align-items: flex-start; 
+                align-items: flex-start;
                 justify-content: space-between;
                 width: 100%;
                 margin-bottom: 5rem;
                 position: relative;
             }
 
-            /* --- Zig Zag Logic --- */
-            
-            /* ODD Items (1, 3, 5...): Content Left, Image Right */
+            /* ODD Items (1, 3...): Content Left, Image Right */
             .timeline-row:nth-child(odd) {
                 flex-direction: row;
             }
@@ -109,7 +107,6 @@
                 text-align: right;
                 padding-right: 3rem; 
             }
-            /* Corrects list alignment for Right-aligned text */
             .timeline-row:nth-child(odd) .timeline-content ul {
                 display: inline-block;
                 text-align: left;
@@ -118,7 +115,7 @@
                 padding-left: 3rem;
             }
 
-            /* EVEN Items (2, 4, 6...): Image Left, Content Right */
+            /* EVEN Items (2, 4...): Image Left, Content Right */
             .timeline-row:nth-child(even) {
                 flex-direction: row-reverse;
             }
@@ -130,11 +127,10 @@
                 padding-right: 3rem;
             }
 
-            /* Center the dot on the line - Fixed to top of the row */
             .timeline-dot {
-                left: 50% !important; /* Force centering */
+                left: 50% !important; 
                 transform: translateX(-50%);
-                top: 2rem; /* Aligns with the card title */
+                top: 2rem; 
                 margin-top: 0;
             }
         }
@@ -151,7 +147,8 @@
             </div>
 
             <div class="hidden lg:flex items-center space-x-8">
-                <a href="/index.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Home</a> <a href="/gallery.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Media</a>
+                <a href="/index.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Home</a> 
+                <a href="/gallery.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Media</a>
                 <a href="/trust/campaigns.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Campaigns</a>
 
                 <div x-data="{ dropdownOpen: false }" class="relative">
@@ -192,8 +189,7 @@
     </nav>
 
     <main>
-
-        <section class="bg-brand-light/60 py-16 md:py-24">
+        <section class="bg-brand-light/60 py-20 md:py-28">
             <div class="container mx-auto px-4 md:px-8 max-w-5xl text-center">
                 <p class="text-sm font-semibold text-brand-accent uppercase tracking-wider mb-2">Project Milestones</p>
                 <h1 class="text-4xl md:text-5xl font-extrabold text-brand-dark mb-4 font-heading">
@@ -210,164 +206,153 @@
 
                 <div class="relative flex flex-col gap-12 md:gap-0">
 
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
+                    <article class="timeline-row relative pl-6 md:pl-0">
+                        <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
                         
                         <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
+                            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full relative h-full">
                                 <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Government Led Community Involvement</h3>
+                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Government led community involvement initiative</h3>
                                     <p class="text-sm text-brand-accent font-semibold">Bijanbari, Darjeeling</p>
                                 </div>
                                 
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/11.png" class="w-full h-full object-cover" alt="Bijanbari Initiative">
-                                </div>
+                                <div class="md:hidden mt-6 smart-gallery-container w-full" data-wp-slug="government-led-community-involvement"></div>
 
-                                <div class="mt-4 pt-4 border-t border-gray-100">
+                                <div class="mt-6 pt-4 border-t border-gray-100">
                                     <div class="text-brand-dark/80 text-sm space-y-3">
                                         <p>Inspired the BDO of Bijanbari, Mr. Kaushik Banerjee, to launch public competition among the Self Help Group members rewarding the highest BottleBrick contributors, integrating environmental action into local governance.</p>
                                         <p>The BottleBricks were used to construct essential community assets including a model wall, a playroom for Anganwadi Children and a secure fencing for the BDO office compound—demonstrating functional scalability of waste-derived construction.</p>
                                     </div>
-                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: BDO collaboration; Bottlebricks construction</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/11.png" alt="Bijanbari Initiative" class="w-full h-full object-cover">
-                            </div>
+                        <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+                            <div class="smart-gallery-container" data-wp-slug="government-led-community-involvement"></div>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
+                    <article class="timeline-row relative pl-6 md:pl-0">
+                        <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
                         
                         <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
+                            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full relative h-full">
                                 <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Menstrual Health and Sustainability</h3>
+                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Menstrual Health and Sustainability Convergence</h3>
                                     <p class="text-sm text-brand-accent font-semibold">Rimbick, Darjeeling</p>
                                 </div>
                                 
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/29.png" class="w-full h-full object-cover" alt="Menstrual Health">
-                                </div>
+                                <div class="md:hidden mt-6 smart-gallery-container w-full" data-wp-slug="menstrual-health-and-sustainability"></div>
 
-                                <div class="mt-4 pt-4 border-t border-gray-100">
-                                    <p class="text-brand-dark/80 mb-2">Facilitated the transition of more than 400 rural women from disposable sanitary pads to reusable menstrual cups, in collaboration with SHG leader Anjala Rai.</p>
-                                    <p class="text-brand-dark/80 text-sm">This shift reduced non-biodegradable waste and improved long-term women’s health, creating a replicable green menstrual model.</p>
-                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Sustainable menstruation; menstrual cups</div>
+                                <div class="mt-6 pt-4 border-t border-gray-100">
+                                    <div class="text-brand-dark/80 text-sm space-y-3">
+                                        <p>Facilitated the transition of more than 400 rural women from disposable sanitary pads to reusable menstrual cups, in collaboration with SHG leader Anjala Rai.</p>
+                                        <p>This shift reduced non-biodegradable waste and improved long-term women’s health, creating a replicable green menstrual model.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/29.png" alt="Menstrual Health" class="w-full h-full object-cover">
-                            </div>
+                        <div class="timeline-image-desktop hidden md:block w-1/2 md:pr-10">
+                            <div class="smart-gallery-container" data-wp-slug="menstrual-health-and-sustainability"></div>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
+                    <article class="timeline-row relative pl-6 md:pl-0">
+                        <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
                         
                         <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
+                            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full relative h-full">
                                 <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Urban Demonstration Projects</h3>
+                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Urban demonstration projects</h3>
                                     <p class="text-sm text-brand-accent font-semibold">Kolkata</p>
                                 </div>
                                 
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/wb-3.png" class="w-full h-full object-cover" alt="Urban Projects Kolkata">
-                                </div>
+                                <div class="md:hidden mt-6 smart-gallery-container w-full" data-wp-slug="urban-demonstration-projects"></div>
 
-                                <div class="mt-4 pt-4 border-t border-gray-100">
+                                <div class="mt-6 pt-4 border-t border-gray-100">
                                     <ul class="list-disc list-outside space-y-3 pl-5 text-sm text-brand-dark/80">
-                                        <li><strong>Park Infrastructure Upgrade:</strong> Built a BottleBrick bench at Subhash Sarovar Park in partnership with the Inner Wheel Club of Kolkata New Gen which included training on segregated cleanup, making bottlebricks and construction of benches using bottlebricks.</li>
-                                        <li><strong>Capacity Building:</strong> Provided hands-on training to members of Inner Wheel Club of Kolkata New Gen to construct school furniture from bottlebricks which was donated. We built 4 stools and 1 table using BottleBricks and reused plyboards.</li>
-                                        <li><strong>Quality Control:</strong> Supplied pre-verified BottleBricks from GreenAmmo’s network to ensure structural strength and durability.</li>
+                                        <li><strong>Park Infrastructure Upgrade</strong> &ndash; Built a BottleBrick bench at Subhash Sarovar Park in partnership with the Inner Wheel Club of Kolkata New Gen which included training on segregated cleanup, making bottlebricks and construction of benches using bottlebricks.</li>
+                                        <li><strong>Capacity Building</strong> &ndash; Provided hands-on training to members of Inner Wheel Club of Kolkata New Gen to construct school furniture from bottlebricks which was donated. We built 4 stools and 1 table using BottleBricks and reused plyboards.</li>
+                                        <li><strong>Quality Control</strong> &ndash; Supplied pre-verified BottleBricks from GreenAmmo’s network to ensure structural strength and durability.</li>
                                     </ul>
-                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Bottlebricks benches, Bottlebricks table</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/wb-3.png" alt="Urban Projects Kolkata" class="w-full h-full object-cover">
-                            </div>
+                        <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+                            <div class="smart-gallery-container" data-wp-slug="urban-demonstration-projects"></div>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
+                    <article class="timeline-row relative pl-6 md:pl-0">
+                        <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
                         
                         <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
+                            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full relative h-full">
                                 <div>
-                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Waste Plastic Free Sepi</h3>
+                                    <h3 class="text-xl font-bold text-brand-dark font-heading">Waste plastic free Sepi</h3>
                                     <p class="text-sm text-brand-accent font-semibold">Darjeeling</p>
                                 </div>
                                 
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/wb-4.png" class="w-full h-full object-cover" alt="Waste Plastic Free Sepi">
-                                </div>
+                                <div class="md:hidden mt-6 smart-gallery-container w-full" data-wp-slug="waste-plastic-free-sepi"></div>
 
-                                <div class="mt-4 pt-4 border-t border-gray-100">
+                                <div class="mt-6 pt-4 border-t border-gray-100">
                                     <ul class="list-disc list-outside space-y-3 pl-5 text-sm text-brand-dark/80">
-                                        <li><strong>School Curriculum Integration:</strong> BottleBrick-making incorporated into 5 major schools from Rimbick to Sepi. The students receive internal marks for participation. This ensures early adoption of waste segregation and recycling habits.</li>
-                                        <li><strong>Women’s SHG Engagement:</strong> 20+ Self-Help Group members are paid for BottleBrick production. They conduct regular segregated clean-ups in their communities.</li>
-                                        <li><strong>Infrastructure Impact:</strong> 200 BottleBricks used to build a divider wall at Lippohoccha Homestay, Sepi, demonstrating small-scale local application.</li>
+                                        <li><strong>School Curriculum Integration</strong> &ndash; BottleBrick-making incorporated into 5 major schools from Rimbick to Sepi. The students receive internal marks for participation. This ensures early adoption of waste segregation and recycling habits.</li>
+                                        <li><strong>Women’s SHG Engagement</strong> &ndash; 20+ Self-Help Group members are paid for BottleBrick production. They conduct regular segregated clean-ups in their communities.</li>
+                                        <li><strong>Infrastructure Impact</strong> &ndash; 200 BottleBricks used to build a divider wall at Lippohoccha Homestay, Sepi, demonstrating small-scale local application.</li>
                                     </ul>
-                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: Schools; Bottlebricks wall</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/wb-4.png" alt="Waste Plastic Free Sepi" class="w-full h-full object-cover">
-                            </div>
+                        <div class="timeline-image-desktop hidden md:block w-1/2 md:pr-10">
+                            <div class="smart-gallery-container" data-wp-slug="waste-plastic-free-sepi"></div>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="timeline-row relative pl-10 md:pl-0">
-                        <div class="timeline-dot absolute top-8 left-5 w-5 h-5 bg-brand-accent rounded-full border-4 border-white z-10 -translate-x-1/2 md:top-[2rem]"></div>
+                    <article class="timeline-row relative pl-6 md:pl-0">
+                        <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
                         
                         <div class="timeline-content w-full md:w-1/2 flex flex-col">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-full relative h-full">
+                            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full relative h-full">
                                 <div>
                                     <h3 class="text-xl font-bold text-brand-dark font-heading">India Hikes Collaboration</h3>
                                     <p class="text-sm text-brand-accent font-semibold">Sepi Base Camp</p>
                                 </div>
                                 
-                                <div class="md:hidden mt-4 rounded-lg overflow-hidden w-full aspect-[1587/2245]">
-                                    <img src="/assets/images/projects/wb-5.png" class="w-full h-full object-cover" alt="India Hikes Collaboration">
-                                </div>
+                                <div class="md:hidden mt-6 smart-gallery-container w-full" data-wp-slug="indiahikes-collaboration"></div>
 
-                                <div class="mt-4 pt-4 border-t border-gray-100">
+                                <div class="mt-6 pt-4 border-t border-gray-100">
                                     <div class="text-brand-dark/80 text-sm space-y-3">
                                         <p>GreenAmmo has collaborated with India Hikes to convert all the soft plastic waste collected in the Sandakphu trail into Bottlebricks and utilise them for infrastructure development of the area.</p>
                                         <p>In less than a year more than 900 bottlebricks have been made showcasing the positive step towards waste plastic free Sepi and protecting the biodiversity of the Himalayan Black Forest region of Sandakphu.</p>
                                     </div>
-                                    <div class="mt-4 text-xs text-brand-accent font-bold uppercase">KEYWORDS: IndiaHikes; Sandakphu</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="timeline-image-desktop hidden md:block w-1/2">
-                            <div class="relative rounded-2xl overflow-hidden shadow-xl w-full aspect-[1587/2245] border-4 border-white transform hover:scale-[1.02] transition duration-500">
-                                <img src="/assets/images/projects/wb-5.png" alt="India Hikes Collaboration" class="w-full h-full object-cover">
-                            </div>
+                        <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+                            <div class="smart-gallery-container" data-wp-slug="indiahikes-collaboration"></div>
                         </div>
-                    </div>
+                    </article>
 
                 </div>
             </div>
         </section>
+
+        <div id="image-modal"
+             role="dialog"
+             aria-modal="true"
+             class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50 p-6 transition-opacity duration-300">
+            
+            <button id="modal-close" class="absolute top-6 right-6 text-white text-3xl font-light">
+                &times;
+            </button>
+        
+            <img id="modal-image" class="max-h-[90vh] max-w-[90vw] object-contain rounded-xl shadow-2xl" src="" alt="">
+        </div>
 
     </main>
     
@@ -403,11 +388,11 @@
                         <h4 class="font-semibold text-white mb-3 font-heading">Trust</h4>
                         <ul class="text-sm space-y-2 text-brand-light/80">
                             <li><a href="/trust/projects.html" class="hover:text-brand-light transition">Projects & Milestones</a></li>
-                            <li><a href="/trust/campaign.html" class="hover:text-brand-light transition">Campaigns</a></li>
+                            <li><a href="/trust/campaigns.html" class="hover:text-brand-light transition">Campaigns</a></li>
                             <li><a href="/trust/reports.html" class="hover:text-brand-light transition">Reports & Research</a></li>
                         </ul>
                     </div>
-                    <div classs="space-y-3">
+                    <div class="space-y-3">
                         <h4 class="font-semibold text-white mb-3 font-heading">Take Action</h4>
                         <div class="space-y-2">
                             <a href="/join-us.html" class="block text-center py-2 px-4 rounded-full bg-brand-accent text-white hover:bg-brand-dark/90 transition text-sm font-semibold shadow-md">Join Us</a>
@@ -429,7 +414,6 @@
 
     <script>
        document.addEventListener('DOMContentLoaded', () => {
-           
             // --- Mobile Menu Toggle ---
             const menuToggle = document.getElementById('mobile-menu-toggle');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -459,6 +443,8 @@
             }
         });
     </script>
+
+    <script type="module" src="../../src/project-gallery.js"></script>
 
 </body>
 </html>
