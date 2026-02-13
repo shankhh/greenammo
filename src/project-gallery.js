@@ -101,15 +101,16 @@ function renderGallery(container, images) {
 /* ============================
    LAYOUT MODULES
 ============================ */
-
 function layoutOne(img) {
-  const div = createBlock("grid grid-cols-1 gap-4");
+  // Added 'grid-rows-1' and 'h-full' to lock the height to the container
+  const div = createBlock("grid grid-cols-1 grid-rows-1 gap-4 h-full");
   div.innerHTML = imageHTML(img);
   return div;
 }
 
 function layoutTwo(imgs) {
-  const div = createBlock("grid grid-cols-1 gap-4");
+  // Changed grid-cols-1 to grid-cols-2
+  const div = createBlock("grid grid-cols-2 gap-4 h-full");
   div.innerHTML = `
         ${imageHTML(imgs[0])}
         ${imageHTML(imgs[1])}
