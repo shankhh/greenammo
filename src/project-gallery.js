@@ -118,15 +118,35 @@ function layoutTwo(imgs) {
   return div;
 }
 
+// function layoutThree(imgs) {
+//   const div = createBlock("grid grid-cols-2 gap-4");
+//   div.innerHTML = `
+//         ${imageHTML(imgs[0])}
+//         ${imageHTML(imgs[1])}
+//         <div class="col-span-2">
+//             ${imageHTML(imgs[2])}
+//         </div>
+//     `;
+//   return div;
+// }
+
 function layoutThree(imgs) {
   const div = createBlock("grid grid-cols-2 gap-4");
+
+  // Wrap images in aspect ratio containers to lock their height.
+  // Top row = 1:1 squares, Bottom row = 2:1 landscape rectangle.
   div.innerHTML = `
-        ${imageHTML(imgs[0])}
-        ${imageHTML(imgs[1])}
-        <div class="col-span-2">
+        <div class="aspect-square w-full overflow-hidden rounded-lg">
+            ${imageHTML(imgs[0])}
+        </div>
+        <div class="aspect-square w-full overflow-hidden rounded-lg">
+            ${imageHTML(imgs[1])}
+        </div>
+        <div class="col-span-2 aspect-[2/1] w-full overflow-hidden rounded-lg">
             ${imageHTML(imgs[2])}
         </div>
     `;
+
   return div;
 }
 
