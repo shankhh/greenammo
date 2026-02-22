@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQs - GreenAmmo Trust</title>
+    <link rel="icon" type="image/svg+xml" href="./trust.png" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "trust-dark":    "#1D371F",
+              "trust-primary": "#7C966A",
+              "trust-accent":  "#6E8546",
+              "trust-light":   "#D2E3AB",
+              "brand-base":    "#F8F9FA", 
+              "brand-dark":    "#1D371F",
+              "brand-accent":  "#6E8546",
+              "brand-light":   "#D2E3AB",
+              "faq-green":     "#347152", /* Matched from the reference image */
+            },
+            fontFamily: {
+              'sans': ['Inter', 'sans-serif'],
+              'heading': ['Bricolage Grotesque', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+        body { font-family: "Inter", sans-serif; background-color: #ffffff; overflow-x: hidden; }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* FAQ Specific Styling - Targets WP headings as Questions and P as Answers */
+        #page-content > h2, 
+        #page-content > h3, 
+        #page-content > h4,
+        #page-content .wp-block-heading {
+            background-color: #347152;
+            color: #ffffff !important;
+            padding: 1.25rem 1.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0;
+            font-weight: 600;
+            font-size: 1.125rem;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        #page-content > p,
+        #page-content > ul,
+        #page-content > div:not(.skeleton) {
+            padding: 1.25rem 1.5rem 1.5rem 2rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #4b5563;
+            line-height: 1.8;
+            background-color: transparent;
+        }
+
+        /* Styling lists inside answers */
+        #page-content ul {
+            list-style-type: disc;
+            padding-left: 3rem;
+        }
+        
+        #page-content a {
+            color: #347152;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+    <nav x-data="{ open: false }" class="bg-white shadow-lg sticky top-0 z-20">
+      <div class="container mx-auto px-4 md:px-8 py-3 flex justify-between items-center">
+        <div class="flex items-center">
+          <a href="./index.html" class="block">
+            <img src="trust.png" alt="GreenAmmo Trust Logo" class="h-12 w-auto object-contain" title="GreenAmmo Trust" />
+          </a>
+        </div>
+
+        <div class="hidden lg:flex items-center space-x-8">
+          <a href="/index.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Home</a>
+          <a href="/gallery.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Media</a>
+          <a href="/trust/campaign.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Campaigns</a>
+
+          <div x-data="{ dropdownOpen: false }" class="relative">
+            <button @click="dropdownOpen = !dropdownOpen" @click.away="dropdownOpen = false" class="text-gray-700 hover:text-brand-accent transition inline-flex items-center gap-1 font-semibold">
+              Milestones
+              <svg :class="{'rotate-180': dropdownOpen}" class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div x-show="dropdownOpen" x-cloak class="absolute bg-white rounded-xl shadow-xl p-3 top-10 right-0 w-48 transition-all z-30 border border-brand-light origin-top-right">
+              <ul class="text-sm space-y-1">
+                <li><a href="projects.html" @click="dropdownOpen = false" class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition">Projects</a></li>
+                <li><a href="reports.html" @click="dropdownOpen = false" class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition">Reports</a></li>
+              </ul>
+            </div>
+          </div>
+          <a href="/joinus.html" class="cta-button bg-brand-accent text-white hover:bg-brand-dark/90 shadow-brand-accent/50 px-5 py-2 rounded-lg font-medium">Let's Talk</a>
+        </div>
+
+        <button @click="open = !open" class="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100">
+          <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+          <svg x-show="open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <div x-show="open" x-cloak class="lg:hidden px-4 pb-4 bg-white border-t border-gray-100 absolute w-full shadow-2xl z-10">
+         <ul class="flex flex-col space-y-2 font-medium">
+          <a href="/index.html" class="block py-2 text-gray-700">Home</a>
+          <a href="/gallery.html" class="block py-2 text-gray-700">Media</a>
+          <a href="/trust/campaign.html" class="block py-2 text-gray-700">Campaigns</a>
+          <a href="/joinus.html" class="mt-4 block text-center bg-brand-accent text-white py-2 rounded-lg">Join the Change</a>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="flex-grow bg-white">
+        <section class="pb-24 pt-12 md:pt-16">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <h1 id="page-title" class="text-4xl md:text-5xl font-heading font-bold mb-10 text-faq-green tracking-tight">FAQs</h1>
+                
+                <div id="page-content" class="w-full">
+                    <div class="skeleton h-14 w-full rounded mb-2 bg-faq-green/20 animate-pulse"></div>
+                    <div class="skeleton h-20 w-11/12 rounded mb-6 bg-gray-100 animate-pulse ml-4"></div>
+                    
+                    <div class="skeleton h-14 w-full rounded mb-2 bg-faq-green/20 animate-pulse"></div>
+                    <div class="skeleton h-24 w-11/12 rounded mb-6 bg-gray-100 animate-pulse ml-4"></div>
+                    
+                    <div class="skeleton h-14 w-full rounded mb-2 bg-faq-green/20 animate-pulse"></div>
+                    <div class="skeleton h-16 w-11/12 rounded mb-6 bg-gray-100 animate-pulse ml-4"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-brand-dark text-white pt-12">
+      <div class="container mx-auto px-4 md:px-8">
+        <div
+          class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-brand-primary"
+        >
+          <div class="md:col-span-2 space-y-4">
+            <h3 class="text-3xl font-bold text-brand-light">GreenAmmo Group</h3>
+            <p class="text-sm text-brand-light/70 max-w-sm">
+              Empowering sustainable living and waste management through
+              community action, research, and project initiation.
+            </p>
+          </div>
+
+          <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
+            <!-- <div class="space-y-3">
+              <h4 class="font-semibold text-white mb-3">GreenAmmo</h4>
+              <ul class="text-sm space-y-2 text-brand-light/80">
+                <li>
+                  <a href="/aboutus" class="hover:text-brand-light transition"
+                    >About Us</a
+                  >
+                </li>
+                <li>
+                  <a href="/gallery" class="hover:text-brand-light transition"
+                    >Media (Gallery)</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/certifications"
+                    class="hover:text-brand-light transition"
+                    >Certificates</a
+                  >
+                </li>
+                <li>
+                  <a href="/alliances" class="hover:text-brand-light transition"
+                    >Alliances</a
+                  >
+                </li>
+              </ul>
+            </div> -->
+
+            <div class="space-y-3">
+              <h4 class="font-semibold text-white mb-3">Solutions</h4>
+              <ul class="text-sm space-y-2 text-brand-light/80">
+                <li>
+                  <a
+                    href="/solutions/finance"
+                    class="hover:text-brand-light transition"
+                    >Finance</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/solutions/education"
+                    class="hover:text-brand-light transition"
+                    >Education & Development</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/solutions/event-supply"
+                    class="hover:text-brand-light transition"
+                    >Event & Supply</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/solutions/accommodation"
+                    class="hover:text-brand-light transition"
+                    >Accommodations</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="space-y-3">
+              <h4 class="font-semibold text-white mb-3">Trust</h4>
+              <ul class="text-sm space-y-2 text-brand-light/80">
+                <li>
+                  <a
+                    href="/trust/projects.html"
+                    class="hover:text-brand-light transition"
+                    >Projects </a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/trust/campaigns.html"
+                    class="hover:text-brand-light transition"
+                    >Campaigns</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/trust/reports.html"
+                    class="hover:text-brand-light transition"
+                    >Annual Reports</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/joinus.html"
+                    class="hover:text-brand-light transition"
+                    >Donate Now</a
+                  >
+                </li>
+                <li>
+                  <a href="/trust/faq.html" class="hover:text-brand-light transition"
+                    >FAQ</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="space-y-3">
+              <h4 class="font-semibold text-white mb-3">Support</h4>
+              <ul class="text-sm space-y-2 text-brand-light/80">
+                <li>
+                  <a
+                    href="/solutions/contact.html"
+                    class="hover:text-brand-light transition"
+                    >Contact Us</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/joinus.html"
+                    class="hover:text-brand-light transition"
+                    >Join Us</a
+                  >
+                </li>
+                
+                <li>
+                  <a href="/privacy" class="hover:text-brand-light transition"
+                    >Privacy Policy</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="container mx-auto px-4 md:px-8 py-4 flex flex-col sm:flex-row justify-between items-center text-sm text-brand-light/80"
+        >
+          <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
+          <div class="flex space-x-4 mt-2 sm:mt-0">
+            <a href="https://www.facebook.com/people/GreenAmmo/100071774210115/" class="hover:text-white transition">Facebook</a>
+            <a href="https://www.instagram.com/green_ammo/" class="hover:text-white transition">Instagram</a>
+            <a href="https://www.youtube.com/@greenammo7472" class="hover:text-white transition">YouTube</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+        // Use 'faqs' slug as the default if not provided in the URL
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get("slug") || "faqs"; 
+        
+        const titleEl = document.getElementById("page-title");
+        const contentEl = document.getElementById("page-content");
+
+        async function loadFAQs() {
+            try {
+                // Fetch content from the WordPress API
+                const res = await fetch(`https://cms.greenammo.in/wp-json/wp/v2/pages?slug=${slug}&_embed`);
+                const pages = await res.json();
+                
+                if (!pages || !pages.length) {
+                    contentEl.innerHTML = `
+                        <div class="bg-red-50 text-red-600 p-4 rounded-md border border-red-200">
+                            Sorry, the FAQ content could not be found. Please check back later.
+                        </div>`;
+                    return;
+                }
+                
+                const page = pages[0];
+
+                // Setting Title
+                if (page.title && page.title.rendered) {
+                    titleEl.innerHTML = page.title.rendered;
+                }
+
+                // Parse and inject the content directly
+                // The CSS defined in the <head> block will automatically style WP H2/H3/H4 as the green question boxes
+                contentEl.innerHTML = page.content.rendered;
+
+            } catch (e) { 
+                console.error("Error fetching FAQs:", e);
+                contentEl.innerHTML = `
+                    <div class="bg-red-50 text-red-600 p-4 rounded-md border border-red-200">
+                        There was an error loading the FAQs. Please try refreshing the page.
+                    </div>`;
+            }
+        }
+
+        // Initialize fetching on page load
+        document.addEventListener('DOMContentLoaded', loadFAQs);
+    </script>
+</body>
+</html>
