@@ -110,11 +110,11 @@
             class="text-gray-700 hover:text-brand-accent transition font-semibold"
             >Home</a
           >
-          <a
+          <!-- <a
             href="/gallery.html"
             class="text-gray-700 hover:text-brand-accent transition font-semibold"
             >Media</a
-          >
+          > -->
           <a
             href="/trust/campaign.html"
             class="text-gray-700 hover:text-brand-accent transition font-semibold"
@@ -127,7 +127,7 @@
               @click.away="dropdownOpen = false"
               class="text-gray-700 hover:text-brand-accent transition inline-flex items-center gap-1 font-semibold"
             >
-              Milestones
+              Projects
               <svg
                 :class="{'rotate-180': dropdownOpen}"
                 class="w-4 h-4 transform transition-transform duration-300"
@@ -177,6 +177,11 @@
               </ul>
             </div>
           </div>
+          <a
+            href="/trust/tutorials.html"
+            class="text-gray-700 hover:text-brand-accent transition font-semibold"
+            >Tutorials</a
+          >
 
           <a
             href="/joinus.html"
@@ -259,7 +264,7 @@
               @click="mobileDropdownOpen = !mobileDropdownOpen"
               class="w-full text-left py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded flex justify-between items-center"
             >
-              Milestones
+              Projects
               <svg
                 :class="{'rotate-180': mobileDropdownOpen}"
                 class="w-4 h-4 transform transition-transform duration-300"

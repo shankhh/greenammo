@@ -108,7 +108,7 @@
 <body class="bg-brand-base text-brand-dark font-sans">
     
     <!-- 🌿 TRUST NAV COMPONENT (from trust/index.html) -->
-     <nav x-data="{ open: false }" class="bg-white shadow-lg sticky top-0 z-20">
+    <nav x-data="{ open: false }" class="bg-white shadow-lg sticky top-0 z-20">
       <div
         class="container mx-auto px-4 md:px-8 py-3 flex justify-between items-center"
       >
@@ -129,11 +129,11 @@
             class="text-gray-700 hover:text-brand-accent transition font-semibold"
             >Home</a
           >
-          <a
+          <!-- <a
             href="/gallery.html"
             class="text-gray-700 hover:text-brand-accent transition font-semibold"
             >Media</a
-          >
+          > -->
           <a
             href="/trust/campaign.html"
             class="text-gray-700 hover:text-brand-accent transition font-semibold"
@@ -146,7 +146,7 @@
               @click.away="dropdownOpen = false"
               class="text-gray-700 hover:text-brand-accent transition inline-flex items-center gap-1 font-semibold"
             >
-              Milestones
+              Projects
               <svg
                 :class="{'rotate-180': dropdownOpen}"
                 class="w-4 h-4 transform transition-transform duration-300"
@@ -196,6 +196,11 @@
               </ul>
             </div>
           </div>
+          <a
+            href="/trust/tutorials.html"
+            class="text-gray-700 hover:text-brand-accent transition font-semibold"
+            >Tutorials</a
+          >
 
           <a
             href="/joinus.html"
@@ -267,7 +272,7 @@
             >Media</a
           >
           <a
-            href="/campaigns.html"
+            href="/trust/campaign.html"
             @click="open = false"
             class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded"
             >Campaigns</a
@@ -278,7 +283,7 @@
               @click="mobileDropdownOpen = !mobileDropdownOpen"
               class="w-full text-left py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded flex justify-between items-center"
             >
-              Milestones
+              Projects
               <svg
                 :class="{'rotate-180': mobileDropdownOpen}"
                 class="w-4 h-4 transform transition-transform duration-300"
@@ -307,13 +312,13 @@
               class="ml-4 border-l border-brand-light pl-4 space-y-1"
             >
               <a
-                href="/milestones/projects.html"
+                href="/trust/projects.html"
                 @click="open = false"
                 class="block py-1 text-sm text-gray-600 hover:text-brand-accent"
                 >Projects</a
               >
               <a
-                href="/milestones/reports.html"
+                href="/trust/reports.html"
                 @click="open = false"
                 class="block py-1 text-sm text-gray-600 hover:text-brand-accent"
                 >Reports</a
