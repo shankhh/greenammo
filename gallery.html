@@ -19,108 +19,162 @@
 
     <!-- 3. Configure Tailwind with Pop Pastel Group Palette & Fonts -->
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              // GreenAmmo Group (Blended Pop Pastel Theme)
-              "group-primary-green": "#4CAF50", // Deep Mint (Primary Branding)
-              "group-primary-blue": "#56A0D3",
-              "group-pastel-green":  "#A8D7B0", // Soft Sage (Accents, Backgrounds)
-              "group-pastel-blue":   "#9FD8E4", // Sky Mist (Secondary Accent)
-              "group-accent-neutral":"#F0EAD6", // Sandy Beige (Warm Highlights)
-              "group-base-white":    "#FDFDFD", // Clean Base (Background)
-              "group-text-dark":     "#1F2937", // Dark Gray for Text (Good Contrast)
-              "group-text-medium":   "#6B7280", // Medium Gray for Subtext
-            },
-            fontFamily: {
-              // Setup font families
-              'sans': ['Inter', 'sans-serif'],
-              'heading': ['Bricolage Grotesque', 'sans-serif'],
-            },
-             animation: { // Animation for modal & skeleton
-                'fade-in': 'fade-in 0.3s ease-out',
-                'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            },
-            keyframes: {
-                'fade-in': {
-                    'from': { opacity: 0, transform: 'translateY(10px)' },
-                    'to': { opacity: 1, transform: 'translateY(0)' },
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // GreenAmmo Group (Blended Pop Pastel Theme)
+                        "group-primary-green": "#4CAF50", // Deep Mint (Primary Branding)
+                        "group-primary-blue": "#56A0D3",
+                        "group-pastel-green": "#A8D7B0", // Soft Sage (Accents, Backgrounds)
+                        "group-pastel-blue": "#9FD8E4", // Sky Mist (Secondary Accent)
+                        "group-accent-neutral": "#F0EAD6", // Sandy Beige (Warm Highlights)
+                        "group-base-white": "#FDFDFD", // Clean Base (Background)
+                        "group-text-dark": "#1F2937", // Dark Gray for Text (Good Contrast)
+                        "group-text-medium": "#6B7280", // Medium Gray for Subtext
+                    },
+                    fontFamily: {
+                        // Setup font families
+                        'sans': ['Inter', 'sans-serif'],
+                        'heading': ['Bricolage Grotesque', 'sans-serif'],
+                    },
+                    animation: { // Animation for modal & skeleton
+                        'fade-in': 'fade-in 0.3s ease-out',
+                        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        'fade-in': {
+                            'from': { opacity: 0, transform: 'translateY(10px)' },
+                            'to': { opacity: 1, transform: 'translateY(0)' },
+                        },
+                        /* Ensure pulse is defined if using animate-pulse */
+                        pulse: {
+                            '0%, 100%': { opacity: 1 },
+                            '50%': { opacity: .5 },
+                        }
+                    }
                 },
-                /* Ensure pulse is defined if using animate-pulse */
-                pulse: {
-                  '0%, 100%': { opacity: 1 },
-                  '50%': { opacity: .5 },
-                }
-            }
-          },
-        },
-      };
+            },
+        };
     </script>
 
     <!-- 4. Import Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- 5. Apply new font rules, CTA button styles, Tab styles, Skeleton -->
     <style>
-      body {
-        font-family: "Inter", sans-serif;
-        background-color: #FDFDFD; /* group-base-white */
-        color: #1F2937; /* group-text-dark */
-      }
-      h1, h2, h3, h4, .font-heading {
-        font-family: "Bricolage Grotesque", sans-serif;
-      }
-      .cta-button { /* Consistent Button Style */
-        display: inline-block; padding: 0.75rem 2.5rem; border-radius: 9999px;
-        font-size: 1rem; font-weight: 600; transition: all 0.3s ease-in-out;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        transform: scale(1); text-align: center;
-      }
-      .cta-button:hover {
-        transform: scale(1.03) translateY(-2px);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      }
-       /* Tab Button Styles */
-       .tab-button {
-            transition: all 0.2s ease-in-out; white-space: nowrap;
-            padding: 0.5rem 1.25rem; /* px-5 py-2 */
-            font-size: 1rem; /* text-base */ font-weight: 600; /* font-semibold */
-            border-radius: 9999px; /* rounded-full */ border-width: 1px;
-            border-color: #D1D5DB; /* border-gray-300 */ color: #374151; /* text-gray-700 */
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #FDFDFD;
+            /* group-base-white */
+            color: #1F2937;
+            /* group-text-dark */
         }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-heading {
+            font-family: "Bricolage Grotesque", sans-serif;
+        }
+
+        .cta-button {
+            /* Consistent Button Style */
+            display: inline-block;
+            padding: 0.75rem 2.5rem;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transform: scale(1);
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.03) translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Tab Button Styles */
+        .tab-button {
+            transition: all 0.2s ease-in-out;
+            white-space: nowrap;
+            padding: 0.5rem 1.25rem;
+            /* px-5 py-2 */
+            font-size: 1rem;
+            /* text-base */
+            font-weight: 600;
+            /* font-semibold */
+            border-radius: 9999px;
+            /* rounded-full */
+            border-width: 1px;
+            border-color: #D1D5DB;
+            /* border-gray-300 */
+            color: #374151;
+            /* text-gray-700 */
+        }
+
         .tab-button.active {
-            border-color: #4CAF50; /* group-primary-green */
-            color: #ffffff; /* white text */
-            background-color: #4CAF50; /* group-primary-green */
+            border-color: #4CAF50;
+            /* group-primary-green */
+            color: #ffffff;
+            /* white text */
+            background-color: #4CAF50;
+            /* group-primary-green */
         }
+
         .tab-button:not(.active):hover {
-            border-color: #A8D7B0; /* group-pastel-green */
-            color: #4CAF50; /* group-primary-green */
-            background-color: #A8D7B033; /* group-pastel-green with low opacity */
+            border-color: #A8D7B0;
+            /* group-pastel-green */
+            color: #4CAF50;
+            /* group-primary-green */
+            background-color: #A8D7B033;
+            /* group-pastel-green with low opacity */
         }
-         /* Added style for modal transitions */
-        .modal-hidden { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-out, visibility 0s linear 0.3s; }
-        .modal-visible { opacity: 1; visibility: visible; transition: opacity 0.3s ease-out; }
-         /* Carousel content centering */
-        #carousel-content img, #carousel-content video { margin: auto; }
+
+        /* Added style for modal transitions */
+        .modal-hidden {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-out, visibility 0s linear 0.3s;
+        }
+
+        .modal-visible {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.3s ease-out;
+        }
+
+        /* Carousel content centering */
+        #carousel-content img,
+        #carousel-content video {
+            margin: auto;
+        }
     </style>
 </head>
 
 <body class="bg-group-base-white text-group-text-dark font-sans" x-data="{ showModal: false }">
     <!-- 🌿 NAV COMPONENT for GreenAmmo Group -->
-<nav class="w-full bg-white shadow-sm sticky top-0 z-50">
-    <div class="container mx-auto flex justify-between items-center px-6 py-4">
-        
-        <a href="/" class="font-heading font-extrabold text-2xl text-group-primary-green tracking-tight flex items-center gap-2">
-            <img src="./assets/greenammo.jpeg" alt="GreenAmmo Logo" class="h-10 w-auto rounded-full object-cover">
-            <span class="text-group-primary-green">Green</span><span class="text-group-primary-blue">Ammo</span>
-        </a>
+    <nav class="w-full bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center px-6 py-4">
 
-        <ul class="hidden md:flex space-x-6 text-group-text-medium font-medium items-center">
-            <li><a href="/aboutus.html" class="hover:text-group-primary-green transition">About Us</a></li>
-             <li><a href="/gallery.html" class="hover:text-group-primary-green transition">Media</a></li>
-            <!-- <li class="relative group">
+            <a href="/"
+                class="font-heading font-extrabold text-2xl text-group-primary-green tracking-tight flex items-center gap-2">
+                <img src="./assets/greenammo.jpeg" alt="GreenAmmo Logo" class="h-10 w-auto rounded-full object-cover">
+                <div style="display: flex; align-items: center; gap: 0;">
+                    <span class="text-group-primary-green">GREEN</span>
+                    <span class="text-group-primary-blue">AMMO</span>
+                </div>
+            </a>
+
+            <ul class="hidden md:flex space-x-6 text-group-text-medium font-medium items-center">
+                <li><a href="/aboutus.html" class="hover:text-group-primary-green transition">About Us</a></li>
+                <li><a href="/gallery.html" class="hover:text-group-primary-green transition">Media</a></li>
+                <!-- <li class="relative group">
                 <button class="hover:text-group-primary-green transition inline-flex items-center gap-1">
                     Media
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -135,93 +189,132 @@
                     </ul>
                 </div>
             </li> -->
-            <li><a href="/blog.html" class="hover:text-group-primary-green transition">Blog</a></li>
-            <li><a href="/joinus.html" class="hover:text-group-primary-green transition">Join Us</a></li>
-        </ul>
+                <li><a href="/blog.html" class="hover:text-group-primary-green transition">Blog</a></li>
+                <li><a href="/joinus.html" class="hover:text-group-primary-green transition">Join Us</a></li>
+            </ul>
 
-        <div class="hidden md:flex items-center space-x-6">
-            <div class="flex gap-4 items-center">
-                <a href="https://www.facebook.com/people/GreenAmmo/100071774210115/" target="_blank" class="text-[#73A6F7] hover:text-[#1877F2] transition-colors duration-300" aria-label="Facebook">
-                    <svg class="w-6 h-6" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="12" fill="currentColor" />
-                        <path fill="#ffffff" d="M14 10h-2V8.5c0-.83.24-1.5 1.5-1.5h1.5V5.14C14.74 5.1 13.59 5 12.4 5 10.03 5 8.5 6.44 8.5 9v1H6v3h2.5v7h3v-7h2.5l.5-3z" />
-                    </svg>
-                </a>
-                <a href="https://www.instagram.com/green_ammo/" target="_blank" class="text-[#F07A9E] hover:text-[#E1306C] transition-colors duration-300" aria-label="Instagram">
-        <svg class="w-6 h-6" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="12" fill="currentColor" />
-            
-            <g fill="none" stroke="#ffffff" stroke-width="1.6">
-                <rect x="6.8" y="6.8" width="10.4" height="10.4" rx="2.8" ry="2.8" />
-                <circle cx="12" cy="12" r="2.4" />
-            </g>
-            
-            <circle cx="15.2" cy="8.8" r="0.8" fill="#ffffff" />
-        </svg>
-    </a>
-                <a href="https://www.linkedin.com/in/green-ammo-b7189a1b8/" target="_blank" class="text-[#6AABE0] hover:text-[#0A66C2] transition-colors duration-300" aria-label="LinkedIn">
-                    <svg class="w-6 h-6" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="12" fill="currentColor" />
-                        <path fill="#ffffff" d="M8 17H5.5V9H8v8zM6.75 7.82c-.8 0-1.44-.65-1.44-1.45s.64-1.45 1.44-1.45 1.44.65 1.44 1.45-.64 1.45-1.44 1.45zM18.5 17h-2.5v-4.11c0-1.02-.38-1.72-1.31-1.72-.72 0-1.15.48-1.34.95-.07.16-.09.39-.09.62V17h-2.5V9h2.5v1.09c.35-.53.98-1.28 2.37-1.28 1.73 0 3.03 1.13 3.03 3.55V17z"/>
-                    </svg>
-                </a>
-                <a href="https://www.youtube.com/@greenammo7472" target="_blank" class="text-[#FA7A7A] hover:text-[#FF0000] transition-colors duration-300" aria-label="YouTube">
-                    <svg class="w-6 h-6" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="12" fill="currentColor" />
-                        <path fill="#ffffff" d="M17.65 8.35a2 2 0 00-1.4-1.4C15 6.6 12 6.6 12 6.6s-3 0-4.25.35a2 2 0 00-1.4 1.4C6 9.6 6 12 6 12s0 2.4.35 3.65a2 2 0 001.4 1.4C9 17.4 12 17.4 12 17.4s3 0 4.25-.35a2 2 0 001.4-1.4C18 14.4 18 12 18 12s0-2.4-.35-3.65zM10.8 14V10l3.6 2-3.6 2z"/>
-                    </svg>
-                </a>
+            <div class="hidden md:flex items-center space-x-6">
+                <div class="flex gap-4 items-center">
+                    <a href="https://www.facebook.com/people/GreenAmmo/100071774210115/" target="_blank"
+                        class="text-[#73A6F7] hover:text-[#1877F2] transition-colors duration-300"
+                        aria-label="Facebook">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="12" fill="currentColor" />
+                            <path fill="#ffffff"
+                                d="M14 10h-2V8.5c0-.83.24-1.5 1.5-1.5h1.5V5.14C14.74 5.1 13.59 5 12.4 5 10.03 5 8.5 6.44 8.5 9v1H6v3h2.5v7h3v-7h2.5l.5-3z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/green_ammo/" target="_blank"
+                        class="text-[#F07A9E] hover:text-[#E1306C] transition-colors duration-300"
+                        aria-label="Instagram">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="12" fill="currentColor" />
+
+                            <g fill="none" stroke="#ffffff" stroke-width="1.6">
+                                <rect x="6.8" y="6.8" width="10.4" height="10.4" rx="2.8" ry="2.8" />
+                                <circle cx="12" cy="12" r="2.4" />
+                            </g>
+
+                            <circle cx="15.2" cy="8.8" r="0.8" fill="#ffffff" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/green-ammo-b7189a1b8/" target="_blank"
+                        class="text-[#6AABE0] hover:text-[#0A66C2] transition-colors duration-300"
+                        aria-label="LinkedIn">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="12" fill="currentColor" />
+                            <path fill="#ffffff"
+                                d="M8 17H5.5V9H8v8zM6.75 7.82c-.8 0-1.44-.65-1.44-1.45s.64-1.45 1.44-1.45 1.44.65 1.44 1.45-.64 1.45-1.44 1.45zM18.5 17h-2.5v-4.11c0-1.02-.38-1.72-1.31-1.72-.72 0-1.15.48-1.34.95-.07.16-.09.39-.09.62V17h-2.5V9h2.5v1.09c.35-.53.98-1.28 2.37-1.28 1.73 0 3.03 1.13 3.03 3.55V17z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/@greenammo7472" target="_blank"
+                        class="text-[#FA7A7A] hover:text-[#FF0000] transition-colors duration-300" aria-label="YouTube">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="12" fill="currentColor" />
+                            <path fill="#ffffff"
+                                d="M17.65 8.35a2 2 0 00-1.4-1.4C15 6.6 12 6.6 12 6.6s-3 0-4.25.35a2 2 0 00-1.4 1.4C6 9.6 6 12 6 12s0 2.4.35 3.65a2 2 0 001.4 1.4C9 17.4 12 17.4 12 17.4s3 0 4.25-.35a2 2 0 001.4-1.4C18 14.4 18 12 18 12s0-2.4-.35-3.65zM10.8 14V10l3.6 2-3.6 2z" />
+                        </svg>
+                    </a>
+                </div>
+
+                <button id="explore-btn-desktop"
+                    class="hidden md:block cta-button bg-group-primary-green text-white hover:bg-opacity-90">
+                    Explore
+                </button>
             </div>
-            
-            <button id="explore-btn-desktop" class="hidden md:block cta-button bg-group-primary-green text-white hover:bg-opacity-90">
-                Explore
+
+            <button id="mobile-menu-toggle"
+                class="md:hidden flex items-center text-group-primary-green focus:outline-none">
+                <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
+                <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
             </button>
         </div>
 
-        <button id="mobile-menu-toggle" class="md:hidden flex items-center text-group-primary-green focus:outline-none">
-            <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
-            <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </button>
-    </div>
+        <div id="mobile-menu"
+            class="hidden md:hidden flex-col space-y-2 bg-white shadow-inner px-6 py-4 border-t border-gray-100">
+            <a href="/aboutus.html"
+                class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">About
+                Us</a>
+            <a href="/gallery.html"
+                class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">Media</a>
+            <a href="/joinus.html"
+                class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">Join
+                Us</a>
 
-    <div id="mobile-menu" class="hidden md:hidden flex-col space-y-2 bg-white shadow-inner px-6 py-4 border-t border-gray-100">
-        <a href="/aboutus.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">About Us</a>
-        <a href="/gallery.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">Media</a>
-        <a href="/joinus.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">Join Us</a>
-        
-        <button id="explore-btn-mobile" class="mt-2 w-full cta-button bg-group-primary-green text-white hover:bg-opacity-90">
-            Explore
-        </button>
+            <button id="explore-btn-mobile"
+                class="mt-2 w-full cta-button bg-group-primary-green text-white hover:bg-opacity-90">
+                Explore
+            </button>
 
-        <div class="flex gap-6 mt-4 justify-center border-t pt-4">
-            <a href="https://www.facebook.com/people/GreenAmmo/100071774210115/" target="_blank" class="text-[#73A6F7] hover:text-[#1877F2] transition-colors duration-300" aria-label="Facebook">
-                <svg class="w-6 h-6" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="currentColor" /><path fill="#ffffff" d="M14 10h-2V8.5c0-.83.24-1.5 1.5-1.5h1.5V5.14C14.74 5.1 13.59 5 12.4 5 10.03 5 8.5 6.44 8.5 9v1H6v3h2.5v7h3v-7h2.5l.5-3z" /></svg>
-            </a>
-            <a href="https://www.instagram.com/green_ammo/" target="_blank" class="text-[#F07A9E] hover:text-[#E1306C] transition-colors duration-300" aria-label="Instagram">
-        <svg class="w-6 h-6" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="12" fill="currentColor" />
-            
-            <g fill="none" stroke="#ffffff" stroke-width="1.6">
-                <rect x="6.8" y="6.8" width="10.4" height="10.4" rx="2.8" ry="2.8" />
-                <circle cx="12" cy="12" r="2.4" />
-            </g>
-            
-            <circle cx="15.2" cy="8.8" r="0.8" fill="#ffffff" />
-        </svg>
-    </a>
-            <a href="https://www.linkedin.com/in/green-ammo-b7189a1b8/" target="_blank" class="text-[#6AABE0] hover:text-[#0A66C2] transition-colors duration-300" aria-label="LinkedIn">
-                <svg class="w-6 h-6" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="currentColor" /><path fill="#ffffff" d="M8 17H5.5V9H8v8zM6.75 7.82c-.8 0-1.44-.65-1.44-1.45s.64-1.45 1.44-1.45 1.44.65 1.44 1.45-.64 1.45-1.44 1.45zM18.5 17h-2.5v-4.11c0-1.02-.38-1.72-1.31-1.72-.72 0-1.15.48-1.34.95-.07.16-.09.39-.09.62V17h-2.5V9h2.5v1.09c.35-.53.98-1.28 2.37-1.28 1.73 0 3.03 1.13 3.03 3.55V17z"/></svg>
-            </a>
-            <a href="https://www.youtube.com/@greenammo7472" target="_blank" class="text-[#FA7A7A] hover:text-[#FF0000] transition-colors duration-300" aria-label="YouTube">
-                <svg class="w-6 h-6" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="currentColor" /><path fill="#ffffff" d="M17.65 8.35a2 2 0 00-1.4-1.4C15 6.6 12 6.6 12 6.6s-3 0-4.25.35a2 2 0 00-1.4 1.4C6 9.6 6 12 6 12s0 2.4.35 3.65a2 2 0 001.4 1.4C9 17.4 12 17.4 12 17.4s3 0 4.25-.35a2 2 0 001.4-1.4C18 14.4 18 12 18 12s0-2.4-.35-3.65zM10.8 14V10l3.6 2-3.6 2z"/></svg>
-            </a>
+            <div class="flex gap-6 mt-4 justify-center border-t pt-4">
+                <a href="https://www.facebook.com/people/GreenAmmo/100071774210115/" target="_blank"
+                    class="text-[#73A6F7] hover:text-[#1877F2] transition-colors duration-300" aria-label="Facebook">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="12" fill="currentColor" />
+                        <path fill="#ffffff"
+                            d="M14 10h-2V8.5c0-.83.24-1.5 1.5-1.5h1.5V5.14C14.74 5.1 13.59 5 12.4 5 10.03 5 8.5 6.44 8.5 9v1H6v3h2.5v7h3v-7h2.5l.5-3z" />
+                    </svg>
+                </a>
+                <a href="https://www.instagram.com/green_ammo/" target="_blank"
+                    class="text-[#F07A9E] hover:text-[#E1306C] transition-colors duration-300" aria-label="Instagram">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="12" fill="currentColor" />
+
+                        <g fill="none" stroke="#ffffff" stroke-width="1.6">
+                            <rect x="6.8" y="6.8" width="10.4" height="10.4" rx="2.8" ry="2.8" />
+                            <circle cx="12" cy="12" r="2.4" />
+                        </g>
+
+                        <circle cx="15.2" cy="8.8" r="0.8" fill="#ffffff" />
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/green-ammo-b7189a1b8/" target="_blank"
+                    class="text-[#6AABE0] hover:text-[#0A66C2] transition-colors duration-300" aria-label="LinkedIn">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="12" fill="currentColor" />
+                        <path fill="#ffffff"
+                            d="M8 17H5.5V9H8v8zM6.75 7.82c-.8 0-1.44-.65-1.44-1.45s.64-1.45 1.44-1.45 1.44.65 1.44 1.45-.64 1.45-1.44 1.45zM18.5 17h-2.5v-4.11c0-1.02-.38-1.72-1.31-1.72-.72 0-1.15.48-1.34.95-.07.16-.09.39-.09.62V17h-2.5V9h2.5v1.09c.35-.53.98-1.28 2.37-1.28 1.73 0 3.03 1.13 3.03 3.55V17z" />
+                    </svg>
+                </a>
+                <a href="https://www.youtube.com/@greenammo7472" target="_blank"
+                    class="text-[#FA7A7A] hover:text-[#FF0000] transition-colors duration-300" aria-label="YouTube">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="12" fill="currentColor" />
+                        <path fill="#ffffff"
+                            d="M17.65 8.35a2 2 0 00-1.4-1.4C15 6.6 12 6.6 12 6.6s-3 0-4.25.35a2 2 0 00-1.4 1.4C6 9.6 6 12 6 12s0 2.4.35 3.65a2 2 0 001.4 1.4C9 17.4 12 17.4 12 17.4s3 0 4.25-.35a2 2 0 001.4-1.4C18 14.4 18 12 18 12s0-2.4-.35-3.65zM10.8 14V10l3.6 2-3.6 2z" />
+                    </svg>
+                </a>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <main class="min-h-screen">
 
@@ -232,7 +325,8 @@
                     Our Work in Action
                 </h1>
                 <p class="text-lg md:text-xl text-group-text-medium max-w-3xl mx-auto">
-                    A visual journey through our community projects, workshops, and sustainable efforts across the country.
+                    A visual journey through our community projects, workshops, and sustainable efforts across the
+                    country.
                 </p>
             </div>
         </section>
@@ -243,12 +337,12 @@
 
                 <!-- Tab Navigation - UPDATED @click -->
                 <div class="flex flex-wrap justify-center gap-3 mb-12 border-b border-gray-200 pb-4">
-                    <button @click="activeTab = 'photos'; switchTab('image')" :class="{ 'active': activeTab === 'photos' }"
-                        class="tab-button">
+                    <button @click="activeTab = 'photos'; switchTab('image')"
+                        :class="{ 'active': activeTab === 'photos' }" class="tab-button">
                         📷 Photos
                     </button>
-                    <button @click="activeTab = 'videos'; switchTab('video')" :class="{ 'active': activeTab === 'videos' }"
-                        class="tab-button">
+                    <button @click="activeTab = 'videos'; switchTab('video')"
+                        :class="{ 'active': activeTab === 'videos' }" class="tab-button">
                         🎬 Videos
                     </button>
                 </div>
@@ -257,9 +351,11 @@
                 <div>
                     <!-- Photos Tab Content -->
                     <div x-show="activeTab === 'photos'" x-transition.opacity.duration.300>
-                        <h2 class="text-3xl font-bold text-group-text-dark font-heading mb-8 text-center sr-only">Photo Gallery</h2>
+                        <h2 class="text-3xl font-bold text-group-text-dark font-heading mb-8 text-center sr-only">Photo
+                            Gallery</h2>
                         <!-- Skeleton Loader for Photos -->
-                        <div id="photos-skeleton" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
+                        <div id="photos-skeleton"
+                            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
                             <!-- Repeat skeleton items (e.g., 6-9 times) -->
                             <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
                             <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
@@ -269,23 +365,27 @@
                             <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
                         </div>
                         <!-- Actual Photo Grid (Populated by JS) -->
-                        <div id="photos-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
+                        <div id="photos-grid"
+                            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
                             <!-- Images will be appended here -->
                         </div>
                     </div>
 
                     <!-- Videos Tab Content -->
-                     <div x-show="activeTab === 'videos'" x-transition.opacity.duration.300>
-                         <h2 class="text-3xl font-bold text-group-text-dark font-heading mb-8 text-center sr-only">Video Gallery</h2>
-                         <!-- Skeleton Loader for Videos -->
-                        <div id="videos-skeleton" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
+                    <div x-show="activeTab === 'videos'" x-transition.opacity.duration.300>
+                        <h2 class="text-3xl font-bold text-group-text-dark font-heading mb-8 text-center sr-only">Video
+                            Gallery</h2>
+                        <!-- Skeleton Loader for Videos -->
+                        <div id="videos-skeleton"
+                            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
                             <!-- Repeat skeleton items -->
                             <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
                             <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
                             <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
                         </div>
                         <!-- Actual Video Grid (Populated by JS) -->
-                        <div id="videos-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
+                        <div id="videos-grid"
+                            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
                             <!-- Videos will be appended here -->
                         </div>
                     </div>
@@ -293,31 +393,38 @@
                     <!-- Infinite Scroll Sentinel & Messages -->
                     <div id="infinite-scroll-sentinel" class="text-center py-8">
                         <!-- Generic Loading Message (Initially hidden) -->
-                         <p id="loading-message" class="hidden text-gray-500">Loading more...</p>
-                         <p id="end-message" class="hidden text-group-text-medium">You've reached the end.</p>
+                        <p id="loading-message" class="hidden text-gray-500">Loading more...</p>
+                        <p id="end-message" class="hidden text-group-text-medium">You've reached the end.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- CAROUSEL MODAL (Remains mostly the same, styles updated) -->
-        <div id="carousel-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4 modal-hidden">
-            <div class="relative w-full max-w-4xl max-h-[85vh] bg-group-text-dark rounded-lg shadow-xl flex flex-col" @click.stop>
-                <button onclick="closeCarousel()" class="absolute -top-4 -right-4 m-2 text-white bg-black/50 rounded-full p-1 z-[60] hover:text-group-pastel-blue transition text-3xl">&times;</button>
+        <div id="carousel-modal"
+            class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4 modal-hidden">
+            <div class="relative w-full max-w-4xl max-h-[85vh] bg-group-text-dark rounded-lg shadow-xl flex flex-col"
+                @click.stop>
+                <button onclick="closeCarousel()"
+                    class="absolute -top-4 -right-4 m-2 text-white bg-black/50 rounded-full p-1 z-[60] hover:text-group-pastel-blue transition text-3xl">&times;</button>
 
                 <!-- Carousel Content Area (Image/Video) -->
-                <div id="carousel-content" class="flex-grow w-full h-full flex items-center justify-center overflow-hidden relative p-4">
+                <div id="carousel-content"
+                    class="flex-grow w-full h-full flex items-center justify-center overflow-hidden relative p-4">
                     <!-- Media element (img or video) inserted by JS -->
                 </div>
 
                 <!-- Caption Area -->
-                 <div id="carousel-caption" class="p-3 bg-black/30 text-white text-center text-sm font-medium truncate"></div>
+                <div id="carousel-caption" class="p-3 bg-black/30 text-white text-center text-sm font-medium truncate">
+                </div>
 
-                 <!-- Navigation Arrows -->
-                <button onclick="changeMedia(-1)" id="carousel-prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-12 p-3 text-white text-4xl z-50 opacity-75 hover:opacity-100 transition focus:outline-none">
+                <!-- Navigation Arrows -->
+                <button onclick="changeMedia(-1)" id="carousel-prev"
+                    class="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-12 p-3 text-white text-4xl z-50 opacity-75 hover:opacity-100 transition focus:outline-none">
                     &#10094;
                 </button>
-                <button onclick="changeMedia(1)" id="carousel-next" class="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-12 p-3 text-white text-4xl z-50 opacity-75 hover:opacity-100 transition focus:outline-none">
+                <button onclick="changeMedia(1)" id="carousel-next"
+                    class="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-12 p-3 text-white text-4xl z-50 opacity-75 hover:opacity-100 transition focus:outline-none">
                     &#10095;
                 </button>
             </div>
@@ -332,37 +439,59 @@
                 <div class="md:col-span-2 space-y-4">
                     <h3 class="text-3xl font-bold text-group-pastel-green font-heading">GreenAmmo Group</h3>
                     <p class="text-sm text-gray-300 max-w-sm">
-                        Empowering sustainable living and waste management through community action, research, and project initiation.
+                        Empowering sustainable living and waste management through community action, research, and
+                        project initiation.
                     </p>
                 </div>
                 <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
                     <div class="space-y-3">
-
+                        <h4 class="font-semibold text-white mb-3 font-heading">GreenAmmo</h4>
+                        <ul class="text-sm space-y-2 text-gray-300">
+                            <li><a href="/aboutus.html" class="hover:text-group-pastel-green transition">About Us</a>
+                            </li>
+                            <li><a href="/gallery.html" class="hover:text-group-pastel-green transition">Media
+                                    (Gallery)</a></li>
+                            <li><a href="/certifications.html"
+                                    class="hover:text-group-pastel-green transition">Certificates</a></li>
+                            <li><a href="/alliances.html" class="hover:text-group-pastel-green transition">Alliances</a>
+                            </li>
+                        </ul>
                     </div>
                     <div class="space-y-3">
                         <h4 class="font-semibold text-white mb-3 font-heading">Solutions</h4>
                         <ul class="text-sm space-y-2 text-gray-300">
-                            <li><a href="/solutions/finance.html" class="hover:text-group-pastel-green transition">Finance</a></li>
-                            <li><a href="/solutions/education.html" class="hover:text-group-pastel-green transition">Education & Development</a></li>
-                            <li><a href="/solutions/event-supply.html" class="hover:text-group-pastel-green transition">Event & Supply</a></li>
-                            <li><a href="/solutions/accommodation.html" class="hover:text-group-pastel-green transition">Accommodations</a></li>
+                            <li><a href="/solutions/finance.html"
+                                    class="hover:text-group-pastel-green transition">Finance</a></li>
+                            <li><a href="/solutions/education.html"
+                                    class="hover:text-group-pastel-green transition">Education & Development</a></li>
+                            <li><a href="/solutions/event-supply.html"
+                                    class="hover:text-group-pastel-green transition">Event & Supply</a></li>
+                            <li><a href="/solutions/accommodation.html"
+                                    class="hover:text-group-pastel-green transition">Accommodations</a></li>
                         </ul>
                     </div>
                     <div class="space-y-3">
                         <h4 class="font-semibold text-white mb-3 font-heading">Trust</h4>
                         <ul class="text-sm space-y-2 text-gray-300">
-                            <li><a href="/trust/projects.html" class="hover:text-group-pastel-green transition">Projects </a></li>
-                            <li><a href="/trust/campaigns.html" class="hover:text-group-pastel-green transition">Campaigns</a></li>
-                            <li><a href="/trust/reports.html" class="hover:text-group-pastel-green transition">Reports </a></li>
+                            <li><a href="/trust/projects.html" class="hover:text-group-pastel-green transition">Projects
+                                </a></li>
+                            <li><a href="/trust/campaigns.html"
+                                    class="hover:text-group-pastel-green transition">Campaigns</a></li>
+                            <li><a href="/trust/reports.html" class="hover:text-group-pastel-green transition">Reports
+                                </a></li>
                             <li><a href="/trust/faq.html" class="hover:text-group-pastel-green transition">FAQ</a></li>
-                            <li><a href="/trust/joinus.html" class="hover:text-group-pastel-green transition">Donate Now </a></li>
+                            <li><a href="/trust/joinus.html" class="hover:text-group-pastel-green transition">Donate Now
+                                </a></li>
                         </ul>
                     </div>
                     <div class="space-y-3">
                         <h4 class="font-semibold text-white mb-3 font-heading">Take Action</h4>
                         <div class="space-y-2">
-                            <a href="/joinus.html" class="block text-center py-2 px-4 rounded-full bg-group-primary-green text-white hover:bg-opacity-80 transition text-sm font-semibold shadow-md">Join Us</a>
-                            <button id="explore-btn-footer" class="block w-full text-center py-2 px-4 rounded-full border-2 border-group-pastel-green text-group-pastel-green hover:bg-group-pastel-green hover:text-group-text-dark transition text-sm font-semibold">Explore</button>
+                            <a href="/joinus.html"
+                                class="block text-center py-2 px-4 rounded-full bg-group-primary-green text-white hover:bg-opacity-80 transition text-sm font-semibold shadow-md">Join
+                                Us</a>
+                            <button id="explore-btn-footer"
+                                class="block w-full text-center py-2 px-4 rounded-full border-2 border-group-pastel-green text-group-pastel-green hover:bg-group-pastel-green hover:text-group-text-dark transition text-sm font-semibold">Explore</button>
                         </div>
                     </div>
                 </div>
@@ -370,90 +499,124 @@
             <div class="flex flex-col sm:flex-row justify-between items-center py-6 text-sm text-gray-400">
                 <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
                 <div class="flex gap-4 mt-4 sm:mt-0 items-center justify-center">
-    
-    <a href="https://www.facebook.com/people/GreenAmmo/100071774210115/" target="_blank" class="hover:opacity-80 transition-all duration-300 transform hover:-translate-y-1" aria-label="Facebook">
-        <svg class="w-6 h-6" fill="#1877F2" viewBox="0 0 24 24">
-            <path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/>
-        </svg>
-    </a>
 
-    <a href="https://www.instagram.com/green_ammo/" target="_blank" class="hover:opacity-80 transition-all duration-300 transform hover:-translate-y-1" aria-label="Instagram">
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="url(#ig-grad)">
-            <defs>
-                <linearGradient id="ig-grad" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FFDC80"/>
-                    <stop offset="0.5" stop-color="#F56040"/>
-                    <stop offset="1" stop-color="#C13584"/>
-                </linearGradient>
-            </defs>
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm3.98-10.842a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
-        </svg>
-    </a>
+                    <a href="https://www.facebook.com/people/GreenAmmo/100071774210115/" target="_blank"
+                        class="hover:opacity-80 transition-all duration-300 transform hover:-translate-y-1"
+                        aria-label="Facebook">
+                        <svg class="w-6 h-6" fill="#1877F2" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z" />
+                        </svg>
+                    </a>
 
-    <a href="https://www.linkedin.com/in/green-ammo-b7189a1b8/" target="_blank" class="hover:opacity-80 transition-all duration-300 transform hover:-translate-y-1" aria-label="LinkedIn">
-        <svg class="w-6 h-6" fill="#0A66C2" viewBox="0 0 24 24">
-            <path d="M22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.73V1.73C24 .77 23.2 0 22.23 0zM7.12 20.45H3.56V9h3.56v11.45zM5.34 7.43c-1.14 0-2.06-.93-2.06-2.06 0-1.14.92-2.06 2.06-2.06 1.14 0 2.06.92 2.06 2.06 0 1.13-.92 2.06-2.06 2.06zM20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28z"/>
-        </svg>
-    </a>
+                    <a href="https://www.instagram.com/green_ammo/" target="_blank"
+                        class="hover:opacity-80 transition-all duration-300 transform hover:-translate-y-1"
+                        aria-label="Instagram">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="url(#ig-grad)">
+                            <defs>
+                                <linearGradient id="ig-grad" x1="2" y1="22" x2="22" y2="2"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#FFDC80" />
+                                    <stop offset="0.5" stop-color="#F56040" />
+                                    <stop offset="1" stop-color="#C13584" />
+                                </linearGradient>
+                            </defs>
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm3.98-10.842a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z" />
+                        </svg>
+                    </a>
 
-    <a href="https://www.youtube.com/@greenammo7472" target="_blank" class="hover:opacity-80 transition-all duration-300 transform hover:-translate-y-1" aria-label="YouTube">
-        <svg class="w-6 h-6" fill="#FF0000" viewBox="0 0 24 24">
-            <path d="M23.5 6.19c-.24-.89-.95-1.61-1.84-1.85C19.96 3.9 12 3.9 12 3.9s-7.96 0-9.66.44C1.45 4.58.74 5.3.5 6.19.06 7.89 0 12 0 12s.06 4.11.5 5.81c.24.89.95 1.61 1.84 1.85 1.7.44 9.66.44 9.66.44s7.96 0 9.66-.44c.89-.24 1.6-.96 1.84-1.85.44-1.7.44-5.81.44-5.81s0-4.11-.44-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/>
-        </svg>
-    </a>
-    
-</div>
+                    <a href="https://www.linkedin.com/in/green-ammo-b7189a1b8/" target="_blank"
+                        class="hover:opacity-80 transition-all duration-300 transform hover:-translate-y-1"
+                        aria-label="LinkedIn">
+                        <svg class="w-6 h-6" fill="#0A66C2" viewBox="0 0 24 24">
+                            <path
+                                d="M22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.73V1.73C24 .77 23.2 0 22.23 0zM7.12 20.45H3.56V9h3.56v11.45zM5.34 7.43c-1.14 0-2.06-.93-2.06-2.06 0-1.14.92-2.06 2.06-2.06 1.14 0 2.06.92 2.06 2.06 0 1.13-.92 2.06-2.06 2.06zM20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28z" />
+                        </svg>
+                    </a>
+
+                    <a href="https://www.youtube.com/@greenammo7472" target="_blank"
+                        class="hover:opacity-80 transition-all duration-300 transform hover:-translate-y-1"
+                        aria-label="YouTube">
+                        <svg class="w-6 h-6" fill="#FF0000" viewBox="0 0 24 24">
+                            <path
+                                d="M23.5 6.19c-.24-.89-.95-1.61-1.84-1.85C19.96 3.9 12 3.9 12 3.9s-7.96 0-9.66.44C1.45 4.58.74 5.3.5 6.19.06 7.89 0 12 0 12s.06 4.11.5 5.81c.24.89.95 1.61 1.84 1.85 1.7.44 9.66.44 9.66.44s7.96 0 9.66-.44c.89-.24 1.6-.96 1.84-1.85.44-1.7.44-5.81.44-5.81s0-4.11-.44-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z" />
+                        </svg>
+                    </a>
+
+                </div>
             </div>
         </div>
     </footer>
 
     <!-- Explore Modal (Remains same as index.html) -->
-    <div id="exploreModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden justify-center items-center z-50 p-4 modal-hidden">
-        <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full mx-auto overflow-hidden animate-fade-in" id="modal-content">
+    <div id="exploreModal"
+        class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden justify-center items-center z-50 p-4 modal-hidden">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full mx-auto overflow-hidden animate-fade-in"
+            id="modal-content">
             <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100">
                 <h3 class="text-xl font-semibold text-group-text-dark font-heading">Explore GreenAmmo</h3>
                 <button id="modal-close-btn" class="text-gray-400 hover:text-group-primary-green focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
                     </svg>
                 </button>
             </div>
 
             <div class="grid md:grid-cols-2 gap-6 p-8">
-                <div class="bg-group-pastel-blue/20 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-group-pastel-blue/30 border border-group-pastel-blue/40" onclick="window.location.href='./solutions/index.html'">
+                <div class="bg-group-pastel-blue/20 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-group-pastel-blue/30 border border-group-pastel-blue/40"
+                    onclick="window.location.href='./solutions/index.html'">
                     <div>
-                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-group-pastel-blue/20">
-                            <svg class="w-16 h-16 text-group-pastel-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        <div
+                            class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-group-pastel-blue/20">
+                            <svg class="w-16 h-16 text-group-pastel-blue" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
                             </svg>
                         </div>
-                        <h4 class="text-2xl font-semibold text-group-text-dark mb-2 font-heading">GreenAmmo Solutions</h4>
+                        <h4 class="text-2xl font-semibold text-group-text-dark mb-2 font-heading">GreenAmmo Solutions
+                        </h4>
                         <p class="text-group-text-medium text-sm leading-relaxed">
-                            Professional, scalable services spanning Finance, Education, Events, and Accommodation — uniting purpose with performance for sustainable growth.
+                            Professional, scalable services spanning Finance, Education, Events, and Accommodation —
+                            uniting purpose with performance for sustainable growth.
                         </p>
                     </div>
                     <div class="mt-6">
-                        <button class="cta-button-secondary border-group-pastel-blue text-group-pastel-blue hover:bg-group-pastel-blue/20 w-full sm:w-auto">
+                        <button
+                            class="cta-button-secondary border-group-pastel-blue text-group-pastel-blue hover:bg-group-pastel-blue/20 w-full sm:w-auto">
                             Visit Solutions
                         </button>
                     </div>
                 </div>
 
-                <div class="bg-group-pastel-green/30 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-group-pastel-green/40 border border-group-pastel-green/50" onclick="window.location.href='./trust/index.html'">
+                <div class="bg-group-pastel-green/30 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-group-pastel-green/40 border border-group-pastel-green/50"
+                    onclick="window.location.href='./trust/index.html'">
                     <div>
-                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-group-pastel-green/20">
-                            <svg class="w-16 h-16 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        <div
+                            class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-group-pastel-green/20">
+                            <svg class="w-16 h-16 text-group-primary-green" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 10a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
                         </div>
-                        <h4 class="text-2xl font-semibold text-group-primary-green mb-2 font-heading">GreenAmmo Trust</h4>
+                        <h4 class="text-2xl font-semibold text-group-primary-green mb-2 font-heading">GreenAmmo Trust
+                        </h4>
                         <p class="text-group-text-medium text-sm leading-relaxed">
-                            Non-profit initiatives for environmental awareness, youth empowerment, and community development — turning sustainability into action.
+                            Non-profit initiatives for environmental awareness, youth empowerment, and community
+                            development — turning sustainability into action.
                         </p>
                     </div>
                     <div class="mt-6">
-                        <button class="cta-button-secondary border-group-primary-green text-group-primary-green hover:bg-group-pastel-green/50 w-full sm:w-auto">
+                        <button
+                            class="cta-button-secondary border-group-primary-green text-group-primary-green hover:bg-group-pastel-green/50 w-full sm:w-auto">
                             Visit Trust
                         </button>
                     </div>
@@ -504,7 +667,7 @@
                     const data = await res.json();
 
                     if (!res.ok) {
-                         throw new Error(`HTTP error! status: ${res.status}`);
+                        throw new Error(`HTTP error! status: ${res.status}`);
                     }
 
                     if (data.length === 0 || (totalPages && page >= parseInt(totalPages))) {
@@ -521,7 +684,7 @@
                     endMessage.textContent = 'Failed to load content.'; // Show error
                     endMessage.classList.remove('hidden');
                     hasMore = false;
-                     sentinel.style.display = 'none';
+                    sentinel.style.display = 'none';
                 } finally {
                     isLoading = false;
                     showSkeleton(mediaType, false); // Hide skeleton
@@ -584,31 +747,31 @@
                 });
             }
 
-// --- Skeleton Loader Logic ---
+            // --- Skeleton Loader Logic ---
             // --- Skeleton Loader Logic (Fixed) ---
-function showSkeleton(mediaType, show) {
-    const photosSkeleton = document.getElementById('photos-skeleton');
-    const videosSkeleton = document.getElementById('videos-skeleton');
-    const photosGrid = document.getElementById('photos-grid');
-    const videosGrid = document.getElementById('videos-grid');
+            function showSkeleton(mediaType, show) {
+                const photosSkeleton = document.getElementById('photos-skeleton');
+                const videosSkeleton = document.getElementById('videos-skeleton');
+                const photosGrid = document.getElementById('photos-grid');
+                const videosGrid = document.getElementById('videos-grid');
 
-    const skeleton = (mediaType === 'image') ? photosSkeleton : videosSkeleton;
-    const grid = (mediaType === 'image') ? photosGrid : videosGrid;
+                const skeleton = (mediaType === 'image') ? photosSkeleton : videosSkeleton;
+                const grid = (mediaType === 'image') ? photosGrid : videosGrid;
 
-    if (!skeleton || !grid) return;
+                if (!skeleton || !grid) return;
 
-    if (show && grid.childElementCount === 0) {
-        // SHOW logic
-        // We remove 'hidden'. We do NOT add inline style 'grid' because 
-        // the HTML class="grid" already handles that.
-        skeleton.classList.remove('hidden');
-        skeleton.style.display = ''; // Clean up any leftover inline styles
-    } else if (!show) {
-        // HIDE logic
-        skeleton.classList.add('hidden');
-        skeleton.style.display = ''; // CRITICAL: Removes inline 'display: grid' so .hidden can work
-    }
-}
+                if (show && grid.childElementCount === 0) {
+                    // SHOW logic
+                    // We remove 'hidden'. We do NOT add inline style 'grid' because 
+                    // the HTML class="grid" already handles that.
+                    skeleton.classList.remove('hidden');
+                    skeleton.style.display = ''; // Clean up any leftover inline styles
+                } else if (!show) {
+                    // HIDE logic
+                    skeleton.classList.add('hidden');
+                    skeleton.style.display = ''; // CRITICAL: Removes inline 'display: grid' so .hidden can work
+                }
+            }
 
 
             // --- Lazy Loading Observer ---
@@ -632,19 +795,19 @@ function showSkeleton(mediaType, show) {
                 }
             }, { threshold: 0.5 }); // Trigger when 50% visible
 
-             if(sentinel) infiniteScrollObserver.observe(sentinel);
+            if (sentinel) infiniteScrollObserver.observe(sentinel);
 
 
             // --- Tab Switching Logic (FIXED) ---
-             window.switchTab = (newMediaType) => { // newMediaType is 'image' or 'video'
+            window.switchTab = (newMediaType) => { // newMediaType is 'image' or 'video'
                 if (newMediaType === currentMediaType) return; // Do nothing if already active
 
                 // Reset state for the new tab
                 currentMediaType = newMediaType;
                 currentPage = 1;
                 hasMore = true;
-                isLoading = false; 
-                allMediaData = []; 
+                isLoading = false;
+                allMediaData = [];
                 currentIndex = 0;
 
                 // Clear previous grid content
@@ -654,17 +817,17 @@ function showSkeleton(mediaType, show) {
                 // Hide skeletons
                 photosSkeleton.classList.add('hidden');
                 videosSkeleton.classList.add('hidden');
-                
+
                 // Reset messages
                 endMessage.classList.add('hidden');
                 loadingMessage.classList.add('hidden');
-                sentinel.style.display = 'block'; 
+                sentinel.style.display = 'block';
 
                 // Fetch data for the new tab
                 fetchGallery(currentMediaType, currentPage);
-                
+
                 // Note: Alpine's activeTab is set by the @click directive on the button itself.
-             };
+            };
 
             // --- Carousel Logic ---
             function updateCarousel() {
@@ -721,7 +884,7 @@ function showSkeleton(mediaType, show) {
             window.closeCarousel = () => {
                 modal.classList.remove('flex', 'modal-visible');
                 modal.classList.add('modal-hidden');
-                 // Stop video if playing
+                // Stop video if playing
                 const video = modal.querySelector('video');
                 if (video) {
                     video.pause();
@@ -754,41 +917,41 @@ function showSkeleton(mediaType, show) {
                 console.warn('Lenis script not loaded.');
             }
 
-             // --- Explore Modal --- (Vanilla JS version)
-             // Re-finding elements just in case
-             const exploreModal = document.getElementById('exploreModal');
-             const exploreBtns = [
+            // --- Explore Modal --- (Vanilla JS version)
+            // Re-finding elements just in case
+            const exploreModal = document.getElementById('exploreModal');
+            const exploreBtns = [
                 document.getElementById('explore-btn-desktop'),
                 document.getElementById('explore-btn-mobile'),
                 document.getElementById('explore-btn-footer')
             ];
-             const modalCloseBtn = exploreModal ? exploreModal.querySelector('button[class*="text-gray-400"]') : null; // More robust selector
+            const modalCloseBtn = exploreModal ? exploreModal.querySelector('button[class*="text-gray-400"]') : null; // More robust selector
 
-             function openModalJS() { 
-                 const modal = document.getElementById('exploreModal'); // Find it again
-                 if(modal) { 
-                     modal.classList.remove('hidden', 'modal-hidden'); 
-                     modal.classList.add('flex', 'modal-visible'); 
-                 } 
-             }
-             function closeModalJS() { 
-                 const modal = document.getElementById('exploreModal'); // Find it again
-                 if(modal) { 
-                     modal.classList.remove('flex', 'modal-visible'); 
-                     modal.classList.add('modal-hidden'); 
-                     setTimeout(() => { modal.classList.add('hidden'); }, 300); 
-                 } 
-             }
+            function openModalJS() {
+                const modal = document.getElementById('exploreModal'); // Find it again
+                if (modal) {
+                    modal.classList.remove('hidden', 'modal-hidden');
+                    modal.classList.add('flex', 'modal-visible');
+                }
+            }
+            function closeModalJS() {
+                const modal = document.getElementById('exploreModal'); // Find it again
+                if (modal) {
+                    modal.classList.remove('flex', 'modal-visible');
+                    modal.classList.add('modal-hidden');
+                    setTimeout(() => { modal.classList.add('hidden'); }, 300);
+                }
+            }
 
-             exploreBtns.forEach(btn => { if (btn) btn.addEventListener('click', openModalJS); });
-             if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModalJS);
-             if (exploreModal) exploreModal.addEventListener('click', (event) => { 
-                 if (event.target === exploreModal) closeModalJS(); // Close on backdrop click
+            exploreBtns.forEach(btn => { if (btn) btn.addEventListener('click', openModalJS); });
+            if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModalJS);
+            if (exploreModal) exploreModal.addEventListener('click', (event) => {
+                if (event.target === exploreModal) closeModalJS(); // Close on backdrop click
             });
 
 
         });
     </script>
 </body>
-</html>
 
+</html>

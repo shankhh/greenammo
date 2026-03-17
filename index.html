@@ -55,7 +55,9 @@
         };
     </script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
 
     <style>
         body {
@@ -64,7 +66,11 @@
             color: #1F2937;
         }
 
-        h1, h2, h3, h4, .font-heading {
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-heading {
             font-family: "Bricolage Grotesque", sans-serif;
         }
 
@@ -112,13 +118,27 @@
             visibility: visible;
             transition: opacity 0.3s ease-out;
         }
-        
+
         /* Utility for vanilla JS transitions */
-        .opacity-0 { opacity: 0; }
-        .opacity-100 { opacity: 1; }
-        .translate-y-8 { transform: translateY(2rem); }
-        .translate-y-0 { transform: translateY(0); }
-        .-translate-y-8 { transform: translateY(-2rem); }
+        .opacity-0 {
+            opacity: 0;
+        }
+
+        .opacity-100 {
+            opacity: 1;
+        }
+
+        .translate-y-8 {
+            transform: translateY(2rem);
+        }
+
+        .translate-y-0 {
+            transform: translateY(0);
+        }
+
+        .-translate-y-8 {
+            transform: translateY(-2rem);
+        }
     </style>
 </head>
 
@@ -175,18 +195,22 @@
             </button>
         </div>
     </nav> -->
-<nav class="w-full bg-white shadow-sm sticky top-0 z-50">
-    <div class="container mx-auto flex justify-between items-center px-6 py-4">
-        
-        <a href="/" class="font-heading font-extrabold text-2xl text-group-primary-green tracking-tight flex items-center gap-2">
-            <img src="./assets/greenammo.jpeg" alt="GreenAmmo Logo" class="h-10 w-auto rounded-full object-cover">
-            <span class="text-group-primary-green">Green</span><span class="text-group-primary-blue">Ammo</span>
-        </a>
+    <nav class="w-full bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center px-6 py-4">
 
-        <ul class="hidden md:flex space-x-6 text-group-text-medium font-medium items-center">
-            <li><a href="/aboutus.html" class="hover:text-group-primary-green transition">About Us</a></li>
-            <li><a href="/gallery.html" class="hover:text-group-primary-green transition">Media</a></li>
-            <!-- <li class="relative group">
+            <a href="/"
+                class="font-heading font-extrabold text-2xl text-group-primary-green tracking-tight flex items-center gap-2">
+                <img src="./assets/greenammo.jpeg" alt="GreenAmmo Logo" class="h-10 w-auto rounded-full object-cover">
+                <div style="display: flex; align-items: center; gap: 0;">
+                    <span class="text-group-primary-green">GREEN</span>
+                    <span class="text-group-primary-blue">AMMO</span>
+                </div>
+            </a>
+
+            <ul class="hidden md:flex space-x-6 text-group-text-medium font-medium items-center">
+                <li><a href="/aboutus.html" class="hover:text-group-primary-green transition">About Us</a></li>
+                <li><a href="/gallery.html" class="hover:text-group-primary-green transition">Media</a></li>
+                <!-- <li class="relative group">
                 <button class="hover:text-group-primary-green transition inline-flex items-center gap-1">
                     Media
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -201,151 +225,199 @@
                     </ul>
                 </div>
             </li> -->
-            <li><a href="/blog.html" class="hover:text-group-primary-green transition">Blog</a></li>
-            <li><a href="/joinus.html" class="hover:text-group-primary-green transition">Join Us</a></li>
-        </ul>
+                <li><a href="/blog.html" class="hover:text-group-primary-green transition">Blog</a></li>
+                <li><a href="/joinus.html" class="hover:text-group-primary-green transition">Join Us</a></li>
+            </ul>
 
-        <div class="hidden md:flex items-center space-x-6">
-            <div class="flex gap-4 items-center">
-                <a href="https://www.facebook.com/people/GreenAmmo/100071774210115/" target="_blank" class="text-[#73A6F7] hover:text-[#1877F2] transition-colors duration-300" aria-label="Facebook">
-                    <svg class="w-6 h-6" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="12" fill="currentColor" />
-                        <path fill="#ffffff" d="M14 10h-2V8.5c0-.83.24-1.5 1.5-1.5h1.5V5.14C14.74 5.1 13.59 5 12.4 5 10.03 5 8.5 6.44 8.5 9v1H6v3h2.5v7h3v-7h2.5l.5-3z" />
-                    </svg>
-                </a>
-                <a href="https://www.instagram.com/green_ammo/" target="_blank" class="text-[#F07A9E] hover:text-[#E1306C] transition-colors duration-300" aria-label="Instagram">
-        <svg class="w-6 h-6" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="12" fill="currentColor" />
-            
-            <g fill="none" stroke="#ffffff" stroke-width="1.6">
-                <rect x="6.8" y="6.8" width="10.4" height="10.4" rx="2.8" ry="2.8" />
-                <circle cx="12" cy="12" r="2.4" />
-            </g>
-            
-            <circle cx="15.2" cy="8.8" r="0.8" fill="#ffffff" />
-        </svg>
-    </a>
-                <a href="https://www.linkedin.com/in/green-ammo-b7189a1b8/" target="_blank" class="text-[#6AABE0] hover:text-[#0A66C2] transition-colors duration-300" aria-label="LinkedIn">
-                    <svg class="w-6 h-6" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="12" fill="currentColor" />
-                        <path fill="#ffffff" d="M8 17H5.5V9H8v8zM6.75 7.82c-.8 0-1.44-.65-1.44-1.45s.64-1.45 1.44-1.45 1.44.65 1.44 1.45-.64 1.45-1.44 1.45zM18.5 17h-2.5v-4.11c0-1.02-.38-1.72-1.31-1.72-.72 0-1.15.48-1.34.95-.07.16-.09.39-.09.62V17h-2.5V9h2.5v1.09c.35-.53.98-1.28 2.37-1.28 1.73 0 3.03 1.13 3.03 3.55V17z"/>
-                    </svg>
-                </a>
-                <a href="https://www.youtube.com/@greenammo7472" target="_blank" class="text-[#FA7A7A] hover:text-[#FF0000] transition-colors duration-300" aria-label="YouTube">
-                    <svg class="w-6 h-6" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="12" fill="currentColor" />
-                        <path fill="#ffffff" d="M17.65 8.35a2 2 0 00-1.4-1.4C15 6.6 12 6.6 12 6.6s-3 0-4.25.35a2 2 0 00-1.4 1.4C6 9.6 6 12 6 12s0 2.4.35 3.65a2 2 0 001.4 1.4C9 17.4 12 17.4 12 17.4s3 0 4.25-.35a2 2 0 001.4-1.4C18 14.4 18 12 18 12s0-2.4-.35-3.65zM10.8 14V10l3.6 2-3.6 2z"/>
-                    </svg>
-                </a>
+            <div class="hidden md:flex items-center space-x-6">
+                <div class="flex gap-4 items-center">
+                    <a href="https://www.facebook.com/people/GreenAmmo/100071774210115/" target="_blank"
+                        class="text-[#73A6F7] hover:text-[#1877F2] transition-colors duration-300"
+                        aria-label="Facebook">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="12" fill="currentColor" />
+                            <path fill="#ffffff"
+                                d="M14 10h-2V8.5c0-.83.24-1.5 1.5-1.5h1.5V5.14C14.74 5.1 13.59 5 12.4 5 10.03 5 8.5 6.44 8.5 9v1H6v3h2.5v7h3v-7h2.5l.5-3z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/green_ammo/" target="_blank"
+                        class="text-[#F07A9E] hover:text-[#E1306C] transition-colors duration-300"
+                        aria-label="Instagram">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="12" fill="currentColor" />
+
+                            <g fill="none" stroke="#ffffff" stroke-width="1.6">
+                                <rect x="6.8" y="6.8" width="10.4" height="10.4" rx="2.8" ry="2.8" />
+                                <circle cx="12" cy="12" r="2.4" />
+                            </g>
+
+                            <circle cx="15.2" cy="8.8" r="0.8" fill="#ffffff" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/green-ammo-b7189a1b8/" target="_blank"
+                        class="text-[#6AABE0] hover:text-[#0A66C2] transition-colors duration-300"
+                        aria-label="LinkedIn">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="12" fill="currentColor" />
+                            <path fill="#ffffff"
+                                d="M8 17H5.5V9H8v8zM6.75 7.82c-.8 0-1.44-.65-1.44-1.45s.64-1.45 1.44-1.45 1.44.65 1.44 1.45-.64 1.45-1.44 1.45zM18.5 17h-2.5v-4.11c0-1.02-.38-1.72-1.31-1.72-.72 0-1.15.48-1.34.95-.07.16-.09.39-.09.62V17h-2.5V9h2.5v1.09c.35-.53.98-1.28 2.37-1.28 1.73 0 3.03 1.13 3.03 3.55V17z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/@greenammo7472" target="_blank"
+                        class="text-[#FA7A7A] hover:text-[#FF0000] transition-colors duration-300" aria-label="YouTube">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="12" fill="currentColor" />
+                            <path fill="#ffffff"
+                                d="M17.65 8.35a2 2 0 00-1.4-1.4C15 6.6 12 6.6 12 6.6s-3 0-4.25.35a2 2 0 00-1.4 1.4C6 9.6 6 12 6 12s0 2.4.35 3.65a2 2 0 001.4 1.4C9 17.4 12 17.4 12 17.4s3 0 4.25-.35a2 2 0 001.4-1.4C18 14.4 18 12 18 12s0-2.4-.35-3.65zM10.8 14V10l3.6 2-3.6 2z" />
+                        </svg>
+                    </a>
+                </div>
+
+                <button id="explore-btn-desktop"
+                    class="hidden md:block cta-button bg-group-primary-green text-white hover:bg-opacity-90">
+                    Explore
+                </button>
             </div>
-            
-            <button id="explore-btn-desktop" class="hidden md:block cta-button bg-group-primary-green text-white hover:bg-opacity-90">
-                Explore
+
+            <button id="mobile-menu-toggle"
+                class="md:hidden flex items-center text-group-primary-green focus:outline-none">
+                <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
+                <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
             </button>
         </div>
 
-        <button id="mobile-menu-toggle" class="md:hidden flex items-center text-group-primary-green focus:outline-none">
-            <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
-            <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </button>
-    </div>
+        <div id="mobile-menu"
+            class="hidden md:hidden flex-col space-y-2 bg-white shadow-inner px-6 py-4 border-t border-gray-100">
+            <a href="/aboutus.html"
+                class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">About
+                Us</a>
+            <a href="/gallery.html"
+                class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">Media</a>
+            <a href="/joinus.html"
+                class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">Join
+                Us</a>
 
-    <div id="mobile-menu" class="hidden md:hidden flex-col space-y-2 bg-white shadow-inner px-6 py-4 border-t border-gray-100">
-        <a href="/aboutus.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">About Us</a>
-        <a href="/gallery.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">Media</a>
-        <a href="/joinus.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">Join Us</a>
-        
-        <button id="explore-btn-mobile" class="mt-2 w-full cta-button bg-group-primary-green text-white hover:bg-opacity-90">
-            Explore
-        </button>
+            <button id="explore-btn-mobile"
+                class="mt-2 w-full cta-button bg-group-primary-green text-white hover:bg-opacity-90">
+                Explore
+            </button>
 
-        <div class="flex gap-6 mt-4 justify-center border-t pt-4">
-            <a href="https://www.facebook.com/people/GreenAmmo/100071774210115/" target="_blank" class="text-[#73A6F7] hover:text-[#1877F2] transition-colors duration-300" aria-label="Facebook">
-                <svg class="w-6 h-6" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="currentColor" /><path fill="#ffffff" d="M14 10h-2V8.5c0-.83.24-1.5 1.5-1.5h1.5V5.14C14.74 5.1 13.59 5 12.4 5 10.03 5 8.5 6.44 8.5 9v1H6v3h2.5v7h3v-7h2.5l.5-3z" /></svg>
-            </a>
-            <a href="https://www.instagram.com/green_ammo/" target="_blank" class="text-[#F07A9E] hover:text-[#E1306C] transition-colors duration-300" aria-label="Instagram">
-        <svg class="w-6 h-6" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="12" fill="currentColor" />
-            
-            <g fill="none" stroke="#ffffff" stroke-width="1.6">
-                <rect x="6.8" y="6.8" width="10.4" height="10.4" rx="2.8" ry="2.8" />
-                <circle cx="12" cy="12" r="2.4" />
-            </g>
-            
-            <circle cx="15.2" cy="8.8" r="0.8" fill="#ffffff" />
-        </svg>
-    </a>
-            <a href="https://www.linkedin.com/in/green-ammo-b7189a1b8/" target="_blank" class="text-[#6AABE0] hover:text-[#0A66C2] transition-colors duration-300" aria-label="LinkedIn">
-                <svg class="w-6 h-6" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="currentColor" /><path fill="#ffffff" d="M8 17H5.5V9H8v8zM6.75 7.82c-.8 0-1.44-.65-1.44-1.45s.64-1.45 1.44-1.45 1.44.65 1.44 1.45-.64 1.45-1.44 1.45zM18.5 17h-2.5v-4.11c0-1.02-.38-1.72-1.31-1.72-.72 0-1.15.48-1.34.95-.07.16-.09.39-.09.62V17h-2.5V9h2.5v1.09c.35-.53.98-1.28 2.37-1.28 1.73 0 3.03 1.13 3.03 3.55V17z"/></svg>
-            </a>
-            <a href="https://www.youtube.com/@greenammo7472" target="_blank" class="text-[#FA7A7A] hover:text-[#FF0000] transition-colors duration-300" aria-label="YouTube">
-                <svg class="w-6 h-6" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="currentColor" /><path fill="#ffffff" d="M17.65 8.35a2 2 0 00-1.4-1.4C15 6.6 12 6.6 12 6.6s-3 0-4.25.35a2 2 0 00-1.4 1.4C6 9.6 6 12 6 12s0 2.4.35 3.65a2 2 0 001.4 1.4C9 17.4 12 17.4 12 17.4s3 0 4.25-.35a2 2 0 001.4-1.4C18 14.4 18 12 18 12s0-2.4-.35-3.65zM10.8 14V10l3.6 2-3.6 2z"/></svg>
-            </a>
+            <div class="flex gap-6 mt-4 justify-center border-t pt-4">
+                <a href="https://www.facebook.com/people/GreenAmmo/100071774210115/" target="_blank"
+                    class="text-[#73A6F7] hover:text-[#1877F2] transition-colors duration-300" aria-label="Facebook">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="12" fill="currentColor" />
+                        <path fill="#ffffff"
+                            d="M14 10h-2V8.5c0-.83.24-1.5 1.5-1.5h1.5V5.14C14.74 5.1 13.59 5 12.4 5 10.03 5 8.5 6.44 8.5 9v1H6v3h2.5v7h3v-7h2.5l.5-3z" />
+                    </svg>
+                </a>
+                <a href="https://www.instagram.com/green_ammo/" target="_blank"
+                    class="text-[#F07A9E] hover:text-[#E1306C] transition-colors duration-300" aria-label="Instagram">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="12" fill="currentColor" />
+
+                        <g fill="none" stroke="#ffffff" stroke-width="1.6">
+                            <rect x="6.8" y="6.8" width="10.4" height="10.4" rx="2.8" ry="2.8" />
+                            <circle cx="12" cy="12" r="2.4" />
+                        </g>
+
+                        <circle cx="15.2" cy="8.8" r="0.8" fill="#ffffff" />
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/green-ammo-b7189a1b8/" target="_blank"
+                    class="text-[#6AABE0] hover:text-[#0A66C2] transition-colors duration-300" aria-label="LinkedIn">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="12" fill="currentColor" />
+                        <path fill="#ffffff"
+                            d="M8 17H5.5V9H8v8zM6.75 7.82c-.8 0-1.44-.65-1.44-1.45s.64-1.45 1.44-1.45 1.44.65 1.44 1.45-.64 1.45-1.44 1.45zM18.5 17h-2.5v-4.11c0-1.02-.38-1.72-1.31-1.72-.72 0-1.15.48-1.34.95-.07.16-.09.39-.09.62V17h-2.5V9h2.5v1.09c.35-.53.98-1.28 2.37-1.28 1.73 0 3.03 1.13 3.03 3.55V17z" />
+                    </svg>
+                </a>
+                <a href="https://www.youtube.com/@greenammo7472" target="_blank"
+                    class="text-[#FA7A7A] hover:text-[#FF0000] transition-colors duration-300" aria-label="YouTube">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="12" fill="currentColor" />
+                        <path fill="#ffffff"
+                            d="M17.65 8.35a2 2 0 00-1.4-1.4C15 6.6 12 6.6 12 6.6s-3 0-4.25.35a2 2 0 00-1.4 1.4C6 9.6 6 12 6 12s0 2.4.35 3.65a2 2 0 001.4 1.4C9 17.4 12 17.4 12 17.4s3 0 4.25-.35a2 2 0 001.4-1.4C18 14.4 18 12 18 12s0-2.4-.35-3.65zM10.8 14V10l3.6 2-3.6 2z" />
+                    </svg>
+                </a>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
     <main class="min-h-screen">
 
-<section class="container mx-auto px-4 md:px-8 py-16 grid md:grid-cols-2 gap-12 items-center">
-    <div>
-        <h1 class="text-4xl md:text-5xl font-extrabold mb-5 leading-tight font-heading text-group-text-dark">
-            Empowering People.<br />
-            Enabling Progress.<br />
-            <span class="text-group-primary-dark">Enriching Planet.</span>
-        </h1>
-        <p class="text-lg text-group-text-medium mb-8 max-w-lg">
-            GreenAmmo Group bridges impact and innovation — empowering individuals, communities, and enterprises to build a smarter, inclusive, and sustainable future.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4">
-            <a href="./trust/index.html" class="cta-button bg-group-primary-green text-white hover:bg-opacity-90 shadow-group-pastel-green/50">
-                Visit Trust
-            </a>    
-            <a href="./solutions/index.html" class="cta-button-secondary border-group-primary-blue text-group-primary-blue hover:bg-group-pastel-blue/50">
-                Visit Solutions
-            </a>
-        </div>
-    </div>
-    
-    <div class="flex justify-center">
-        <div class="w-full max-w-md">
-            <img src="/assets/greenammo.jpeg" 
-                 alt="Empowering People and Progress" 
-                 class="w-full h-auto [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_100%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_100%)]">
-        </div>
-    </div>
-</section>
+        <section class="container mx-auto px-4 md:px-8 py-16 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-5 leading-tight font-heading text-group-text-dark">
+                    Empowering People.<br />
+                    Enabling Progress.<br />
+                    <span class="text-group-primary-dark">Enriching Planet.</span>
+                </h1>
+                <p class="text-lg text-group-text-medium mb-8 max-w-lg">
+                    GreenAmmo Group bridges impact and innovation — empowering individuals, communities, and enterprises
+                    to build a smarter, inclusive, and sustainable future.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="./trust/index.html"
+                        class="cta-button bg-group-primary-green text-white hover:bg-opacity-90 shadow-group-pastel-green/50">
+                        Visit Trust
+                    </a>
+                    <a href="./solutions/index.html"
+                        class="cta-button-secondary border-group-primary-blue text-group-primary-blue hover:bg-group-pastel-blue/50">
+                        Visit Solutions
+                    </a>
+                </div>
+            </div>
 
-<section class="container mx-auto px-4 md:px-8 py-12">
-            <h2 class="text-3xl font-bold text-center mb-10 font-heading text-group-text-dark">Why Choose GreenAmmo?</h2>
+            <div class="flex justify-center">
+                <div class="w-full max-w-md">
+                    <img src="/assets/greenammo.jpeg" alt="Empowering People and Progress"
+                        class="w-full h-auto [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_100%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_100%)]">
+                </div>
+            </div>
+        </section>
+
+        <section class="container mx-auto px-4 md:px-8 py-12">
+            <h2 class="text-3xl font-bold text-center mb-10 font-heading text-group-text-dark">Why Choose GreenAmmo?
+            </h2>
             <div class="grid md:grid-cols-3 gap-6">
-                
+
                 <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition border border-gray-100">
-                    <div class="w-full h-32 bg-group-pastel-green/30 rounded-xl mb-4 flex items-center justify-center border border-group-pastel-green p-2">
-                        <img src="/assets/images/main/file_0000000089047209af18c2cec50e5ff7.png" alt="Integrated Approach" class="h-20 w-20 object-contain mix-blend-multiply">
+                    <div
+                        class="w-full h-32 bg-group-pastel-green/30 rounded-xl mb-4 flex items-center justify-center border border-group-pastel-green p-2">
+                        <img src="/assets/images/main/file_0000000089047209af18c2cec50e5ff7.png"
+                            alt="Integrated Approach" class="h-20 w-20 object-contain mix-blend-multiply">
                     </div>
                     <h3 class="font-semibold text-xl mb-2 font-heading text-group-text-dark">Integrated Approach</h3>
                     <p class="text-group-text-medium text-sm">
                         Combining social and professional impact to create meaningful, scalable outcomes.
                     </p>
                 </div>
-                
+
                 <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition border border-gray-100">
-                    <div class="w-full h-32 bg-group-pastel-green/30 rounded-xl mb-4 flex items-center justify-center border border-group-pastel-green p-2">
-                        <img src="/assets/images/main/Transparent operations .png" alt="Transparent Operations" class="h-20 w-20 object-contain mix-blend-multiply">
+                    <div
+                        class="w-full h-32 bg-group-pastel-green/30 rounded-xl mb-4 flex items-center justify-center border border-group-pastel-green p-2">
+                        <img src="/assets/images/main/Transparent operations .png" alt="Transparent Operations"
+                            class="h-20 w-20 object-contain mix-blend-multiply">
                     </div>
                     <h3 class="font-semibold text-xl mb-2 font-heading text-group-text-dark">Transparent Operations</h3>
                     <p class="text-group-text-medium text-sm">
                         People-first, transparent processes trusted by public, private, and civic sectors.
                     </p>
                 </div>
-                
+
                 <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition border border-gray-100">
-                    <div class="w-full h-32 bg-group-pastel-green/30 rounded-xl mb-4 flex items-center justify-center border border-group-pastel-green p-2">
-                        <img src="/assets/images/main/Scalable solutions .png" alt="Scalable Solutions" class="h-20 w-20 object-contain mix-blend-multiply">
+                    <div
+                        class="w-full h-32 bg-group-pastel-green/30 rounded-xl mb-4 flex items-center justify-center border border-group-pastel-green p-2">
+                        <img src="/assets/images/main/Scalable solutions .png" alt="Scalable Solutions"
+                            class="h-20 w-20 object-contain mix-blend-multiply">
                     </div>
                     <h3 class="font-semibold text-xl mb-2 font-heading text-group-text-dark">Scalable Solutions</h3>
                     <p class="text-group-text-medium text-sm">
@@ -357,41 +429,53 @@
         </section>
 
         <section class="container mx-auto px-4 md:px-8 py-16">
-            <h2 class="text-3xl font-bold text-center mb-10 font-heading text-group-text-dark">Discover Our Divisions</h2>
+            <h2 class="text-3xl font-bold text-center mb-10 font-heading text-group-text-dark">Discover Our Divisions
+            </h2>
             <div class="grid md:grid-cols-2 gap-8">
-                
-                <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition flex flex-col justify-between border border-gray-100">
-    <div>
-        <h3 class="text-2xl font-semibold mb-3 font-heading text-group-primary-blue text-center">GreenAmmo Solutions</h3>
-        
-        <div class="w-full h-40 flex items-center justify-center gap-4 mb-4 p-2">
-            <img src="/assets/greenammo.jpeg" alt="GreenAmmo Logo" class="h-16 md:h-20 w-auto object-contain mix-blend-multiply">
-            
-            <span class="text-4xl md:text-5xl font-extrabold text-[#2B608F] font-heading tracking-tight">
-                Solutions
-            </span>
-        </div>
-        
-        <p class="text-group-text-medium mb-4 text-sm">
-            Professional, scalable services across Finance, Education, Events, FMCG, and Accommodation — driving business and social growth together.
-        </p>
-    </div>
-    <a href="./solutions/index.html" class="mt-4 inline-block text-center cta-button-secondary border-group-primary-blue text-group-primary-blue hover:bg-group-pastel-blue/20 w-full sm:w-auto">
-        Visit Solutions
-    </a>
-</div>
 
-                <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition flex flex-col justify-between border border-gray-100">
+                <div
+                    class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition flex flex-col justify-between border border-gray-100">
                     <div>
-                        <h3 class="text-2xl font-semibold mb-3 font-heading text-group-primary-green text-center">GreenAmmo Trust</h3>
-                        <div class="w-full h-40 flex items-center justify-center mb-4 p-2">
-                            <img src="/trust/trust.png" alt="GreenAmmo Trust Logo" class="max-h-full max-w-full object-contain mix-blend-multiply">
+                        <h3 class="text-2xl font-semibold mb-3 font-heading text-group-primary-blue text-center">
+                            GreenAmmo Solutions</h3>
+
+                        <div class="w-full h-40 flex items-center justify-center gap-4 mb-4 p-2">
+                            <img src="/assets/greenammo.jpeg" alt="GreenAmmo Logo"
+                                class="h-16 md:h-20 w-auto object-contain mix-blend-multiply">
+
+                            <span
+                                class="text-4xl md:text-5xl font-extrabold text-[#2B608F] font-heading tracking-tight">
+                                Solutions
+                            </span>
                         </div>
+
                         <p class="text-group-text-medium mb-4 text-sm">
-                            Non-profit initiatives empowering people and protecting the planet — from climate action to women’s empowerment and community development.
+                            Professional, scalable services across Finance, Education, Events, FMCG, and Accommodation —
+                            driving business and social growth together.
                         </p>
                     </div>
-                    <a href="./trust/index.html" class="mt-4 inline-block text-center cta-button-secondary border-group-primary-green text-group-primary-green hover:bg-group-pastel-green/50 w-full sm:w-auto">
+                    <a href="./solutions/index.html"
+                        class="mt-4 inline-block text-center cta-button-secondary border-group-primary-blue text-group-primary-blue hover:bg-group-pastel-blue/20 w-full sm:w-auto">
+                        Visit Solutions
+                    </a>
+                </div>
+
+                <div
+                    class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition flex flex-col justify-between border border-gray-100">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-3 font-heading text-group-primary-green text-center">
+                            GreenAmmo Trust</h3>
+                        <div class="w-full h-40 flex items-center justify-center mb-4 p-2">
+                            <img src="/trust/trust.png" alt="GreenAmmo Trust Logo"
+                                class="max-h-full max-w-full object-contain mix-blend-multiply">
+                        </div>
+                        <p class="text-group-text-medium mb-4 text-sm">
+                            Non-profit initiatives empowering people and protecting the planet — from climate action to
+                            women’s empowerment and community development.
+                        </p>
+                    </div>
+                    <a href="./trust/index.html"
+                        class="mt-4 inline-block text-center cta-button-secondary border-group-primary-green text-group-primary-green hover:bg-group-pastel-green/50 w-full sm:w-auto">
                         Visit Trust
                     </a>
                 </div>
@@ -409,133 +493,197 @@
             <div class="overflow-hidden relative">
                 <div class="animate-marquee flex gap-12 items-start whitespace-nowrap">
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/channels4_profile.jpg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">India Hikes</span>
+                        <img src="/assets/alliances-logo/channels4_profile.jpg"
+                            class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">India
+                            Hikes</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (1).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Swachh Bharat Mission</span>
+                        <img src="/assets/alliances-logo/images (1).png" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Swachh
+                            Bharat Mission</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (2).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Dak_ti Craft</span>
+                        <img src="/assets/alliances-logo/images (2).png" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Dak_ti
+                            Craft</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (3).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">CWE Nepal</span>
+                        <img src="/assets/alliances-logo/images (3).png" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">CWE
+                            Nepal</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (4).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Unite Nepal</span>
+                        <img src="/assets/alliances-logo/images (4).png" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Unite
+                            Nepal</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (5).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">SEOK Foundation</span>
+                        <img src="/assets/alliances-logo/images (5).png" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">SEOK
+                            Foundation</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (38).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Directorate of School Education & Literacy</span>
+                        <img src="/assets/alliances-logo/images (38).jpeg" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Directorate
+                            of School Education & Literacy</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (39).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Shillong Municipal Board</span>
+                        <img src="/assets/alliances-logo/images (39).jpeg" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Shillong
+                            Municipal Board</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (40).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Meghalaya State Pollution Control Board</span>
+                        <img src="/assets/alliances-logo/images (40).jpeg" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Meghalaya
+                            State Pollution Control Board</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (6).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Studio Manali</span>
+                        <img src="/assets/alliances-logo/images (6).png" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Studio
+                            Manali</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (41).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Samagra Shiksha Abhiyan</span>
+                        <img src="/assets/alliances-logo/images (41).jpeg" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Samagra
+                            Shiksha Abhiyan</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (42).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Winter Tales</span>
+                        <img src="/assets/alliances-logo/images (42).jpeg" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Winter
+                            Tales</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (43).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Women's Indian Chamber of Commerce & Industry</span>
+                        <img src="/assets/alliances-logo/images (43).jpeg" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Women's
+                            Indian Chamber of Commerce & Industry</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (46).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Body Bodh</span>
+                        <img src="/assets/alliances-logo/images (46).jpeg" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Body
+                            Bodh</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (45).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">GrassRoot</span>
+                        <img src="/assets/alliances-logo/images (45).jpeg" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span
+                            class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">GrassRoot</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (44).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">House of Grownest</span>
+                        <img src="/assets/alliances-logo/images (44).jpeg" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">House of
+                            Grownest</span>
                     </div>
 
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/channels4_profile.jpg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">India Hikes</span>
+                        <img src="/assets/alliances-logo/channels4_profile.jpg"
+                            class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">India
+                            Hikes</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (1).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Swachh Bharat Mission</span>
+                        <img src="/assets/alliances-logo/images (1).png" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Swachh
+                            Bharat Mission</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (2).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Dak_ti Craft</span>
+                        <img src="/assets/alliances-logo/images (2).png" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Dak_ti
+                            Craft</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (3).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">CWE Nepal</span>
+                        <img src="/assets/alliances-logo/images (3).png" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">CWE
+                            Nepal</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (4).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Unite Nepal</span>
+                        <img src="/assets/alliances-logo/images (4).png" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Unite
+                            Nepal</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (5).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">SEOK Foundation</span>
+                        <img src="/assets/alliances-logo/images (5).png" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">SEOK
+                            Foundation</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (38).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Directorate of School Education & Literacy</span>
+                        <img src="/assets/alliances-logo/images (38).jpeg" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Directorate
+                            of School Education & Literacy</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (39).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Shillong Municipal Board</span>
+                        <img src="/assets/alliances-logo/images (39).jpeg" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Shillong
+                            Municipal Board</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (40).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Meghalaya State Pollution Control Board</span>
+                        <img src="/assets/alliances-logo/images (40).jpeg" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Meghalaya
+                            State Pollution Control Board</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (6).png" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Studio Manali</span>
+                        <img src="/assets/alliances-logo/images (6).png" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Studio
+                            Manali</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (41).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Samagra Shiksha Abhiyan</span>
+                        <img src="/assets/alliances-logo/images (41).jpeg" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Samagra
+                            Shiksha Abhiyan</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (42).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Winter Tales</span>
+                        <img src="/assets/alliances-logo/images (42).jpeg" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Winter
+                            Tales</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (43).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Women's Indian Chamber of Commerce & Industry</span>
+                        <img src="/assets/alliances-logo/images (43).jpeg" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Women's
+                            Indian Chamber of Commerce & Industry</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (46).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Body Bodh</span>
+                        <img src="/assets/alliances-logo/images (46).jpeg" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">Body
+                            Bodh</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (45).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">GrassRoot</span>
+                        <img src="/assets/alliances-logo/images (45).jpeg" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span
+                            class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">GrassRoot</span>
                     </div>
                     <div class="flex flex-col items-center justify-start shrink-0 w-40">
-                        <img src="/assets/alliances-logo/images (44).jpeg" class="h-24 w-full object-contain logo-muted" aria-hidden="true" />
-                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">House of Grownest</span>
+                        <img src="/assets/alliances-logo/images (44).jpeg" class="h-24 w-full object-contain logo-muted"
+                            aria-hidden="true" />
+                        <span class="mt-3 text-sm font-semibold text-gray-700 text-center whitespace-normal">House of
+                            Grownest</span>
                     </div>
                 </div>
             </div>
@@ -543,21 +691,30 @@
 
         <style>
             @keyframes scroll {
-                0% { transform: translateX(0); }
-                100% { transform: translateX(-50%); }
+                0% {
+                    transform: translateX(0);
+                }
+
+                100% {
+                    transform: translateX(-50%);
+                }
             }
+
             .animate-marquee {
                 animation: scroll 40s linear infinite;
                 display: flex;
                 width: fit-content;
             }
+
             .animate-marquee:hover {
                 animation-play-state: paused;
             }
+
             .logo-muted {
                 filter: grayscale(100%) opacity(70%);
                 transition: all 0.3s ease;
             }
+
             .flex:hover .logo-muted {
                 filter: grayscale(0%) opacity(100%);
                 transform: scale(1.05);
@@ -570,25 +727,37 @@
             </h2>
 
             <div class="mt-20 max-w-4xl mx-auto">
-                <div class="bg-group-text-dark text-white p-8 md:p-12 rounded-[2.5rem] relative overflow-hidden text-center shadow-2xl min-h-[300px] flex items-center justify-center">
+                <div
+                    class="bg-group-text-dark text-white p-8 md:p-12 rounded-[2.5rem] relative overflow-hidden text-center shadow-2xl min-h-[300px] flex items-center justify-center">
 
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-group-primary-green/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-                    <div class="absolute bottom-0 left-0 w-48 h-48 bg-group-pastel-blue/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+                    <div
+                        class="absolute top-0 right-0 w-64 h-64 bg-group-primary-green/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2">
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 w-48 h-48 bg-group-pastel-blue/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2">
+                    </div>
 
-                    <div id="testimonial-container" class="relative z-10 w-full transition-all duration-700 ease-in-out">
+                    <div id="testimonial-container"
+                        class="relative z-10 w-full transition-all duration-700 ease-in-out">
                         <p id="testimonial-text" class="text-2xl md:text-3xl font-heading mb-6 italic leading-relaxed">
-                            "GreenAmmo is one of the only organizations built from a concept to an entity without compromising on ethics."
+                            "GreenAmmo is one of the only organizations built from a concept to an entity without
+                            compromising on ethics."
                         </p>
-                        <p id="testimonial-author" class="text-group-pastel-green text-sm font-bold uppercase tracking-widest mb-8">
+                        <p id="testimonial-author"
+                            class="text-group-pastel-green text-sm font-bold uppercase tracking-widest mb-8">
                             - Navjot, Meghalaya
                         </p>
                     </div>
 
                     <div class="absolute bottom-6 left-0 right-0 z-20">
-                        <a href="/testimonials.html" class="inline-flex items-center gap-2 bg-white text-group-text-dark px-8 py-3 rounded-full font-bold hover:bg-group-pastel-green/20 transition-all shadow-lg group text-sm">
+                        <a href="/testimonials.html"
+                            class="inline-flex items-center gap-2 bg-white text-group-text-dark px-8 py-3 rounded-full font-bold hover:bg-group-pastel-green/20 transition-all shadow-lg group text-sm">
                             Read All Testimonials
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
                         </a>
                     </div>
@@ -604,37 +773,59 @@
                 <div class="md:col-span-2 space-y-4">
                     <h3 class="text-3xl font-bold text-group-pastel-green font-heading">GreenAmmo Group</h3>
                     <p class="text-sm text-gray-300 max-w-sm">
-                        Empowering sustainable living and waste management through community action, research, and project initiation.
+                        Empowering sustainable living and waste management through community action, research, and
+                        project initiation.
                     </p>
                 </div>
                 <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
                     <div class="space-y-3">
-
+                        <h4 class="font-semibold text-white mb-3 font-heading">GreenAmmo</h4>
+                        <ul class="text-sm space-y-2 text-gray-300">
+                            <li><a href="/aboutus.html" class="hover:text-group-pastel-green transition">About Us</a>
+                            </li>
+                            <li><a href="/gallery.html" class="hover:text-group-pastel-green transition">Media
+                                    (Gallery)</a></li>
+                            <li><a href="/certifications.html"
+                                    class="hover:text-group-pastel-green transition">Certificates</a></li>
+                            <li><a href="/alliances.html" class="hover:text-group-pastel-green transition">Alliances</a>
+                            </li>
+                        </ul>
                     </div>
                     <div class="space-y-3">
                         <h4 class="font-semibold text-white mb-3 font-heading">Solutions</h4>
                         <ul class="text-sm space-y-2 text-gray-300">
-                            <li><a href="/solutions/finance.html" class="hover:text-group-pastel-green transition">Finance</a></li>
-                            <li><a href="/solutions/education.html" class="hover:text-group-pastel-green transition">Education & Development</a></li>
-                            <li><a href="/solutions/event-supply.html" class="hover:text-group-pastel-green transition">Event & Supply</a></li>
-                            <li><a href="/solutions/accommodation.html" class="hover:text-group-pastel-green transition">Accommodations</a></li>
+                            <li><a href="/solutions/finance.html"
+                                    class="hover:text-group-pastel-green transition">Finance</a></li>
+                            <li><a href="/solutions/education.html"
+                                    class="hover:text-group-pastel-green transition">Education & Development</a></li>
+                            <li><a href="/solutions/event-supply.html"
+                                    class="hover:text-group-pastel-green transition">Event & Supply</a></li>
+                            <li><a href="/solutions/accommodation.html"
+                                    class="hover:text-group-pastel-green transition">Accommodations</a></li>
                         </ul>
                     </div>
                     <div class="space-y-3">
                         <h4 class="font-semibold text-white mb-3 font-heading">Trust</h4>
                         <ul class="text-sm space-y-2 text-gray-300">
-                            <li><a href="/trust/projects.html" class="hover:text-group-pastel-green transition">Projects </a></li>
-                            <li><a href="/trust/campaigns.html" class="hover:text-group-pastel-green transition">Campaigns</a></li>
-                            <li><a href="/trust/reports.html" class="hover:text-group-pastel-green transition">Reports </a></li>
+                            <li><a href="/trust/projects.html" class="hover:text-group-pastel-green transition">Projects
+                                </a></li>
+                            <li><a href="/trust/campaigns.html"
+                                    class="hover:text-group-pastel-green transition">Campaigns</a></li>
+                            <li><a href="/trust/reports.html" class="hover:text-group-pastel-green transition">Reports
+                                </a></li>
                             <li><a href="/trust/faq.html" class="hover:text-group-pastel-green transition">FAQ</a></li>
-                            <li><a href="/trust/joinus.html" class="hover:text-group-pastel-green transition">Donate Now </a></li>
+                            <li><a href="/trust/joinus.html" class="hover:text-group-pastel-green transition">Donate Now
+                                </a></li>
                         </ul>
                     </div>
                     <div class="space-y-3">
                         <h4 class="font-semibold text-white mb-3 font-heading">Take Action</h4>
                         <div class="space-y-2">
-                            <a href="/joinus.html" class="block text-center py-2 px-4 rounded-full bg-group-primary-green text-white hover:bg-opacity-80 transition text-sm font-semibold shadow-md">Join Us</a>
-                            <button id="explore-btn-footer" class="block w-full text-center py-2 px-4 rounded-full border-2 border-group-pastel-green text-group-pastel-green hover:bg-group-pastel-green hover:text-group-text-dark transition text-sm font-semibold">Explore</button>
+                            <a href="/joinus.html"
+                                class="block text-center py-2 px-4 rounded-full bg-group-primary-green text-white hover:bg-opacity-80 transition text-sm font-semibold shadow-md">Join
+                                Us</a>
+                            <button id="explore-btn-footer"
+                                class="block w-full text-center py-2 px-4 rounded-full border-2 border-group-pastel-green text-group-pastel-green hover:bg-group-pastel-green hover:text-group-text-dark transition text-sm font-semibold">Explore</button>
                         </div>
                     </div>
                 </div>
@@ -642,89 +833,123 @@
             <div class="flex flex-col sm:flex-row justify-between items-center py-6 text-sm text-gray-400">
                 <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
                 <div class="flex gap-4 mt-4 sm:mt-0 items-center justify-center">
-    
-    <a href="https://www.facebook.com/people/GreenAmmo/100071774210115/" target="_blank" class="hover:opacity-80 transition-all duration-300 transform hover:-translate-y-1" aria-label="Facebook">
-        <svg class="w-6 h-6" fill="#1877F2" viewBox="0 0 24 24">
-            <path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/>
-        </svg>
-    </a>
 
-    <a href="https://www.instagram.com/green_ammo/" target="_blank" class="hover:opacity-80 transition-all duration-300 transform hover:-translate-y-1" aria-label="Instagram">
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="url(#ig-grad)">
-            <defs>
-                <linearGradient id="ig-grad" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FFDC80"/>
-                    <stop offset="0.5" stop-color="#F56040"/>
-                    <stop offset="1" stop-color="#C13584"/>
-                </linearGradient>
-            </defs>
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm3.98-10.842a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
-        </svg>
-    </a>
+                    <a href="https://www.facebook.com/people/GreenAmmo/100071774210115/" target="_blank"
+                        class="hover:opacity-80 transition-all duration-300 transform hover:-translate-y-1"
+                        aria-label="Facebook">
+                        <svg class="w-6 h-6" fill="#1877F2" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z" />
+                        </svg>
+                    </a>
 
-    <a href="https://www.linkedin.com/in/green-ammo-b7189a1b8/" target="_blank" class="hover:opacity-80 transition-all duration-300 transform hover:-translate-y-1" aria-label="LinkedIn">
-        <svg class="w-6 h-6" fill="#0A66C2" viewBox="0 0 24 24">
-            <path d="M22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.73V1.73C24 .77 23.2 0 22.23 0zM7.12 20.45H3.56V9h3.56v11.45zM5.34 7.43c-1.14 0-2.06-.93-2.06-2.06 0-1.14.92-2.06 2.06-2.06 1.14 0 2.06.92 2.06 2.06 0 1.13-.92 2.06-2.06 2.06zM20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28z"/>
-        </svg>
-    </a>
+                    <a href="https://www.instagram.com/green_ammo/" target="_blank"
+                        class="hover:opacity-80 transition-all duration-300 transform hover:-translate-y-1"
+                        aria-label="Instagram">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="url(#ig-grad)">
+                            <defs>
+                                <linearGradient id="ig-grad" x1="2" y1="22" x2="22" y2="2"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#FFDC80" />
+                                    <stop offset="0.5" stop-color="#F56040" />
+                                    <stop offset="1" stop-color="#C13584" />
+                                </linearGradient>
+                            </defs>
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm3.98-10.842a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z" />
+                        </svg>
+                    </a>
 
-    <a href="https://www.youtube.com/@greenammo7472" target="_blank" class="hover:opacity-80 transition-all duration-300 transform hover:-translate-y-1" aria-label="YouTube">
-        <svg class="w-6 h-6" fill="#FF0000" viewBox="0 0 24 24">
-            <path d="M23.5 6.19c-.24-.89-.95-1.61-1.84-1.85C19.96 3.9 12 3.9 12 3.9s-7.96 0-9.66.44C1.45 4.58.74 5.3.5 6.19.06 7.89 0 12 0 12s.06 4.11.5 5.81c.24.89.95 1.61 1.84 1.85 1.7.44 9.66.44 9.66.44s7.96 0 9.66-.44c.89-.24 1.6-.96 1.84-1.85.44-1.7.44-5.81.44-5.81s0-4.11-.44-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/>
-        </svg>
-    </a>
-    
-</div>
+                    <a href="https://www.linkedin.com/in/green-ammo-b7189a1b8/" target="_blank"
+                        class="hover:opacity-80 transition-all duration-300 transform hover:-translate-y-1"
+                        aria-label="LinkedIn">
+                        <svg class="w-6 h-6" fill="#0A66C2" viewBox="0 0 24 24">
+                            <path
+                                d="M22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.73V1.73C24 .77 23.2 0 22.23 0zM7.12 20.45H3.56V9h3.56v11.45zM5.34 7.43c-1.14 0-2.06-.93-2.06-2.06 0-1.14.92-2.06 2.06-2.06 1.14 0 2.06.92 2.06 2.06 0 1.13-.92 2.06-2.06 2.06zM20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28z" />
+                        </svg>
+                    </a>
+
+                    <a href="https://www.youtube.com/@greenammo7472" target="_blank"
+                        class="hover:opacity-80 transition-all duration-300 transform hover:-translate-y-1"
+                        aria-label="YouTube">
+                        <svg class="w-6 h-6" fill="#FF0000" viewBox="0 0 24 24">
+                            <path
+                                d="M23.5 6.19c-.24-.89-.95-1.61-1.84-1.85C19.96 3.9 12 3.9 12 3.9s-7.96 0-9.66.44C1.45 4.58.74 5.3.5 6.19.06 7.89 0 12 0 12s.06 4.11.5 5.81c.24.89.95 1.61 1.84 1.85 1.7.44 9.66.44 9.66.44s7.96 0 9.66-.44c.89-.24 1.6-.96 1.84-1.85.44-1.7.44-5.81.44-5.81s0-4.11-.44-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z" />
+                        </svg>
+                    </a>
+
+                </div>
             </div>
         </div>
     </footer>
 
-    <div id="exploreModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden justify-center items-center z-50 p-4 modal-hidden">
-        <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full mx-auto overflow-hidden animate-fade-in" id="modal-content">
+    <div id="exploreModal"
+        class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden justify-center items-center z-50 p-4 modal-hidden">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full mx-auto overflow-hidden animate-fade-in"
+            id="modal-content">
             <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100">
                 <h3 class="text-xl font-semibold text-group-text-dark font-heading">Explore GreenAmmo</h3>
                 <button id="modal-close-btn" class="text-gray-400 hover:text-group-primary-green focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
                     </svg>
                 </button>
             </div>
 
             <div class="grid md:grid-cols-2 gap-6 p-8">
-                <div class="bg-group-pastel-blue/20 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-group-pastel-blue/30 border border-group-pastel-blue/40" onclick="window.location.href='./solutions/index.html'">
+                <div class="bg-group-pastel-blue/20 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-group-pastel-blue/30 border border-group-pastel-blue/40"
+                    onclick="window.location.href='./solutions/index.html'">
                     <div>
-                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-group-pastel-blue/20">
-                            <svg class="w-16 h-16 text-group-pastel-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        <div
+                            class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-group-pastel-blue/20">
+                            <svg class="w-16 h-16 text-group-pastel-blue" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
                             </svg>
                         </div>
-                        <h4 class="text-2xl font-semibold text-group-text-dark mb-2 font-heading">GreenAmmo Solutions</h4>
+                        <h4 class="text-2xl font-semibold text-group-text-dark mb-2 font-heading">GreenAmmo Solutions
+                        </h4>
                         <p class="text-group-text-medium text-sm leading-relaxed">
-                            Professional, scalable services spanning Finance, Education, Events, and Accommodation — uniting purpose with performance for sustainable growth.
+                            Professional, scalable services spanning Finance, Education, Events, and Accommodation —
+                            uniting purpose with performance for sustainable growth.
                         </p>
                     </div>
                     <div class="mt-6">
-                        <button class="cta-button-secondary border-group-pastel-blue text-group-pastel-blue hover:bg-group-pastel-blue/20 w-full sm:w-auto">
+                        <button
+                            class="cta-button-secondary border-group-pastel-blue text-group-pastel-blue hover:bg-group-pastel-blue/20 w-full sm:w-auto">
                             Visit Solutions
                         </button>
                     </div>
                 </div>
 
-                <div class="bg-group-pastel-green/30 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-group-pastel-green/40 border border-group-pastel-green/50" onclick="window.location.href='./trust/index.html'">
+                <div class="bg-group-pastel-green/30 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-group-pastel-green/40 border border-group-pastel-green/50"
+                    onclick="window.location.href='./trust/index.html'">
                     <div>
-                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-group-pastel-green/20">
-                            <svg class="w-16 h-16 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        <div
+                            class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-group-pastel-green/20">
+                            <svg class="w-16 h-16 text-group-primary-green" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 10a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
                         </div>
-                        <h4 class="text-2xl font-semibold text-group-primary-green mb-2 font-heading">GreenAmmo Trust</h4>
+                        <h4 class="text-2xl font-semibold text-group-primary-green mb-2 font-heading">GreenAmmo Trust
+                        </h4>
                         <p class="text-group-text-medium text-sm leading-relaxed">
-                            Non-profit initiatives for environmental awareness, youth empowerment, and community development — turning sustainability into action.
+                            Non-profit initiatives for environmental awareness, youth empowerment, and community
+                            development — turning sustainability into action.
                         </p>
                     </div>
                     <div class="mt-6">
-                        <button class="cta-button-secondary border-group-primary-green text-group-primary-green hover:bg-group-pastel-green/50 w-full sm:w-auto">
+                        <button
+                            class="cta-button-secondary border-group-primary-green text-group-primary-green hover:bg-group-pastel-green/50 w-full sm:w-auto">
                             Visit Trust
                         </button>
                     </div>
@@ -790,17 +1015,17 @@
 
             // --- 3. Testimonials Carousel (Replaces Alpine.js) ---
             const testimonials = [{
-                    text: 'GreenAmmo is one of the only organizations built from a concept to an entity without compromising on ethics.',
-                    author: 'Navjot, Meghalaya'
-                },
-                {
-                    text: 'They don’t treat clean-ups as events, but as systems that need time, trust, and follow-through.',
-                    author: 'Hiranyak, Kolkata'
-                },
-                {
-                    text: 'GreenAmmo brings structure without imposing control. Communities retain ownership of both the problem and the solution.',
-                    author: 'Francis, Goa'
-                }
+                text: 'GreenAmmo is one of the only organizations built from a concept to an entity without compromising on ethics.',
+                author: 'Navjot, Meghalaya'
+            },
+            {
+                text: 'They don’t treat clean-ups as events, but as systems that need time, trust, and follow-through.',
+                author: 'Hiranyak, Kolkata'
+            },
+            {
+                text: 'GreenAmmo brings structure without imposing control. Communities retain ownership of both the problem and the solution.',
+                author: 'Francis, Goa'
+            }
             ];
 
             let currentIdx = 0;
@@ -822,9 +1047,9 @@
 
                         // Fade in from bottom
                         containerEl.style.transform = 'translateY(20px)';
-                        
+
                         // Force reflow for transition
-                        void containerEl.offsetWidth; 
+                        void containerEl.offsetWidth;
 
                         containerEl.style.opacity = '1';
                         containerEl.style.transform = 'translateY(0)';
@@ -835,7 +1060,7 @@
             // --- 4. Initialize Lenis Smooth Scroll ---
             if (typeof Lenis !== 'undefined') {
                 const lenis = new Lenis()
-                lenis.on('scroll', (e) => {})
+                lenis.on('scroll', (e) => { })
 
                 function raf(time) {
                     lenis.raf(time)
