@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./assets/greenammo.jpeg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
+
+    <title>Donate - GreenAmmo Trust</title>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Group Base Colors[cite: 2]
+                        "group-primary-green": "#4CAF50",
+                        "group-pastel-green": "#A8D7B0",
+                        "group-base-white": "#FDFDFD",
+                        "group-text-dark": "#1F2937",
+                        "group-text-medium": "#6B7280",
+                        // Trust Specific Palette[cite: 2]
+                        "trust-dark": "#1D371F",
+                        "trust-primary": "#7C966A",
+                        "trust-accent": "#6E8546",
+                        "trust-light": "#D2E3AB",
+                        "brand-dark": "#1D371F", // Primary Dark Green (Headings, Main Text)
+                        "brand-primary": "#7C966A", // Secondary Olive Green (Borders, Secondary Text)
+                        "brand-accent": "#6E8546", // Tertiary Vibrant Moss (CTA Background, Highlights)
+                        "brand-light": "#D2E3AB", // Lightest Green (Light backgrounds, Watermarks)
+                        "brand-base": "#F7FAF7",
+                        "group-primary-green": "#4CAF50",
+                        "group-pastel-green": "#A8D7B0",
+                        "group-pastel-blue": "#9FD8E4",
+                        "group-accent-neutral": "#F0EAD6",
+                        "group-base-white": "#FDFDFD",
+                        "group-text-dark": "#1F2937",
+                        "group-text-medium": "#6B7280",
+                        "trust-dark": "#1D371F",
+                        "trust-primary": "#7C966A",
+                        "trust-accent": "#6E8546",
+                        "trust-light": "#D2E3AB",
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'heading': ['Bricolage Grotesque', 'sans-serif'],
+                    }
+                },
+            },
+        };
+    </script>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #FDFDFD;
+            color: #1F2937;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-heading {
+            font-family: "Bricolage Grotesque", sans-serif;
+        }
+
+        /* CTA Button Styles from Style Guide[cite: 2] */
+        .cta-trust {
+            display: inline-block;
+            padding: 0.75rem 2.5rem;
+            border-radius: 9999px;
+            background-color: #6E8546;
+            /* trust-accent */
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgba(110, 133, 70, 0.3);
+        }
+
+        .cta-trust:hover {
+            transform: scale(1.03) translateY(-2px);
+            background-color: #1D371F;
+            /* trust-dark */
+        }
+
+        /* UPI QR styles from Source 1[cite: 1] */
+        .upi-qr-wrapper {
+            position: relative;
+            display: inline-block;
+            border-radius: 1.25rem;
+            overflow: hidden;
+        }
+
+        .upi-qr-wrapper img {
+            width: 256px;
+            height: 256px;
+            filter: blur(6px) brightness(0.88);
+        }
+
+        .upi-qr-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(2px);
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+
+<body class="bg-group-base-white text-group-text-dark">
+    <!-- NAV[cite: 2] -->
+    <nav x-data="{ open: false }" class="bg-white shadow-lg sticky top-0 z-20">
+        <div class="container mx-auto px-4 md:px-8 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="./index.html" class="block">
+                    <img src="trust.png" alt="GreenAmmo Trust Logo" class="h-12 w-auto object-contain"
+                        title="GreenAmmo Trust" />
+                </a>
+            </div>
+
+            <div class="hidden lg:flex items-center space-x-8">
+                <a href="/index.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Home</a>
+                <!-- <a
+            href="/gallery.html"
+            class="text-gray-700 hover:text-brand-accent transition font-semibold"
+            >Media</a
+          > -->
+                <a href="/trust/campaign.html"
+                    class="text-gray-700 hover:text-brand-accent transition font-semibold">Campaigns</a>
+
+                <div x-data="{ dropdownOpen: false }" class="relative">
+                    <button @click="dropdownOpen = !dropdownOpen" @click.away="dropdownOpen = false"
+                        class="text-gray-700 hover:text-brand-accent transition inline-flex items-center gap-1 font-semibold">
+                        Projects
+                        <svg :class="{'rotate-180': dropdownOpen}"
+                            class="w-4 h-4 transform transition-transform duration-300" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div x-show="dropdownOpen" x-cloak x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
+                        class="absolute bg-white rounded-xl shadow-xl p-3 top-10 right-0 w-48 transition-all z-30 border border-brand-light origin-top-right">
+                        <ul class="text-sm space-y-1">
+                            <li>
+                                <a href="projects.html" @click="dropdownOpen = false"
+                                    class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition">
+                                    Projects
+                                </a>
+                            </li>
+                            <li>
+                                <a href="reports.html" @click="dropdownOpen = false"
+                                    class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition">
+                                    Reports
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="/trust/tutorials.html"
+                    class="text-gray-700 hover:text-brand-accent transition font-semibold">Tutorials</a>
+
+                <a href="/joinus.html"
+                    class="cta-button bg-brand-accent text-white hover:bg-brand-dark/90 shadow-brand-accent/50">
+                    Let's Talk
+                </a>
+            </div>
+
+            <button @click="open = !open" class="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
+                <svg x-show="open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <div x-show="open" x-cloak x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-4"
+            class="lg:hidden px-4 pb-4 bg-white border-t border-gray-100 absolute w-full shadow-2xl z-10">
+            <ul class="flex flex-col space-y-2 font-medium">
+                <a href="/index.html" @click="open = false"
+                    class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Home</a>
+                <a href="/gallery.html" @click="open = false"
+                    class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Media</a>
+                <a href="/trust/campaign.html" @click="open = false"
+                    class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Campaigns</a>
+
+                <div x-data="{ mobileDropdownOpen: false }">
+                    <button @click="mobileDropdownOpen = !mobileDropdownOpen"
+                        class="w-full text-left py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded flex justify-between items-center">
+                        Projects
+                        <svg :class="{'rotate-180': mobileDropdownOpen}"
+                            class="w-4 h-4 transform transition-transform duration-300" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div x-show="mobileDropdownOpen" x-cloak x-transition:enter="transition ease-out duration-100"
+                        x-transition:enter-start="transform opacity-0 scale-y-90"
+                        x-transition:enter-end="transform opacity-100 scale-y-100"
+                        x-transition:leave="transition ease-in duration-75"
+                        x-transition:leave-start="transform opacity-100 scale-y-100"
+                        x-transition:leave-end="transform opacity-0 scale-y-90"
+                        class="ml-4 border-l border-brand-light pl-4 space-y-1">
+                        <a href="/trust/projects.html" @click="open = false"
+                            class="block py-1 text-sm text-gray-600 hover:text-brand-accent">Projects</a>
+                        <a href="/trust/reports.html" @click="open = false"
+                            class="block py-1 text-sm text-gray-600 hover:text-brand-accent">Reports</a>
+                    </div>
+                </div>
+
+                <a href="/joinus.html" @click="open = false"
+                    class="mt-4 block text-center cta-button bg-brand-accent text-white hover:bg-brand-dark/90 shadow-brand-accent/50">
+                    Join the Change
+                </a>
+            </ul>
+        </div>
+    </nav>
+
+
+    <main>
+        <!-- Hero Section[cite: 2] -->
+        <section class="bg-trust-light/30 py-16 md:py-24 border-b border-trust-light/50">
+            <div class="container mx-auto px-4 text-center max-w-3xl">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-trust-dark mb-4">Support Our Mission</h1>
+                <p class="text-lg text-trust-primary">Your contributions power our non-profit initiatives for
+                    environmental awareness and community development.</p>
+            </div>
+        </section>
+
+        <!-- Donation Cards[cite: 1, 2] -->
+        <section class="container mx-auto px-4 py-16 max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- Bank Details Card[cite: 1] -->
+                <div
+                    class="bg-white rounded-3xl shadow-md p-8 border border-gray-100 hover:shadow-lg transition-shadow">
+                    <h2 class="text-2xl font-bold text-trust-dark mb-6 border-b pb-4">Bank Transfer</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-xs text-trust-primary font-bold uppercase tracking-widest mb-1">Account
+                                Holder</p>
+                            <p class="text-xl font-bold text-trust-dark">GREENAMMO</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-trust-primary font-bold uppercase tracking-widest mb-1">Account
+                                Number</p>
+                            <p class="text-2xl font-mono font-bold text-trust-accent">694705602564</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-xs text-trust-primary font-bold uppercase tracking-widest mb-1">IFSC Code
+                                </p>
+                                <p class="font-bold text-trust-dark">ICIC0006947</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-trust-primary font-bold uppercase tracking-widest mb-1">Branch
+                                </p>
+                                <p class="text-sm font-medium">Chowrangee, Kolkata</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UPI Card[cite: 1] -->
+                <div
+                    class="bg-white rounded-3xl shadow-md p-8 border border-gray-100 flex flex-col items-center text-center">
+                    <h2 class="text-2xl font-bold text-trust-dark mb-4">Scan & Donate</h2>
+                    <p class="text-group-text-medium mb-6">Quick donation via any UPI App</p>
+
+                    <div class="upi-qr-wrapper border-2 border-dashed border-trust-light p-2">
+                        <img src="../assets/upi_qr_blurred.png" alt="UPI QR Code">
+                        <div class="upi-qr-overlay">
+                            <div class="bg-white/90 px-4 py-2 rounded-full text-xs font-bold shadow-sm">
+                                green03585.ibz@icici</div>
+                            <button
+                                class="bg-trust-accent text-white px-4 py-1 rounded-full text-xs hover:bg-trust-dark transition">Copy
+                                ID</button>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 bg-trust-light/20 px-6 py-3 rounded-full border border-trust-light/40">
+                        <span class="text-sm font-semibold text-trust-dark">UPI ID: green03585.ibz@icici</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer[cite: 2] -->
+    <footer class="bg-brand-dark text-white pt-12">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-brand-primary">
+                <div class="md:col-span-2 space-y-4">
+                    <h3 class="text-3xl font-bold text-brand-light">GreenAmmo Group</h3>
+                    <p class="text-sm text-brand-light/70 max-w-sm">
+                        Empowering sustainable living and waste management through
+                        community action, research, and project initiation.
+                    </p>
+                </div>
+
+                <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
+
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3">Solutions</h4>
+                        <ul class="text-sm space-y-2 text-brand-light/80">
+                            <li>
+                                <a href="/solutions/finance" class="hover:text-brand-light transition">Finance</a>
+                            </li>
+                            <li>
+                                <a href="/solutions/education" class="hover:text-brand-light transition">Education &
+                                    Development</a>
+                            </li>
+                            <li>
+                                <a href="/solutions/event-supply" class="hover:text-brand-light transition">Event &
+                                    Supply</a>
+                            </li>
+                            <li>
+                                <a href="/solutions/accommodation"
+                                    class="hover:text-brand-light transition">Accommodations</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3">Trust</h4>
+                        <ul class="text-sm space-y-2 text-brand-light/80">
+                            <li>
+                                <a href="/trust/projects.html" class="hover:text-brand-light transition">Projects </a>
+                            </li>
+                            <li>
+                                <a href="/trust/campaigns.html" class="hover:text-brand-light transition">Campaigns</a>
+                            </li>
+                            <li>
+                                <a href="/trust/reports.html" class="hover:text-brand-light transition">Annual
+                                    Reports</a>
+                            </li>
+                            <li>
+                                <a href="/trust/donate.html" class="hover:text-brand-light transition">Donate Now</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-white mb-3">Support</h4>
+                        <ul class="text-sm space-y-2 text-brand-light/80">
+                            <li>
+                                <a href="/solutions/contact.html" class="hover:text-brand-light transition">Contact
+                                    Us</a>
+                            </li>
+                            <li>
+                                <a href="/joinus.html" class="hover:text-brand-light transition">Join Us</a>
+                            </li>
+
+                            <li>
+                                <a href="/privacy" class="hover:text-brand-light transition">Privacy Policy</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="container mx-auto px-4 md:px-8 py-4 flex flex-col sm:flex-row justify-between items-center text-sm text-brand-light/80">
+                <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
+                <div class="flex space-x-4 mt-2 sm:mt-0">
+                    <a href="https://www.facebook.com/people/GreenAmmo/100071774210115/"
+                        class="hover:text-white transition">Facebook</a>
+                    <a href="https://www.instagram.com/green_ammo/" class="hover:text-white transition">Instagram</a>
+                    <a href="https://www.youtube.com/@greenammo7472" class="hover:text-white transition">YouTube</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="exploreModal"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden justify-center items-center z-[60] p-4 modal-hidden transition-all duration-300">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full mx-auto overflow-hidden flex flex-col max-h-[90vh]"
+            id="modal-content">
+            <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+                <h3 class="text-xl font-bold text-trust-dark font-heading">Explore GreenAmmo</h3>
+                <button id="modal-close-btn" class="text-gray-400 hover:text-trust-dark"><svg class="w-6 h-6"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg></button>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6 p-6">
+                <div class="bg-trust-light/20 p-6 rounded-xl cursor-pointer hover:bg-trust-light/30 transition"
+                    onclick="window.location.href='./trust/index.html'">
+                    <h4 class="font-bold text-trust-dark text-lg mb-2">GreenAmmo Trust</h4>
+                    <p class="text-sm text-gray-600">Non-profit initiatives.</p>
+                </div>
+                <div class="bg-group-pastel-blue/20 p-6 rounded-xl cursor-pointer hover:bg-group-pastel-blue/30 transition"
+                    onclick="window.location.href='./solutions/index.html'">
+                    <h4 class="font-bold text-group-text-dark text-lg mb-2">GreenAmmo Solutions</h4>
+                    <p class="text-sm text-gray-600">Professional services.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const wpGrid = document.getElementById('wp-video-grid');
+            const ytGrid = document.getElementById('youtube-grid');
+            const skeletons = document.querySelectorAll('.skeleton-card');
+            const wpNoVideoMsg = document.getElementById('wp-no-videos');
+
+            // --- 1. Load WordPress Videos ---
+            async function loadWordPressVideos() {
+                try {
+                    const res = await fetch('https://cms.greenammo.in/wp-json/wp/v2/media?media_type=video&per_page=4');
+                    if (!res.ok) throw new Error('WP Fetch failed');
+                    const data = await res.json();
+
+                    skeletons.forEach(el => el.remove());
+
+                    if (!data || data.length === 0) {
+                        wpNoVideoMsg.classList.remove('hidden');
+                        return;
+                    }
+
+                    data.forEach(item => {
+                        const src = item.source_url;
+                        const title = item.title.rendered || 'Client Story';
+
+                        const card = document.createElement('div');
+                        card.className = "wp-video-card group cursor-pointer";
+
+                        card.innerHTML = `
+                            <div class="relative w-full h-full">
+                                <video src="${src}" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" 
+                                       playsinline preload="metadata"></video>
+                                <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-transparent transition-all pointer-events-none play-icon">
+                                    <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 shadow-lg">
+                                        <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </div>
+                                </div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-trust-dark/90 via-transparent to-transparent opacity-100 pointer-events-none flex flex-col justify-end p-5">
+                                    <h3 class="text-white font-bold text-lg font-heading leading-tight mb-1">${title}</h3>
+                                    <p class="text-trust-light text-[10px] font-bold uppercase tracking-wide">Watch Story</p>
+                                </div>
+                            </div>
+                        `;
+
+                        const vid = card.querySelector('video');
+                        const icon = card.querySelector('.play-icon');
+
+                        card.addEventListener('click', () => {
+                            if (vid.paused) { vid.play(); icon.style.opacity = '0'; }
+                            else { vid.pause(); icon.style.opacity = '1'; }
+                        });
+
+                        wpGrid.appendChild(card);
+                    });
+
+                } catch (err) {
+                    console.error("WP Video Error:", err);
+                    skeletons.forEach(el => el.remove());
+                    wpNoVideoMsg.textContent = "Unable to load videos.";
+                    wpNoVideoMsg.classList.remove('hidden');
+                }
+            }
+
+            // --- 2. Load YouTube Videos (Specific List) ---
+            function loadYouTubeVideos() {
+                // Updated list as per user request
+                const ytVideos = [
+                    { id: 'fQv3GdyRDDM', title: 'Akshay', role: 'Testimonial' },
+                    { id: 'Nfhjm74aS4w', title: 'Rayan', role: 'Testimonial' },
+                    { id: 'jBVTfO6Wd2o', title: 'Cleric', role: 'Testimonial' },
+                    { id: 'R4Fqw7gbuYY', title: 'Mouli', role: 'Testimonial' },
+                    { id: 'PsmMgIn0Sn0', title: 'Biyash', role: 'Testimonial' },
+                    { id: 'KmiY6_EKkzE', title: 'Prantar', role: 'Testimonial' },
+                    { id: '9lH723mdzfE', title: 'Wandei', role: 'Testimonial' }
+                ];
+
+                ytVideos.forEach(video => {
+                    const card = document.createElement('div');
+                    // 'aspect-[9/16]' works best for Shorts, 'aspect-video' for standard. 
+                    // Using a min-height ensures visibility for both.
+                    card.className = "yt-video-card group shadow-md hover:shadow-2xl bg-black rounded-2xl overflow-hidden relative aspect-[9/16] md:aspect-video";
+
+                    card.innerHTML = `
+                        <iframe 
+                            src="https://www.youtube.com/embed/${video.id}?modestbranding=1&rel=0" 
+                            class="absolute inset-0 w-full h-full object-cover" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent pointer-events-none">
+                             <h4 class="text-white font-bold font-heading text-lg">${video.title}</h4>
+                             <span class="text-trust-light text-xs uppercase tracking-wide">${video.role}</span>
+                        </div>
+                    `;
+                    ytGrid.appendChild(card);
+                });
+            }
+
+            // Initialize
+            loadWordPressVideos();
+            loadYouTubeVideos();
+
+            // --- Modal Logic ---
+            const exploreModal = document.getElementById('exploreModal');
+            const exploreBtns = [
+                document.getElementById('explore-btn-desktop'),
+                document.getElementById('explore-btn-mobile')
+            ];
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+
+            function openModal() {
+                if (exploreModal) {
+                    exploreModal.classList.remove('hidden', 'modal-hidden');
+                    setTimeout(() => exploreModal.classList.add('flex', 'modal-visible'), 10);
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+            function closeModal() {
+                if (exploreModal) {
+                    exploreModal.classList.remove('flex', 'modal-visible');
+                    exploreModal.classList.add('modal-hidden');
+                    setTimeout(() => exploreModal.classList.add('hidden'), 300);
+                    document.body.style.overflow = '';
+                }
+            }
+            exploreBtns.forEach(btn => { if (btn) btn.addEventListener('click', openModal); });
+            if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+            if (exploreModal) exploreModal.addEventListener('click', (e) => { if (e.target === exploreModal) closeModal(); });
+
+            // --- Lenis Smooth Scroll ---
+            if (typeof Lenis !== 'undefined') {
+                const lenis = new Lenis();
+                function raf(time) {
+                    lenis.raf(time);
+                    requestAnimationFrame(raf);
+                }
+                requestAnimationFrame(raf);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

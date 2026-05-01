@@ -54,7 +54,11 @@
             color: #1F2937;
         }
 
-        h1, h2, h3, h4, .font-heading {
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-heading {
             font-family: "Bricolage Grotesque", sans-serif;
         }
 
@@ -127,7 +131,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(2px);
             border-radius: 1.25rem;
             padding: 1rem;
@@ -135,14 +139,14 @@
         }
 
         .upi-id-badge {
-            background: rgba(255,255,255,0.92);
-            border: 1.5px solid rgba(76,175,80,0.35);
+            background: rgba(255, 255, 255, 0.92);
+            border: 1.5px solid rgba(76, 175, 80, 0.35);
             border-radius: 9999px;
             padding: 0.4rem 1rem;
             font-size: 0.85rem;
             font-weight: 700;
             color: #1F2937;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
             letter-spacing: 0.01em;
             white-space: nowrap;
         }
@@ -160,7 +164,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: background 0.2s, transform 0.15s;
-            box-shadow: 0 2px 8px rgba(76,175,80,0.3);
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
         }
 
         .copy-btn:hover {
@@ -255,21 +259,30 @@
             <button id="mobile-menu-toggle"
                 class="md:hidden flex items-center text-group-primary-green focus:outline-none">
                 <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
                 </svg>
                 <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
                 </svg>
             </button>
         </div>
 
         <div id="mobile-menu"
             class="hidden md:hidden flex-col space-y-2 bg-white shadow-inner px-6 py-4 border-t border-gray-100">
-            <a href="/aboutus.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">About Us</a>
-            <a href="/gallery.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">Media</a>
-            <a href="/blog.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">Blog</a>
-            <a href="/joinus.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">Join Us</a>
-            <button id="explore-btn-mobile" class="mt-2 w-full cta-button bg-group-primary-green text-white hover:bg-opacity-90">
+            <a href="/aboutus.html"
+                class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">About
+                Us</a>
+            <a href="/gallery.html"
+                class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">Media</a>
+            <a href="/blog.html"
+                class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">Blog</a>
+            <a href="/joinus.html"
+                class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded transition">Join
+                Us</a>
+            <button id="explore-btn-mobile"
+                class="mt-2 w-full cta-button bg-group-primary-green text-white hover:bg-opacity-90">
                 Explore
             </button>
         </div>
@@ -281,33 +294,42 @@
                 <h1 class="text-4xl md:text-5xl font-extrabold text-group-text-dark mb-4 font-heading animate-fade-in">
                     Donate Now
                 </h1>
-                <p class="text-lg md:text-xl text-group-text-medium max-w-3xl mx-auto animate-fade-in" style="animation-delay: 0.1s;">
-                    Your contribution helps us continue our mission of sustainable living and waste management. Thank you for your support!
+                <p class="text-lg md:text-xl text-group-text-medium max-w-3xl mx-auto animate-fade-in"
+                    style="animation-delay: 0.1s;">
+                    Your contribution helps us continue our mission of sustainable living and waste management. Thank
+                    you for your support!
                 </p>
             </div>
         </section>
 
         <section class="container mx-auto px-4 md:px-8 max-w-5xl">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                
+
                 <!-- Card 1: Bank Details -->
-                <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-8 md:p-10 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300">
-                    <div class="w-16 h-16 bg-group-pastel-green/30 text-group-primary-green rounded-2xl flex items-center justify-center mb-6 text-3xl">
+                <div
+                    class="bg-white rounded-3xl shadow-lg border border-gray-100 p-8 md:p-10 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300">
+                    <div
+                        class="w-16 h-16 bg-group-pastel-green/30 text-group-primary-green rounded-2xl flex items-center justify-center mb-6 text-3xl">
                         🏦
                     </div>
-                    <h2 class="text-2xl font-bold font-heading text-group-text-dark mb-6 border-b border-gray-100 pb-4">Bank Transfer Details</h2>
+                    <h2 class="text-2xl font-bold font-heading text-group-text-dark mb-6 border-b border-gray-100 pb-4">
+                        Bank Transfer Details</h2>
                     <div class="mb-4 flex items-center gap-2">
-                        <span class="text-xs bg-[#F25C2B]/10 text-[#F25C2B] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-[#F25C2B]/20">ICICI Bank</span>
+                        <span
+                            class="text-xs bg-[#F25C2B]/10 text-[#F25C2B] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-[#F25C2B]/20">ICICI
+                            Bank</span>
                         <span class="text-xs text-gray-400 font-medium">Chowrangee Branch</span>
                     </div>
-                    
+
                     <div class="space-y-6">
                         <div>
-                            <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-1">Account Holder's Name</p>
+                            <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-1">Account
+                                Holder's Name</p>
                             <p class="text-xl font-bold text-group-text-dark">GREENAMMO</p>
                         </div>
                         <div>
-                            <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-1">Account Number</p>
+                            <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-1">Account Number
+                            </p>
                             <div class="bg-gray-50 px-4 py-3 rounded-xl border border-gray-100 mt-1 inline-block">
                                 <p class="text-2xl font-bold text-group-primary-green tracking-[0.1em]">694705602564</p>
                             </div>
@@ -323,24 +345,29 @@
                             </div>
                             <div>
                                 <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-1">Email</p>
-                                <a href="mailto:greenammo.15@gmail.com" class="text-md font-medium text-group-primary-green hover:underline">greenammo.15@gmail.com</a>
+                                <a href="mailto:greenammo.15@gmail.com"
+                                    class="text-md font-medium text-group-primary-green hover:underline">greenammo.15@gmail.com</a>
                             </div>
                         </div>
                         <div>
                             <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-1">Branch</p>
-                            <p class="text-md font-medium text-group-text-dark leading-relaxed">Chowrangee Branch, Kolkata</p>
+                            <p class="text-md font-medium text-group-text-dark leading-relaxed">Chowrangee Branch,
+                                Kolkata</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 2: UPI QR Code -->
-                <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-8 md:p-10 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 flex flex-col items-center justify-center text-center">
-                    <div class="w-16 h-16 bg-group-pastel-blue/30 text-group-primary-blue rounded-2xl flex items-center justify-center mb-6 text-3xl">
+                <div
+                    class="bg-white rounded-3xl shadow-lg border border-gray-100 p-8 md:p-10 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 flex flex-col items-center justify-center text-center">
+                    <div
+                        class="w-16 h-16 bg-group-pastel-blue/30 text-group-primary-blue rounded-2xl flex items-center justify-center mb-6 text-3xl">
                         📱
                     </div>
                     <h2 class="text-2xl font-bold font-heading text-group-text-dark mb-4">Scan to Pay via UPI</h2>
-                    <p class="text-group-text-medium mb-8">Use any UPI app (GPay, PhonePe, Paytm, etc.) to scan and donate directly.</p>
-                    
+                    <p class="text-group-text-medium mb-8">Use any UPI app (GPay, PhonePe, Paytm, etc.) to scan and
+                        donate directly.</p>
+
                     <!-- Blurred QR with UPI Overlay -->
                     <div class="bg-white p-4 rounded-3xl shadow-inner border-2 border-dashed border-gray-200">
                         <div class="upi-qr-wrapper">
@@ -348,7 +375,11 @@
                             <div class="upi-qr-overlay">
                                 <div class="upi-id-badge">green03585.ibz@icici</div>
                                 <button class="copy-btn" id="copy-upi-btn" onclick="copyUpiId()">
-                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" />
+                                        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                                    </svg>
                                     <span id="copy-btn-label">Copy UPI ID</span>
                                 </button>
                             </div>
@@ -359,8 +390,13 @@
                     <div class="mt-6 upi-id-row">
                         <span class="text-gray-500 font-medium text-sm">UPI ID:</span>
                         <span class="text-base font-bold text-group-text-dark">green03585.ibz@icici</span>
-                        <button class="copy-btn" onclick="copyUpiId()" style="padding:0.25rem 0.7rem;font-size:0.72rem;">
-                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        <button class="copy-btn" onclick="copyUpiId()"
+                            style="padding:0.25rem 0.7rem;font-size:0.72rem;">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" />
+                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                            </svg>
                             Copy
                         </button>
                     </div>
@@ -422,6 +458,8 @@
                                     class="hover:text-group-pastel-green transition">Campaigns</a></li>
                             <li><a href="/trust/reports.html" class="hover:text-group-pastel-green transition">Reports &
                                     Research</a></li>
+                            <li><a href="/trust/donate.html" class="hover:text-group-pastel-green transition">Donate Now
+                                </a></li>
                         </ul>
                     </div>
                     <!-- Column 4: Action/Explore -->
@@ -654,4 +692,5 @@
         });
     </script>
 </body>
+
 </html>
