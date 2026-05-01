@@ -101,6 +101,86 @@
             visibility: visible;
             transition: opacity 0.3s ease-out;
         }
+
+        /* UPI QR blurred overlay card */
+        .upi-qr-wrapper {
+            position: relative;
+            display: inline-block;
+            border-radius: 1.25rem;
+            overflow: hidden;
+        }
+
+        .upi-qr-wrapper img {
+            display: block;
+            width: 256px;
+            height: 256px;
+            object-fit: cover;
+            border-radius: 1.25rem;
+            filter: blur(6px) brightness(0.88);
+            transform: scale(1.05);
+        }
+
+        .upi-qr-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(2px);
+            border-radius: 1.25rem;
+            padding: 1rem;
+            gap: 0.5rem;
+        }
+
+        .upi-id-badge {
+            background: rgba(255,255,255,0.92);
+            border: 1.5px solid rgba(76,175,80,0.35);
+            border-radius: 9999px;
+            padding: 0.4rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #1F2937;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+            letter-spacing: 0.01em;
+            white-space: nowrap;
+        }
+
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 9999px;
+            padding: 0.35rem 0.9rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+            box-shadow: 0 2px 8px rgba(76,175,80,0.3);
+        }
+
+        .copy-btn:hover {
+            background: #388E3C;
+            transform: scale(1.05);
+        }
+
+        .copy-btn.copied {
+            background: #56A0D3;
+        }
+
+        .upi-id-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: #f9fafb;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 9999px;
+            padding: 0.5rem 1.2rem;
+        }
     </style>
 </head>
 
@@ -216,6 +296,10 @@
                         🏦
                     </div>
                     <h2 class="text-2xl font-bold font-heading text-group-text-dark mb-6 border-b border-gray-100 pb-4">Bank Transfer Details</h2>
+                    <div class="mb-4 flex items-center gap-2">
+                        <span class="text-xs bg-[#F25C2B]/10 text-[#F25C2B] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-[#F25C2B]/20">ICICI Bank</span>
+                        <span class="text-xs text-gray-400 font-medium">Chowrangee Branch</span>
+                    </div>
                     
                     <div class="space-y-6">
                         <div>
@@ -243,8 +327,8 @@
                             </div>
                         </div>
                         <div>
-                            <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-1">Address</p>
-                            <p class="text-md font-medium text-group-text-dark leading-relaxed">Placeholder Address, City, State, ZIP Code</p>
+                            <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-1">Branch</p>
+                            <p class="text-md font-medium text-group-text-dark leading-relaxed">Chowrangee Branch, Kolkata</p>
                         </div>
                     </div>
                 </div>
@@ -257,13 +341,28 @@
                     <h2 class="text-2xl font-bold font-heading text-group-text-dark mb-4">Scan to Pay via UPI</h2>
                     <p class="text-group-text-medium mb-8">Use any UPI app (GPay, PhonePe, Paytm, etc.) to scan and donate directly.</p>
                     
-                    <div class="bg-white p-6 rounded-3xl shadow-inner border-2 border-dashed border-gray-200">
-                        <img src="https://placehold.co/300x300/4CAF50/FFFFFF?text=UPI+QR+Code" alt="UPI QR Code Placeholder" class="w-64 h-64 object-contain rounded-xl shadow-sm hover:scale-105 transition-transform duration-300">
+                    <!-- Blurred QR with UPI Overlay -->
+                    <div class="bg-white p-4 rounded-3xl shadow-inner border-2 border-dashed border-gray-200">
+                        <div class="upi-qr-wrapper">
+                            <img src="./assets/upi_qr_blurred.png" alt="UPI QR Code - scan with any UPI app">
+                            <div class="upi-qr-overlay">
+                                <div class="upi-id-badge">green03585.ibz@icici</div>
+                                <button class="copy-btn" id="copy-upi-btn" onclick="copyUpiId()">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                                    <span id="copy-btn-label">Copy UPI ID</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="mt-8 bg-gray-50 px-6 py-3 rounded-full border border-gray-100 flex items-center gap-3">
-                        <span class="text-gray-500 font-medium">UPI ID:</span>
-                        <span class="text-lg font-bold text-group-text-dark">greenammo@upi</span>
+
+                    <!-- UPI ID row below -->
+                    <div class="mt-6 upi-id-row">
+                        <span class="text-gray-500 font-medium text-sm">UPI ID:</span>
+                        <span class="text-base font-bold text-group-text-dark">green03585.ibz@icici</span>
+                        <button class="copy-btn" onclick="copyUpiId()" style="padding:0.25rem 0.7rem;font-size:0.72rem;">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                            Copy
+                        </button>
                     </div>
                 </div>
 
@@ -468,6 +567,31 @@
             </div>
         </div>
     </div>
+    <script>
+        function copyUpiId() {
+            const upiId = 'green03585.ibz@icici';
+            navigator.clipboard.writeText(upiId).then(() => {
+                const btn = document.getElementById('copy-upi-btn');
+                const label = document.getElementById('copy-btn-label');
+                if (btn && label) {
+                    btn.classList.add('copied');
+                    label.textContent = 'Copied!';
+                    setTimeout(() => {
+                        btn.classList.remove('copied');
+                        label.textContent = 'Copy UPI ID';
+                    }, 2000);
+                }
+            }).catch(() => {
+                // Fallback for older browsers
+                const el = document.createElement('textarea');
+                el.value = upiId;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+            });
+        }
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Mobile Menu Toggle
