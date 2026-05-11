@@ -9,8 +9,7 @@
     <!-- 1. Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- 2. Load Alpine.js for interactivity (Tabs) -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Alpine.js removed — gallery uses vanilla JS -->
 
     <!-- Lenis Smooth Scroll (Optional) -->
     <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
@@ -154,10 +153,35 @@
         #carousel-content video {
             margin: auto;
         }
+
+        /* Category Filter Pills */
+        .category-pill {
+            padding: 0.4rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 9999px;
+            border: 1px solid #D1D5DB;
+            color: #374151;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .category-pill:hover {
+            border-color: #A8D7B0;
+            color: #4CAF50;
+            background: rgba(168, 215, 176, 0.15);
+        }
+        .category-pill.active {
+            border-color: #4CAF50;
+            color: #fff;
+            background: #4CAF50;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.25);
+        }
     </style>
 </head>
 
-<body class="bg-group-base-white text-group-text-dark font-sans" x-data="{ showModal: false }">
+<body class="bg-group-base-white text-group-text-dark font-sans">
     <!-- 🌿 NAV COMPONENT for GreenAmmo Group -->
     <nav class="w-full bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center px-6 py-4">
@@ -332,100 +356,87 @@
         </section>
 
         <!-- GALLERY TABS & CONTENT -->
-        <section class="py-16 bg-white" x-data="{ activeTab: 'photos' }">
+        <section class="py-16 bg-white">
             <div class="container mx-auto px-4 md:px-8 max-w-6xl">
 
-                <!-- Tab Navigation - UPDATED @click -->
-                <div class="flex flex-wrap justify-center gap-3 mb-12 border-b border-gray-200 pb-4">
-                    <button @click="activeTab = 'photos'; switchTab('image')"
-                        :class="{ 'active': activeTab === 'photos' }" class="tab-button">
+                <!-- Media Type Toggle (Photos / Videos) -->
+                <div class="flex justify-center gap-3 mb-6">
+                    <button id="tab-image" onclick="switchTab('image')" class="tab-button active">
                         📷 Photos
                     </button>
-                    <button @click="activeTab = 'videos'; switchTab('video')"
-                        :class="{ 'active': activeTab === 'videos' }" class="tab-button">
+                    <button id="tab-video" onclick="switchTab('video')" class="tab-button">
                         🎬 Videos
                     </button>
                 </div>
 
-                <!-- Tab Content Area -->
-                <div>
-                    <!-- Photos Tab Content -->
-                    <div x-show="activeTab === 'photos'" x-transition.opacity.duration.300>
-                        <h2 class="text-3xl font-bold text-group-text-dark font-heading mb-8 text-center sr-only">Photo
-                            Gallery</h2>
-                        <!-- Skeleton Loader for Photos -->
-                        <div id="photos-skeleton"
-                            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
-                            <!-- Repeat skeleton items (e.g., 6-9 times) -->
-                            <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
-                            <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
-                            <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
-                            <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
-                            <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
-                            <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
-                        </div>
-                        <!-- Actual Photo Grid (Populated by JS) -->
-                        <div id="photos-grid"
-                            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
-                            <!-- Images will be appended here -->
-                        </div>
-                    </div>
+                <!-- Category Filter Pills (dynamically populated) -->
+                <div id="category-pills" class="flex flex-wrap justify-center gap-2 mb-10 pb-4 border-b border-gray-200">
+                    <!-- Pills injected by JS -->
+                </div>
 
-                    <!-- Videos Tab Content -->
-                    <div x-show="activeTab === 'videos'" x-transition.opacity.duration.300>
-                        <h2 class="text-3xl font-bold text-group-text-dark font-heading mb-8 text-center sr-only">Video
-                            Gallery</h2>
-                        <!-- Skeleton Loader for Videos -->
-                        <div id="videos-skeleton"
-                            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
-                            <!-- Repeat skeleton items -->
-                            <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
-                            <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
-                            <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
-                        </div>
-                        <!-- Actual Video Grid (Populated by JS) -->
-                        <div id="videos-grid"
-                            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
-                            <!-- Videos will be appended here -->
-                        </div>
-                    </div>
+                <!-- Active Category Title -->
+                <div id="category-header" class="text-center mb-8 hidden">
+                    <h2 id="category-title" class="text-2xl md:text-3xl font-bold text-group-text-dark font-heading"></h2>
+                    <p id="category-count" class="text-sm text-group-text-medium mt-1"></p>
+                </div>
 
-                    <!-- Infinite Scroll Sentinel & Messages -->
-                    <div id="infinite-scroll-sentinel" class="text-center py-8">
-                        <!-- Generic Loading Message (Initially hidden) -->
-                        <p id="loading-message" class="hidden text-gray-500">Loading more...</p>
-                        <p id="end-message" class="hidden text-group-text-medium">You've reached the end.</p>
-                    </div>
+                <!-- Skeleton Loader -->
+                <div id="gallery-skeleton" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
+                    <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
+                    <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
+                    <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
+                    <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
+                    <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
+                    <div class="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
+                </div>
+
+                <!-- Actual Media Grid -->
+                <div id="media-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-3 max-w-6xl mx-auto">
+                </div>
+
+                <!-- Infinite Scroll Sentinel & Messages -->
+                <div id="infinite-scroll-sentinel" class="text-center py-8">
+                    <p id="loading-message" class="hidden text-gray-500">Loading more...</p>
+                    <p id="end-message" class="hidden text-group-text-medium">You've reached the end.</p>
                 </div>
             </div>
         </section>
 
-        <!-- CAROUSEL MODAL (Remains mostly the same, styles updated) -->
+        <!-- CAROUSEL MODAL -->
         <div id="carousel-modal"
-            class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4 modal-hidden">
-            <div class="relative w-full max-w-4xl max-h-[85vh] bg-group-text-dark rounded-lg shadow-xl flex flex-col"
-                @click.stop>
-                <button onclick="closeCarousel()"
-                    class="absolute -top-4 -right-4 m-2 text-white bg-black/50 rounded-full p-1 z-[60] hover:text-group-pastel-blue transition text-3xl">&times;</button>
+            class="fixed inset-0 bg-black/95 backdrop-blur-md z-50 hidden items-center justify-center modal-hidden">
+            
+            <!-- Top Bar -->
+            <div class="absolute top-0 w-full flex justify-between items-center p-4 z-[60] bg-gradient-to-b from-black/60 to-transparent">
+                <div id="carousel-caption" class="text-white text-lg font-heading drop-shadow-md px-4"></div>
+                <button onclick="closeCarousel()" class="text-white opacity-70 hover:opacity-100 hover:text-group-pastel-green transition text-4xl focus:outline-none px-4">&times;</button>
+            </div>
 
-                <!-- Carousel Content Area (Image/Video) -->
-                <div id="carousel-content"
-                    class="flex-grow w-full h-full flex items-center justify-center overflow-hidden relative p-4">
-                    <!-- Media element (img or video) inserted by JS -->
-                </div>
+            <!-- Carousel Content Area (Image/Video) -->
+            <div id="carousel-content" class="w-full h-full flex items-center justify-center relative overflow-hidden" onclick="event.stopPropagation()">
+                <!-- Media element (img or video) inserted by JS -->
+            </div>
 
-                <!-- Caption Area -->
-                <div id="carousel-caption" class="p-3 bg-black/30 text-white text-center text-sm font-medium truncate">
-                </div>
-
-                <!-- Navigation Arrows -->
-                <button onclick="changeMedia(-1)" id="carousel-prev"
-                    class="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-12 p-3 text-white text-4xl z-50 opacity-75 hover:opacity-100 transition focus:outline-none">
-                    &#10094;
+            <!-- Navigation Arrows -->
+            <button onclick="changeMedia(-1); event.stopPropagation();" id="carousel-prev"
+                class="absolute left-4 top-1/2 transform -translate-y-1/2 p-4 text-white text-5xl z-50 opacity-50 hover:opacity-100 hover:scale-110 transition focus:outline-none drop-shadow-lg">
+                &#10094;
+            </button>
+            <button onclick="changeMedia(1); event.stopPropagation();" id="carousel-next"
+                class="absolute right-4 top-1/2 transform -translate-y-1/2 p-4 text-white text-5xl z-50 opacity-50 hover:opacity-100 hover:scale-110 transition focus:outline-none drop-shadow-lg">
+                &#10095;
+            </button>
+            
+            <!-- Zoom Controls -->
+            <div class="absolute bottom-6 right-6 flex gap-3 z-[60]" id="zoom-controls">
+                <button onclick="zoomMedia(-1); event.stopPropagation();" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center backdrop-blur transition focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" /></svg>
                 </button>
-                <button onclick="changeMedia(1)" id="carousel-next"
-                    class="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-12 p-3 text-white text-4xl z-50 opacity-75 hover:opacity-100 transition focus:outline-none">
-                    &#10095;
+                <button onclick="zoomMedia(1); event.stopPropagation();" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center backdrop-blur transition focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" /></svg>
+                </button>
+                <button onclick="resetZoom(); event.stopPropagation();" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center backdrop-blur transition focus:outline-none" title="Reset Zoom">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" /></svg>
                 </button>
             </div>
         </div>
@@ -625,333 +636,8 @@
         </div>
     </div>
 
-    <!-- 🧠 JavaScript for Gallery Logic -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // State variables
-            let currentMediaType = 'image'; // Start with photos
-            let currentPage = 1;
-            const perPage = 9;
-            let isLoading = false;
-            let hasMore = true;
-            let allMediaData = []; // Combined data for carousel
-            let currentIndex = 0; // Carousel index
-
-            // DOM Elements
-            const photosGrid = document.getElementById('photos-grid');
-            const videosGrid = document.getElementById('videos-grid');
-            const photosSkeleton = document.getElementById('photos-skeleton');
-            const videosSkeleton = document.getElementById('videos-skeleton');
-            const sentinel = document.getElementById('infinite-scroll-sentinel');
-            const loadingMessage = document.getElementById('loading-message');
-            const endMessage = document.getElementById('end-message');
-            const modal = document.getElementById('carousel-modal');
-            const carouselContent = document.getElementById('carousel-content');
-            const carouselCaption = document.getElementById('carousel-caption');
-            const carouselPrev = document.getElementById('carousel-prev');
-            const carouselNext = document.getElementById('carousel-next');
-
-            // --- API Fetching ---
-            async function fetchGallery(mediaType, page) {
-                if (isLoading || !hasMore) return;
-
-                isLoading = true;
-                showSkeleton(mediaType, true); // Show skeleton for the correct tab
-                loadingMessage.classList.remove('hidden'); // Show loading text
-                endMessage.classList.add('hidden');
-
-                try {
-                    // Fetch images or videos based on mediaType
-                    const res = await fetch(`https://cms.greenammo.in/wp-json/wp/v2/media?media_type=${mediaType}&per_page=${perPage}&page=${page}`);
-                    const totalPages = res.headers.get('X-WP-TotalPages');
-                    const data = await res.json();
-
-                    if (!res.ok) {
-                        throw new Error(`HTTP error! status: ${res.status}`);
-                    }
-
-                    if (data.length === 0 || (totalPages && page >= parseInt(totalPages))) {
-                        hasMore = false;
-                        endMessage.classList.remove('hidden');
-                        sentinel.style.display = 'none'; // Hide sentinel when no more items
-                    } else {
-                        renderMedia(data, mediaType);
-                        currentPage++;
-                        sentinel.style.display = 'block'; // Ensure sentinel is visible
-                    }
-                } catch (error) {
-                    console.error("Error fetching gallery data:", error);
-                    endMessage.textContent = 'Failed to load content.'; // Show error
-                    endMessage.classList.remove('hidden');
-                    hasMore = false;
-                    sentinel.style.display = 'none';
-                } finally {
-                    isLoading = false;
-                    showSkeleton(mediaType, false); // Hide skeleton
-                    loadingMessage.classList.add('hidden'); // Hide loading text
-                }
-            }
-
-            // --- Rendering Media ---
-            function renderMedia(data, mediaType) {
-                const grid = (mediaType === 'image') ? photosGrid : videosGrid;
-                const startIndex = allMediaData.length; // Starting index for the new batch in the global array
-
-                allMediaData = allMediaData.concat(data); // Add new data for carousel
-
-                data.forEach((item, index) => {
-                    const mimeType = item.mime_type || '';
-                    const isImage = mimeType.startsWith('image');
-                    const isVideo = mimeType.startsWith('video');
-
-                    if (!isImage && !isVideo) return;
-
-                    const mediaUrl = item.media_details?.sizes?.medium_large?.source_url || item.source_url;
-                    if (!mediaUrl) return;
-
-                    const globalIndex = startIndex + index; // Calculate correct global index
-                    const caption = item.caption?.rendered?.replace(/<[^>]*>?/gm, '') || `View ${mediaType}`;
-
-                    const container = document.createElement('div');
-                    container.className = 'aspect-square overflow-hidden cursor-pointer shadow-md hover:shadow-lg transition duration-300 relative group rounded-lg border border-gray-100';
-                    container.setAttribute('onclick', `openCarousel(${globalIndex})`);
-
-                    let mediaElement;
-                    if (isImage) {
-                        mediaElement = document.createElement('img');
-                        mediaElement.setAttribute('data-src', mediaUrl);
-                        mediaElement.alt = caption;
-                        mediaElement.className = 'w-full h-full object-cover group-hover:scale-105 transition duration-300';
-                        mediaElement.loading = 'lazy';
-                        lazyLoadObserver.observe(mediaElement); // Use observer to load image
-                    } else if (isVideo) {
-                        mediaElement = document.createElement('video');
-                        mediaElement.src = mediaUrl;
-                        mediaElement.className = 'w-full h-full object-cover';
-                        mediaElement.muted = true;
-                        mediaElement.loop = true;
-                        mediaElement.playsInline = true;
-                        mediaElement.preload = 'metadata';
-                        // Play/Pause on hover
-                        container.addEventListener('mouseenter', () => mediaElement.play().catch(e => console.error("Video play failed:", e)));
-                        container.addEventListener('mouseleave', () => mediaElement.pause());
-                        // Add a play icon overlay for videos
-                        const playIconOverlay = document.createElement('div');
-                        playIconOverlay.className = 'absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition';
-                        playIconOverlay.innerHTML = `<svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>`;
-                        container.appendChild(playIconOverlay);
-                    }
-
-                    container.appendChild(mediaElement);
-                    grid.appendChild(container);
-                });
-            }
-
-            // --- Skeleton Loader Logic ---
-            // --- Skeleton Loader Logic (Fixed) ---
-            function showSkeleton(mediaType, show) {
-                const photosSkeleton = document.getElementById('photos-skeleton');
-                const videosSkeleton = document.getElementById('videos-skeleton');
-                const photosGrid = document.getElementById('photos-grid');
-                const videosGrid = document.getElementById('videos-grid');
-
-                const skeleton = (mediaType === 'image') ? photosSkeleton : videosSkeleton;
-                const grid = (mediaType === 'image') ? photosGrid : videosGrid;
-
-                if (!skeleton || !grid) return;
-
-                if (show && grid.childElementCount === 0) {
-                    // SHOW logic
-                    // We remove 'hidden'. We do NOT add inline style 'grid' because 
-                    // the HTML class="grid" already handles that.
-                    skeleton.classList.remove('hidden');
-                    skeleton.style.display = ''; // Clean up any leftover inline styles
-                } else if (!show) {
-                    // HIDE logic
-                    skeleton.classList.add('hidden');
-                    skeleton.style.display = ''; // CRITICAL: Removes inline 'display: grid' so .hidden can work
-                }
-            }
-
-
-            // --- Lazy Loading Observer ---
-            const lazyLoadObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const media = entry.target;
-                        if (media.tagName === 'IMG') {
-                            media.src = media.getAttribute('data-src');
-                            media.removeAttribute('data-src');
-                        }
-                        observer.unobserve(media);
-                    }
-                });
-            }, { rootMargin: '0px 0px 200px 0px' });
-
-            // --- Infinite Scroll Observer ---
-            const infiniteScrollObserver = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting && !isLoading && hasMore) {
-                    fetchGallery(currentMediaType, currentPage);
-                }
-            }, { threshold: 0.5 }); // Trigger when 50% visible
-
-            if (sentinel) infiniteScrollObserver.observe(sentinel);
-
-
-            // --- Tab Switching Logic (FIXED) ---
-            window.switchTab = (newMediaType) => { // newMediaType is 'image' or 'video'
-                if (newMediaType === currentMediaType) return; // Do nothing if already active
-
-                // Reset state for the new tab
-                currentMediaType = newMediaType;
-                currentPage = 1;
-                hasMore = true;
-                isLoading = false;
-                allMediaData = [];
-                currentIndex = 0;
-
-                // Clear previous grid content
-                photosGrid.innerHTML = '';
-                videosGrid.innerHTML = '';
-
-                // Hide skeletons
-                photosSkeleton.classList.add('hidden');
-                videosSkeleton.classList.add('hidden');
-
-                // Reset messages
-                endMessage.classList.add('hidden');
-                loadingMessage.classList.add('hidden');
-                sentinel.style.display = 'block';
-
-                // Fetch data for the new tab
-                fetchGallery(currentMediaType, currentPage);
-
-                // Note: Alpine's activeTab is set by the @click directive on the button itself.
-            };
-
-            // --- Carousel Logic ---
-            function updateCarousel() {
-                if (allMediaData.length === 0 || currentIndex < 0 || currentIndex >= allMediaData.length) return;
-
-                const item = allMediaData[currentIndex];
-                const mimeType = item.mime_type || '';
-                const isImage = mimeType.startsWith('image');
-                const isVideo = mimeType.startsWith('video');
-
-                if (!isImage && !isVideo) return;
-
-                const mediaUrl = item.media_details?.sizes?.large?.source_url || item.media_details?.sizes?.full?.source_url || item.source_url;
-                if (!mediaUrl) return;
-
-                const caption = item.caption?.rendered?.replace(/<[^>]*>?/gm, '') || `Item ${currentIndex + 1}`;
-
-                // Clear previous media
-                carouselContent.innerHTML = ''; // Clear everything inside first
-
-                let mediaElement;
-                if (isImage) {
-                    mediaElement = document.createElement('img');
-                    mediaElement.src = mediaUrl;
-                    mediaElement.alt = caption;
-                    mediaElement.className = 'max-h-full max-w-full object-contain'; // Center and contain
-                } else if (isVideo) {
-                    mediaElement = document.createElement('video');
-                    mediaElement.src = mediaUrl;
-                    mediaElement.className = 'max-h-full max-w-full object-contain';
-                    mediaElement.controls = true;
-                    mediaElement.autoplay = true; // Autoplay when modal opens
-                    mediaElement.playsInline = true;
-                }
-
-                if (mediaElement) {
-                    carouselContent.appendChild(mediaElement); // Add the new element
-                }
-                carouselCaption.textContent = caption;
-
-                // Update arrow visibility
-                carouselPrev.style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
-                carouselNext.style.visibility = currentIndex === allMediaData.length - 1 ? 'hidden' : 'visible';
-            }
-
-            window.openCarousel = (index) => {
-                currentIndex = index;
-                updateCarousel();
-                modal.classList.remove('hidden', 'modal-hidden');
-                modal.classList.add('flex', 'modal-visible');
-                document.body.style.overflow = 'hidden';
-            }
-
-            window.closeCarousel = () => {
-                modal.classList.remove('flex', 'modal-visible');
-                modal.classList.add('modal-hidden');
-                // Stop video if playing
-                const video = modal.querySelector('video');
-                if (video) {
-                    video.pause();
-                    video.src = ""; // Stop download
-                }
-                setTimeout(() => { modal.classList.add('hidden'); }, 300); // Hide after transition
-                document.body.style.overflow = '';
-            }
-
-            window.changeMedia = (step) => {
-                const newIndex = currentIndex + step;
-                if (newIndex >= 0 && newIndex < allMediaData.length) {
-                    currentIndex = newIndex;
-                    updateCarousel();
-                }
-            }
-
-            // --- Initial Fetch ---
-            fetchGallery(currentMediaType, currentPage); // Fetch photos on initial load
-
-            // --- Lenis Init ---
-            if (typeof Lenis !== 'undefined') {
-                const lenis = new Lenis()
-                function raf(time) {
-                    lenis.raf(time)
-                    requestAnimationFrame(raf)
-                }
-                requestAnimationFrame(raf)
-            } else {
-                console.warn('Lenis script not loaded.');
-            }
-
-            // --- Explore Modal --- (Vanilla JS version)
-            // Re-finding elements just in case
-            const exploreModal = document.getElementById('exploreModal');
-            const exploreBtns = [
-                document.getElementById('explore-btn-desktop'),
-                document.getElementById('explore-btn-mobile'),
-                document.getElementById('explore-btn-footer')
-            ];
-            const modalCloseBtn = exploreModal ? exploreModal.querySelector('button[class*="text-gray-400"]') : null; // More robust selector
-
-            function openModalJS() {
-                const modal = document.getElementById('exploreModal'); // Find it again
-                if (modal) {
-                    modal.classList.remove('hidden', 'modal-hidden');
-                    modal.classList.add('flex', 'modal-visible');
-                }
-            }
-            function closeModalJS() {
-                const modal = document.getElementById('exploreModal'); // Find it again
-                if (modal) {
-                    modal.classList.remove('flex', 'modal-visible');
-                    modal.classList.add('modal-hidden');
-                    setTimeout(() => { modal.classList.add('hidden'); }, 300);
-                }
-            }
-
-            exploreBtns.forEach(btn => { if (btn) btn.addEventListener('click', openModalJS); });
-            if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModalJS);
-            if (exploreModal) exploreModal.addEventListener('click', (event) => {
-                if (event.target === exploreModal) closeModalJS(); // Close on backdrop click
-            });
-
-
-        });
-    </script>
+    <!-- 🧠 Gallery JS (Tag-Based Category Engine) -->
+    <script src="./js/gallery.js"></script>
 </body>
 
 </html>
