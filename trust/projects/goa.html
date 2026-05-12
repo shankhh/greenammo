@@ -142,54 +142,7 @@
 
 <body class="bg-brand-base text-brand-dark font-sans">
 
-    <nav class="w-full bg-white shadow-lg sticky top-0 z-50" x-data="{ open: false }">
-        <div class="container mx-auto px-4 md:px-8 py-3 flex justify-between items-center">
-
-            <div class="flex items-center">
-                <a href="/trust/index.html" class="block"> <img src="../../trust/trust.png" alt="GreenAmmo Trust Logo" class="h-12 w-auto object-contain" title="GreenAmmo Trust" /> </a>
-            </div>
-
-            <div class="hidden lg:flex items-center space-x-8">
-                <a href="/index.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Home</a> <a href="/gallery.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Media</a>
-                <a href="/trust/campaign.html" class="text-gray-700 hover:text-brand-accent transition font-semibold">Campaigns</a>
-
-                <div x-data="{ dropdownOpen: false }" class="relative">
-                    <button @click="dropdownOpen = !dropdownOpen" @click.away="dropdownOpen = false" class="text-brand-accent font-bold transition inline-flex items-center gap-1">
-                        Milestones
-                        <svg :class="{'rotate-180': dropdownOpen}" class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div x-show="dropdownOpen" x-cloak class="absolute bg-white rounded-xl shadow-xl p-3 top-10 right-0 w-48 transition-all z-30 border border-brand-light origin-top-right">
-                        <ul class="text-sm space-y-1">
-                            <li><a href="/trust/projects.html" @click="dropdownOpen = false" class="block py-1 px-2 text-brand-dark font-bold bg-brand-light/50 rounded transition">Projects</a></li>
-                            <li><a href="/trust/reports.html" @click="dropdownOpen = false" class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition">Reports</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <a href="/joinus.html" class="cta-button bg-brand-accent text-white hover:bg-brand-dark/90 shadow-brand-accent/50">
-                    Let's Talk
-                </a>
-            </div>
-
-            <button id="mobile-menu-toggle" @click="open = !open" class="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100">
-                <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                <svg x-show="open" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-        </div>
-
-        <div id="mobile-menu" x-show="open" x-cloak class="lg:hidden px-4 pb-4 bg-white border-t border-gray-100 absolute w-full shadow-2xl z-10">
-            <ul class="flex flex-col space-y-2 font-medium">
-                <a href="/index.html" class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Home</a>
-                <a href="/gallery.html" class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Media</a>
-                <a href="/trust/campaign.html" class="block py-2 text-gray-700 hover:bg-brand-light/50 hover:text-brand-accent rounded">Campaigns</a>
-                <a href="/trust/projects.html" class="block py-2 text-brand-dark font-bold">Projects</a>
-                <a href="/trust/reports.html" class="block py-2 text-brand-dark font-bold">Reports</a>
-                <a href="/joinus.html" class="mt-4 block text-center cta-button bg-brand-accent text-white">Join the Change</a>
-            </ul>
-        </div>
-    </nav>
+    <div id="site-nav"></div>
 
 <main>
 
@@ -272,62 +225,9 @@
     </div>
 </main>
     
-    <footer class="bg-brand-dark text-white pt-12">
-        <div class="container mx-auto px-4 md:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-brand-primary">
-                <div class="md:col-span-2 space-y-4">
-                    <h3 class="text-3xl font-bold text-brand-light font-heading">GreenAmmo Group</h3>
-                    <p class="text-sm text-brand-light/70 max-w-sm">
-                        Empowering sustainable living and waste management through community action, research, and project initiation.
-                    </p>
-                </div>
-                <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
-                    <div class="space-y-3">
-                        <h4 class="font-semibold text-white mb-3 font-heading">GreenAmmo</h4>
-                        <ul class="text-sm space-y-2 text-brand-light/80">
-                            <li><a href="/aboutus.html" class="hover:text-brand-light transition">About Us</a></li>
-                            <li><a href="/gallery.html" class="hover:text-brand-light transition">Media (Gallery)</a></li>
-                            <li><a href="/certifications.html" class="hover:text-brand-light transition">Certificates</a></li>
-                            <li><a href="/alliances.html" class="hover:text-brand-light transition">Alliances</a></li>
-                        </ul>
-                    </div>
-                    <div class="space-y-3">
-                        <h4 class="font-semibold text-white mb-3 font-heading">Solutions</h4>
-                        <ul class="text-sm space-y-2 text-brand-light/80">
-                            <li><a href="/solutions/finance.html" class="hover:text-brand-light transition">Finance</a></li>
-                            <li><a href="/solutions/education.html" class="hover:text-brand-light transition">Education & Development</a></li>
-                            <li><a href="/solutions/eventsupply.html" class="hover:text-brand-light transition">Event & Supply</a></li>
-                            <li><a href="/solutions/accommodation.html" class="hover:text-brand-light transition">Accommodations</a></li>
-                        </ul>
-                    </div>
-                    <div class="space-y-3">
-                        <h4 class="font-semibold text-white mb-3 font-heading">Trust</h4>
-                        <ul class="text-sm space-y-2 text-brand-light/80">
-                            <li><a href="/trust/projects.html" class="hover:text-brand-light transition">Projects & Milestones</a></li>
-                            <li><a href="/trust/campaign.html" class="hover:text-brand-light transition">Campaigns</a></li>
-                            <li><a href="/trust/reports.html" class="hover:text-brand-light transition">Reports & Research</a></li>
-                        </ul>
-                    </div>
-                    <div classs="space-y-3">
-                        <h4 class="font-semibold text-white mb-3 font-heading">Take Action</h4>
-                        <div class="space-y-2">
-                            <a href="/join-us.html" class="block text-center py-2 px-4 rounded-full bg-brand-accent text-white hover:bg-brand-dark/90 transition text-sm font-semibold shadow-md">Join Us</a>
-                            <button id="explore-btn-footer" class="block w-full text-center py-2 px-4 rounded-full border-2 border-brand-light text-brand-light hover:bg-brand-light hover:text-brand-dark transition text-sm font-semibold">Explore</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-col sm:flex-row justify-between items-center py-6 text-sm text-brand-light/80">
-                <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
-                <div class="flex space-x-4 mt-2 sm:mt-0">
-                    <a href="#" class="hover:text-white transition">Facebook</a>
-                    <a href="#" class="hover:text-white transition">Instagram</a>
-                    <a href="#" class="hover:text-white transition">LinkedIn</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div id="site-footer"></div>
 
 <script type="module" src="../../src/project-gallery.js"></script>
+    <script type="module" src="/js/components.js"></script>
 </body>
 </html>

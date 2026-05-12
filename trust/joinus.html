@@ -97,46 +97,7 @@
 
 <body class="bg-group-base-white text-group-text-dark font-sans">
     
-    <!-- 🌿 NAV COMPONENT for GreenAmmo Group --><nav class="w-full bg-white shadow-sm sticky top-0 z-50" x-data="{ mobileMenuOpen: false }">
-        <div class="container mx-auto flex justify-between items-center px-6 py-4">
-            <!-- Logo --><a href="/" class="font-heading font-extrabold text-2xl text-group-primary-green tracking-tight flex items-center gap-2">
-                 <img src="./assets/greenammo.jpeg" alt="GreenAmmo Logo" class="h-10 w-auto rounded-full object-cover">
-                 <span class="text-group-pastel-green">Green</span><span class="text-group-pastel-blue">Ammo</span>
-            </a>
-            <!-- Primary Nav Links (Desktop) --><ul class="hidden md:flex space-x-6 text-group-text-medium font-medium items-center">
-                <li><a href="/aboutus.html" class="hover:text-group-primary-green transition">About Us</a></li>
-                <li class="relative group">
-                    <button class="hover:text-group-primary-green transition inline-flex items-center gap-1">
-                        Media
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-                    </button>
-                    <div class="absolute hidden group-hover:block bg-white rounded-xl shadow-lg p-4 top-5 -left-4 w-56 transition-all z-10 border border-gray-100">
-                        <ul class="text-sm space-y-1">
-                            <li><a href="/gallery.html" class="block py-1 px-3 text-group-text-medium hover:bg-group-pastel-green/30 rounded transition">Gallery</a></li>
-                            <li><a href="/testimonials.html" class="block py-1 px-3 text-group-text-medium hover:bg-group-pastel-green/30 rounded transition">Testimonials</a></li>
-                            <li><a href="/digitalcontent.html" class="block py-1 px-3 text-group-text-medium hover:bg-group-pastel-green/30 rounded transition">Digital Content</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li><a href="/blog.html" class="hover:text-group-primary-green transition">Blog</a></li>
-                <li><a href="/joinus.html" class="text-group-primary-green font-semibold transition">Join Us</a></li> <!-- Active Link --></ul>
-            <!-- Explore Button (Desktop) --><button id="explore-btn-desktop" class="hidden md:block cta-button bg-group-primary-green text-white hover:bg-opacity-90">
-                Explore
-            </button>
-            <!-- Mobile Menu Toggle --><button id="mobile-menu-toggle" class="md:hidden flex items-center text-group-primary-green focus:outline-none">
-                <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-        </div>
-        <!-- Mobile Dropdown --><div id="mobile-menu" class="hidden md:hidden flex-col space-y-2 bg-white shadow-inner px-6 py-4 border-t border-gray-100">
-            <a href="/aboutus.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">About Us</a>
-            <a href="/gallery.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">Media</a>
-            <a href="/blog.html" class="block py-2 text-group-text-medium hover:text-group-primary-green hover:bg-group-pastel-green/30 rounded">Blog</a>
-            <a href="/joinus.html" class="block py-2 text-group-primary-green font-bold bg-group-pastel-green/30 rounded">Join Us</a> <!-- Active Link --><button id="explore-btn-mobile" class="mt-2 w-full cta-button bg-group-primary-green text-white hover:bg-opacity-90">
-                Explore
-             </button>
-        </div>
-    </nav>
+    <!-- 🌿 NAV COMPONENT for GreenAmmo Group --><div id="site-nav"></div>
 
     <!-- MAIN CONTENT --><main>
 
@@ -426,106 +387,9 @@
 
     </main>
 
-    <!-- FOOTER (Group Theme) --><footer class="bg-group-text-dark text-white pt-12">
-        <div class="container mx-auto px-4 md:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-8 border-b border-gray-700">
-                <!-- Logo and Description --><div class="md:col-span-2 space-y-4">
-                    <h3 class="text-3xl font-bold text-group-pastel-green font-heading">GreenAmmo Group</h3>
-                    <p class="text-sm text-gray-300 max-w-sm">
-                        Empowering sustainable living and waste management through community action, research, and project initiation.
-                    </p>
-                </div>
-                <!-- Navigation Columns --><div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6">
-                    <!-- Column 1: GreenAmmo --><div class="space-y-3">
-                        <h4 class="font-semibold text-white mb-3 font-heading">GreenAmmo</h4>
-                        <ul class="text-sm space-y-2 text-gray-300">
-                            <li><a href="/aboutus.html" class="hover:text-group-pastel-green transition">About Us</a></li>
-                            <li><a href="/gallery.html" class="hover:text-group-pastel-green transition">Media (Gallery)</a></li>
-                            <li><a href="/certifications.html" class="hover:text-group-pastel-green transition">Certificates</a></li>
-                            <li><a href="/alliances.html" class="hover:text-group-pastel-green transition">Alliances</a></li>
-                        </ul>
-                    </div>
-                    <!-- Column 2: Solutions --><div class="space-y-3">
-                        <h4 class="font-semibold text-white mb-3 font-heading">Solutions</h4>
-                        <ul class="text-sm space-y-2 text-gray-300">
-                            <li><a href="/solutions/finance.html" class="hover:text-group-pastel-green transition">Finance</a></li>
-                            <li><a href="/solutions/education.html" class="hover:text-group-pastel-green transition">Education & Development</a></li>
-                            <li><a href="/solutions/eventsupply.html" class="hover:text-group-pastel-green transition">Event & Supply</a></li>
-                            <li><a href="/solutions/accommodation.html" class="hover:text-group-pastel-green transition">Accommodations</a></li>
-                        </ul>
-                    </div>
-                    <!-- Column 3: Trust --><div class="space-y-3">
-                        <h4 class="font-semibold text-white mb-3 font-heading">Trust</h4>
-                        <ul class="text-sm space-y-2 text-gray-300">
-                            <li><a href="/trust/projects.html" class="hover:text-group-pastel-green transition">Projects & Milestones</a></li>
-                            <li><a href="/trust/campaigns.html" class="hover:text-group-pastel-green transition">Campaigns</a></li>
-                            <li><a href="/trust/reports.html" class="hover:text-group-pastel-green transition">Reports & Research</a></li>
-                        </ul>
-                    </div>
-                    <!-- Column 4: Action/Explore --><div class="space-y-3">
-                        <h4 class="font-semibold text-white mb-3 font-heading">Take Action</h4>
-                        <div class="space-y-2">
-                            <a href="/join-us.html" class="block text-center py-2 px-4 rounded-full bg-group-primary-green text-white hover:bg-opacity-80 transition text-sm font-semibold shadow-md">Join Us</a>
-                            <button id="explore-btn-footer" class="block w-full text-center py-2 px-4 rounded-full border-2 border-group-pastel-green text-group-pastel-green hover:bg-group-pastel-green hover:text-group-text-dark transition text-sm font-semibold">Explore</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Bottom Row: Copyright and Socials --><div class="flex flex-col sm:flex-row justify-between items-center py-6 text-sm text-gray-400">
-                <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
-                <div class="flex gap-4 mt-4 sm:mt-0">
-                    <a href="#" class="hover:text-group-pastel-blue transition" aria-label="Facebook"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3 8h-2v2h2v2h-2v4h-2v-4H9V12h2V10c0-1.104.896-2 2-2h2v2z"/></svg></a>
-                    <a href="#" class="hover:text-group-pastel-blue transition" aria-label="Instagram"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.179 2.541c.883 0 1.632.748 1.632 1.632v.005c0 .883-.749 1.631-1.632 1.631h-.005c-.883 0-1.632-.748-1.632-1.631v-.005c0-.883.749-1.632 1.632-1.632h.005zM12 8c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4zm-2.821 8.879c.148.093.308.175.474.246.36.155.76.246 1.171.246h2.348c.41 0 .81-.091 1.17-.246.166-.071.326-.153.473-.246.22-.138.423-.306.605-.5.182-.194.34-.413.474-.658.134-.245.242-.516.326-.811.168-.598.256-1.233.256-1.879v-2.352c0-.646-.088-1.281-.256-1.879a4.897 4.897 0 0 0-.326-.811 4.795 4.795 0 0 0-.474-.658 4.67 4.67 0 0 0-.605-.5 4.908 4.908 0 0 0-.474-.246c-.36-.155-.76-.246-1.17-.246h-2.348c-.41 0-.81.091-1.17.246a4.908 4.908 0 0 0-.474.246 4.67 4.67 0 0 0-.605.5 4.795 4.795 0 0 0-.474.658 4.897 4.897 0 0 0-.326.811c-.168.598-.256 1.233-.256 1.879v2.352c0 .646.088 1.281.256 1.879a4.897 4.897 0 0 0 .326.811 4.795 4.795 0 0 0 .474.658 4.67 4.67 0 0 0 .605.5z"/></svg></a>
-                    <a href="#" class="hover:text-group-pastel-blue transition" aria-label="LinkedIn"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-2 16H8V11h2v7zm-1-8H9V8h1v2zM16 18h-2v-3c0-1.657-1.343-3-3-3s-3 1.343-3 3v3h-2V11h2v1.5c.618-.844 1.877-1.5 3-1.5 2.206 0 4 1.794 4 4v3z"/></svg></a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- FOOTER (Group Theme) --><div id="site-footer"></div>
 
-    <!-- 🌍 EXPLORE Button MODAL (Vanilla JS) --><div id="exploreModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden justify-center items-center z-50 p-4 modal-hidden">
-        <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full mx-auto overflow-hidden animate-fade-in" id="modal-content">
-             <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100">
-                <h3 class="text-xl font-semibold text-group-text-dark font-heading">Explore GreenAmmo</h3>
-                <button id="modal-close-btn" class="text-gray-400 hover:text-group-primary-green focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-            <div class="grid md:grid-cols-2 gap-6 p-8">
-                <!-- Panel 1: GreenAmmo Solutions --><div class="bg-group-pastel-blue/20 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-group-pastel-blue/30 border border-group-pastel-blue/40" onclick="window.location.href='./solutions/index.html'">
-                    <div>
-                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-group-pastel-blue/20">
-                            <svg class="w-16 h-16 text-group-pastel-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        </div>
-                        <h4 class="text-2xl font-semibold text-sol-dark mb-2 font-heading">GreenAmmo Solutions</h4>
-                        <p class="text-group-text-medium text-sm leading-relaxed">
-                            Professional, scalable services spanning Finance, Education, Events, and Accommodation — uniting purpose with performance for sustainable growth.
-                        </p>
-                    </div>
-                    <div class="mt-6">
-                        <button class="cta-button-secondary border-group-pastel-blue text-sol-dark hover:bg-group-pastel-blue/20 w-full sm:w-auto">
-                            Visit Solutions
-                        </button>
-                    </div>
-                </div>
-                <!-- Panel 2: GreenAmmo Trust --><div class="bg-group-pastel-green/30 rounded-2xl p-6 flex flex-col justify-between shadow hover:shadow-md transition cursor-pointer hover:bg-group-pastel-green/40 border border-group-pastel-green/50" onclick="window.location.href='./trust/index.html'">
-                     <div>
-                        <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-group-pastel-green/20">
-                           <svg class="w-16 h-16 text-group-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        </div>
-                        <h4 class="text-2xl font-semibold text-group-primary-green mb-2 font-heading">GreenAmmo Trust</h4>
-                        <p class="text-group-text-medium text-sm leading-relaxed">
-                            Non-profit initiatives for environmental awareness, youth empowerment, and community development — turning sustainability into action.
-                        </d>
-                    </div>
-                    <div class="mt-6">
-                         <button class="cta-button-secondary border-group-primary-green text-group-primary-green hover:bg-group-pastel-green/50 w-full sm:w-auto">
-                            Visit Trust
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- 🌍 EXPLORE Button MODAL (Vanilla JS) -->
 
     <!-- 🧠 VANILLA JS for Mobile Menu, Modal, and Lenis --><script>
        document.addEventListener('DOMContentLoaded', () => {
@@ -599,6 +463,7 @@
         });
     </script>
 
+    <script type="module" src="/js/components.js"></script>
 </body>
 </html>
 
