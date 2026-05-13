@@ -7,7 +7,7 @@ const state = {
 
 const paths = {
     group: {
-        logo: '/assets/greenammo.jpeg',
+        logo: '../assets/greenammo.jpeg',
         home: '/index.html',
         about: '/aboutus.html',
         gallery: '/gallery.html',
@@ -431,7 +431,7 @@ function attachEvents() {
         const toggle = container.querySelector('.dropdown-toggle');
         const menu = container.querySelector('.dropdown-menu');
         const icon = container.querySelector('.dropdown-icon');
-        
+
         if (toggle && menu) {
             // Mobile specific logic for desktop nav if used on smaller screens
             toggle.addEventListener('click', (e) => {
@@ -449,7 +449,7 @@ function attachEvents() {
         const toggle = container.querySelector('.mobile-dropdown-toggle');
         const menu = container.querySelector('.mobile-dropdown-menu');
         const icon = container.querySelector('.mobile-dropdown-icon');
-        
+
         if (toggle && menu) {
             toggle.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -471,14 +471,14 @@ function attachEvents() {
             // Small delay to allow display block to apply before transition
             setTimeout(() => {
                 exploreModal.classList.remove('opacity-0');
-                if(modalContent) modalContent.classList.remove('scale-95');
+                if (modalContent) modalContent.classList.remove('scale-95');
             }, 10);
             document.body.style.overflow = 'hidden';
         };
 
         const closeModal = () => {
             exploreModal.classList.add('opacity-0');
-            if(modalContent) modalContent.classList.add('scale-95');
+            if (modalContent) modalContent.classList.add('scale-95');
             setTimeout(() => {
                 exploreModal.classList.add('hidden');
             }, 300);
