@@ -27,6 +27,8 @@
         { key: 'members', label: '👥 Members', icon: '👥', keywords: ['member', 'team', 'group photo', 'staff', 'volunteer'] },
         { key: 'posters', label: '📄 Posters', icon: '📄', keywords: ['poster', 'flyer', 'banner', 'design'] },
         { key: 'logo', label: '🏷️ Logo', icon: '🏷️', keywords: ['logo', 'brand', 'emblem'] },
+        { key: 'testimonials', label: '🗣️ Testimonials', icon: '🗣️', keywords: ['testimonial', 'review', 'feedback', 'interview', 'experience'] },
+        { key: 'tutorials', label: '📖 Tutorials', icon: '📖', keywords: ['tutorial', 'guide', 'how-to', 'lesson', 'demo', 'explainer'] },
     ];
 
     // ── State ──
@@ -85,7 +87,9 @@
         const title = (item.title?.rendered || '').toLowerCase();
         const alt = (item.alt_text || '').toLowerCase();
         const desc = (item.description?.rendered || '').toLowerCase();
-        const haystack = title + ' ' + alt + ' ' + desc;
+        const caption = (item.caption?.rendered || '').toLowerCase();
+        const slug = (item.slug || '').toLowerCase();
+        const haystack = title + ' ' + alt + ' ' + desc + ' ' + caption + ' ' + slug;
 
         const matched = [];
         TAG_GROUPS.forEach(g => {
@@ -227,7 +231,7 @@
                     const grp = TAG_GROUPS.find(t => t.key === firstCat);
                     if (grp) {
                         const badge = document.createElement('span');
-                        badge.className = 'absolute bottom-2 left-2 text-xs bg-black/60 text-white px-2 py-0.5 rounded-full backdrop-blur-sm';
+                        badge.className = 'absolute bottom-2 left-2 text-xs bg-black/60 text-white px-2 py-0.5 rounded-full backdrop-blur-sm z-10';
                         badge.textContent = grp.icon + ' ' + grp.label.replace(/^[^\s]+\s/, '');
                         container.appendChild(badge);
                     }
