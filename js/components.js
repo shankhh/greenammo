@@ -7,7 +7,7 @@ const state = {
 
 const paths = {
     group: {
-        logo: '../assets/greenammo.jpeg',
+        logo: '/assets/greenammo-BqfXjaiB.jpeg',
         home: '/index.html',
         about: '/aboutus.html',
         gallery: '/gallery.html',
@@ -17,7 +17,7 @@ const paths = {
         donate: '/donate.html'
     },
     trust: {
-        logo: '/trust/trust.png',
+        logo: '/assets/trust-q95g3UYq.png',
         home: '/trust/index.html',
         campaigns: '/trust/campaign.html',
         projects: '/trust/projects.html',
@@ -27,7 +27,7 @@ const paths = {
         donate: '/trust/donate.html'
     },
     solutions: {
-        logo: '/assets/greenammo.jpeg',
+        logo: '/assets/greenammo-BqfXjaiB.jpeg',
         home: '/solutions/index.html',
         finance: '/solutions/finance.html',
         education: '/solutions/education.html',
