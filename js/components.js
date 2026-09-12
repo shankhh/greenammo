@@ -555,10 +555,10 @@ function hydrateDynamicNav(theme) {
         const navUl = document.querySelector('nav ul.hidden.md\\:flex, nav ul.hidden.lg\\:flex');
         if (!navUl) return;
 
-        navData.items.forEach(item => {
-            const existingLink = navUl.querySelector(`a[href="${item.url}"]`);
-            if (existingLink) return;
+        // Clear hardcoded static baseline and replace with exact WordPress menu order
+        navUl.innerHTML = '';
 
+        navData.items.forEach(item => {
             const li = document.createElement('li');
             if (item.children && item.children.length > 0) {
                 li.className = 'relative group dropdown-container py-1';
