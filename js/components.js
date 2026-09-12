@@ -69,18 +69,20 @@ function getGroupNav() {
             </a>
             <ul class="hidden md:flex space-x-6 text-group-text-medium font-medium items-center">
                 <li><a href="${paths.group.about}" class="hover:text-group-primary-green transition ${getActiveClass(paths.group.about, 'text-group-primary-green')}">About Us</a></li>
-                <li class="relative group">
+                <li class="relative group py-1">
                     <button class="hover:text-group-primary-green transition inline-flex items-center gap-1">
                         Media
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
-                    <div class="absolute hidden group-hover:block bg-white rounded-xl shadow-lg p-4 top-5 -left-4 w-56 transition-all z-10 border border-gray-100">
-                        <ul class="text-sm space-y-1">
-                            <li><a href="${paths.group.gallery}" class="block py-1 px-3 text-group-text-medium hover:bg-group-pastel-green/30 rounded transition ${getActiveClass(paths.group.gallery, 'font-bold text-group-primary-green')}">Gallery</a></li>
-                            <li><a href="${paths.group.testimonials}" class="block py-1 px-3 text-group-text-medium hover:bg-group-pastel-green/30 rounded transition ${getActiveClass(paths.group.testimonials, 'font-bold text-group-primary-green')}">Testimonials</a></li>
-                        </ul>
+                    <div class="absolute hidden group-hover:block top-full pt-2 -left-4 w-56 transition-all z-10">
+                        <div class="bg-white rounded-xl shadow-lg p-4 border border-gray-100">
+                            <ul class="text-sm space-y-1">
+                                <li><a href="${paths.group.gallery}" class="block py-1 px-3 text-group-text-medium hover:bg-group-pastel-green/30 rounded transition ${getActiveClass(paths.group.gallery, 'font-bold text-group-primary-green')}">Gallery</a></li>
+                                <li><a href="${paths.group.testimonials}" class="block py-1 px-3 text-group-text-medium hover:bg-group-pastel-green/30 rounded transition ${getActiveClass(paths.group.testimonials, 'font-bold text-group-primary-green')}">Testimonials</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </li>
                 <li><a href="${paths.group.blog}" class="hover:text-group-primary-green transition ${getActiveClass(paths.group.blog, 'text-group-primary-green')}">Blog</a></li>
@@ -119,18 +121,20 @@ function getTrustNav() {
         <div class="hidden lg:flex items-center space-x-8">
           <a href="${paths.group.home}" class="text-gray-700 hover:text-brand-accent transition font-semibold">HOME</a>
           <a href="${paths.trust.campaigns}" class="text-gray-700 hover:text-brand-accent transition font-semibold ${getActiveClass(paths.trust.campaigns, 'text-brand-accent')}">Campaigns</a>
-          <div class="relative group dropdown-container">
+          <div class="relative group dropdown-container py-1">
             <button class="dropdown-toggle text-gray-700 hover:text-brand-accent transition inline-flex items-center gap-1 font-semibold">
               Projects
               <svg class="dropdown-icon w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-            <div class="dropdown-menu absolute hidden group-hover:block bg-white rounded-xl shadow-xl p-3 top-10 right-0 w-48 transition-all z-30 border border-brand-light origin-top-right">
-              <ul class="text-sm space-y-1">
-                <li><a href="${paths.trust.projects}" class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition">Projects</a></li>
-                <li><a href="${paths.trust.reports}" class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition">Reports</a></li>
-              </ul>
+            <div class="dropdown-menu absolute hidden group-hover:block top-full pt-2 right-0 w-48 transition-all z-30 origin-top-right">
+              <div class="bg-white rounded-xl shadow-xl p-3 border border-brand-light">
+                <ul class="text-sm space-y-1">
+                  <li><a href="${paths.trust.projects}" class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition">Projects</a></li>
+                  <li><a href="${paths.trust.reports}" class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition">Reports</a></li>
+                </ul>
+              </div>
             </div>
           </div>
           <a href="${paths.trust.tutorials}" class="text-gray-700 hover:text-brand-accent transition font-semibold ${getActiveClass(paths.trust.tutorials, 'text-brand-accent')}">Tutorials</a>
@@ -180,18 +184,20 @@ function getSolutionsNav() {
                 <ul class="hidden md:flex items-center space-x-6">
                     <li><a href="${paths.group.home}" class="text-base font-semibold text-gray-700 hover:text-brand-accent transition">HOME</a></li>
                     <li><a href="${paths.group.about}" class="text-gray-700 hover:text-brand-accent transition">About Us</a></li>
-                    <li class="relative group dropdown-container">
+                    <li class="relative group dropdown-container py-1">
                         <button class="dropdown-toggle text-gray-700 hover:text-brand-accent transition inline-flex items-center gap-1">
                             Services
                             <svg xmlns="http://www.w3.org/2000/svg" class="dropdown-icon w-4 h-4 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                         </button>
-                        <div class="dropdown-menu absolute hidden group-hover:block bg-white rounded-xl shadow-xl p-3 top-5 -left-4 w-48 transition-all z-10 border border-brand-light">
-                            <ul class="text-sm space-y-1">
-                                <li><a href="${paths.solutions.finance}" class="block py-1 px-2 text-gray-700 hover:bg-brand-light rounded transition">Finance Services</a></li>
-                                <li><a href="${paths.solutions.education}" class="block py-1 px-2 text-gray-700 hover:bg-brand-light rounded transition">Education & Dev.</a></li>
-                                <li><a href="${paths.solutions.eventsupply}" class="block py-1 px-2 text-gray-700 hover:bg-brand-light rounded transition">Event & Supply</a></li>
-                                <li><a href="${paths.solutions.accommodation}" class="block py-1 px-2 text-gray-700 hover:bg-brand-light rounded transition">Accommodation</a></li>
-                            </ul>
+                        <div class="dropdown-menu absolute hidden group-hover:block top-full pt-2 -left-4 w-48 transition-all z-10">
+                            <div class="bg-white rounded-xl shadow-xl p-3 border border-brand-light">
+                                <ul class="text-sm space-y-1">
+                                    <li><a href="${paths.solutions.finance}" class="block py-1 px-2 text-gray-700 hover:bg-brand-light rounded transition">Finance Services</a></li>
+                                    <li><a href="${paths.solutions.education}" class="block py-1 px-2 text-gray-700 hover:bg-brand-light rounded transition">Education & Dev.</a></li>
+                                    <li><a href="${paths.solutions.eventsupply}" class="block py-1 px-2 text-gray-700 hover:bg-brand-light rounded transition">Event & Supply</a></li>
+                                    <li><a href="${paths.solutions.accommodation}" class="block py-1 px-2 text-gray-700 hover:bg-brand-light rounded transition">Accommodation</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </li>
                     <li>
