@@ -71,9 +71,52 @@ async function fetchProjectImages(slug) {
   }
 }
 
+function getCurrentRegion() {
+  const container = document.querySelector(".timeline-container");
+  if (container && container.dataset.wpRegion) {
+    return container.dataset.wpRegion.toLowerCase().trim();
+  }
+
+  const path = window.location.pathname.toLowerCase();
+  if (path.includes("meghalaya")) return "meghalaya";
+  if (path.includes("west-bengal") || path.includes("westbengal")) return "west-bengal";
+  if (path.includes("assam")) return "assam";
+  if (path.includes("goa")) return "goa";
+  if (path.includes("himachal")) return "himachal-pradesh";
+  if (path.includes("arunachal")) return "arunachal-pradesh";
+  if (path.includes("nepal")) return "nepal";
+  if (path.includes("odisha")) return "odisha";
+  if (path.includes("tamil-nadu") || path.includes("tamilnadu")) return "tamil-nadu";
+  return null;
+}
+
+function isPostForRegion(project, targetRegion) {
+  if (!targetRegion) return false;
+  const cleanTarget = targetRegion.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+  // 1. Check ACF field 'region' or 'project_region'
+  if (project.acf) {
+    const acfRegion = (project.acf.region || project.acf.project_region || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (acfRegion && (acfRegion.includes(cleanTarget) || cleanTarget.includes(acfRegion))) return true;
+  }
+
+  // 2. Check Post Slug
+  const slug = (project.slug || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  if (slug.includes(cleanTarget)) return true;
+
+  // 3. Check Post Title
+  const title = (project.title?.rendered || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  if (title.includes(cleanTarget)) return true;
+
+  return false;
+}
+
 async function initDynamicProjectsFeed() {
   const feedContainer = document.querySelector(".timeline-container");
   if (!feedContainer) return;
+
+  const currentRegion = getCurrentRegion();
+  if (!currentRegion) return;
 
   const existingSlugs = new Set();
   document.querySelectorAll("[data-wp-slug]").forEach((el) => {
@@ -86,10 +129,13 @@ async function initDynamicProjectsFeed() {
     const projects = await res.json();
     if (!Array.isArray(projects)) return;
 
-    // Filter for new projects published in WP that aren't hardcoded on the page yet
-    const newProjects = projects.filter(
-      (p) => p.slug && !existingSlugs.has(p.slug.toLowerCase().trim())
-    );
+    // Filter for new projects published in WP that match the current region and aren't hardcoded yet
+    const newProjects = projects.filter((p) => {
+      if (!p.slug) return false;
+      const isAlreadyOnPage = existingSlugs.has(p.slug.toLowerCase().trim());
+      if (isAlreadyOnPage) return false;
+      return isPostForRegion(p, currentRegion);
+    });
 
     for (const project of newProjects) {
       const images = await parseProjectImages(project);
