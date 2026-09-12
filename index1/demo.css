@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  --color-theme-primary: var(--theme-primary);
+  --color-theme-accent: var(--theme-accent);
+  --font-heading: "Bricolage Grotesque", "Outfit", sans-serif;
+  --font-sans: "Outfit", "Inter", sans-serif;
+}
+
+/* Base custom properties for state-driven theme color swappings */
+:root {
+  /* Default: Group Theme (Mint / Pop Pastel) */
+  --theme-primary: #4CAF50;
+  --theme-accent: #9FD8E4;
+}
+
+/* Custom CSS Transitions for color variable swaps */
+#website-preview {
+  transition: background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Sleek Scrollbars for CPT Panels */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.3);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.15);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.3);
+}
+
+/* Premium Text Gradient Helper */
+.text-gradient {
+  background: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Active Theme Toggle Button State */
+.active-theme {
+  background-color: var(--theme-primary) !important;
+  color: #020617 !important;
+  box-shadow: 0 4px 12px -2px rgba(255, 255, 255, 0.05);
+}
+
+/* Active Tab Highlight for State Picker */
+.active-tab {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: var(--theme-primary) !important;
+  color: var(--theme-primary) !important;
+}
+
+/* Active CMS Tab highlight */
+.active-cms-tab {
+  border-bottom-color: #0284c7 !important;
+  color: #0284c7 !important;
+  background-color: rgba(2, 132, 199, 0.05);
+}
+
+/* Interactive Card Hover Effects */
+.project-card-arrow {
+  transition: transform 0.3s ease;
+}
+
+#project-showcase-card:hover .project-card-arrow {
+  transform: translateX(4px);
+}
+
+/* Pulse Glow Rings */
+.glow-ring {
+  box-shadow: 0 0 40px -5px var(--theme-primary);
+}
+
+/* Fade animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

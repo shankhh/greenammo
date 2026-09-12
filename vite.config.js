@@ -4,7 +4,7 @@ import { resolve } from 'path';
 import {glob} from 'glob';
 
 // Define the directories where your HTML files are located.
-const htmlDirectories = ['solutions', 'trust'];
+const htmlDirectories = ['solutions', 'trust', 'index1'];
 
 const getHtmlEntryFiles = () => {
   const entries = {};

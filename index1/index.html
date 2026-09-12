@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en" class="h-full">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GREENAMMO Interactive Prototype - WordPress CMS & UI Showcase</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind v4 compiled styles -->
+    <link rel="stylesheet" href="./demo.css">
+</head>
+
+<body class="h-full bg-slate-950 text-slate-100 font-sans overflow-x-hidden antialiased">
+
+    <!-- Prototype Dashboard Layout (Split-screen on desktop: Left = Website Preview, Right = WordPress CMS Panel) -->
+    <div class="flex flex-col lg:flex-row min-h-screen">
+        
+        <!-- ========================================== -->
+        <!-- LEFT: THE LIVE WEBSITE PROTOTYPE PREVIEW  -->
+        <!-- ========================================== -->
+        <div id="website-preview" class="flex-1 flex flex-col min-h-screen bg-slate-900 border-r border-slate-800 transition-all duration-500 overflow-y-auto">
+            
+            <!-- Dynamic Navigation Bar -->
+            <nav id="preview-nav" class="sticky top-0 z-30 w-full backdrop-blur-md border-b border-white/10 px-6 py-4 transition-all duration-300">
+                <div class="max-w-6xl mx-auto flex justify-between items-center">
+                    <a href="#" class="flex items-center gap-3 group">
+                        <img src="../assets/greenammo.jpeg" alt="GREENAMMO Logo" class="h-10 w-10 rounded-full border border-white/20 object-cover group-hover:scale-105 transition-transform">
+                        <div class="flex flex-col">
+                            <span class="font-heading font-extrabold text-lg tracking-wider text-theme-primary">GREENAMMO</span>
+                            <span id="nav-subtitle" class="text-[10px] uppercase font-bold tracking-widest text-slate-400">Group Portal</span>
+                        </div>
+                    </a>
+                    
+                    <!-- Desktop Links -->
+                    <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+                        <a href="#" class="text-white hover:text-theme-accent transition">Home</a>
+                        <a href="#" class="text-slate-300 hover:text-theme-accent transition">About Us</a>
+                        <a href="#" class="text-slate-300 hover:text-theme-accent transition">Media</a>
+                        <a href="#" class="text-slate-300 hover:text-theme-accent transition">Join Us</a>
+                    </div>
+
+                    <!-- Dynamic Action CTA -->
+                    <div class="flex items-center gap-4">
+                        <button id="theme-indicator" class="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-slate-300">
+                            <span class="h-2 w-2 rounded-full bg-theme-accent animate-pulse"></span>
+                            <span id="theme-label">Group theme</span>
+                        </button>
+                        <button id="preview-cta" class="px-5 py-2 rounded-full text-xs font-bold text-slate-950 bg-theme-accent hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-theme-accent/20 transition-all">
+                            Explore
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Live Content Area -->
+            <main class="flex-1 flex flex-col justify-between">
+                
+                <!-- Hero Section with Theme Backdrops -->
+                <section class="relative px-6 py-16 md:py-24 overflow-hidden">
+                    <!-- Dynamic Mesh Gradient Backgrounds -->
+                    <div class="absolute inset-0 z-0 pointer-events-none">
+                        <div id="mesh-gradient-1" class="absolute -top-40 -left-40 w-96 h-96 rounded-full blur-[100px] opacity-35 transition-all duration-700 bg-theme-primary"></div>
+                        <div id="mesh-gradient-2" class="absolute bottom-10 right-10 w-80 h-80 rounded-full blur-[100px] opacity-25 transition-all duration-700 bg-theme-accent"></div>
+                    </div>
+
+                    <div class="max-w-4xl mx-auto text-center relative z-10 space-y-6">
+                        <!-- Theme selector widget inside site header to show potential -->
+                        <div class="inline-flex p-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-4">
+                            <button id="btn-theme-group" class="px-4 py-1.5 rounded-full text-xs font-semibold transition-all active-theme" onclick="setTheme('group')">Group Portal</button>
+                            <button id="btn-theme-solutions" class="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-400 hover:text-white transition-all" onclick="setTheme('solutions')">Solutions Division</button>
+                            <button id="btn-theme-trust" class="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-400 hover:text-white transition-all" onclick="setTheme('trust')">Trust Division</button>
+                        </div>
+
+                        <!-- CMS Configured Header Content -->
+                        <h1 id="cms-hero-title" class="text-4xl md:text-6xl font-extrabold font-heading leading-tight tracking-tight text-white transition-all duration-300">
+                            Empowering People.<br>Enabling Progress.<br><span class="text-gradient">Enriching Planet.</span>
+                        </h1>
+                        
+                        <p id="cms-hero-desc" class="text-slate-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed transition-all duration-300">
+                            GREENAMMO Group bridges impact and innovation — empowering individuals, communities, and enterprises to build a smarter, inclusive, and sustainable future.
+                        </p>
+
+                        <div class="flex justify-center gap-4 pt-4">
+                            <button id="cms-btn-primary" class="px-8 py-3 rounded-full text-sm font-bold text-slate-950 bg-theme-accent hover:opacity-90 hover:scale-[1.02] shadow-xl shadow-theme-accent/10 transition-all">
+                                Get Started
+                            </button>
+                            <button id="cms-btn-secondary" class="px-8 py-3 rounded-full text-sm font-bold bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all">
+                                Learn More
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Core Stats Section -->
+                <section class="border-y border-white/5 py-12 px-6 bg-slate-900/50 backdrop-blur-sm">
+                    <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                        <div class="space-y-1">
+                            <h3 id="cms-stat-states" class="text-4xl font-extrabold font-heading text-theme-primary transition-all duration-300">10+</h3>
+                            <p class="text-xs uppercase tracking-widest text-slate-400 font-bold">States Active</p>
+                        </div>
+                        <div class="space-y-1">
+                            <h3 id="cms-stat-hours" class="text-4xl font-extrabold font-heading text-theme-primary transition-all duration-300">500k+</h3>
+                            <p class="text-xs uppercase tracking-widest text-slate-400 font-bold">Community Hours</p>
+                        </div>
+                        <div class="space-y-1">
+                            <h3 id="cms-stat-projects" class="text-4xl font-extrabold font-heading text-theme-primary transition-all duration-300">100+</h3>
+                            <p class="text-xs uppercase tracking-widest text-slate-400 font-bold">Projects Done</p>
+                        </div>
+                        <div class="space-y-1">
+                            <h3 id="cms-stat-partners" class="text-4xl font-extrabold font-heading text-theme-primary transition-all duration-300">500+</h3>
+                            <p class="text-xs uppercase tracking-widest text-slate-400 font-bold">Partners Joined</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Interactive Projects & Writeup Integration Showcase -->
+                <section class="px-6 py-16 max-w-6xl mx-auto w-full space-y-12">
+                    <div class="text-center max-w-xl mx-auto space-y-3">
+                        <h2 class="text-3xl font-bold font-heading text-white">Trust Projects & Milestones</h2>
+                        <p class="text-slate-400 text-sm">Select a state region to view historically migrated writeups dynamically injected from the WordPress Database Schema.</p>
+                    </div>
+
+                    <!-- State Selector Tabs -->
+                    <div class="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto border-b border-white/5 pb-6">
+                        <button class="state-tab px-4 py-2 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-slate-300 hover:text-white transition-all active-tab" data-state="meghalaya">Meghalaya</button>
+                        <button class="state-tab px-4 py-2 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-slate-300 hover:text-white transition-all" data-state="assam">Assam</button>
+                        <button class="state-tab px-4 py-2 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-slate-300 hover:text-white transition-all" data-state="goa">Goa</button>
+                        <button class="state-tab px-4 py-2 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-slate-300 hover:text-white transition-all" data-state="tamil-nadu">Tamil Nadu</button>
+                        <button class="state-tab px-4 py-2 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-slate-300 hover:text-white transition-all" data-state="west-bengal">West Bengal</button>
+                    </div>
+
+                    <!-- Dynamic Project Container (Glassmorphic Card) -->
+                    <div id="project-showcase-card" class="grid md:grid-cols-5 gap-8 p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md shadow-2xl relative overflow-hidden transition-all duration-500">
+                        <div class="md:col-span-3 space-y-6">
+                            <div class="space-y-2">
+                                <span id="project-state-badge" class="inline-block py-1 px-3 rounded-full bg-theme-primary/20 text-theme-primary border border-theme-primary/30 text-[10px] uppercase font-bold tracking-widest">Trust Project</span>
+                                <h3 id="project-title" class="text-2xl md:text-3xl font-bold font-heading text-white">Shillong Waste & Youth Action</h3>
+                            </div>
+                            
+                            <p id="project-description" class="text-slate-300 text-sm leading-relaxed">
+                                Our initiatives in Meghalaya center on environmental action and youth collaboration in Shillong, working alongside the Shillong Municipal Board and the State Pollution Control Board.
+                            </p>
+
+                            <!-- Timeline of Migrated Writeups -->
+                            <div class="space-y-4">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-white/5 pb-2">Migrated History & Milestones</h4>
+                                <div id="project-milestones" class="space-y-4 max-h-[220px] overflow-y-auto pr-2">
+                                    <!-- Milestones dynamic injector -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Map / Geo Visualization Mock -->
+                        <div class="md:col-span-2 flex flex-col justify-between bg-slate-950/60 border border-white/5 rounded-2xl p-6 min-h-[300px] relative">
+                            <!-- Visual Ring Map Mock -->
+                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
+                                <div class="w-48 h-48 rounded-full border-2 border-dashed border-theme-primary animate-[spin_40s_linear_infinite]"></div>
+                                <div class="absolute w-36 h-36 rounded-full border border-dashed border-theme-accent animate-[spin_20s_linear_infinite_reverse]"></div>
+                            </div>
+                            
+                            <div class="relative z-10 space-y-2">
+                                <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400">Map Localization</h4>
+                                <p id="project-location" class="text-sm font-semibold text-white">East Khasi Hills, Shillong</p>
+                            </div>
+                            
+                            <!-- Static Geo Points representing CMS dynamic data -->
+                            <div class="relative z-10 flex flex-col items-center justify-center h-full py-6">
+                                <div class="relative">
+                                    <span class="absolute inline-flex h-6 w-6 rounded-full bg-theme-primary opacity-75 animate-ping"></span>
+                                    <span class="relative inline-flex rounded-full h-4 w-4 bg-theme-primary border border-white"></span>
+                                </div>
+                                <span id="project-coordinates" class="text-[10px] font-mono text-slate-500 mt-2">25.5788° N, 91.8933° E</span>
+                            </div>
+
+                            <button class="relative z-10 w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold tracking-wider uppercase text-white transition-all">
+                                View Government Certifications
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Premium Testimonials Carousel -->
+                <section class="border-t border-white/5 bg-slate-900/30 px-6 py-16">
+                    <div class="max-w-4xl mx-auto text-center space-y-8">
+                        <h2 class="text-3xl font-bold font-heading text-white">Voices of the Community</h2>
+                        
+                        <div class="relative min-h-[180px] flex items-center justify-center">
+                            <div id="testimonial-card" class="space-y-4 transition-all duration-500 transform">
+                                <p id="testimonial-quote" class="text-xl md:text-2xl font-heading text-slate-200 italic leading-relaxed">
+                                    "GREENAMMO is one of the only organizations built from a concept to an entity without compromising on ethics."
+                                </p>
+                                <div class="flex flex-col items-center justify-center">
+                                    <span id="testimonial-name" class="font-bold text-sm text-theme-accent">Navjot</span>
+                                    <span id="testimonial-loc" class="text-xs text-slate-500 uppercase tracking-widest">Meghalaya</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dots Indicator -->
+                        <div class="flex justify-center gap-2">
+                            <button class="t-dot h-2 w-2 rounded-full bg-theme-accent" onclick="setTestimonial(0)"></button>
+                            <button class="t-dot h-2 w-2 rounded-full bg-white/20" onclick="setTestimonial(1)"></button>
+                            <button class="t-dot h-2 w-2 rounded-full bg-white/20" onclick="setTestimonial(2)"></button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Footer (Preview) -->
+                <footer class="border-t border-white/5 bg-slate-950 py-10 px-6 text-center text-xs text-slate-500">
+                    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+                        <div class="flex items-center gap-2">
+                            <img src="../assets/greenammo.jpeg" alt="GREENAMMO Logo" class="h-6 w-6 rounded-full opacity-60">
+                            <p>&copy; 2026 GREENAMMO Group. UI Prototype Sandbox.</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                            <a href="#" class="hover:text-white transition">Terms of Service</a>
+                            <a href="#" class="hover:text-white transition">WP REST API Schema</a>
+                        </div>
+                    </div>
+                </footer>
+
+            </main>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- RIGHT: THE WORDPRESS CMS ADMIN SIMULATOR  -->
+        <!-- ========================================== -->
+        <div id="cms-panel" class="w-full lg:w-[420px] bg-slate-950 border-t lg:border-t-0 border-slate-800 flex flex-col h-auto lg:h-screen sticky top-0 overflow-y-auto select-none">
+            <!-- CMS Panel Header -->
+            <div class="p-6 border-b border-slate-800 bg-slate-900/50 flex justify-between items-center">
+                <div class="flex items-center gap-2.5">
+                    <div class="h-8 w-8 rounded-lg bg-sky-600 flex items-center justify-center text-white font-bold text-sm">
+                        WP
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-sm font-bold tracking-tight text-white">WordPress CMS Customizer</span>
+                        <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider flex items-center gap-1">
+                            <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span> Live REST API Mock
+                        </span>
+                    </div>
+                </div>
+                <span class="text-[10px] font-mono bg-slate-800 text-slate-300 px-2 py-1 rounded">v2.1</span>
+            </div>
+
+            <!-- Tabs to toggle between fields -->
+            <div class="grid grid-cols-3 border-b border-slate-800 text-center text-xs">
+                <button id="tab-cms-global" class="py-3 font-semibold border-b-2 border-sky-500 text-sky-500 bg-slate-900/20 active-cms-tab" onclick="setCmsTab('global')">General</button>
+                <button id="tab-cms-projects" class="py-3 font-semibold text-slate-400 border-b-2 border-transparent hover:text-white hover:bg-slate-900/10" onclick="setCmsTab('projects')">Trust Projects</button>
+                <button id="tab-cms-schema" class="py-3 font-semibold text-slate-400 border-b-2 border-transparent hover:text-white hover:bg-slate-900/10" onclick="setCmsTab('schema')">JSON Schema</button>
+            </div>
+
+            <!-- Content Area for Custom Fields -->
+            <div class="flex-1 p-6 space-y-6">
+
+                <!-- 1. GENERAL FIELDS SECTION -->
+                <div id="cms-fields-global" class="space-y-6">
+                    <div class="space-y-2">
+                        <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">WordPress Page: Homepage</span>
+                        <h4 class="text-sm font-bold text-slate-200">ACF Custom Fields: Hero Block</h4>
+                    </div>
+
+                    <!-- Hero Title Textarea -->
+                    <div class="space-y-2">
+                        <label for="input-hero-title" class="block text-xs font-semibold text-slate-300 flex justify-between">
+                            <span>Hero Main Title (HTML Allowed)</span>
+                            <span class="text-[10px] text-slate-500 font-mono">field: hero_title</span>
+                        </label>
+                        <textarea id="input-hero-title" rows="3" class="w-full text-xs bg-slate-900 border border-slate-800 rounded-lg p-3 text-white focus:outline-none focus:border-sky-500 transition-all font-mono"></textarea>
+                    </div>
+
+                    <!-- Hero Description -->
+                    <div class="space-y-2">
+                        <label for="input-hero-desc" class="block text-xs font-semibold text-slate-300 flex justify-between">
+                            <span>Hero Subtext Description</span>
+                            <span class="text-[10px] text-slate-500 font-mono">field: hero_desc</span>
+                        </label>
+                        <textarea id="input-hero-desc" rows="4" class="w-full text-xs bg-slate-900 border border-slate-800 rounded-lg p-3 text-white focus:outline-none focus:border-sky-500 transition-all leading-relaxed"></textarea>
+                    </div>
+
+                    <!-- Statistics Fields (ACF Repeater Mock) -->
+                    <div class="space-y-3">
+                        <h5 class="text-xs font-bold text-slate-300 flex justify-between border-t border-slate-800 pt-4">
+                            <span>ACF Repeater: Core Counters</span>
+                            <span class="text-[10px] text-slate-500 font-mono">field: stat_counters</span>
+                        </h5>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-semibold text-slate-400">States Count</label>
+                                <input id="input-stat-states" type="text" class="w-full text-xs bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white focus:outline-none focus:border-sky-500">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-semibold text-slate-400">Hours Count</label>
+                                <input id="input-stat-hours" type="text" class="w-full text-xs bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white focus:outline-none focus:border-sky-500">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-semibold text-slate-400">Projects Count</label>
+                                <input id="input-stat-projects" type="text" class="w-full text-xs bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white focus:outline-none focus:border-sky-500">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-semibold text-slate-400">Partners Count</label>
+                                <input id="input-stat-partners" type="text" class="w-full text-xs bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white focus:outline-none focus:border-sky-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. PROJECTS FIELDS SECTION (EDIT WRITEUPS) -->
+                <div id="cms-fields-projects" class="space-y-6 hidden">
+                    <div class="space-y-2">
+                        <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Custom Post Type: trust_projects</span>
+                        <h4 class="text-sm font-bold text-slate-200">ACF Repeater: Historical Writeup Milestones</h4>
+                    </div>
+
+                    <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-800 space-y-1 text-xs">
+                        <p class="font-bold text-slate-300">Editing Post: <span id="cms-project-editing-title" class="text-sky-400">Meghalaya</span></p>
+                        <p class="text-[10px] text-slate-500">Writeups extracted from trust/projects/ files are mapped below as Gutenberg block elements.</p>
+                    </div>
+
+                    <!-- Dynamic Milestone List Inputs -->
+                    <div id="cms-milestones-repeater" class="space-y-4 max-h-[350px] overflow-y-auto pr-2">
+                        <!-- Loaded dynamically based on selected state tab -->
+                    </div>
+                </div>
+
+                <!-- 3. JSON SCHEMA ENDPOINT SHOWCASE -->
+                <div id="cms-fields-schema" class="space-y-6 hidden">
+                    <div class="space-y-2">
+                        <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">WP REST API ENDPOINT</span>
+                        <h4 class="text-sm font-bold text-slate-200">GET /wp-json/wp/v2/trust_projects?state=<span id="api-state-param" class="text-sky-400">meghalaya</span></h4>
+                    </div>
+
+                    <!-- JSON Schema Pre block -->
+                    <div class="relative">
+                        <button class="absolute top-2 right-2 px-2.5 py-1 text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono rounded" onclick="copyApiJson()">Copy</button>
+                        <pre id="api-json-render" class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-[10px] font-mono text-emerald-400 overflow-x-auto max-h-[400px] leading-relaxed">
+<!-- Loaded dynamically -->
+                        </pre>
+                    </div>
+                    
+                    <div class="space-y-2 text-xs text-slate-400 bg-white/5 p-4 rounded-xl border border-white/5 leading-relaxed">
+                        <p class="font-semibold text-slate-200 flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Headless Implementation Detail
+                        </p>
+                        <p>In the final architecture, client requests fetch this JSON schema from the WordPress database. An automated Node.js crawler fetches and structures these properties to hydrate the layout statically during production compilation.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Save Simulated Changes Button -->
+            <div class="p-6 border-t border-slate-800 bg-slate-900/30 flex justify-between items-center gap-4">
+                <div class="text-xs text-slate-500">
+                    Auto-saves dynamically
+                </div>
+                <button id="btn-save-draft" class="px-6 py-2.5 rounded-lg text-xs font-bold bg-sky-600 hover:bg-sky-500 text-white shadow-lg shadow-sky-600/25 transition-all flex items-center gap-2">
+                    <svg class="w-3 h-3 animate-spin hidden" id="save-spinner" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    Publish to Staging
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Floating Toggle Button for Mobile CMS Simulator -->
+    <button id="cms-mobile-toggle" class="lg:hidden fixed bottom-6 right-6 h-14 w-14 rounded-full bg-sky-600 hover:bg-sky-500 text-white flex items-center justify-center shadow-2xl z-50 transition-all duration-300">
+        <svg id="cms-mobile-toggle-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+    </button>
+
+    <script type="module" src="./demo.js"></script>
+
+</body>
+
+</html>
