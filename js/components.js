@@ -540,10 +540,19 @@ function hydrateDynamicNav(theme) {
 
     async function tryFetchMenu() {
         for (const slug of candidates) {
-            const endpoint = `https://cms.greenammo.in/wp-json/wp/v2/menus/${slug}?_fields=id,title,items`;
-            const data = await swrFetch(slug, endpoint, null);
-            if (data && Array.isArray(data.items) && data.items.length > 0) {
-                return data;
+            const endpoints = [
+                `https://cms.greenammo.in/wp-json/wp/v2/menus/${slug}?_fields=id,title,items`,
+                `https://cms.greenammo.in/wp-json/wp-api-menus/v2/menus/${slug}`,
+                `https://cms.greenammo.in/wp-json/menus/v1/menus/${slug}`
+            ];
+            for (const endpoint of endpoints) {
+                const data = await swrFetch(`nav_${slug}`, endpoint, null);
+                if (data) {
+                    const items = data.items || (Array.isArray(data) ? data : null);
+                    if (Array.isArray(items) && items.length > 0) {
+                        return { items };
+                    }
+                }
             }
         }
         return null;
