@@ -43,12 +43,15 @@ async function fetchProjectImages(slug) {
     const images = [];
 
     for (const id of imageIds) {
-      const mediaRes = await fetch(`${MEDIA_ENDPOINT}/${id}`);
+      const mediaRes = await fetch(`${MEDIA_ENDPOINT}/${id}?_fields=source_url,alt_text,caption,title`);
       const media = await mediaRes.json();
+
+      const captionText = media.caption?.rendered ? media.caption.rendered.replace(/<[^>]*>?/gm, '').trim() : '';
 
       images.push({
         url: media.source_url,
-        alt: media.alt_text || "",
+        alt: media.alt_text || media.title?.rendered || "",
+        caption: captionText || media.alt_text || "",
       });
     }
 
@@ -182,15 +185,22 @@ function createBlock(classes) {
 // }
 
 function imageHTML(img) {
+  const hasCaption = img.caption && img.caption.length > 0;
   return `
-        <div class="rounded-xl overflow-hidden cursor-zoom-in">
+        <div class="rounded-xl overflow-hidden cursor-zoom-in relative group/img">
             <img 
                 src="${img.url}" 
                 alt="${img.alt}" 
                 data-full="${img.url}"
+                data-caption="${img.caption || ''}"
                 class="w-full aspect-[4/5] object-cover transition duration-500 hover:scale-105"
                 loading="lazy"
             >
+            ${hasCaption ? `
+              <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3 text-white text-xs opacity-90 group-hover/img:opacity-100 transition-opacity">
+                <p class="line-clamp-2 font-medium">${img.caption}</p>
+              </div>
+            ` : ''}
         </div>
     `;
 }
@@ -203,17 +213,28 @@ document.addEventListener("click", function (e) {
   const img = e.target.closest("img[data-full]");
   if (!img) return;
 
-  openModal(img.dataset.full, img.alt);
+  openModal(img.dataset.full, img.alt, img.dataset.caption);
 });
 
-function openModal(src, alt) {
+function openModal(src, alt, caption) {
   const modal = document.getElementById("image-modal");
   const modalImg = document.getElementById("modal-image");
+  const modalCaption = document.getElementById("modal-caption");
 
-  modalImg.src = src;
-  modalImg.alt = alt || "";
-  modal.classList.remove("hidden");
-  modal.classList.add("flex");
+  if (modalImg) {
+    modalImg.src = src;
+    modalImg.alt = alt || "";
+  }
+
+  if (modalCaption) {
+    modalCaption.textContent = caption || "";
+    modalCaption.classList.toggle("hidden", !caption);
+  }
+
+  if (modal) {
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+  }
 
   document.body.classList.add("overflow-hidden");
 }

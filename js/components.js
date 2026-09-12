@@ -1,3 +1,5 @@
+import { swrFetch, getCachedData } from '../src/cms-cache.js';
+
 // components.js - Centralized Nav, Footer, and Explore Modal
 
 const state = {
@@ -524,7 +526,52 @@ export function initComponents() {
     }
 
     attachEvents();
+    hydrateDynamicNav(theme);
+}
+
+function hydrateDynamicNav(theme) {
+    const slug = `${theme}-nav`;
+    const endpoint = `https://cms.greenammo.in/wp-json/wp/v2/menus/${slug}?_fields=id,title,items`;
+
+    swrFetch(slug, endpoint, null, (navData) => {
+        if (!navData || !Array.isArray(navData.items) || navData.items.length === 0) return;
+
+        const navUl = document.querySelector('nav ul.hidden.md\\:flex, nav ul.hidden.lg\\:flex');
+        if (!navUl) return;
+
+        // Render dynamic custom items from WP Admin
+        navData.items.forEach(item => {
+            const existingLink = navUl.querySelector(`a[href="${item.url}"]`);
+            if (existingLink) return; // Prevent duplicate rendering if baseline exists
+
+            const li = document.createElement('li');
+            if (item.children && item.children.length > 0) {
+                li.className = 'relative group dropdown-container py-1';
+                li.innerHTML = `
+                    <button class="dropdown-toggle text-gray-700 hover:text-brand-accent transition inline-flex items-center gap-1 font-semibold">
+                        ${item.title}
+                        <svg class="dropdown-icon w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu absolute hidden group-hover:block top-full pt-2 right-0 w-48 transition-all z-30 origin-top-right">
+                        <div class="bg-white rounded-xl shadow-xl p-3 border border-brand-light">
+                            <ul class="text-sm space-y-1">
+                                ${item.children.map(child => `
+                                    <li><a href="${child.url}" class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition">${child.title}</a></li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            } else {
+                li.innerHTML = `<a href="${item.url}" class="text-gray-700 hover:text-brand-accent transition font-semibold">${item.title}</a>`;
+            }
+            navUl.appendChild(li);
+        });
+    });
 }
 
 // Auto-initialize when the script loads
 document.addEventListener('DOMContentLoaded', initComponents);
+

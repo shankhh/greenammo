@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GREENAMMO WordPress Slugs & API Registry",
+  "description": "Central registry of WordPress REST API endpoints, menu slugs, page slugs, and project gallery slugs for cms.greenammo.in",
+  "api_base": "https://cms.greenammo.in/wp-json/wp/v2",
+  "endpoints": {
+    "posts": "https://cms.greenammo.in/wp-json/wp/v2/posts",
+    "pages": "https://cms.greenammo.in/wp-json/wp/v2/pages",
+    "project": "https://cms.greenammo.in/wp-json/wp/v2/project",
+    "media": "https://cms.greenammo.in/wp-json/wp/v2/media",
+    "menus": "https://cms.greenammo.in/wp-json/wp/v2/menus"
+  },
+  "navigation_menus": [
+    {
+      "slug": "group-nav",
+      "name": "GREENAMMO Group Navigation",
+      "target_component": "getGroupNav",
+      "description": "Main portal navigation bar (About Us, Media -> Gallery/Testimonials, Blog, Join Us)"
+    },
+    {
+      "slug": "trust-nav",
+      "name": "GREENAMMO Trust Navigation",
+      "target_component": "getTrustNav",
+      "description": "NGO Division navigation bar (HOME, Campaigns, Projects -> Projects/Reports, Tutorials, Let's Talk)"
+    },
+    {
+      "slug": "solutions-nav",
+      "name": "GREENAMMO Solutions Navigation",
+      "target_component": "getSolutionsNav",
+      "description": "Commercial Division navigation bar (HOME, About Us, Services -> Finance/Education/Events/Accommodation, Contact Us)"
+    }
+  ],
+  "page_copy_slugs": [
+    {
+      "slug": "home",
+      "title": "Main Group Portal",
+      "description": "Homepage tagline, mission, division highlights"
+    },
+    {
+      "slug": "aboutus",
+      "title": "About Us",
+      "description": "Executive trustees, team bios, group history"
+    },
+    {
+      "slug": "joinus",
+      "title": "Join Us / Careers",
+      "description": "Volunteer positions, careers info, get in touch header"
+    },
+    {
+      "slug": "donate",
+      "title": "Donate Portal",
+      "description": "Donation causes, bank/UPI details, cause copy"
+    },
+    {
+      "slug": "trust-home",
+      "title": "GREENAMMO Trust Homepage",
+      "description": "Vision, Mission, Motto, Community Statistics"
+    },
+    {
+      "slug": "solutions-home",
+      "title": "GREENAMMO Solutions Homepage",
+      "description": "Services overview, enterprise consulting copy"
+    }
+  ],
+  "project_gallery_slugs": [
+    {
+      "slug": "urban-demonstration-projects",
+      "region": "West Bengal",
+      "description": "Darjeeling & Kolkata community urban projects"
+    },
+    {
+      "slug": "meghalaya-eco-tourism",
+      "region": "Meghalaya",
+      "description": "Khasi & Jaintia hills eco-tourism & school campaigns"
+    },
+    {
+      "slug": "himachal-waste-management",
+      "region": "Himachal Pradesh",
+      "description": "High-altitude mountain waste management"
+    },
+    {
+      "slug": "assam-flood-resilience",
+      "region": "Assam",
+      "description": "Brahmaputra basin community resilience"
+    },
+    {
+      "slug": "arunachal-conservation",
+      "region": "Arunachal Pradesh",
+      "description": "Forestry and biodiversity conservation"
+    },
+    {
+      "slug": "tamil-nadu-coastal",
+      "region": "Tamil Nadu",
+      "description": "Coastal cleanup & marine protection"
+    },
+    {
+      "slug": "odisha-community",
+      "region": "Odisha",
+      "description": "Rural education and sanitation drive"
+    },
+    {
+      "slug": "goa-beach-cleanups",
+      "region": "Goa",
+      "description": "Sustainable tourism & beach preservation"
+    },
+    {
+      "slug": "nepal-youth-action",
+      "region": "Nepal",
+      "description": "Himalayan youth climate alliance"
+    }
+  ]
+}
