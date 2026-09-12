@@ -549,8 +549,9 @@ function hydrateDynamicNav(theme) {
             const li = document.createElement('li');
             const itemTitle = item.title || item.post_title || '';
             const itemUrl = item.url || item.guid || '#';
+            const children = item.children || item.child_items;
 
-            if (item.children && item.children.length > 0) {
+            if (children && children.length > 0) {
                 li.className = 'relative group dropdown-container py-1';
                 li.innerHTML = `
                     <button class="dropdown-toggle text-gray-700 hover:text-brand-accent transition inline-flex items-center gap-1 font-semibold">
@@ -562,7 +563,7 @@ function hydrateDynamicNav(theme) {
                     <div class="dropdown-menu absolute hidden group-hover:block top-full pt-2 right-0 w-48 transition-all z-30 origin-top-right">
                         <div class="bg-white rounded-xl shadow-xl p-3 border border-brand-light">
                             <ul class="text-sm space-y-1">
-                                ${item.children.map(child => `
+                                ${children.map(child => `
                                     <li><a href="${child.url || child.guid || '#'}" class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition">${child.title || child.post_title || ''}</a></li>
                                 `).join('')}
                             </ul>
