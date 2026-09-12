@@ -6,6 +6,7 @@ const MEDIA_ENDPOINT = `${WP_BASE}/media`;
 
 document.addEventListener("DOMContentLoaded", () => {
   initGalleries();
+  initDynamicProjectsFeed();
 });
 
 async function initGalleries() {
@@ -26,24 +27,19 @@ async function initGalleries() {
    FETCH LOGIC
 ============================ */
 
-async function fetchProjectImages(slug) {
-  try {
-    const projectRes = await fetch(`${PROJECT_ENDPOINT}?slug=${slug}`);
-    const projectData = await projectRes.json();
+async function parseProjectImages(project) {
+  if (!project || !project.acf) return [];
 
-    if (!projectData.length) return [];
+  const imageIds = Object.values(project.acf).filter(
+    (val) => typeof val === "number" && val !== 0,
+  );
 
-    const project = projectData[0];
-    if (!project.acf) return [];
+  const images = [];
 
-    const imageIds = Object.values(project.acf).filter(
-      (val) => typeof val === "number" && val !== 0,
-    );
-
-    const images = [];
-
-    for (const id of imageIds) {
+  for (const id of imageIds) {
+    try {
       const mediaRes = await fetch(`${MEDIA_ENDPOINT}/${id}?_fields=source_url,alt_text,caption,title`);
+      if (!mediaRes.ok) continue;
       const media = await mediaRes.json();
 
       const captionText = media.caption?.rendered ? media.caption.rendered.replace(/<[^>]*>?/gm, '').trim() : '';
@@ -53,12 +49,85 @@ async function fetchProjectImages(slug) {
         alt: media.alt_text || media.title?.rendered || "",
         caption: captionText || media.alt_text || "",
       });
+    } catch (e) {
+      console.warn("Failed to fetch media ID:", id, e);
     }
+  }
 
-    return images;
+  return images;
+}
+
+async function fetchProjectImages(slug) {
+  try {
+    const projectRes = await fetch(`${PROJECT_ENDPOINT}?slug=${slug}`);
+    const projectData = await projectRes.json();
+
+    if (!projectData.length) return [];
+
+    return await parseProjectImages(projectData[0]);
   } catch (err) {
     console.error("Gallery fetch error:", err);
     return [];
+  }
+}
+
+async function initDynamicProjectsFeed() {
+  const feedContainer = document.querySelector(".timeline-container");
+  if (!feedContainer) return;
+
+  const existingSlugs = new Set();
+  document.querySelectorAll("[data-wp-slug]").forEach((el) => {
+    if (el.dataset.wpSlug) existingSlugs.add(el.dataset.wpSlug.toLowerCase().trim());
+  });
+
+  try {
+    const res = await fetch(`${PROJECT_ENDPOINT}?per_page=100`);
+    if (!res.ok) return;
+    const projects = await res.json();
+    if (!Array.isArray(projects)) return;
+
+    // Filter for new projects published in WP that aren't hardcoded on the page yet
+    const newProjects = projects.filter(
+      (p) => p.slug && !existingSlugs.has(p.slug.toLowerCase().trim())
+    );
+
+    for (const project of newProjects) {
+      const images = await parseProjectImages(project);
+      const title = project.title?.rendered || "Project Milestone";
+      const content = project.content?.rendered || "";
+
+      if (!content && !images.length) continue;
+
+      const article = document.createElement("article");
+      article.className = "timeline-row relative pl-6 md:pl-0 mt-12 md:mt-0";
+      article.innerHTML = `
+        <div class="timeline-dot absolute top-8 w-4 h-4 bg-brand-accent rounded-full border-4 border-white z-10"></div>
+        <div class="timeline-content w-full md:w-1/2 flex flex-col">
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100 w-full">
+                <h3 class="text-xl font-bold text-brand-dark font-heading">${title}</h3>
+                <p class="text-xs text-brand-accent font-semibold uppercase tracking-wider mb-2">WordPress Live Sync</p>
+                <div class="md:hidden mt-2 mb-6 smart-gallery-container-dynamic"></div>
+                <div class="space-y-4 pt-4 border-t border-gray-100 text-brand-dark/80 text-sm">
+                    ${content}
+                </div>
+            </div>
+        </div>
+        <div class="timeline-image-desktop hidden md:block w-1/2 md:pl-10">
+            <div class="smart-gallery-container-dynamic"></div>
+        </div>
+      `;
+
+      feedContainer.appendChild(article);
+
+      if (images.length) {
+        const desktopGal = article.querySelector(".timeline-image-desktop .smart-gallery-container-dynamic");
+        const mobileGal = article.querySelector(".timeline-content .smart-gallery-container-dynamic");
+        if (desktopGal) renderGallery(desktopGal, images);
+        if (mobileGal) renderGallery(mobileGal, images);
+      }
+    }
+  } catch (err) {
+    console.error("Error loading dynamic projects feed:", err);
   }
 }
 
