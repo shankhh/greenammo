@@ -96,24 +96,32 @@ function isPostForRegion(project, targetRegion) {
 
   // 1. Check ACF field 'region' or 'project_region'
   if (project.acf) {
-    const acfRegion = (project.acf.region || project.acf.project_region || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-    if (acfRegion && (acfRegion.includes(cleanTarget) || cleanTarget.includes(acfRegion))) return true;
+    let rawRegion = project.acf.region || project.acf.project_region || '';
+    if (typeof rawRegion === 'object' && rawRegion !== null) {
+      rawRegion = rawRegion.value || rawRegion.label || JSON.stringify(rawRegion);
+    }
+    const acfRegion = String(rawRegion || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (acfRegion && acfRegion !== 'false' && acfRegion !== 'true' && (acfRegion.includes(cleanTarget) || cleanTarget.includes(acfRegion))) {
+      return true;
+    }
   }
 
   // 2. Check Post Slug
   const slug = (project.slug || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-  if (slug.includes(cleanTarget)) return true;
+  if (slug && slug.includes(cleanTarget)) return true;
 
   // 3. Check Post Title
   const title = (project.title?.rendered || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-  if (title.includes(cleanTarget)) return true;
+  if (title && title.includes(cleanTarget)) return true;
 
   return false;
 }
 
 async function initDynamicProjectsFeed() {
-  const feedContainer = document.querySelector(".timeline-container");
-  if (!feedContainer) return;
+  const outerContainer = document.querySelector(".timeline-container");
+  if (!outerContainer) return;
+
+  const feedContainer = outerContainer.querySelector(".relative.flex") || outerContainer;
 
   const currentRegion = getCurrentRegion();
   if (!currentRegion) return;
@@ -129,7 +137,7 @@ async function initDynamicProjectsFeed() {
     const projects = await res.json();
     if (!Array.isArray(projects)) return;
 
-    // Filter for new projects published in WP that match the current region and aren't hardcoded yet
+    // Filter for new projects published in WP that match current region and aren't hardcoded yet
     const newProjects = projects.filter((p) => {
       if (!p.slug) return false;
       const isAlreadyOnPage = existingSlugs.has(p.slug.toLowerCase().trim());
