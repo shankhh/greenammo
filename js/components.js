@@ -530,19 +530,34 @@ export function initComponents() {
 }
 
 function hydrateDynamicNav(theme) {
-    const slug = `${theme}-nav`;
-    const endpoint = `https://cms.greenammo.in/wp-json/wp/v2/menus/${slug}?_fields=id,title,items`;
+    const slugMap = {
+        group: ['group-nav', 'greenammogroup', 'primary', 'group'],
+        trust: ['trust-nav', 'greenammotrust', 'secondary', 'trust'],
+        solutions: ['solutions-nav', 'greenammosolutions', 'solutions']
+    };
 
-    swrFetch(slug, endpoint, null, (navData) => {
+    const candidates = slugMap[theme] || slugMap.group;
+
+    async function tryFetchMenu() {
+        for (const slug of candidates) {
+            const endpoint = `https://cms.greenammo.in/wp-json/wp/v2/menus/${slug}?_fields=id,title,items`;
+            const data = await swrFetch(slug, endpoint, null);
+            if (data && Array.isArray(data.items) && data.items.length > 0) {
+                return data;
+            }
+        }
+        return null;
+    }
+
+    tryFetchMenu().then((navData) => {
         if (!navData || !Array.isArray(navData.items) || navData.items.length === 0) return;
 
         const navUl = document.querySelector('nav ul.hidden.md\\:flex, nav ul.hidden.lg\\:flex');
         if (!navUl) return;
 
-        // Render dynamic custom items from WP Admin
         navData.items.forEach(item => {
             const existingLink = navUl.querySelector(`a[href="${item.url}"]`);
-            if (existingLink) return; // Prevent duplicate rendering if baseline exists
+            if (existingLink) return;
 
             const li = document.createElement('li');
             if (item.children && item.children.length > 0) {
