@@ -531,49 +531,30 @@ export function initComponents() {
 
 function hydrateDynamicNav(theme) {
     const slugMap = {
-        group: ['group-nav', 'greenammogroup', 'primary', 'group'],
-        trust: ['trust-nav', 'greenammotrust', 'secondary', 'trust'],
-        solutions: ['solutions-nav', 'greenammosolutions', 'solutions']
+        group: ['greenammogroup', 'primary'],
+        trust: ['trust', 'secondary_menu'],
+        solutions: ['solutions']
     };
 
     const candidates = slugMap[theme] || slugMap.group;
 
-    async function tryFetchMenu() {
-        for (const slug of candidates) {
-            const endpoints = [
-                `https://cms.greenammo.in/wp-json/wp/v2/menus/${slug}?_fields=id,title,items`,
-                `https://cms.greenammo.in/wp-json/wp-api-menus/v2/menus/${slug}`,
-                `https://cms.greenammo.in/wp-json/menus/v1/menus/${slug}`
-            ];
-            for (const endpoint of endpoints) {
-                const data = await swrFetch(`nav_${slug}`, endpoint, null);
-                if (data) {
-                    const items = data.items || (Array.isArray(data) ? data : null);
-                    if (Array.isArray(items) && items.length > 0) {
-                        return { items };
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    tryFetchMenu().then((navData) => {
-        if (!navData || !Array.isArray(navData.items) || navData.items.length === 0) return;
-
+    function renderNavItems(items) {
         const navUl = document.querySelector('nav ul.hidden.md\\:flex, nav ul.hidden.lg\\:flex');
-        if (!navUl) return;
+        if (!navUl || !Array.isArray(items) || items.length === 0) return;
 
-        // Clear hardcoded static baseline and replace with exact WordPress menu order
+        // Clear existing static baseline and replace with exact WordPress menu order
         navUl.innerHTML = '';
 
-        navData.items.forEach(item => {
+        items.forEach(item => {
             const li = document.createElement('li');
+            const itemTitle = item.title || item.post_title || '';
+            const itemUrl = item.url || item.guid || '#';
+
             if (item.children && item.children.length > 0) {
                 li.className = 'relative group dropdown-container py-1';
                 li.innerHTML = `
                     <button class="dropdown-toggle text-gray-700 hover:text-brand-accent transition inline-flex items-center gap-1 font-semibold">
-                        ${item.title}
+                        ${itemTitle}
                         <svg class="dropdown-icon w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
@@ -582,18 +563,45 @@ function hydrateDynamicNav(theme) {
                         <div class="bg-white rounded-xl shadow-xl p-3 border border-brand-light">
                             <ul class="text-sm space-y-1">
                                 ${item.children.map(child => `
-                                    <li><a href="${child.url}" class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition">${child.title}</a></li>
+                                    <li><a href="${child.url || child.guid || '#'}" class="block py-1 px-2 text-gray-700 hover:bg-brand-light/50 rounded transition">${child.title || child.post_title || ''}</a></li>
                                 `).join('')}
                             </ul>
                         </div>
                     </div>
                 `;
             } else {
-                li.innerHTML = `<a href="${item.url}" class="text-gray-700 hover:text-brand-accent transition font-semibold">${item.title}</a>`;
+                li.innerHTML = `<a href="${itemUrl}" class="text-gray-700 hover:text-brand-accent transition font-semibold">${itemTitle}</a>`;
             }
             navUl.appendChild(li);
         });
-    });
+    }
+
+    async function loadMenu() {
+        for (const slug of candidates) {
+            const endpoints = [
+                `https://cms.greenammo.in/wp-json/menus/v1/menus/${slug}`,
+                `https://cms.greenammo.in/wp-json/menus/v1/locations/${slug}`,
+                `https://cms.greenammo.in/wp-json/wp-api-menus/v2/menus/${slug}`
+            ];
+            for (const endpoint of endpoints) {
+                const data = await swrFetch(`nav_${slug}`, endpoint, null, (freshData) => {
+                    const freshItems = freshData?.items || (Array.isArray(freshData) ? freshData : null);
+                    if (Array.isArray(freshItems) && freshItems.length > 0) {
+                        renderNavItems(freshItems);
+                    }
+                });
+                if (data) {
+                    const items = data.items || (Array.isArray(data) ? data : null);
+                    if (Array.isArray(items) && items.length > 0) {
+                        renderNavItems(items);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    loadMenu();
 }
 
 // Auto-initialize when the script loads
