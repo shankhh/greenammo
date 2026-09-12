@@ -1,5 +1,5 @@
 /**
- * GreenAmmo Gallery — Tag-Based Category Engine
+ * GREENAMMO Gallery — Tag-Based Category Engine
  * 
  * HOW IT WORKS:
  * 1. Fetches ALL media from WP REST API (paginated).

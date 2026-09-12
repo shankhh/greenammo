@@ -61,7 +61,7 @@ function getGroupNav() {
     <nav class="w-full bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center px-6 py-4">
             <a href="${paths.group.home}" class="font-heading font-extrabold text-2xl text-group-primary-green tracking-tight flex items-center gap-2">
-                <img src="${paths.group.logo}" alt="GreenAmmo Logo" class="h-10 w-auto rounded-full object-cover">
+                <img src="${paths.group.logo}" alt="GREENAMMO Logo" class="h-10 w-auto rounded-full object-cover">
                 <div style="display: flex; align-items: center; gap: 0;">
                     <span class="text-group-primary-green">GREEN</span>
                     <span class="text-[#3B82F6]">AMMO</span>
@@ -113,7 +113,7 @@ function getTrustNav() {
       <div class="container mx-auto px-4 md:px-8 py-3 flex justify-between items-center">
         <div class="flex items-center">
           <a href="${paths.trust.home}" class="block">
-            <img src="${paths.trust.logo}" alt="GreenAmmo Trust Logo" class="h-12 w-auto object-contain" title="GreenAmmo Trust" />
+            <img src="${paths.trust.logo}" alt="GREENAMMO Trust Logo" class="h-12 w-auto object-contain" title="GREENAMMO Trust" />
           </a>
         </div>
         <div class="hidden lg:flex items-center space-x-8">
@@ -174,7 +174,7 @@ function getSolutionsNav() {
         <div class="container mx-auto px-4 md:px-8 py-3">
             <div class="flex justify-between items-center">
                 <a href="${paths.solutions.home}" class="flex items-center gap-2 text-2xl md:text-3xl font-extrabold text-brand-dark rounded-lg p-1 font-heading">
-                    <img src="${paths.solutions.logo}" alt="GreenAmmo" class="h-10 w-auto rounded-full object-cover">
+                    <img src="${paths.solutions.logo}" alt="GREENAMMO" class="h-10 w-auto rounded-full object-cover">
                     Solutions
                 </a>
                 <ul class="hidden md:flex items-center space-x-6">
@@ -280,7 +280,7 @@ function getGroupFooter() {
                 </div>
             </div>
             <div class="flex flex-col sm:flex-row justify-between items-center py-6 text-sm text-gray-400">
-                <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
+                <p>&copy; 2025 GREENAMMO Group. All rights reserved.</p>
                 <div class="flex gap-4 mt-4 sm:mt-0">
                     <a href="https://www.facebook.com/people/GreenAmmo/100071774210115/" class="hover:text-group-pastel-blue transition">Facebook</a>
                     <a href="https://www.instagram.com/green_ammo/" class="hover:text-group-pastel-blue transition">Instagram</a>
@@ -315,7 +315,7 @@ function getTrustFooter() {
                 </div>
             </div>
             <div class="container mx-auto px-4 md:px-8 py-4 flex flex-col sm:flex-row justify-between items-center text-sm text-[#D2E3AB]/80">
-                <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
+                <p>&copy; 2025 GREENAMMO Group. All rights reserved.</p>
                 <div class="flex space-x-4 mt-2 sm:mt-0">
                     <a href="https://www.facebook.com/people/GreenAmmo/100071774210115/" class="hover:text-white transition">Facebook</a>
                     <a href="https://www.instagram.com/green_ammo/" class="hover:text-white transition">Instagram</a>
@@ -349,7 +349,7 @@ function getSolutionsFooter() {
                 </div>
             </div>
             <div class="container mx-auto px-4 md:px-8 py-4 flex flex-col sm:flex-row justify-between items-center text-sm text-[#BFDBFE]/80">
-                <p>&copy; 2025 GreenAmmo Group. All rights reserved.</p>
+                <p>&copy; 2025 GREENAMMO Group. All rights reserved.</p>
                 <div class="flex space-x-4 mt-2 sm:mt-0">
                     <a href="https://www.facebook.com/people/GreenAmmo/100071774210115/" class="hover:text-white transition">Facebook</a>
                     <a href="https://www.instagram.com/green_ammo/" class="hover:text-white transition">Instagram</a>
@@ -368,7 +368,7 @@ function getExploreModal() {
     <div id="exploreModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden justify-center items-center z-50 p-4 opacity-0 transition-opacity duration-300">
         <div class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full mx-auto overflow-hidden scale-95 transition-transform duration-300" id="modal-content">
             <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100">
-                <h3 class="text-xl font-semibold text-group-text-dark font-heading">Explore GreenAmmo</h3>
+                <h3 class="text-xl font-semibold text-group-text-dark font-heading">Explore GREENAMMO</h3>
                 <button id="modal-close-btn" class="text-gray-400 hover:text-group-primary-green focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
@@ -380,7 +380,7 @@ function getExploreModal() {
                         <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-[#9FD8E4]/20">
                             <svg class="w-16 h-16 text-[#9FD8E4]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                         </div>
-                        <h4 class="text-2xl font-semibold text-[#2A6496] mb-2 font-heading">GreenAmmo Solutions</h4>
+                        <h4 class="text-2xl font-semibold text-[#2A6496] mb-2 font-heading">GREENAMMO Solutions</h4>
                         <p class="text-gray-500 text-sm leading-relaxed">Professional, scalable services spanning Finance, Education, Events, and Accommodation.</p>
                     </div>
                     <div class="mt-6">
@@ -393,7 +393,7 @@ function getExploreModal() {
                         <div class="w-full h-40 bg-white rounded-xl flex items-center justify-center mb-4 border border-[#A8D7B0]/20">
                             <svg class="w-16 h-16 text-[#4CAF50]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         </div>
-                        <h4 class="text-2xl font-semibold text-[#4CAF50] mb-2 font-heading">GreenAmmo Trust</h4>
+                        <h4 class="text-2xl font-semibold text-[#4CAF50] mb-2 font-heading">GREENAMMO Trust</h4>
                         <p class="text-gray-500 text-sm leading-relaxed">Non-profit initiatives for environmental awareness, youth empowerment, and community development.</p>
                     </div>
                     <div class="mt-6">
