@@ -6,26 +6,26 @@ This guide serves as a quick lookup and reference for both the **non-technical t
 
 ## 📌 1. Quick Slugs & Endpoints Lookup Table
 
-| Resource Type | WordPress Slug | Description / Target | WP Admin Location |
+| Resource Type | WordPress Slug / Location | Description / Target | WP Admin Location |
 | :--- | :--- | :--- | :--- |
-| **Menu** | `group-nav` | Main GREENAMMO Group Portal Navbar | Appearance → Menus |
-| **Menu** | `trust-nav` | GREENAMMO Trust NGO Navbar | Appearance → Menus |
-| **Menu** | `solutions-nav` | GREENAMMO Solutions Commercial Navbar | Appearance → Menus |
+| **Menu** | `greenammogroup` / `primary` | Main GREENAMMO Group Portal Navbar | Appearance → Menus → GreenAmmoGroup |
+| **Menu** | `trust` / `secondary_menu` | GREENAMMO Trust NGO Navbar | Appearance → Menus → Trust |
+| **Menu** | `solutions` | GREENAMMO Solutions Commercial Navbar | Appearance → Menus → Solutions |
 | **Page** | `home` | Group Portal Homepage Copy | Pages → All Pages → home |
 | **Page** | `aboutus` | About Us & Team Bios Copy | Pages → All Pages → aboutus |
 | **Page** | `joinus` | Join Us & Careers Copy | Pages → All Pages → joinus |
 | **Page** | `donate` | Donation Causes & Payment Info | Pages → All Pages → donate |
 | **Page** | `trust-home` | GREENAMMO Trust Overview | Pages → All Pages → trust-home |
 | **Page** | `solutions-home` | GREENAMMO Solutions Services | Pages → All Pages → solutions-home |
-| **Gallery** | `urban-demonstration-projects` | West Bengal Projects Media | Project Custom Post → urban-demonstration-projects |
-| **Gallery** | `meghalaya-eco-tourism` | Meghalaya Eco-Tourism Media | Project Custom Post → meghalaya-eco-tourism |
-| **Gallery** | `himachal-waste-management` | Himachal Pradesh Waste Drive | Project Custom Post → himachal-waste-management |
-| **Gallery** | `assam-flood-resilience` | Assam Brahmaputra Resilience | Project Custom Post → assam-flood-resilience |
-| **Gallery** | `arunachal-conservation` | Arunachal Pradesh Conservation | Project Custom Post → arunachal-conservation |
-| **Gallery** | `tamil-nadu-coastal` | Tamil Nadu Coastal Cleanup | Project Custom Post → tamil-nadu-coastal |
-| **Gallery** | `odisha-community` | Odisha Sanitation & Education | Project Custom Post → odisha-community |
-| **Gallery** | `goa-beach-cleanups` | Goa Tourism Preservation | Project Custom Post → goa-beach-cleanups |
-| **Gallery** | `nepal-youth-action` | Nepal Youth Climate Alliance | Project Custom Post → nepal-youth-action |
+| **Project Region** | `meghalaya` | Meghalaya Regional Timeline Feed | Projects → Add New / Edit → Region: Meghalaya |
+| **Project Region** | `west-bengal` | West Bengal Regional Timeline Feed | Projects → Add New / Edit → Region: West Bengal |
+| **Project Region** | `himachal-pradesh` | Himachal Pradesh Regional Timeline Feed | Projects → Add New / Edit → Region: Himachal Pradesh |
+| **Project Region** | `assam` | Assam Regional Timeline Feed | Projects → Add New / Edit → Region: Assam |
+| **Project Region** | `arunachal-pradesh` | Arunachal Pradesh Conservation Feed | Projects → Add New / Edit → Region: Arunachal Pradesh |
+| **Project Region** | `tamil-nadu` | Tamil Nadu Coastal Cleanup Feed | Projects → Add New / Edit → Region: Tamil Nadu |
+| **Project Region** | `odisha` | Odisha Community & Education Feed | Projects → Add New / Edit → Region: Odisha |
+| **Project Region** | `goa` | Goa Tourism Preservation Feed | Projects → Add New / Edit → Region: Goa |
+| **Project Region** | `nepal` | Nepal Youth Action Feed | Projects → Add New / Edit → Region: Nepal |
 
 > 📁 Machine-readable JSON schema is saved in [`wp-slugs.json`](file:///s:/CODE/greenammo/wp-slugs.json).
 
@@ -36,32 +36,38 @@ This guide serves as a quick lookup and reference for both the **non-technical t
 ### A. How to Add or Edit Navigation Links
 1. Log into WordPress Admin (`https://cms.greenammo.in/wp-admin`).
 2. Go to **Appearance → Menus**.
-3. Select the menu you want to edit (`group-nav`, `trust-nav`, or `solutions-nav`).
-4. Add new custom links or reorder items using drag-and-drop.
-5. Click **Save Menu**. The website updates dynamically for users!
+3. Select the target menu (`GreenAmmoGroup`, `Trust`, or `Solutions`).
+4. Add new custom links or reorder items using drag-and-drop. Drag an item to the right to create dropdown sub-menus (`child_items`).
+5. Click **Save Menu**.
 
-### B. How to Add Captions / Descriptions to Images
+### B. How to Publish a New Regional Project Milestone (Zero-Code)
+1. Go to **Projects → Add New**.
+2. Fill in **Title** and **Description Copy** (in main editor box).
+3. Attach photos in **Project Settings** (Image 1-4).
+4. Set the **Region** dropdown (e.g. `Meghalaya`, `West Bengal`, `Assam`, etc.).
+5. Click **Publish** — card automatically renders on the live region page!
+
+### C. How to Add Captions / Descriptions to Images
 1. In WP Admin, go to **Media → Library**.
-2. Click any image.
-3. Fill out the **Caption** field (e.g. *"Menstrual hygiene workshop in Darjeeling"*).
-4. Click Save. The caption automatically displays under the image card and inside the full-screen Lightbox viewer!
-
-### C. How to Update Page Text Copy
-1. In WP Admin, go to **Pages → All Pages**.
-2. Select the page you want to update (e.g. `aboutus` or `home`).
-3. Edit the text using the visual editor and click **Update**.
+2. Click any image and fill in the **Caption** field.
+3. Caption automatically displays under image cards and in the Lightbox viewer!
 
 ---
 
 ## 💻 Developer Architecture & Performance Reference
 
+### ⚡ Active REST API Endpoints
+- **Menus**: `https://cms.greenammo.in/wp-json/menus/v1/menus/{slug}` & `https://cms.greenammo.in/wp-json/menus/v1/locations/{slug}`
+- **Projects**: `https://cms.greenammo.in/wp-json/wp/v2/project?per_page=100`
+- **Media**: `https://cms.greenammo.in/wp-json/wp/v2/media/{id}`
+
 ### ⚡ Stale-While-Revalidate (SWR) Caching
-To prevent WordPress response delays from slowing down the website:
-- **Instant Render (0ms)**: The app reads cached content from `localStorage` (`greenammo_cms_cache_*`) or inline baselines.
-- **Silent Background Sync**: [src/cms-cache.js](file:///s:/CODE/greenammo/src/cms-cache.js) fetches fresh data with a **3.5s timeout** and `_fields` payload compression, updating `localStorage` for subsequent page views without blocking initial paint.
+- **Instant Render (0ms)**: The app reads cached content from `localStorage` (`greenammo_cms_cache_*`).
+- **Live Background Sync**: [src/cms-cache.js](file:///s:/CODE/greenammo/src/cms-cache.js) fetches fresh data in the background and invokes `onUpdate` callbacks to re-render DOM dynamically on updates.
 
 ### Key Module Files
 - [wp-slugs.json](file:///s:/CODE/greenammo/wp-slugs.json): WP API Endpoint & Slug registry.
 - [src/cms-cache.js](file:///s:/CODE/greenammo/src/cms-cache.js): SWR Caching & Timeout engine.
 - [js/components.js](file:///s:/CODE/greenammo/js/components.js): Navigation & Footer component generator.
-- [src/project-gallery.js](file:///s:/CODE/greenammo/src/project-gallery.js): ACF Gallery parser with caption overlays.
+- [src/project-gallery.js](file:///s:/CODE/greenammo/src/project-gallery.js): ACF Gallery & Zero-Code Regional Feed renderer.
+- [NON_TECH_GUIDE.md](file:///s:/CODE/greenammo/NON_TECH_GUIDE.md): End-user documentation for content editors.

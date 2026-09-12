@@ -8,23 +8,27 @@
     "pages": "https://cms.greenammo.in/wp-json/wp/v2/pages",
     "project": "https://cms.greenammo.in/wp-json/wp/v2/project",
     "media": "https://cms.greenammo.in/wp-json/wp/v2/media",
-    "menus": "https://cms.greenammo.in/wp-json/wp/v2/menus"
+    "menus_v1": "https://cms.greenammo.in/wp-json/menus/v1/menus",
+    "locations_v1": "https://cms.greenammo.in/wp-json/menus/v1/locations"
   },
   "navigation_menus": [
     {
-      "slug": "group-nav",
+      "slug": "greenammogroup",
+      "location": "primary",
       "name": "GREENAMMO Group Navigation",
       "target_component": "getGroupNav",
       "description": "Main portal navigation bar (About Us, Media -> Gallery/Testimonials, Blog, Join Us)"
     },
     {
-      "slug": "trust-nav",
+      "slug": "trust",
+      "location": "secondary_menu",
       "name": "GREENAMMO Trust Navigation",
       "target_component": "getTrustNav",
       "description": "NGO Division navigation bar (HOME, Campaigns, Projects -> Projects/Reports, Tutorials, Let's Talk)"
     },
     {
-      "slug": "solutions-nav",
+      "slug": "solutions",
+      "location": "solutions",
       "name": "GREENAMMO Solutions Navigation",
       "target_component": "getSolutionsNav",
       "description": "Commercial Division navigation bar (HOME, About Us, Services -> Finance/Education/Events/Accommodation, Contact Us)"
@@ -62,50 +66,50 @@
       "description": "Services overview, enterprise consulting copy"
     }
   ],
-  "project_gallery_slugs": [
+  "regional_project_slugs": [
     {
-      "slug": "urban-demonstration-projects",
-      "region": "West Bengal",
-      "description": "Darjeeling & Kolkata community urban projects"
-    },
-    {
-      "slug": "meghalaya-eco-tourism",
-      "region": "Meghalaya",
+      "region": "meghalaya",
+      "title": "Meghalaya Projects",
       "description": "Khasi & Jaintia hills eco-tourism & school campaigns"
     },
     {
-      "slug": "himachal-waste-management",
-      "region": "Himachal Pradesh",
+      "region": "west-bengal",
+      "title": "West Bengal Projects",
+      "description": "Darjeeling & Kolkata community urban projects"
+    },
+    {
+      "region": "himachal-pradesh",
+      "title": "Himachal Pradesh Projects",
       "description": "High-altitude mountain waste management"
     },
     {
-      "slug": "assam-flood-resilience",
-      "region": "Assam",
+      "region": "assam",
+      "title": "Assam Projects",
       "description": "Brahmaputra basin community resilience"
     },
     {
-      "slug": "arunachal-conservation",
-      "region": "Arunachal Pradesh",
+      "region": "arunachal-pradesh",
+      "title": "Arunachal Pradesh Projects",
       "description": "Forestry and biodiversity conservation"
     },
     {
-      "slug": "tamil-nadu-coastal",
-      "region": "Tamil Nadu",
+      "region": "tamil-nadu",
+      "title": "Tamil Nadu Projects",
       "description": "Coastal cleanup & marine protection"
     },
     {
-      "slug": "odisha-community",
-      "region": "Odisha",
+      "region": "odisha",
+      "title": "Odisha Projects",
       "description": "Rural education and sanitation drive"
     },
     {
-      "slug": "goa-beach-cleanups",
-      "region": "Goa",
+      "region": "goa",
+      "title": "Goa Projects",
       "description": "Sustainable tourism & beach preservation"
     },
     {
-      "slug": "nepal-youth-action",
-      "region": "Nepal",
+      "region": "nepal",
+      "title": "Nepal Projects",
       "description": "Himalayan youth climate alliance"
     }
   ]
